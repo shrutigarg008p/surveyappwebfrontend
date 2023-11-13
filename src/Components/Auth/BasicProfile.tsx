@@ -99,11 +99,11 @@ class BasicProfile extends React.Component<any, State> {
 
     onSubmit() {
         if (this.props.userId) {
-            return this.createBanner();
+            return this.createProfile();
         }
     }
 
-    createBanner() {
+    createProfile() {
         if(this.props.userId) {
             const valuesIn = this.formValues()
             return Promise.resolve()
@@ -192,264 +192,240 @@ class BasicProfile extends React.Component<any, State> {
     }
 
     render() {
-        const containerStyle = {
-            textAlign: 'center',
-            padding: '20px',
-            border: '1px solid #ddd',
-            borderRadius: '5px',
-            maxWidth: '400px',
-            margin: 'auto',
-            marginTop: '50px',
-        };
         const {selectedCountryOption, selectedStateOption, selectedCityOption}=this.state
         return (
-            <div className="container-pp col-md-10">
-                <div className="row">
-                    <div className="col-md-12">
+            <div className="jumbotron bg-white p-3 border shadow-sm">
+                <div className='text-center mb-3'>Please provide following information to continue</div>
+                <Show when={this.state.status === PageStatus.Loading}>
+                    <div className="d-flex justify-content-center w-100 p-5">
+                        <Spinner animation="border" variant="primary" />
+                    </div>
+                </Show>
+
+                <Alert variant="danger" show={this.state.status === PageStatus.Error}>
+                    {this.state.error}
+                </Alert>
 
 
+                <form
+                    onSubmit={this.props.handleSubmit((event) => this.onSubmit())}
+                    className="mt-4"
+                >
 
-                        <Show when={this.state.status === PageStatus.Loading}>
-                            <div className="d-flex justify-content-center w-100 p-5">
-                                <Spinner animation="border" variant="primary" />
-                            </div>
-                        </Show>
-
-                        <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-                            {this.state.error}
-                        </Alert>
-
-                        <p className="text-center">Please provide following information to continue</p>
-                        <div className="wrapper-md">
-                            <div className="row">
-                                <div className="col-md-offset-2 col-md-8">
-
-                                    <form
-                                        onSubmit={this.props.handleSubmit((event) => this.onSubmit())}
-                                        className="mt-4"
-                                    >
-
-                                        <div className="panel panel-default">
-                                            <div className="panel-heading">
-                                                <span className="h4">Register</span>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="title">First name</label>
-                                                <input
-                                                    className="form-control"
-                                                    name="firstName"
-                                                    onChange={(e) => this.setState({ firstName: e.target.value })}
-                                                    value={this.state.firstName}
-                                                    placeholder="Enter here"
-                                                    required
-                                                />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="lastName">Last Name*</label>
-                                                <input
-                                                    className="form-control"
-                                                    id="lastName"
-                                                    name="lastName"
-                                                    onChange={(e) => this.setState({ lastName: e.target.value })}
-                                                    value={this.state.lastName}
-                                                    placeholder="Enter.."
-                                                    required
-                                                />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="Mobile Number">Mobile Number*</label>
-                                                <input
-                                                    className="form-control"
-                                                    id="mobile"
-                                                    name="mobile"
-                                                    onChange={(e) => this.setState({ mobile: e.target.value })}
-                                                    value={this.state.mobile}
-                                                    placeholder="Enter here.."
-                                                    required
-                                                />
-                                            </div>
-
-                                            <div className='form-group'>
-                                                <label htmlFor='gender'>Gender*</label>
-                                                <select
-                                                    style={{
-                                                        width: '100%',
-                                                        display: 'block',
-                                                        height: '40px',
-                                                        lineHeight: '1.5',
-                                                        color: '#495057',
-                                                        backgroundColor: '#fff',
-                                                        backgroundClip: 'padding-box',
-                                                        border: '1px solid #ced4da',
-                                                        borderRadius: '5px',
-                                                        transition:
-                                                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-                                                    }}
-                                                    name='gender'
-                                                    id='gender'
-                                                    value={this.state.gender}
-                                                    required
-                                                    onChange={(e) =>
-                                                        this.setState({ gender: e.target.value })
-                                                    }
-                                                >
-                                                    <option value='' disabled>--Choose--</option>
-                                                    <option value='male'>Male</option>
-                                                    <option value='female'>Female</option>
-                                                </select>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="description">Date Of Birth*</label>
-                                                <input
-                                                    className="form-control"
-                                                    id="description"
-                                                    name="description"
-                                                    value={this.state.dateOfBirth}
-                                                    onChange={(e) => this.setState({ dateOfBirth: e.target.value })}
-                                                    placeholder="Enter dob in format DD/MM/YYYY"
-                                                />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="description">Address Line 1*</label>
-                                                <input
-                                                    className="form-control"
-                                                    id="addressLine1"
-                                                    name="addressLine1"
-                                                    value={this.state.addressLine1}
-                                                    onChange={(e) => this.setState({ addressLine1: e.target.value })}
-                                                    placeholder="Enter here"
-                                                />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="description">Address Line 2</label>
-                                                <input
-                                                    className="form-control"
-                                                    id="addressLine2"
-                                                    name="addressLine2"
-                                                    value={this.state.addressLine2}
-                                                    onChange={(e) => this.setState({ addressLine2: e.target.value })}
-                                                    placeholder="Enter here"
-                                                />
-                                            </div>
-
-                                            <div className='form-group'>
-                                                <label htmlFor='country'>Country*</label>
-                                                <Select
-                                                    name='countryTitle'
-                                                    id='countryTitle'
-                                                    onChange={this.handleCountryChange}
-                                                    value={selectedCountryOption}
-                                                    required
-                                                    options={this.state.countries}
-                                                />
-                                            </div>
-
-                                            <div className='form-group'>
-                                                <label htmlFor='country'>State*</label>
-                                                <Select
-                                                    name='state'
-                                                    id='state'
-                                                    onChange={this.handleStateChange}
-                                                    value={selectedStateOption}
-                                                    required
-                                                    options={this.state.states}
-                                                />
-                                            </div>
-
-                                            <div className='form-group'>
-                                                <label htmlFor='country'>City*</label>
-                                                <Select
-                                                    name='city'
-                                                    id='city'
-                                                    onChange={this.handleCityChange}
-                                                    value={selectedCityOption}
-                                                    required
-                                                    options={this.state.cities}
-                                                />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="description">pincode*</label>
-                                                <input
-                                                    className="form-control"
-                                                    id="pinCode"
-                                                    name="pinCode"
-                                                    value={this.state.pinCode}
-                                                    onChange={(e) => this.setState({ pinCode: e.target.value })}
-                                                    placeholder="Enter here"
-                                                />
-                                            </div>
-
-                                            <div className='form-group'>
-                                                <label htmlFor='gender'>Referral Source*</label>
-                                                <select
-                                                    style={{
-                                                        width: '100%',
-                                                        display: 'block',
-                                                        height: '40px',
-                                                        lineHeight: '1.5',
-                                                        color: '#495057',
-                                                        backgroundColor: '#fff',
-                                                        backgroundClip: 'padding-box',
-                                                        border: '1px solid #ced4da',
-                                                        borderRadius: '5px',
-                                                        transition:
-                                                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-                                                    }}
-                                                    name='gender'
-                                                    id='gender'
-                                                    value={this.state.referralSource}
-                                                    required
-                                                    onChange={(e) =>
-                                                        this.setState({ referralSource: e.target.value })
-                                                    }
-                                                >
-                                                    <option value='' disabled>--Choose--</option>
-                                                    <option value='website'>Website</option>
-                                                    <option value='others'>Others</option>
-                                                </select>
-                                            </div>
-
-                                            <hr />
-
-                                            <Alert variant="danger" show={!!this.state.error} className="mt-2">
-                                                {this.state.error}
-                                            </Alert>
-
-                                            <div className="d-flex align-items-center mt-2">
-                                                <button
-                                                    type="submit"
-                                                    disabled={false}
-                                                    className="btn btn-primary mr-3"
-                                                >
-                                                    Submit
-                                                </button>
-
-                                                <button
-                                                    type="button"
-                                                    disabled={false}
-                                                    onClick={() => this.reset()}
-                                                    className="btn btn-light mr-3"
-                                                >
-                                                    Reset
-                                                </button>
-
-                                                <Show when={this.state.status === PageStatus.Submitting}>
-                                                    <Spinner animation="border" variant="primary" />
-                                                </Show>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="title">First name</label>
+                            <input
+                                className="form-control"
+                                name="firstName"
+                                onChange={(e) => this.setState({ firstName: e.target.value })}
+                                value={this.state.firstName}
+                                placeholder="Enter here"
+                                required
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="lastName">Last Name*</label>
+                            <input
+                                className="form-control"
+                                id="lastName"
+                                name="lastName"
+                                onChange={(e) => this.setState({ lastName: e.target.value })}
+                                value={this.state.lastName}
+                                placeholder="Enter.."
+                                required
+                            />
                         </div>
                     </div>
-                </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="Mobile Number">Mobile Number*</label>
+                            <input
+                                className="form-control"
+                                id="mobile"
+                                name="mobile"
+                                onChange={(e) => this.setState({ mobile: e.target.value })}
+                                value={this.state.mobile}
+                                placeholder="Enter here.."
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor='gender'>Gender*</label>
+                            <select
+                                style={{
+                                    width: '100%',
+                                    display: 'block',
+                                    height: '40px',
+                                    lineHeight: '1.5',
+                                    color: '#495057',
+                                    backgroundColor: '#fff',
+                                    backgroundClip: 'padding-box',
+                                    border: '1px solid #ced4da',
+                                    borderRadius: '5px',
+                                    transition:
+                                        'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+                                }}
+                                name='gender'
+                                id='gender'
+                                value={this.state.gender}
+                                required
+                                onChange={(e) =>
+                                    this.setState({ gender: e.target.value })
+                                }
+                            >
+                                <option value='' disabled>--Choose--</option>
+                                <option value='male'>Male</option>
+                                <option value='female'>Female</option>
+                            </select>
+                        </div>
+                        <div className="col">
+                            <label htmlFor="description">Date Of Birth*</label>
+                            <input
+                                className="form-control"
+                                id="description"
+                                type="date"
+                                name="description"
+                                value={this.state.dateOfBirth}
+                                onChange={(e) => this.setState({ dateOfBirth: e.target.value })}
+                                placeholder="Enter dob in format DD/MM/YYYY"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="description">pincode*</label>
+                            <input
+                                className="form-control"
+                                id="pinCode"
+                                name="pinCode"
+                                value={this.state.pinCode}
+                                onChange={(e) => this.setState({ pinCode: e.target.value })}
+                                placeholder="Enter here"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="description">Address Line 1*</label>
+                            <input
+                                className="form-control"
+                                id="addressLine1"
+                                name="addressLine1"
+                                value={this.state.addressLine1}
+                                onChange={(e) => this.setState({ addressLine1: e.target.value })}
+                                placeholder="Enter here"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="description">Address Line 2</label>
+                            <input
+                                className="form-control"
+                                id="addressLine2"
+                                name="addressLine2"
+                                value={this.state.addressLine2}
+                                onChange={(e) => this.setState({ addressLine2: e.target.value })}
+                                placeholder="Enter here"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor='country'>Country*</label>
+                            <Select
+                                name='countryTitle'
+                                id='countryTitle'
+                                onChange={this.handleCountryChange}
+                                value={selectedCountryOption}
+                                required
+                                options={this.state.countries}
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor='country'>State*</label>
+                            <Select
+                                name='state'
+                                id='state'
+                                onChange={this.handleStateChange}
+                                value={selectedStateOption}
+                                required
+                                options={this.state.states}
+                            />
+                        </div>
+                        <div className='col'>
+                            <label htmlFor='country'>City*</label>
+                            <Select
+                                name='city'
+                                id='city'
+                                onChange={this.handleCityChange}
+                                value={selectedCityOption}
+                                required
+                                options={this.state.cities}
+                            />
+                        </div>
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor='gender'>Referral Source*</label>
+                        <select
+                            style={{
+                                width: '100%',
+                                display: 'block',
+                                height: '40px',
+                                lineHeight: '1.5',
+                                color: '#495057',
+                                backgroundColor: '#fff',
+                                backgroundClip: 'padding-box',
+                                border: '1px solid #ced4da',
+                                borderRadius: '5px',
+                                transition:
+                                    'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+                            }}
+                            name='gender'
+                            id='gender'
+                            value={this.state.referralSource}
+                            required
+                            onChange={(e) =>
+                                this.setState({ referralSource: e.target.value })
+                            }
+                        >
+                            <option value="" className="">Select Referral</option>
+                            <option value="adFlierNewspaper">Ad flier with newspaper</option><option value="adFlierOther">Ad flier at market/outdoors</option><option value="adOnWebsite">Saw an ad on a website</option><option value="blogForum">Read about it on a blog/forum</option><option value="cafeCoffeeDay">Ad at Café Coffee Day</option><option value="emailFromFriend">Got an email from a friend/colleague</option><option value="emailFromWebPortal">Email from a web portal/service/jobsite</option><option value="googleSearch">Searched on google.com</option><option value="other">Other</option><option value="otherSearchEngine">Searched on another search engine</option><option value="referredViaIndiaSpeaks">Referred via Indiaspeaks.net from a friend/colleague</option><option value="shopRestaurant">Ad at a shop/restaurant</option><option value="smsFromIndiaSpeaks">SMS invite from Indiaspeaks.net</option><option value="wordOfMouth">Word of mouth from friend/colleague</option>
+                        </select>
+                    </div>
+                    <hr />
+
+                    <Alert variant="danger" show={!!this.state.error} className="mt-2">
+                        {this.state.error}
+                    </Alert>
+
+                    <div className="d-flex align-items-center mt-2">
+                        <button
+                            type="submit"
+                            disabled={false}
+                            className="btn btn-primary mr-3"
+                        >
+                            Submit
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled={false}
+                            onClick={() => this.reset()}
+                            className="btn btn-light mr-3"
+                        >
+                            Reset
+                        </button>
+
+                        <Show when={this.state.status === PageStatus.Submitting}>
+                            <Spinner animation="border" variant="primary" />
+                        </Show>
+                    </div>
+                </form>
             </div>
         );
     }

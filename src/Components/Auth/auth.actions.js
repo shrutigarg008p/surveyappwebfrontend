@@ -10,6 +10,11 @@ export const authSuccess = (user) => ({
   user,
 });
 
+export const authSuccessLastStep = (user) => ({
+    type: authActions.AUTH_SUCCESS_LAST_STEP,
+    user,
+});
+
 export const authRegisterSuccess = (user) => ({
     type: authActions.AUTH_REGISTRATION_SUCCESS,
     user,
@@ -28,12 +33,10 @@ export const authLogin =
       dispatch(authStart());
       const user = await AuthAPI.login(username, password, registerType);
       if(user.emailConfirmed === true && user.basicProfile) {
-          console.log('enter one')
           dispatch(authSuccess(user));
           history.push("/");
       } else if(user.basicProfile === null && user.emailConfirmed === true){
-          console.log('enter 2')
-          dispatch(authSuccess(user));
+          dispatch(authSuccessLastStep(user));
           history.push("/auth/basic-profile");
       } else {
           dispatch(authRegisterSuccess(user));

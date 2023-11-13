@@ -1,9 +1,10 @@
 import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
 import DashboardPage from "views/Dashboard/Dashboard.js";
-import UserProfile from "views/UserProfile/UserProfile.js";
-import NotificationsPage from "views/Notifications/Notifications.js";
+import {RedemptionRouter} from "./Components/Redemptions";
+import {List} from "./Components/Redemptions/List";
+import {RewardsList} from "./Components/Rewards/RewardsList";
+import UserProfile from "./views/UserProfile/UserProfile";
+import {ReferralsList} from "./Components/Referrals/RefferalsList";
 
 
 const dashboardRoutes = [
@@ -15,17 +16,31 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/user",
-    name: "User Profile",
-    icon: Person,
+    path: "/profilr",
+    name: "Profile",
+    icon: Dashboard,
     component: UserProfile,
     layout: "/admin",
   },
   {
-    path: "/notifications",
-    name: "Notifications",
-    icon: Notifications,
-    component: NotificationsPage,
+    path: "/redemption",
+    name: "Redemption",
+    icon: Dashboard,
+    component: List,
+    layout: "/admin",
+  },
+  {
+    path: "/rewards",
+    name: "Rewards",
+    icon: Dashboard,
+    component: RewardsList,
+    layout: "/admin",
+  },
+  {
+    path: "/referrals",
+    name: "Referrals",
+    icon: Dashboard,
+    component: ReferralsList,
     layout: "/admin",
   },
 ];

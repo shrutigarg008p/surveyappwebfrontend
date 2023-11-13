@@ -35,6 +35,16 @@ export const authReducers = (state = initialState, action) => {
       return { ...state, adminUser };
     }
 
+    case authActions.AUTH_SUCCESS_LAST_STEP: {
+      const adminUser = {
+        isAuthenticated: false,
+        userId: action.user.id,
+        loading: false,
+        error: null,
+      };
+      return { ...state, adminUser };
+    }
+
     case authActions.AUTH_REGISTRATION_SUCCESS: {
       const adminUser = {
         isAuthenticated: false,

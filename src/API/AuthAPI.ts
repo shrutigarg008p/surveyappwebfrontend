@@ -1,6 +1,13 @@
 import * as _ from 'lodash';
 import { api } from '../axiosConfig';
-import {createBasicProfileURL, loginURL, registrationURL} from '../Utils/urls';
+import {
+    createBasicProfileURL,
+    getProfile,
+    loginURL,
+    redemptionRequest, referralsUrl,
+    registrationURL,
+    rewardsURL
+} from '../Utils/urls';
 
 
 export class AuthAPI {
@@ -14,6 +21,16 @@ export class AuthAPI {
           return _.get(res, 'data.data', {});
         });
   }
+
+
+    static async profile(
+        userId: string,
+    ): Promise<any> {
+        return api.get(`${getProfile}/${userId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 
     static async registration(
         body: any
@@ -29,6 +46,33 @@ export class AuthAPI {
         userId: any,
     ): Promise<any> {
         return api.put(`${createBasicProfileURL}/${userId}`, body)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static async redemptionList(
+        limit: string,
+    ): Promise<any> {
+        return api.get(`${redemptionRequest}/${limit}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static async rewardsList(
+        limit: string,
+    ): Promise<any> {
+        return api.get(`${rewardsURL}/${limit}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static async referralsList(
+        limit: string,
+    ): Promise<any> {
+        return api.get(`${referralsUrl}/${limit}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

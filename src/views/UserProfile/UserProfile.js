@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux";
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
+import {AuthAPI} from "../../API";
 
 const styles = {
   cardCategoryWhite: {
@@ -52,39 +53,37 @@ export default function UserProfile(props) {
   const { invalid, pristine, submitting } = props;
 
   const classes = useStyles();
-  const { token } = useSelector((state) => state.adminUser.adminUser);
-  let { _id } = jwt.decode(token);
+  const { userId } = useSelector((state) => state.adminUser.adminUser);
 
   useEffect(() => {
     loadProfile();
   }, []);
 
   const loadProfile = async () => {
-    {
       Promise.resolve()
 
         .then(() => {
-          if (!_id) {
+          if (!userId) {
             return Promise.reject(new Error("Invalid ID"));
           }
-          return ProfileAPI.getadmin(_id);
+          return AuthAPI.profile(userId);
         })
         .then((user) => {
+          console.log('user---->', user)
           if (!!user) {
-            setUsername(user.username);
-            setEmail(user.email);
-            setFirstName(user.firstname);
-            setLastName(user.lastname);
-            setCity(user.city);
-            setCountry(user.country);
-            setPostalcode(user.postalcode);
+            setUsername(user.dataValues.email);
+            setEmail(user.dataValues.email);
+            setFirstName(user.profile.firstName);
+            setLastName(user.profile.lastName);
+            setCity(user.profile.city);
+            setCountry(user.profile.country);
+            setPostalcode(user.profile.pinCode);
             setAboutme(user.aboutme);
           }
         })
         .catch((error) => {
           alert(error);
         });
-    }
   };
 
   const handleSubmit = async () => {
@@ -117,9 +116,9 @@ export default function UserProfile(props) {
           <Card>
             <form onSubmit={handleSubmit}>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
+                <h4 className={classes.cardTitleWhite}>Profile</h4>
                 <p className={classes.cardCategoryWhite}>
-                  Complete your profile
+                  Your profile
                 </p>
               </CardHeader>
               <CardBody>
@@ -287,16 +286,16 @@ export default function UserProfile(props) {
                   </GridItem>
                 </GridContainer>
               </CardBody>
-              <CardFooter>
-                <Button
-                  color="primary"
-                  type="submit"
-                  disabled={submitting || invalid}
-                >
-                  Update Profile
-                </Button>
-                <LoadingSpinner show={props.isLoading} />
-              </CardFooter>
+              {/*<CardFooter>*/}
+              {/*  <Button*/}
+              {/*    color="primary"*/}
+              {/*    type="submit"*/}
+              {/*    disabled={submitting || invalid}*/}
+              {/*  >*/}
+              {/*    Update Profile*/}
+              {/*  </Button>*/}
+              {/*  <LoadingSpinner show={props.isLoading} />*/}
+              {/*</CardFooter>*/}
             </form>
           </Card>
         </GridItem>

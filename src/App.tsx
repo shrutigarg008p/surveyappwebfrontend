@@ -10,6 +10,7 @@ import Admin from "./Layout/Admin";
 import {PrivateRouteWithRedux} from "./PrivateRoute";
 import {VerificationEmailScreens} from "./Components/Auth/VerificationEmailScreen";
 import {AuthRouter} from "./Components/Auth/AuthRouter";
+import {RedemptionRouter} from "./Components/Redemptions";
 
 class App extends React.Component<any, any> {
 

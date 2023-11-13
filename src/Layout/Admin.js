@@ -19,14 +19,6 @@ const switchRoutes = () => (
   <Switch>
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        if (role === 'admin') {
-          return (
-              <Route
-                  path={'/admin' + '/appointment'}
-                  key={'key'}
-              />
-                )
-           } else {
           return (
           <Route
               path={prop.layout + prop.path}
@@ -35,7 +27,6 @@ const switchRoutes = () => (
           />
         );
         }
-      }
       return null;
     })}
     <Redirect from="/" to="/admin/dashboard" />
@@ -85,7 +76,7 @@ function Admin({ ...rest }) {
         routes={routes}
         logoText={"Dataxing admin"}
         logo={logo}
-        image={image}
+        image=""
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
         color={color}
