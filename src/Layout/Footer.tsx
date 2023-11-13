@@ -12,7 +12,7 @@ export function Footer() {
           <div className="row">
             <div className="col-md-6">
               <div className="contacts">
-                <h3>Dataxing PANEL</h3>
+                <h3>IndiaPolls PANEL</h3>
                 <ul>
                   <li>
                     <FontAwesomeIcon
@@ -33,7 +33,7 @@ export function Footer() {
                     <FontAwesomeIcon
                       icon={['fas', 'envelope']}
                     />
-                    Dataxing@gmail.com
+                    IndiaPolls@gmail.com
                   </li>
                 </ul>
               </div>
@@ -104,7 +104,7 @@ export function Footer() {
 
       <div className="copy-rights">
         <p className="mb-0 text-a-d-4">
-          © 2022 Dataxing.
+          © 2022 IndiaPolls.
           Version
           {' '}
           {process.env.REACT_APP_VERSION}

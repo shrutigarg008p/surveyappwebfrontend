@@ -42,7 +42,7 @@ export default function Footer(props) {
         <p className={classes.right}>
           <span>
             &copy; {1900 + new Date().getYear()}{" "}
-              Dataxing
+              IndiaPolls
             , web application admin panel
           </span>
         </p>

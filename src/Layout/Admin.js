@@ -74,7 +74,7 @@ function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"Dataxing admin"}
+        logoText={"IndiaPolls admin"}
         logo={logo}
         image=""
         handleDrawerToggle={handleDrawerToggle}

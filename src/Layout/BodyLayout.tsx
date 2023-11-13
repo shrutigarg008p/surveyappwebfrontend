@@ -52,7 +52,7 @@ export class BodyLayout extends React.Component<any, {
                   >
                     <img className="logo-img" src={logoImg} alt="" />
                     <span className="text-a-1 h4">
-                      Dataxing
+                      IndiaPolls
                     </span>
                   </Link>
                   <div className={'px-2 py-3'

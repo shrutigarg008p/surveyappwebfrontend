@@ -193,7 +193,7 @@ export default function Dashboard() {
             <CardHeader color="warning">
               <h4 className={classes.cardTitleWhite}>Cases Statuses</h4>
               <p className={classes.cardCategoryWhite}>
-                All cases of Dataxing platform
+                All cases of IndiaPolls platform
               </p>
             </CardHeader>
             <CardBody>
@@ -215,7 +215,7 @@ export default function Dashboard() {
             <CardHeader color="warning">
               <h4 className={classes.cardTitleWhite}>Cases Statuses</h4>
               <p className={classes.cardCategoryWhite}>
-                All cases of Dataxing platform
+                All cases of IndiaPolls platform
               </p>
             </CardHeader>
             <CardBody>

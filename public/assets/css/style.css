@@ -155,8 +155,8 @@ button.pack_subs_btn:hover { background: #7559FE; box-shadow: 0 0 5px 0 #7559FE 
 .pcard_slider .slick-slide { margin-right: 30px;}
 /* subscription package */
 
-/* loving Dataxing */
-section.loving_Dataxing { margin-bottom: 80px;}
+/* loving IndiaPolls */
+section.loving_IndiaPolls { margin-bottom: 80px;}
 .loving_customers {overflow: hidden;}
 .slider.slick-initialized { visibility: visible; opacity: 1;}
 .cust_slider_inner { padding: 30px; border-radius: 10px; box-shadow: 0 0 20px 0px #dfe4fa; margin: 20px;}
@@ -175,11 +175,11 @@ button.slick-next.slick-arrow { position: absolute; width: 60px; height: 60px; b
 button.slick-next:before {display: none;}
 button.slick-next:after { content: ''; background: url(../img/slick-right.png) no-repeat; width: 31px; height: 31px; display: inline-block; text-align: center;}
 .customer_slider { padding-bottom: 80px !important;}
-/* loving Dataxing */
+/* loving IndiaPolls */
 
 /* app soon */
 .mob_app_purple { background: #7559FE; border-radius: 24px; position: relative;}
-img.Dataxing_hand { position: absolute; right: 40px; bottom: 0;}
+img.IndiaPolls_hand { position: absolute; right: 40px; bottom: 0;}
 .mob_app_text_group { max-width: 540px; padding: 80px 0 120px 80px; line-height: 53px;}
 p.ma_soon { font-size: 50px; font-weight: 700; color: #fff; margin-bottom: 18px;}
 p.ma_soon span { display: block;}
@@ -1030,7 +1030,7 @@ td.max-lines{
     .kyc_verification {display: none; }
     .my_request_header { flex-direction: column; }
     .my_request_header h3.dashboard_heading { order: 2; margin-top: 20px;}
-    img.Dataxing_hand { position: initial; max-width: 100%; padding-right: 20px; }
+    img.IndiaPolls_hand { position: initial; max-width: 100%; padding-right: 20px; }
     .mob_app_purple { text-align: center;}
     .mob_app_text_group { padding: 35px 15px 10px 15px; max-width: 100%;}
     p.ma_soon {font-size: 30px; line-height: normal;}
@@ -1093,7 +1093,7 @@ td.max-lines{
     .top_navmenu .navbar .mobile_sign_notifi ul.menu-inner li.menu-item {margin-bottom: 0;}
     .signin_btn { margin-right: 15px;}
     section.subscription_package {margin-bottom: 40px;}
-    section.loving_Dataxing {margin-bottom: 40px;}
+    section.loving_IndiaPolls {margin-bottom: 40px;}
     footer.footer { padding: 40px 40px 20px; text-align: center;}
     ul.footer_social { justify-content: center;}
     input.footer_custom_input {text-align: center; }
