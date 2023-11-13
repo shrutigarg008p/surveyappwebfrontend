@@ -1,0 +1,64 @@
+@mixin trim($numLines: null){
+  @if $numLines != null {
+    display:-webkit-box;
+    -webkit-line-clamp:$numLines;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  @else{
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    display:block;
+  }
+}
+
+@mixin box-shadow($x-axis: 0, $y-axis: 0, $blur: 10px, $color: rgba(0,0,0,0.2)) {
+  box-shadow: $x-axis $y-axis $blur $color !important;
+  -webkit-box-shadow: $x-axis $y-axis $blur $color !important;
+}
+
+@mixin padding($top, $right, $bottom, $left) {
+  padding: {
+    top: $top;
+    bottom: $bottom;
+    right: $right;
+    left: $left;
+  }
+}
+
+@mixin scrollbars($size, $foreground-color, $background-color: white) {
+  &::-webkit-scrollbar {
+    width:  $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+@mixin colors($colors) {
+  @each $name, $hex in $colors {
+    .svg-#{$name} {
+      fill : #{$hex};
+    }
+    .hover-#{$name}#{":hover"} * {
+      color: #{$hex} !important;
+    }
+    .hover-#{$name}#{":hover"} {
+      svg {
+        fill: #{$hex} !important;
+      }
+    }
+  }
+}

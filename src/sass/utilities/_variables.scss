@@ -1,0 +1,48 @@
+$bg-gradient-1: linear-gradient(to right, #F1FDFF, #00AEE1);
+$bg-gradient-2: linear-gradient(to right, #00AEE1, #0058BD);
+
+$a-1: #D70040;
+$a-1-10: rgba(#D70040, 0.05);
+$a-2: #f4f8fa;
+$a-3: #f4f5f7;
+$a-4: rgba(0, 173, 182,0.1);
+$a-5: rgba(247, 179, 32,0.1);
+$a-6: rgba(241, 7, 80,0.1);
+$a-7: #00adb6;
+$a-8: #f7b320;
+$a-9: #f10750;
+
+$a-d-1: #1b2132;
+$a-d-2: #e98686;
+$a-d-3: #242f65;
+$a-d-4: #647b9c;
+$a-d-5: #D3D3D3;
+$a-d-4-10: rgba($a-d-4, 0.1);
+
+$colors: (
+    a-1: $a-1,
+    a-1-10: $a-1-10,
+    a-2: $a-2,
+    a-3: $a-3,
+    a-4: $a-4,
+    a-5: $a-5,
+    a-6: $a-6,
+    a-7: $a-7,
+    a-8: $a-8,
+    a-9: $a-9,
+    a-d-1: $a-d-1,
+    a-d-2: $a-d-2,
+    a-d-3: $a-d-3,
+    a-d-4: $a-d-4,
+    a-d-5: $a-d-5,
+    a-d-4-10: $a-d-4-10,
+);
+
+$z-highest: 1201;
+$z-high: 1200;
+$z-medium: 1100;
+$z-low: 50;
+$z-lowest: 0;
+
+
+$rupee-sign: &#8377;

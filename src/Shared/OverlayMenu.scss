@@ -1,0 +1,56 @@
+@import '../sass/utilities/variables';
+@import '../sass/utilities/mixins';
+@import '../../node_modules/bootstrap/scss/functions';
+@import "../../node_modules/bootstrap/scss/variables";
+
+$popover-arrow-width: 1.6rem;
+$popover-arrow-height: 1rem;
+
+.overlay-app:hover {
+  color: $a-1;
+
+  button {
+    color: $a-1;
+  }
+}
+
+.popover-custom-content {
+  max-height: 400px;
+  overflow: auto;
+
+  &:-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+  }
+
+  &:-webkit-scrollbar-thumb {
+    border-radius: 8px;
+  }
+}
+
+.popover-custom {
+  left: -15px !important;
+  border: none;
+  max-height: 400px;
+  margin-top: 28px;
+  border-radius: 10px;
+  
+  @include box-shadow(0, 0, 30px, rgba(black, 0.3));
+
+  > .arrow {
+    top: subtract(-$popover-arrow-height, $popover-border-width);
+    left: 5px !important;
+    border: none;
+
+    &:before {
+      border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
+      border-bottom-color: white;
+    }
+
+    &:after {
+      top: $popover-border-width;
+      border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
+      border-bottom-color: white;
+    }
+  }
+}
