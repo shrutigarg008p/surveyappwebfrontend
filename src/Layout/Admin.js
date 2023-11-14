@@ -26,7 +26,15 @@ const switchRoutes = () => (
               key={key}
           />
         );
-        }
+        } else if(prop.layout === "/master") {
+        return (
+            <Route
+                path={prop.layout + prop.path}
+                component={prop.component}
+                key={key}
+            />
+        )
+      }
       return null;
     })}
     <Redirect from="/" to="/admin/dashboard" />

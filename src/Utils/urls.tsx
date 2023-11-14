@@ -11,6 +11,9 @@ export const cityListURL = '/api/v1/country/getAllCitiesByStateId';
 export const redemptionRequest = '/api/v1/redemptionRequest/getAll';
 export const rewardsURL = '/api/v1/rewards/getAll'
 export const referralsUrl = '/api/v1/referrals/getAll'
+export const countryURL = '/api/v1/country';
+export const redemptionMode = '/api/v1/redemption';
+
 
 
 

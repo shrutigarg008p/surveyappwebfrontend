@@ -5,6 +5,10 @@ import {List} from "./Components/Redemptions/List";
 import {RewardsList} from "./Components/Rewards/RewardsList";
 import UserProfile from "./views/UserProfile/UserProfile";
 import {ReferralsList} from "./Components/Referrals/RefferalsList";
+import {Countries} from "./Components/Countries/Countries";
+import {States} from "./Components/States/States";
+import {City} from "./Components/Cities/City";
+import {RedemptionMode} from "./Components/RedemptionMode/RedemptionMode";
 
 
 const dashboardRoutes = [
@@ -42,6 +46,34 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: ReferralsList,
     layout: "/admin",
+  },
+  {
+    path: "/country",
+    name: "Country",
+    icon: Dashboard,
+    component: Countries,
+    layout: "/master",
+  },
+  {
+    path: "/states",
+    name: "States",
+    icon: Dashboard,
+    component: States,
+    layout: "/master",
+  },
+  {
+    path: "/cities",
+    name: "Cities",
+    icon: Dashboard,
+    component: City,
+    layout: "/master",
+  },
+  {
+    path: "/redemption-mode",
+    name: "Redemption",
+    icon: Dashboard,
+    component: RedemptionMode,
+    layout: "/master",
   },
 ];
 
