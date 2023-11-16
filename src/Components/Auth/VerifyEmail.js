@@ -61,7 +61,7 @@ class VerifyEmail extends React.Component {
     return (
         <div style={containerStyle}>
           <div style={messageStyle}>
-            <p>Your email has been confirmed successfully!</p>
+            <p>{this.state.isVerified}</p>
             <p>Click the button below to log in:</p>
           </div>
           <button style={loginButton} onClick={() => this.onLogin()}>Login</button>
