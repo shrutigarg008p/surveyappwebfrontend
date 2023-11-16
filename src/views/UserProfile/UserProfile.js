@@ -123,21 +123,7 @@ export default function UserProfile(props) {
               </CardHeader>
               <CardBody>
                 <GridContainer>
-                  <GridItem xs={12} sm={12} md={3}>
-                    <CustomInput
-                      labelText="Username"
-                      id="username"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      value={username}
-                      onChange={(e) => {
-                        setUsername(e.target.value);
-                      }}
-                    />
-                  </GridItem>
-
-                  <GridItem xs={12} sm={12} md={4}>
+                  <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
                       labelText="Email address"
                       id="email-address"
@@ -158,6 +144,7 @@ export default function UserProfile(props) {
                         fullWidth: true,
                       }}
                       value={firstname}
+                      disabled={disabled}
                       onChange={(e) => {
                         setFirstName(e.target.value);
                       }}
@@ -171,6 +158,7 @@ export default function UserProfile(props) {
                         fullWidth: true,
                       }}
                       value={lastName}
+                      disabled={disabled}
                       onChange={(e) => {
                         setLastName(e.target.value);
                       }}
@@ -197,6 +185,7 @@ export default function UserProfile(props) {
                       }}
                       id="city"
                       value={city}
+                      disabled={disabled}
                       onChange={(e) => {
                         setCity(e.target.value);
                       }}
@@ -205,16 +194,6 @@ export default function UserProfile(props) {
                         --Choose city--
                       </option>
                       <option>{city}</option>
-                      <option> Mumbai</option>
-                      <option>Bangalore</option>
-                      <option>Karnataka</option>
-                      <option>Gurgaon</option>
-                      <option>Chandigarh</option>
-                      <option>Ludhiana</option>
-                      <option>Amritsar</option>
-                      <option> New York</option>
-                      <option>Los Angeles</option>
-                      <option> Chicago</option>
                     </select>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
@@ -235,6 +214,7 @@ export default function UserProfile(props) {
                       }}
                       id="country"
                       value={country}
+                      disabled={disabled}
                       onChange={(e) => {
                         setCountry(e.target.value);
                       }}
@@ -243,11 +223,6 @@ export default function UserProfile(props) {
                         --Choose Country--
                       </option>
                       <option>{country}</option>
-                      <option>India</option>
-                      <option>America</option>
-                      <option>Canada</option>
-                      <option>Italy</option>
-                      <option>Japan</option>
                     </select>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
@@ -257,6 +232,7 @@ export default function UserProfile(props) {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      disabled={disabled}
                       value={postalcode}
                       onChange={(e) => {
                         setPostalcode(e.target.value);
@@ -264,38 +240,7 @@ export default function UserProfile(props) {
                     />
                   </GridItem>
                 </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <InputLabel style={{ color: "#AAAAAA" }}>
-                      About me
-                    </InputLabel>
-                    <CustomInput
-                      id="about-me"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        multiline: true,
-                        rows: 5,
-                      }}
-                      value={aboutme}
-                      onChange={(e) => {
-                        setAboutme(e.target.value);
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
               </CardBody>
-              {/*<CardFooter>*/}
-              {/*  <Button*/}
-              {/*    color="primary"*/}
-              {/*    type="submit"*/}
-              {/*    disabled={submitting || invalid}*/}
-              {/*  >*/}
-              {/*    Update Profile*/}
-              {/*  </Button>*/}
-              {/*  <LoadingSpinner show={props.isLoading} />*/}
-              {/*</CardFooter>*/}
             </form>
           </Card>
         </GridItem>

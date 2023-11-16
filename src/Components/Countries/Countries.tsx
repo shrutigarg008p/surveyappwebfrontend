@@ -143,7 +143,7 @@ export class Countries extends Component<any, State> {
 
           <Show when={!this.state.countries.length}>
             <Alert variant="info" show={!this.state.countries.length}>
-              At the current moment countries is not available, Click "Country" button for add.
+              At the current moment data is not available, Click "Country" button for add.
             </Alert>
           </Show>
 

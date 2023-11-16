@@ -94,7 +94,7 @@ export class City extends Component<any, State> {
             <Card>
               <CardHeader color="primary">
                 <div className="d-flex align-items-center justify-content-between">
-                <h4>States</h4>
+                <h4>Cities</h4>
                 <div>
                   <Button
                       onClick={() => {
@@ -144,7 +144,7 @@ export class City extends Component<any, State> {
 
           <Show when={!this.state.cities.length}>
             <Alert variant="info" show={!this.state.cities.length}>
-              At the current moment countries is not available, Click "City" button for add.
+              At the current moment data is not available, Click "City" button for add.
             </Alert>
           </Show>
 

@@ -9,6 +9,10 @@ import {Countries} from "./Components/Countries/Countries";
 import {States} from "./Components/States/States";
 import {City} from "./Components/Cities/City";
 import {RedemptionMode} from "./Components/RedemptionMode/RedemptionMode";
+import {PartnersList} from "./Components/Partners/PartnersList";
+import {LabelsList} from "./Components/Labels/LabelsList";
+import {MarketingLinksList} from "./Components/MarketingLinks/MarketingLinksList";
+import {SecList} from "./Components/Sec/SecList";
 
 
 const dashboardRoutes = [
@@ -20,7 +24,7 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/profilr",
+    path: "/profile",
     name: "Profile",
     icon: Dashboard,
     component: UserProfile,
@@ -28,7 +32,7 @@ const dashboardRoutes = [
   },
   {
     path: "/redemption",
-    name: "Redemption",
+    name: "Redemption Request",
     icon: Dashboard,
     component: List,
     layout: "/admin",
@@ -70,9 +74,37 @@ const dashboardRoutes = [
   },
   {
     path: "/redemption-mode",
-    name: "Redemption",
+    name: "Redemption Mode",
     icon: Dashboard,
     component: RedemptionMode,
+    layout: "/master",
+  },
+  {
+    path: "/partners",
+    name: "Partners",
+    icon: Dashboard,
+    component: PartnersList,
+    layout: "/master",
+  },
+  {
+    path: "/labels",
+    name: "Labels",
+    icon: Dashboard,
+    component: LabelsList,
+    layout: "/master",
+  },
+  {
+    path: "/marketing-links",
+    name: "Marketing Links",
+    icon: Dashboard,
+    component: MarketingLinksList,
+    layout: "/master",
+  },
+  {
+    path: "/sec",
+    name: "SEC",
+    icon: Dashboard,
+    component: SecList,
     layout: "/master",
   },
 ];

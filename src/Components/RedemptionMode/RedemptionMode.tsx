@@ -144,7 +144,7 @@ export class RedemptionMode extends Component<any, State> {
 
           <Show when={!this.state.redemptionMode.length}>
             <Alert variant="info" show={!this.state.redemptionMode.length}>
-              At the current moment countries is not available, Click "Redemption" button for add.
+              At the current moment data is not available, Click button for add.
             </Alert>
           </Show>
 

@@ -41,7 +41,9 @@ export default function AdminNavbarLinks() {
       setOpenProfile(event.currentTarget);
     }
   };
+
   const handleCloseProfile = () => {
+    console.log('calling logot---->')
     localStorage.clear();
     window.location.href = '/';
     setOpenProfile(null);
@@ -191,23 +193,23 @@ export default function AdminNavbarLinks() {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={handleCloseProfile}>
+                <ClickAwayListener>
                   <MenuList role="menu">
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      // onClick={handleProfile}
                       className={classes.dropdownItem}
                     >
                       Profile
                     </MenuItem>
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      // onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Settings
                     </MenuItem>
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={() => handleCloseProfile()}
                       className={classes.dropdownItem}
                     >
                       Logout

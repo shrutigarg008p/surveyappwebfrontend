@@ -5,12 +5,10 @@ import {
 } from 'redux-form';
 import { Alert, Modal, Spinner } from 'react-bootstrap';
 import { withRouter } from 'react-router';
-import { CountriesAPI} from '../../API/CountriesAPI';
 
 import { Show } from 'Layout';
 import { PageStatus } from 'enums';
-import * as _ from "lodash";
-import {RedemptionModeAPI} from "../../API";
+import { LabelsAPI } from "../../API";
 
 export type FormValue = {
   "name": string,
@@ -31,16 +29,12 @@ class Form extends React.Component<any, any> {
       error: null,
       country: '',
       name: '',
-      minimumPoints: 0,
       description: "",
-      usePhone: false,
-      useAddress: false,
-      useName: false
     };
   }
 
   componentDidMount() {
-    if (!!this.props.countryId) {
+    if (!!this.props.id) {
       this.fetchDetails();
     }
   }
@@ -49,11 +43,11 @@ class Form extends React.Component<any, any> {
     Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
       .then(() => {
-        if (!this.props.countryId) {
+        if (!this.props.id) {
           return Promise.reject(new Error('Invalid ID'));
         }
 
-        return RedemptionModeAPI.getOneRedemption(this.props.countryId);
+        return LabelsAPI.getOne(this.props.id);
       })
       .then((country) => {
         this.initializeValues(country);
@@ -70,36 +64,28 @@ class Form extends React.Component<any, any> {
   formValues() {
     return {
       name: this.state.name,
-      minimumPoints: parseInt(this.state.minimumPoints, 10),
       description: this.state.description,
-      usePhone: this.state.usePhone,
-      useAddress: this.state.useAddress,
-      useName: this.state.useName
     };
   }
 
-  initializeValues(country) {
+  initializeValues(data) {
     return this.setState({
-      name: country.name,
-      minimumPoints: country.minimumPoints,
-      description: country.description,
-      usePhone: country.usePhone,
-      useAddress: country.useAddress,
-      useName: country.useName
+      name: data.name,
+      description: data.description,
     });
   }
   onSubmit() {
-    if (!this.props.countryId) {
-      return this.createRedemptionMode();
+    if (!this.props.id) {
+      return this.create();
     }
-    return this.updateRedemptionMode();
+    return this.update();
   }
 
-  createRedemptionMode() {
+  create() {
     const valuesIn = this.formValues()
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Submitting }))
-      .then(() => RedemptionModeAPI.createRedemption(valuesIn))
+      .then(() => LabelsAPI.create(valuesIn))
       .then((country) => {
         this.props.onSubmit(country.id);
         return this.setState({ status: PageStatus.Submitted });
@@ -109,14 +95,14 @@ class Form extends React.Component<any, any> {
       });
   }
 
-  updateRedemptionMode() {
+  update() {
     const valuesIn = this.formValues()
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Submitting }))
-      .then(() => RedemptionModeAPI.updateRedemption(valuesIn, this.props.countryId))
+      .then(() => LabelsAPI.update(valuesIn, this.props.id))
       .then(() => {
         this.setState({ status: PageStatus.Submitted });
-        return this.props.onSubmit(this.props.countryId);
+        return this.props.onSubmit(this.props.id);
       })
       .catch((error) => {
         this.setState({ status: PageStatus.Error, error: error.message });
@@ -141,7 +127,7 @@ class Form extends React.Component<any, any> {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-              Redemption Mode
+              Labels
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
@@ -181,52 +167,9 @@ class Form extends React.Component<any, any> {
                   placeholder="Enter..."
                   required
               />
-              <label htmlFor="titleEng">
-                Minimum Points*
-              </label>
-              <input
-                  type="number"
-                  className="form-control"
-                  onChange={(e) => this.setState({minimumPoints: e.target.value})}
-                  value={this.state.minimumPoints}
-                  placeholder="Enter..."
-                  required
-              />
-              <label htmlFor="titleEng">
-              </label>
-              <div className="input-group-text mb-2">
-                <input
-                    type="checkbox"
-                    aria-label="Checkbox for following text input"
-                    onChange={(e) => this.setState({useAddress: !this.state.useAddress})}
-                    value={this.state.useAddress}
-                    checked={this.state.useAddress}
-                /> <div>Use Address</div>
-              </div>
-              <div className="input-group-text mb-2">
-                <input
-                    type="checkbox"
-                    aria-label="Checkbox for following text input"
-                    onChange={(e) => this.setState({usePhone: !this.state.usePhone})}
-                    value={this.state.usePhone}
-                    checked={this.state.usePhone}
-                /> <div>Use Phone</div>
-              </div>
-              <div className="input-group-text mb-2">
-                <input
-                    type="checkbox"
-                    aria-label="Checkbox for following text input"
-                    onChange={(e) => this.setState({useName: !this.state.useName})}
-                    value={this.state.useName}
-                    checked={this.state.useName}
-                /> <div>Use Name</div>
-              </div>
-
 
             </div>
-
             <hr />
-
             <Alert variant="danger" show={!!this.state.error} className="mt-2">
               {this.state.error}
             </Alert>
@@ -260,11 +203,11 @@ class Form extends React.Component<any, any> {
   }
 }
 
-const countryFormRedux = reduxForm<FormValue, any>({
-  form: 'countryForm',
+const FormRedux = reduxForm<FormValue, any>({
+  form: 'labelsForm',
 })(Form);
 
 
-const CountryFormWithRouter = withRouter(countryFormRedux);
+const FormWithRouter = withRouter(FormRedux);
 
-export { CountryFormWithRouter as Form };
+export { FormWithRouter as Form };

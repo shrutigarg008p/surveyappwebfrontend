@@ -151,7 +151,7 @@ class Form extends React.Component<any, State> {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-              State
+              City
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>

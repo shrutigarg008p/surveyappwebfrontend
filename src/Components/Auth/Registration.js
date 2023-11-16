@@ -4,6 +4,7 @@ import { Show } from '../../Layout';
 import { withRouter } from 'react-router';
 import LoadingSpinner from "../../Layout/LoadingSpinner";
 import { authRegistration } from "./auth.actions";
+import FacebookLogin from 'react-facebook-login';
 
 class Registration extends Component {
   constructor(props) {
@@ -53,6 +54,13 @@ class Registration extends Component {
         !!this.state.confirmPassword
 
   }
+
+  responseFacebook(response)  {
+    console.log(response);
+    if (response.status !== 'unknown') {
+      console.log('response---->', response)
+    }
+  };
 
   render() {
     return (
@@ -171,6 +179,15 @@ class Registration extends Component {
                   onClick={() => this.props.history.push('/login')}
               >
                 Sign In
+              </button>
+
+              <button className="mt-2 ml-2">
+                <FacebookLogin
+                    appId="879890270328649"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    callback={(e) => this.responseFacebook(e)}
+                />
               </button>
               <LoadingSpinner show={this.props.isLoading} />
             </div>

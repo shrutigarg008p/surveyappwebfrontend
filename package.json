@@ -15,6 +15,8 @@
     "lint-and-fix": "eslint . --ext .ts --fix"
   },
   "dependencies": {
+    "@babel/helper-environment-visitor": "^7.22.20",
+    "@babel/helper-string-parser": "^7.22.5",
     "@fortawesome/fontawesome-svg-core": "1.2.35",
     "@fortawesome/free-brands-svg-icons": "5.15.3",
     "@fortawesome/free-regular-svg-icons": "5.15.3",
@@ -48,7 +50,7 @@
     "react": "17.0.2",
     "react-bootstrap": "1.5.2",
     "react-dom": "17.0.2",
-    "react-facebook-login": "4.1.1",
+    "react-facebook-login": "^4.1.1",
     "react-google-login": "5.2.2",
     "react-horizontal-datepicker": "2.0.3",
     "react-input-emoji": "4.0.9",

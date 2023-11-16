@@ -53,7 +53,7 @@ class BasicProfile extends React.Component<any, State> {
             error: null,
             firstName: '',
             lastName: '' ,
-            mobile: '',
+            mobile: this.props.phoneNumber || '',
             gender: 'male',
             dateOfBirth: '',
             selectedCountryOption: null,
@@ -435,9 +435,11 @@ const basicProfileFormRedux = reduxForm<FormValue, any>({
     form: 'profileForm',
 })(BasicProfile);
 
-const mapStateToProps = (state: { adminUser: { adminUser: { userId: any; token: any; loading: any; error: any; }; }; }) => {
+const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; }; }; }) => {
     return {
         userId: state.adminUser.adminUser.userId,
+        phoneNumber: state.adminUser.adminUser.phoneNumber,
+        email: state.adminUser.adminUser.email,
         isLoading: state.adminUser.adminUser.loading,
         error: state.adminUser.adminUser.error,
     };

@@ -13,6 +13,13 @@ export const rewardsURL = '/api/v1/rewards/getAll'
 export const referralsUrl = '/api/v1/referrals/getAll'
 export const countryURL = '/api/v1/country';
 export const redemptionMode = '/api/v1/redemption';
+export const partnersURL = '/api/v1/partners';
+export const labelsURL = '/api/v1/labels';
+export const marketingLinksURL = '/api/v1/marketingLinks';
+export const secURL = '/api/v1/sec';
+
+
+
 
 
 

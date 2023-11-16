@@ -17,7 +17,7 @@ class VerifyEmail extends React.Component {
       const queryParams = new URLSearchParams(queryString);
       const email = queryParams.get('email');
       const token = queryParams.get('token');
-      const response = await axios.get(`http://ec2-52-66-172-238.ap-south-1.compute.amazonaws.com:9000/api/v1/auth/user/verify-email?email=${email}&token=${token}`);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL_API}/api/v1/auth/user/verify-email?email=${email}&token=${token}`);
       console.log('response--->', response)
       if (response.data.status === 1) {
         this.setState({isVerified: 'Your email has been confirmed successfully!'})

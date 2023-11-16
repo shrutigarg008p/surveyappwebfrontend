@@ -39,6 +39,8 @@ export const authReducers = (state = initialState, action) => {
       const adminUser = {
         isAuthenticated: false,
         userId: action.user.id,
+        phoneNumber: action.user.phoneNumber,
+        email: action.user.email,
         loading: false,
         error: null,
       };

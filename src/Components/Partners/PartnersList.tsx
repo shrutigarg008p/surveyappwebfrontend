@@ -14,7 +14,7 @@ import GridContainer from "../Grid/GridContainer";
 import Card from "../Card/Card";
 import moment from "moment/moment";
 import {CountriesAPI} from "../../API/CountriesAPI";
-import {StatesAPI} from "../../API";
+import {PartnersAPI, RedemptionModeAPI} from "../../API";
 
 
 const styles = {
@@ -49,19 +49,19 @@ type State = {
   status: PageStatus,
   error: string | null,
   formType: string,
-  states: any[],
-  countryId?: string | null,
+  partners: any[],
+  id?: string | null,
 };
 
-export class States extends Component<any, State> {
+export class PartnersList extends Component<any, State> {
   constructor(props) {
     super(props);
     this.state = {
       status: PageStatus.None,
       error: null,
       formType: MODAL_TYPES.NONE,
-      states: [],
-      countryId: null,
+      partners: [],
+      id: null,
     };
     this.fetchList = this.fetchList.bind(this);
   }
@@ -73,9 +73,9 @@ export class States extends Component<any, State> {
   fetchList(): Promise<void> {
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
-      .then(() => StatesAPI.getStates(1000))
+      .then(() => PartnersAPI.getPartners(1000))
       .then((countries) => {
-        this.setState({ states: countries, status: PageStatus.Loaded });
+        this.setState({ partners: countries, status: PageStatus.Loaded });
       })
       .catch((error) => {
         this.setState({ error: error.message, status: PageStatus.Error });
@@ -94,7 +94,7 @@ export class States extends Component<any, State> {
             <Card>
               <CardHeader color="primary">
                 <div className="d-flex align-items-center justify-content-between">
-                <h4>States</h4>
+                <h4>Partners</h4>
                 <div>
                   <Button
                       onClick={() => {
@@ -107,7 +107,7 @@ export class States extends Component<any, State> {
                       className="mx-1"
                   >
                     <FontAwesomeIcon icon={['fas', 'plus']} className="mr-2" />
-                    State
+                    Create
                   </Button>
                 </div>
                 </div>
@@ -136,37 +136,37 @@ export class States extends Component<any, State> {
               onSubmit={(id) => {
                 this.fetchList();
                 this.setState({
-                  formType: MODAL_TYPES.NONE,
+                  formType: MODAL_TYPES.DETAILS, id: id,
                 });
               }}
             />
           </Show>
 
-          <Show when={!this.state.states.length}>
-            <Alert variant="info" show={!this.state.states.length}>
+          <Show when={!this.state.partners.length}>
+            <Alert variant="info" show={!this.state.partners.length}>
               At the current moment data is not available, Click button for add.
             </Alert>
           </Show>
 
-          <Show when={!!this.state.states.length}>
+          <Show when={!!this.state.partners.length}>
             <Show when={this.isShowDetailModal()}>
               <Details
-                countryId={this.state.countryId}
+                id={this.state.id}
 
                 onClose={() => this.setState({
                   formType: MODAL_TYPES.NONE,
-                  countryId: null,
+                  id: null,
                 })}
                 onUpdate={() => {
-                  // this.setState({
-                  //   formType: MODAL_TYPES.UPDATE,
-                  // });
+                  this.setState({
+                    formType: MODAL_TYPES.UPDATE,
+                  });
                 }}
                 onDelete={(id) => {
-                  // this.setState({
-                  //   formType: MODAL_TYPES.DELETE,
-                  //   countryId: id,
-                  // });
+                  this.setState({
+                    formType: MODAL_TYPES.DELETE,
+                    id: id,
+                  });
                 }}
               />
             </Show>
@@ -174,16 +174,16 @@ export class States extends Component<any, State> {
             <Show when={this.state.formType === MODAL_TYPES.UPDATE}>
               <Form
                 show={this.state.formType === MODAL_TYPES.UPDATE}
-                countryId={this.state.countryId}
+                id={this.state.id}
 
                 onClose={() => this.setState({
                   formType: MODAL_TYPES.NONE,
-                  countryId: null,
+                  id: null,
                 })}
                 onSubmit={(id) => {
                   this.fetchList();
                   this.setState({
-                    formType: MODAL_TYPES.DETAILS, countryId: id,
+                    formType: MODAL_TYPES.DETAILS, id: id,
                   });
                 }}
               />
@@ -194,6 +194,10 @@ export class States extends Component<any, State> {
               <tr>
                 <th>S.No</th>
                 <th>Name</th>
+                <th>Description</th>
+                <th>Success URL</th>
+                <th>Over Quota URL</th>
+                <th>Disqualified URL</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
               </tr>
@@ -201,8 +205,8 @@ export class States extends Component<any, State> {
 
             <tbody>
               {
-                this.state.states.map((country, index) => (
-                  <tr key={country.id}>
+                this.state.partners.map((data, index) => (
+                  <tr key={data.id}>
                     <td>{index + 1}</td>
                     <td>
                       <span
@@ -213,17 +217,21 @@ export class States extends Component<any, State> {
                         onKeyPress={() => null}
                         onClick={() => {
                           this.setState({
-                            formType: MODAL_TYPES.NONE,
-                            countryId: country.id,
+                            formType: MODAL_TYPES.DETAILS,
+                            id: data.id,
                           });
                         }}
                         dangerouslySetInnerHTML={{
-                          __html: country.name || 'Title',
+                          __html: data.name || 'Title',
                         }}
                       />
                     </td>
-                    <td>{moment(country.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                    <td>{moment(country.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
+                    <td>{data.description}</td>
+                    <td>{data.successUrl}</td>
+                    <td>{data.overQuotaUrl}</td>
+                    <td>{data.disqualifiedUrl}</td>
+                    <td>{moment(data.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                    <td>{moment(data.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                   </tr>
                 ))
               }
