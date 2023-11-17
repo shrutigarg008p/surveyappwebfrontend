@@ -11,6 +11,7 @@ import { PageStatus } from 'enums';
 import Select from 'react-select';
 import {AuthAPI, MasterDataAPI} from "../../API";
 import {connect} from "react-redux";
+import {authBasicProfile} from "./auth.actions";
 
 export type FormValue = {
     "firstName":string,
@@ -111,7 +112,7 @@ class BasicProfile extends React.Component<any, State> {
                 .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId))
                 .then((profile) => {
                     this.setState({status: PageStatus.Submitted});
-                    return this.props.history.push('/')
+                        return this.props.authBasicProfile(this.props.history, this.props.userId)
                 })
                 .catch((error) => {
                     this.setState({status: PageStatus.Error, error: error.message});
@@ -445,6 +446,6 @@ const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, em
     };
 };
 
-const BasicProfileWithRouter = withRouter(connect(mapStateToProps) (basicProfileFormRedux));
+const BasicProfileWithRouter = withRouter(connect(mapStateToProps, {authBasicProfile}) (basicProfileFormRedux));
 
 export {BasicProfileWithRouter as BasicProfile };

@@ -20,6 +20,11 @@ export const authRegisterSuccess = (user) => ({
     user,
 });
 
+export const basicProfileCompleted = (user) => ({
+    type: authActions.AUTH_BASIC_PROFILE_SUCCESS,
+    user,
+});
+
 export const authFail = (error) => (dispatch) => {
   dispatch({
     type: authActions.AUTH_FAIL,
@@ -47,6 +52,18 @@ export const authLogin =
     }
   };
 
+export const authBasicProfile =
+    (history, id) => async (dispatch) => {
+        try {
+            console.log('Calling Basvi Profile======>>')
+            dispatch(authStart());
+            let obj = { id }
+            dispatch(basicProfileCompleted(obj));
+            history.push("/");
+        } catch (error) {
+            dispatch(authFail(error.message));
+        }
+    };
 
 export const authRegistration =
     (data, history) => async (dispatch) => {

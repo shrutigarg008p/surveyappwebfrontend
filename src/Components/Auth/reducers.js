@@ -24,6 +24,7 @@ export const authReducers = (state = initialState, action) => {
     case authActions.AUTH_SUCCESS: {
       const adminUser = {
         isAuthenticated: true,
+        isBasicProfile: false,
         token: action.user.token,
         userId: action.user.id,
         firstName: action.user.firstName,
@@ -37,10 +38,23 @@ export const authReducers = (state = initialState, action) => {
 
     case authActions.AUTH_SUCCESS_LAST_STEP: {
       const adminUser = {
-        isAuthenticated: false,
+        isAuthenticated: true,
+        isBasicProfile: true,
+        token: action.user.token,
         userId: action.user.id,
         phoneNumber: action.user.phoneNumber,
         email: action.user.email,
+        loading: false,
+        error: null,
+      };
+      return { ...state, adminUser };
+    }
+
+    case authActions.AUTH_BASIC_PROFILE_SUCCESS: {
+      const adminUser = {
+        isAuthenticated: true,
+        userId: action.user.id,
+        isBasicProfile: false,
         loading: false,
         error: null,
       };
