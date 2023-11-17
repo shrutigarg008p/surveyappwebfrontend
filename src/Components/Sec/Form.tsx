@@ -65,7 +65,7 @@ class Form extends React.Component<any, any> {
     return {
       name: this.state.name,
       description: this.state.description,
-      isActive: this.state.isActive,
+      isActive: this.state.isActive === true ? 1 : 0,
     };
   }
 
@@ -171,17 +171,16 @@ class Form extends React.Component<any, any> {
                   placeholder="Enter..."
                   required
               />
-              <label htmlFor="titleEng">
-                isActive*
-              </label>
-              <input
-                  type="number"
-                  className="form-control"
-                  onChange={(e) => this.setState({isActive: e.target.value})}
-                  value={this.state.isActive}
-                  placeholder="Enter..."
-                  required
-              />
+
+              <div className="input-group-text mt-2">
+                <input
+                    type="checkbox"
+                    aria-label="Checkbox for following text input"
+                    onChange={(e) => this.setState({isActive: !this.state.isActive})}
+                    value={this.state.isActive}
+                    checked={this.state.isActive}
+                /> <div>Active</div>
+              </div>
 
             </div>
             <hr />
