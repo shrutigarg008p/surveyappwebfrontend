@@ -11,6 +11,7 @@ import {PrivateRouteWithRedux} from "./PrivateRoute";
 import {VerificationEmailScreens} from "./Components/Auth/VerificationEmailScreen";
 import {AuthRouter} from "./Components/Auth/AuthRouter";
 import {RedemptionRouter} from "./Components/Redemptions";
+import PrivacyPolicy from "./Components/PrivacyPolicy/privacyPolicy";
 
 class App extends React.Component<any, any> {
 
@@ -21,6 +22,7 @@ class App extends React.Component<any, any> {
         <Switch>
             <Route path="/auth" component={AuthRouter} />
             <Route path="/verify-screen" component={VerificationEmailScreens} />
+            <Route path='/privacy-policy' component={PrivacyPolicy} />
 
             <PrivateRouteWithRedux path="/admin" component={Admin} />
             <PrivateRouteWithRedux path="/" component={Admin} />

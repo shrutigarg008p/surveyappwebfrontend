@@ -13,6 +13,7 @@ import {PartnersList} from "./Components/Partners/PartnersList";
 import {LabelsList} from "./Components/Labels/LabelsList";
 import {MarketingLinksList} from "./Components/MarketingLinks/MarketingLinksList";
 import {SecList} from "./Components/Sec/SecList";
+import {ProfileManagement} from "./Components/ProfileManagement/ProfileManagement";
 
 
 const dashboardRoutes = [
@@ -25,7 +26,7 @@ const dashboardRoutes = [
   },
   {
     path: "/profile",
-    name: "Profile",
+    name: "User Profile",
     icon: Dashboard,
     component: UserProfile,
     layout: "/admin",
@@ -84,6 +85,13 @@ const dashboardRoutes = [
     name: "Partners",
     icon: Dashboard,
     component: PartnersList,
+    layout: "/master",
+  },
+  {
+    path: "/profile-management",
+    name: "Profiles",
+    icon: Dashboard,
+    component: ProfileManagement,
     layout: "/master",
   },
   {

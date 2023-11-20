@@ -13,6 +13,7 @@ import moment from 'moment'
 import GridItem from "../Grid/GridItem";
 import CardBody from "../Card/CardBody";
 import CustomInput from "../CustomInput/CustomInput";
+import {exportToExcel} from "../../Utils/ExportToExcel";
 
 const MODAL_TYPES = {
     NONE: 'NONE',
@@ -107,6 +108,9 @@ export class List extends Component<any, State> {
             });
     }
 
+    handleExport(){
+        exportToExcel(this.state.filteredData, 'output'); // 'output' is the filename without extension
+    };
 
     render() {
         const { filteredData, filters } = this.state;
@@ -175,7 +179,7 @@ export class List extends Component<any, State> {
 
                     <div className="jumbotron bg-white p-1 mt-2 shadow-sm">
                         <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Request</button>
-                        <button type="button" className="btn btn-info ml-1">Export</button>
+                        <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export</button>
                         <button type="button" className="btn btn-danger ml-1" onClick={() => this.clearFilter()}>Clear Filter</button>
                     <button type="button" className="btn btn-warning ml-1">Approve Redemption</button>
                     </div>
