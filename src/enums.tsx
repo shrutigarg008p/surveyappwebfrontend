@@ -60,9 +60,12 @@ export enum DisputeStatus {
   RESOLVED = 'RESOLVED',
 }
 
-export enum TestimonialStatus {
-  PENDING = 'PENDING',
-  APPROVED = 'APPROVED',
+export enum DisplayTypes {
+    CHECKBOX = 1,
+    DROPDOWN = 2,
+    TAGS = 3,
+    RADIO = 4,
+    TEXT_BOX = 5
 }
 
 export enum SeoPageTitle {
