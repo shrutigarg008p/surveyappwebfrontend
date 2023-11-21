@@ -102,7 +102,7 @@ export class QuestionsList extends Component<any, State> {
                     style={{ zIndex: 1201 }}
                 >
                     <Modal.Header closeButton>
-                        <h5 className="mb-0 mt-1">Create Question</h5>
+                        <h5 className="mb-0 mt-1">Questions</h5>
                         <div
                             className="d-flex justify-content-end w-100 mr-2"
                         >
@@ -120,7 +120,7 @@ export class QuestionsList extends Component<any, State> {
                                                 className="mx-1"
                                             >
                                                 <FontAwesomeIcon icon={['fas', 'plus']} className="mr-2" />
-                                                Create
+                                                Create Question
                                             </Button>
                                         </div>
                                     </div>

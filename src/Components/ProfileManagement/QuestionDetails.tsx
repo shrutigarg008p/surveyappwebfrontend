@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import {Alert, Modal, Spinner, Table} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { PageStatus } from 'enums';
+import {DisplayTypes, PageStatus} from 'enums';
 import { Show } from 'Layout';
 import {SecAPI} from "../../API";
 import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
@@ -162,7 +162,7 @@ class QuestionDetails extends React.Component<any, State> {
                             </div>
                             <div className="mb-3">
                                 <strong>Display Type: </strong>
-                                {this.state.data?.dataValues?.displayType}
+                                {DisplayTypes[this.state.data?.dataValues?.displayType]}
                             </div>
                             <Alert
                                 variant="danger"
