@@ -5,14 +5,11 @@ import {
 } from 'redux-form';
 import { Alert, Modal, Spinner } from 'react-bootstrap';
 import { withRouter } from 'react-router';
-import { CountriesAPI} from '../../API/CountriesAPI';
 
 import { Show } from 'Layout';
 import { PageStatus } from 'enums';
-import Select from 'react-select';
-import * as _ from "lodash";
-import {MasterDataAPI, StatesAPI} from "../../API";
-import {selectOptions} from "@testing-library/user-event/dist/select-options";
+import { SecAPI } from "../../API";
+import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
 
 export type FormValue = {
   "name": string,
@@ -23,27 +20,23 @@ type State = {
   error: string | null,
   country: any,
   name: string,
-  selectedCountryOption: any,
-  countries: any
 };
 
-class Form extends React.Component<any, State> {
+class Form extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
       status: PageStatus.None,
       error: null,
-      country: '',
       name: '',
-      countries: [],
-      selectedCountryOption: null,
+      description: "",
+      displayOrder: ''
     };
   }
 
   componentDidMount() {
-    if (!this.props.countryId) {
-      // this.fetchDetails();
-      this.fetchCountryList()
+    if (!!this.props.id) {
+      this.fetchDetails();
     }
   }
 
@@ -51,11 +44,11 @@ class Form extends React.Component<any, State> {
     Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
       .then(() => {
-        if (!this.props.countryId) {
+        if (!this.props.id) {
           return Promise.reject(new Error('Invalid ID'));
         }
 
-        return CountriesAPI.getOneCountry(this.props.countryId);
+        return ProfileManagementAPI.getOne(this.props.id);
       })
       .then((country) => {
         this.initializeValues(country);
@@ -72,31 +65,31 @@ class Form extends React.Component<any, State> {
   formValues() {
     return {
       name: this.state.name,
-      countryId: this.state.country
+      description: this.state.description,
+      displayOrder: this.state.displayOrder,
     };
   }
 
-  initializeValues(country) {
+  initializeValues(data) {
     return this.setState({
-      name: country.name
+      name: data.name,
+      description: data.description,
+      displayOrder: data.displayOrder,
     });
   }
   onSubmit() {
-    if (!this.props.countryId) {
-      return this.createState();
+    if (!this.props.id) {
+      return this.create();
     }
+    return this.update();
   }
 
-  createState() {
+  create() {
     const valuesIn = this.formValues()
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Submitting }))
-      .then(() => StatesAPI.createState(valuesIn))
+      .then(() => ProfileManagementAPI.create(valuesIn))
       .then((country) => {
-        if(_.isEmpty(country)) {
-          throw new Error('Already Exist');
-          return this.setState({ status: PageStatus.Submitted });
-        };
         this.props.onSubmit(country.id);
         return this.setState({ status: PageStatus.Submitted });
       })
@@ -105,31 +98,27 @@ class Form extends React.Component<any, State> {
       });
   }
 
+  update() {
+    const valuesIn = this.formValues()
+    return Promise.resolve()
+      .then(() => this.setState({ status: PageStatus.Submitting }))
+      .then(() => ProfileManagementAPI.update(valuesIn, this.props.id))
+      .then(() => {
+        this.setState({ status: PageStatus.Submitted });
+        return this.props.onSubmit(this.props.id);
+      })
+      .catch((error) => {
+        this.setState({ status: PageStatus.Error, error: error.message });
+      });
+  }
+
   reset() {
     return this.setState({
-      name: ''
+      name: '',
+      description: '',
+      displayOrder: 1
     });
   }
-
-  fetchCountryList(): Promise<void> {
-    return Promise.resolve()
-        .then(() => this.setState({ status: PageStatus.Loading }))
-        .then(() => MasterDataAPI.countryList('10'))
-        .then((countries) => {
-          const options = countries.map(country => ({
-            label: country.name,
-            value: country.id
-          }));
-          this.setState({ countries: options, status: PageStatus.Loaded });
-        })
-        .catch((error) => {
-          this.setState({ error: error.message, status: PageStatus.Error });
-        });
-  }
-
-  handleCountryChange = async (selectedCountryOption) => {
-    this.setState({country: selectedCountryOption.value, selectedCountryOption});
-  };
 
   render() {
     return (
@@ -143,7 +132,7 @@ class Form extends React.Component<any, State> {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-              State
+            Profile
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
@@ -163,18 +152,6 @@ class Form extends React.Component<any, State> {
           >
 
             <div className="form-group">
-            <label htmlFor='gender'>Country*</label>
-              <Select
-                  name='state'
-                  id='state'
-                  onChange={this.handleCountryChange}
-                  value={this.state.selectedCountryOption}
-                  required
-                  options={this.state.countries}
-              />
-            </div>
-
-            <div className="form-group">
               <label htmlFor="titleEng">
                 Name*
               </label>
@@ -182,12 +159,34 @@ class Form extends React.Component<any, State> {
                   className="form-control"
                   onChange={(e) => this.setState({name: e.target.value})}
                   value={this.state.name}
-                  placeholder="Enter name"
+                  placeholder="Enter..."
                   required
               />
+              <label htmlFor="titleEng">
+                Description*
+              </label>
+              <input
+                  className="form-control"
+                  onChange={(e) => this.setState({description: e.target.value})}
+                  value={this.state.description}
+                  placeholder="Enter..."
+                  required
+              />
+
+              <label htmlFor="titleEng">
+                Display Order*
+              </label>
+              <input
+                  type='number'
+                  className="form-control"
+                  onChange={(e) => this.setState({displayOrder: e.target.value})}
+                  value={this.state.displayOrder}
+                  placeholder="Enter..."
+                  required
+              />
+
             </div>
             <hr />
-
             <Alert variant="danger" show={!!this.state.error} className="mt-2">
               {this.state.error}
             </Alert>
@@ -221,11 +220,11 @@ class Form extends React.Component<any, State> {
   }
 }
 
-const countryFormRedux = reduxForm<FormValue, any>({
-  form: 'countryForm',
+const FormRedux = reduxForm<FormValue, any>({
+  form: 'labelsForm',
 })(Form);
 
 
-const CountryFormWithRouter = withRouter(countryFormRedux);
+const FormWithRouter = withRouter(FormRedux);
 
-export { CountryFormWithRouter as Form };
+export { FormWithRouter as Form };

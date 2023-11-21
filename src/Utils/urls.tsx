@@ -17,6 +17,8 @@ export const partnersURL = '/api/v1/partners';
 export const labelsURL = '/api/v1/labels';
 export const marketingLinksURL = '/api/v1/marketingLinks';
 export const secURL = '/api/v1/sec';
+export const profileManagementURL = '/api/v1/profileManagement';
+
 
 
 
