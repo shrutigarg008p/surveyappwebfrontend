@@ -93,7 +93,7 @@ class Confirmation extends Component<{
     return (
       <>
         {React.cloneElement(this.props.children, this.getNewProps())}
-        <Modal centered show={this.state.show} onHide={this.close}>
+        <Modal centered show={this.state.show} onHide={this.close} style={{ zIndex: 1201 }}>
           <Modal.Header closeButton>
             <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>

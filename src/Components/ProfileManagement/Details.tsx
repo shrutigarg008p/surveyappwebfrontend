@@ -7,6 +7,7 @@ import { PageStatus } from 'enums';
 import { Show } from 'Layout';
 import {SecAPI} from "../../API";
 import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
+import {Confirmation} from "../../Shared/Confirmation";
 
 type State = {
   data: any | null,
@@ -56,6 +57,28 @@ class Details extends React.Component<any, State> {
       });
   }
 
+
+  onDelete() {
+    Promise.resolve()
+        .then(() => this.setState({ status: PageStatus.Loading }))
+        .then(() => {
+          if (!this.props.id) {
+            return Promise.reject(new Error('Invalid ID'));
+          }
+          return ProfileManagementAPI.deleteOne(this.props.id);
+        })
+        .then((country) => {
+          if(!!country) {
+            this.setState({ status: PageStatus.Loaded });
+          }
+          return this.props.onDelete(this.props.id)
+
+        })
+        .catch((error) => {
+          this.setState({ status: PageStatus.Error, error: error.message });
+        });
+  }
+
   render() {
     return (
       <>
@@ -65,7 +88,6 @@ class Details extends React.Component<any, State> {
           backdrop="static"
           onHide={this.props.onClose}
           show
-          style={{ zIndex: 1201 }}
         >
           <Modal.Header closeButton>
               <h5 className="mb-0 mt-1">Details</h5>
@@ -83,6 +105,19 @@ class Details extends React.Component<any, State> {
                   />
                   Update
                 </button>
+
+                <Confirmation onAction={() => this.onDelete()} body="Are you sure want to delete ?">
+                  <button
+                      type="button"
+                      title="End the call"
+                      className="btn call-end"
+                  >
+                    <FontAwesomeIcon
+                        icon={['fas', 'trash']}
+                        className="mr-2"
+                    />
+                  </button>
+                </Confirmation>
               </div>
           </Modal.Header>
           <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>

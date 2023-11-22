@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 import { api } from '../axiosConfig';
-import { profileManagementURL } from "../Utils/urls";
+import {profileManagementURL, questionsURL, optionsURL} from "../Utils/urls";
 
 export class ProfileManagementAPI {
     static getAll(
@@ -41,6 +41,62 @@ export class ProfileManagementAPI {
 
     static getOne(id: any): Promise<any> {
         return api.get(`${profileManagementURL}/getOne/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static deleteOne(id: any): Promise<any> {
+        return api.delete(`${profileManagementURL}/delete/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
+    //Questions
+
+    static getAllQuestions(
+        limit = 1000,
+        id: string,
+    ): Promise<any[]> {
+        return api.get(`${questionsURL}/getAll/${id}/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
+    static createQuestions(values: any): Promise<any> {
+        return api.post(`${questionsURL}/create`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static updateQuestions(values: any, id: any): Promise<any> {
+        return api.put(`${questionsURL}/update/${id}`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
+    static getOneQuestions(id: any): Promise<any> {
+        return api.get(`${questionsURL}/getOne/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static deleteOneQuestions(id: any): Promise<any> {
+        return api.delete(`${questionsURL}/delete/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static deleteOneOption(id: any): Promise<any> {
+        return api.delete(`${optionsURL}/delete/${id}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

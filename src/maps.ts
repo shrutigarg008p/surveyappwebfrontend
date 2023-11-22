@@ -1,6 +1,6 @@
 import {mapper} from "./Shared/Mapper";
 import {AppointmentWorkflow} from "./enums";
-import {KycStatus,CompanyKycStatus,DisputeStatus,TestimonialStatus} from "./enums";
+import {KycStatus,CompanyKycStatus,DisputeStatus} from "./enums";
 
 export const userKycStatusMap = mapper({
     [KycStatus.Pending]: 'Pending',
@@ -17,9 +17,4 @@ export const companyKycStatusMap = mapper({
 export const disputeStatusMap = mapper({
     [DisputeStatus.PENDING]: 'PENDING',
     [DisputeStatus.RESOLVED]: 'RESOLVED',
-});
-
-export const testimonialStatusMap = mapper({
-    [TestimonialStatus.PENDING]: 'PENDING',
-    [TestimonialStatus.APPROVED]: 'APPROVED',
 });
