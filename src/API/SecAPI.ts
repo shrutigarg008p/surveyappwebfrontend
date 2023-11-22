@@ -46,4 +46,32 @@ export class SecAPI {
             });
     }
 
+    static createQuestion(values: any): Promise<any> {
+        return api.post(`${secURL}/create-questions`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static getOneQuestion(id: any): Promise<any> {
+        return api.get(`${secURL}/get-SecQuestion/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static getQuestions(secId: any): Promise<any> {
+        return api.get(`${secURL}/get-SecQuestions/${secId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
+    static removeQuestion(id: any): Promise<any> {
+        return api.delete(`${secURL}/remove-question/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
 }
