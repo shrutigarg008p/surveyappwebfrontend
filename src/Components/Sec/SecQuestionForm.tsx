@@ -266,19 +266,19 @@ class SecQuestionsForm extends React.Component<any, any> {
                         <div className="d-flex align-items-center mt-2">
                             <button
                                 type="submit"
-                                disabled={!this.state.questionId}
+                                disabled={!this.state.questionId || !this.state.optionIds}
                                 className="btn btn-primary mr-3"
                             >
                                 Submit
                             </button>
 
-                            <button
-                                type="button"
-                                disabled={false}
-                                className="btn btn-light mr-3"
-                            >
-                                Reset
-                            </button>
+                            {/*<button*/}
+                            {/*    type="button"*/}
+                            {/*    disabled={false}*/}
+                            {/*    className="btn btn-light mr-3"*/}
+                            {/*>*/}
+                            {/*    Reset*/}
+                            {/*</button>*/}
 
                             <Show when={this.state.status === PageStatus.Submitting}>
                                 <Spinner animation="border" variant="primary" />
