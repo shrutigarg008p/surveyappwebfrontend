@@ -88,6 +88,14 @@ export class ProfileManagementAPI {
             });
     }
 
+
+    static getQuestionOptions(questionId: any): Promise<any> {
+        return api.get(`${questionsURL}/getQuestionOptions/${questionId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
     static deleteOneQuestions(id: any): Promise<any> {
         return api.delete(`${questionsURL}/delete/${id}`)
             .then((res) => {
