@@ -73,7 +73,7 @@ export class PartnersList extends Component<any, State> {
   fetchList(): Promise<void> {
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
-      .then(() => PartnersAPI.getPartners(1000))
+      .then(() => PartnersAPI.getPartners(10000))
       .then((countries) => {
         this.setState({ partners: countries, status: PageStatus.Loaded });
       })

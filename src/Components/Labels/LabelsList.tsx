@@ -73,7 +73,7 @@ export class LabelsList extends Component<any, State> {
   fetchList(): Promise<void> {
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
-      .then(() => LabelsAPI.getAll(1000))
+      .then(() => LabelsAPI.getAll(10000))
       .then((countries) => {
         this.setState({ data: countries, status: PageStatus.Loaded });
       })
