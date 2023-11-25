@@ -73,7 +73,7 @@ export class RedemptionMode extends Component<any, State> {
   fetchList(): Promise<void> {
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
-      .then(() => RedemptionModeAPI.redemptionList(1000))
+      .then(() => RedemptionModeAPI.redemptionList(10000))
       .then((countries) => {
         this.setState({ redemptionMode: countries, status: PageStatus.Loaded });
       })

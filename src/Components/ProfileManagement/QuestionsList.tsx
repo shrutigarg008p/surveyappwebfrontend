@@ -76,7 +76,7 @@ export class QuestionsList extends Component<any, State> {
     fetchList(): Promise<void> {
         return Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => ProfileManagementAPI.getAllQuestions(1000, this.props.id))
+            .then(() => ProfileManagementAPI.getAllQuestions(10000, this.props.id))
             .then((countries) => {
                 this.setState({ data: countries, status: PageStatus.Loaded });
             })

@@ -93,7 +93,7 @@ export class RewardsList extends Component<any, State> {
     fetchList(): Promise<void> {
         return Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => AuthAPI.rewardsList('1000'))
+            .then(() => AuthAPI.rewardsList(10000))
             .then((users) => {
                 this.setState({ rewards: users, filteredData: users, status: PageStatus.Loaded });
             })

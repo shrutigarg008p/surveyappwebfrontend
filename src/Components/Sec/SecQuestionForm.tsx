@@ -69,7 +69,7 @@ class SecQuestionsForm extends React.Component<any, any> {
     fetchProfiles() {
         Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => ProfileManagementAPI.getAll(1000))
+            .then(() => ProfileManagementAPI.getAll(10000))
             .then((profiles) => {
                 const options = profiles.map(country => ({
                     label: country.name,
@@ -93,7 +93,7 @@ class SecQuestionsForm extends React.Component<any, any> {
                     return Promise.reject(new Error('Invalid ID'));
                 }
 
-                return ProfileManagementAPI.getAllQuestions(1000, id);
+                return ProfileManagementAPI.getAllQuestions(10000, id);
             })
             .then((questions) => {
                 const options = questions.map(country => ({

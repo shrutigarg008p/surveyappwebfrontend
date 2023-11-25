@@ -99,7 +99,7 @@ export class List extends Component<any, State> {
     fetchList(): Promise<void> {
         return Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => AuthAPI.redemptionList('1000'))
+            .then(() => AuthAPI.redemptionList('10000'))
             .then((users) => {
                 this.setState({ redemptions: users, filteredData: users, status: PageStatus.Loaded });
             })

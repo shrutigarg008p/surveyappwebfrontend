@@ -5,7 +5,7 @@ import {marketingLinksURL} from "../Utils/urls";
 
 export class MarketingLinksAPI {
     static getAll(
-        limit = 1000,
+        limit = 10000,
         offset = 0,
     ): Promise<any[]> {
         return api.get(`${marketingLinksURL}/getAll/${limit}`, {

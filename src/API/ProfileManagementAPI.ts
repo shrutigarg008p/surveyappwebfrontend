@@ -5,7 +5,7 @@ import {profileManagementURL, questionsURL, optionsURL} from "../Utils/urls";
 
 export class ProfileManagementAPI {
     static getAll(
-        limit = 1000,
+        limit = 10000,
         offset = 0,
     ): Promise<any[]> {
         return api.get(`${profileManagementURL}/getAll/${limit}`, {
@@ -57,7 +57,7 @@ export class ProfileManagementAPI {
     //Questions
 
     static getAllQuestions(
-        limit = 1000,
+        limit = 10000,
         id: string,
     ): Promise<any[]> {
         return api.get(`${questionsURL}/getAll/${id}/${limit}`, {

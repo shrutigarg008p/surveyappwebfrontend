@@ -61,7 +61,7 @@ export class AuthAPI {
     }
 
     static async rewardsList(
-        limit: string,
+        limit: number,
     ): Promise<any> {
         return api.get(`${rewardsURL}/${limit}`)
             .then((res) => {
@@ -70,7 +70,7 @@ export class AuthAPI {
     }
 
     static async referralsList(
-        limit: string,
+        limit: number,
     ): Promise<any> {
         return api.get(`${referralsUrl}/${limit}`)
             .then((res) => {

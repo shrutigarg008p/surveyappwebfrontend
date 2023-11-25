@@ -5,7 +5,7 @@ import {labelsURL} from "../Utils/urls";
 
 export class LabelsAPI {
     static getAll(
-        limit = 1000,
+        limit = 10000,
         offset = 0,
     ): Promise<any[]> {
         return api.get(`${labelsURL}/getAll/${limit}`, {

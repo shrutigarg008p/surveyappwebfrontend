@@ -5,7 +5,7 @@ import {countryURL} from "../Utils/urls";
 
 export class CountriesAPI {
     static getCountries(
-        limit = 1000,
+        limit = 10000,
         offset = 0,
     ): Promise<any[]> {
         return api.get(`${countryURL}/getAll/${limit}`, {

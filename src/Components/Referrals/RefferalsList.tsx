@@ -90,7 +90,7 @@ export class ReferralsList extends Component<any, any> {
     fetchList(): Promise<void> {
         return Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => AuthAPI.referralsList('1000'))
+            .then(() => AuthAPI.referralsList(10000))
             .then((users) => {
                 this.setState({ rewards: users, filteredData: users, status: PageStatus.Loaded });
             })

@@ -72,7 +72,7 @@ export class MarketingLinksList extends Component<any, State> {
   fetchList(): Promise<void> {
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
-      .then(() => MarketingLinksAPI.getAll(1000))
+      .then(() => MarketingLinksAPI.getAll(10000))
       .then((countries) => {
         this.setState({ data: countries, status: PageStatus.Loaded });
       })

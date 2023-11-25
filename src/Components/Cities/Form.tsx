@@ -122,7 +122,7 @@ class Form extends React.Component<any, State> {
   fetchStatesList(): Promise<void> {
     return Promise.resolve()
         .then(() => this.setState({ status: PageStatus.Loading }))
-        .then(() => StatesAPI.getStates(1000))
+        .then(() => StatesAPI.getStates(10000))
         .then((states) => {
           const options = states.map(country => ({
             label: country.name,

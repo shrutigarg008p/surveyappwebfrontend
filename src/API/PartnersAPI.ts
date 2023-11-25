@@ -5,7 +5,7 @@ import {partnersURL} from "../Utils/urls";
 
 export class PartnersAPI {
     static getPartners(
-        limit = 1000,
+        limit = 10000,
         offset = 0,
     ): Promise<any[]> {
         return api.get(`${partnersURL}/getAll/${limit}`, {

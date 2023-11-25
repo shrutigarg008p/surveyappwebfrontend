@@ -14,6 +14,7 @@ import {LabelsList} from "./Components/Labels/LabelsList";
 import {MarketingLinksList} from "./Components/MarketingLinks/MarketingLinksList";
 import {SecList} from "./Components/Sec/SecList";
 import {ProfileManagement} from "./Components/ProfileManagement/ProfileManagement";
+import {Surveys} from "./Components/Surveys/Surveys";
 
 
 const dashboardRoutes = [
@@ -29,6 +30,13 @@ const dashboardRoutes = [
     name: "User Profile",
     icon: Dashboard,
     component: UserProfile,
+    layout: "/admin",
+  },
+  {
+    path: "/surveys",
+    name: "Surveys",
+    icon: Dashboard,
+    component: Surveys,
     layout: "/admin",
   },
   {
@@ -106,15 +114,15 @@ const dashboardRoutes = [
     name: "Marketing Links",
     icon: Dashboard,
     component: MarketingLinksList,
-    layout: "/master",
+    layout: "/admin",
   },
   {
     path: "/sec",
     name: "SEC",
     icon: Dashboard,
     component: SecList,
-    layout: "/master",
-  },
+    layout: "/admin",
+  }
 ];
 
 export default dashboardRoutes;

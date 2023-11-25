@@ -5,7 +5,7 @@ import {secURL} from "../Utils/urls";
 
 export class SecAPI {
     static getAll(
-        limit = 1000,
+        limit = 10000,
         offset = 0,
     ): Promise<any[]> {
         return api.get(`${secURL}/getAll/${limit}`, {

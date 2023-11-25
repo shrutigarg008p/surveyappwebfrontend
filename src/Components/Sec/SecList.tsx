@@ -74,7 +74,7 @@ export class SecList extends Component<any, State> {
   fetchList(): Promise<void> {
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
-      .then(() => SecAPI.getAll(1000))
+      .then(() => SecAPI.getAll(10000))
       .then((countries) => {
         this.setState({ data: countries, status: PageStatus.Loaded });
       })

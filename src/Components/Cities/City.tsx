@@ -73,7 +73,7 @@ export class City extends Component<any, State> {
   fetchList(): Promise<void> {
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Loading }))
-      .then(() => StatesAPI.getCities(1000))
+      .then(() => StatesAPI.getCities(10000))
       .then((countries) => {
         this.setState({ cities: countries, status: PageStatus.Loaded });
       })
