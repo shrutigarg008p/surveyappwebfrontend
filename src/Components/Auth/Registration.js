@@ -145,16 +145,15 @@ class Registration extends Component {
               <Show when={this.state.show===true}>
                 <small className="form-text text-danger privacy_error">
                   Please accept the terms to our privacy policy and our terms and conditions
-                  <br/>
+                 
                 </small>
               </Show>
               <Show when={this.state.showConfirmPassword === true}>
                 <small className="form-text text-danger privacy_error">
                   Please enter same password in both password and confirm password
-                  <br/>
+                
                 </small>
               </Show>
-            <br/>
             <div className="login-row login-form-item">
               <div className="login-form-item-control">
                 <button 
