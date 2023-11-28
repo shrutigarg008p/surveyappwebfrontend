@@ -90,7 +90,7 @@ class Registration extends Component {
               className="login-input" 
               />
             </div>
-            <br/>
+            
             <div className="login-row login-form-item login-form-item-control">
               <input 
                type='text'
@@ -105,7 +105,7 @@ class Registration extends Component {
               className="login-input" 
               />
             </div>
-            <br/>
+            
             <div className="login-row login-form-item login-form-item-control">
               <input 
               type='password'
@@ -118,7 +118,7 @@ class Registration extends Component {
               placeholder='Password'
               className="login-input" />
             </div>
-            <br/>
+            
             <div className="login-row login-form-item login-form-item-control">
               <input 
               type='confirmPassword'
@@ -131,7 +131,7 @@ class Registration extends Component {
               placeholder='Confirm Password'
               className="login-input" />
             </div>
-            <br/>
+            
               <div className="login-row login-form-item login-form-item-control">
                 <label>
                   <input 
