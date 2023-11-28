@@ -78,21 +78,21 @@ class Registration extends Component {
           </div>
         </div>
         <div className="dash-login-content">
-        
+
         <form >
             <div className="login-row login-form-item login-form-item-control">
-              <input 
+              <input
                type='text'
                value={this.state.email}
                onChange={(e) => this.setState({ email: e.target.value })}
                onClick={() => this.setState({emailActive: !this.state.emailActive})}
                placeholder='Email'
-              className="login-input" 
+              className="login-input"
               />
             </div>
-            
+
             <div className="login-row login-form-item login-form-item-control">
-              <input 
+              <input
                type='text'
                value={this.state.phoneNumber}
                onChange={(e) =>
@@ -102,12 +102,12 @@ class Registration extends Component {
                }
                onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
                placeholder='Phone'
-              className="login-input" 
+              className="login-input"
               />
             </div>
-            
+
             <div className="login-row login-form-item login-form-item-control">
-              <input 
+              <input
               type='password'
               onChange={(e) =>
                   this.setState({
@@ -118,9 +118,9 @@ class Registration extends Component {
               placeholder='Password'
               className="login-input" />
             </div>
-            
+
             <div className="login-row login-form-item login-form-item-control">
-              <input 
+              <input
               type='confirmPassword'
               onChange={(e) =>
                   this.setState({
@@ -131,10 +131,10 @@ class Registration extends Component {
               placeholder='Confirm Password'
               className="login-input" />
             </div>
-            
+
               <div className="login-row login-form-item login-form-item-control">
                 <label>
-                  <input 
+                  <input
                   type='checkbox'
                   onChange={(e) => this.setState({ policy: e.target.checked })}
                   className="r_pp_checkbox login-checkbox-input" defaultValue />
@@ -145,18 +145,18 @@ class Registration extends Component {
               <Show when={this.state.show===true}>
                 <small className="form-text text-danger privacy_error">
                   Please accept the terms to our privacy policy and our terms and conditions
-                 
+
                 </small>
               </Show>
               <Show when={this.state.showConfirmPassword === true}>
                 <small className="form-text text-danger privacy_error">
                   Please enter same password in both password and confirm password
-                
+
                 </small>
               </Show>
             <div className="login-row login-form-item">
               <div className="login-form-item-control">
-                <button 
+                <button
                 onClick={() => this.onSubmit()}
                 disabled={!this.isSubmitButtonDisable()}
                 className="login-btn login-btn-primary"
@@ -165,7 +165,9 @@ class Registration extends Component {
                 </button>
                 <span>or </span>
                 <a hre="#" onClick={() => this.props.history.push('/login')}>
+                  <button className="btn-white">
                   <span>Sign in</span>
+                  </button>
                 </a>
               </div>
             </div>

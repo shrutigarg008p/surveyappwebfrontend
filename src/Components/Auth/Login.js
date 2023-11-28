@@ -56,10 +56,10 @@ function Login(props) {
         </div>
     <form onSubmit={props.handleSubmit(onSubmit)}>
         <div className="login-row login-form-item login-form-item-control">
-          <input 
+          <input
           type="text"
           name="username"
-          className="login-input" 
+          className="login-input"
           id="username"
           onChange={(e) => setUsername({ username: e.target.value })}
           placeholder="Enter username"
@@ -67,7 +67,7 @@ function Login(props) {
           />
         </div>
         <div className="login-row login-form-item login-form-item-control">
-          <input 
+          <input
           name="password"
           onChange={(e) => setPassword({ password: e.target.value })}
           type={state.isVisible ? "text" : "password"}
@@ -86,7 +86,9 @@ function Login(props) {
             </button>
             <span>or </span>
             <a hre="#"  onClick={handleClick}>
-              <span>Sign Up</span>
+              <button className="btn-white">
+                <span>Sign Up</span>
+              </button>
             </a>
           </div>
         </div>
