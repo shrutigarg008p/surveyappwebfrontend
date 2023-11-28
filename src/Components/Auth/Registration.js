@@ -64,95 +64,83 @@ class Registration extends Component {
 
   render() {
     return (
-        <>
-          <section className='register_page'>
-            <div className='register_left'>
-              <img
-                  src='/assets/img/logo.jpeg'
-                  alt='mainImg'
-                  className='img-fluid '
+      <div className="dash-login-wrap">
+      <div className="dash-login-main-content">
+        <div className="dash-logo-content">
+          <div className="dash-logo-content-bg"><img src="https://flexile.g-axon.work/static/media/neature.e7f17afb.jpg" /></div>
+          <div className="dash-logo-wid">
+            <h1>Sign Up</h1>
+            <p>By Signing Up, you can avail full features of our services.</p>
+            <p>Get an account !!!</p>
+          </div>
+          <div className="dash-logo">
+            <img alt="example" src="/assets/img/logo2.png" style={{width:'100%'}}/>
+          </div>
+        </div>
+        <div className="dash-login-content">
+        
+        <form >
+            <div className="login-row login-form-item login-form-item-control">
+              <input 
+               type='text'
+               value={this.state.email}
+               onChange={(e) => this.setState({ email: e.target.value })}
+               onClick={() => this.setState({emailActive: !this.state.emailActive})}
+               placeholder='Email'
+              className="login-input" 
               />
             </div>
-            <div className='register_right'>
-              <div className={this.state.emailActive === true || this.state.email !==''  ? 'input_group input_group_active': 'input_group'}>
-                <label htmlFor='' className='custom_label'>
-                  Email address
+            <br/>
+            <div className="login-row login-form-item login-form-item-control">
+              <input 
+               type='text'
+               value={this.state.phoneNumber}
+               onChange={(e) =>
+                   this.setState({
+                     phoneNumber: e.target.value,
+                   })
+               }
+               onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
+               placeholder='Phone'
+              className="login-input" 
+              />
+            </div>
+            <br/>
+            <div className="login-row login-form-item login-form-item-control">
+              <input 
+              type='password'
+              onChange={(e) =>
+                  this.setState({
+                    password: e.target.value,
+                  })
+              }
+              onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
+              placeholder='Password'
+              className="login-input" />
+            </div>
+            <br/>
+            <div className="login-row login-form-item login-form-item-control">
+              <input 
+              type='confirmPassword'
+              onChange={(e) =>
+                  this.setState({
+                    confirmPassword: e.target.value,
+                  })
+              }
+              onClick={() => this.setState({confirmPasswordActive: !this.state.confirmPasswordActive})}
+              placeholder='Confirm Password'
+              className="login-input" />
+            </div>
+            <br/>
+              <div className="login-row login-form-item login-form-item-control">
+                <label>
+                  <input 
+                  type='checkbox'
+                  onChange={(e) => this.setState({ policy: e.target.checked })}
+                  className="r_pp_checkbox login-checkbox-input" defaultValue />
+                  <span> By signing up, I accept</span>
                 </label>
-                <input
-                    type='text'
-
-                    value={this.state.email}
-                    onChange={(e) => this.setState({ email: e.target.value })}
-                    onClick={() => this.setState({emailActive: !this.state.emailActive})}
-                    className='custom_input_field'
-                />
-              </div>
-
-              <div className={this.state.phoneNumberActive === true ||this.state.phoneNumber !==''  ? 'input_group input_group_active': 'input_group'}>
-                <label for='' className='custom_label'>
-                  Phone Number
-                </label>
-                <input
-                    type='text'
-
-                    value={this.state.phoneNumber}
-                    onChange={(e) =>
-                        this.setState({
-                          phoneNumber: e.target.value,
-                        })
-                    }
-                    onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
-                    className='custom_input_field'
-                />
-              </div>
-
-
-              <div className={this.state.passwordActive == true||this.state.password!==''  ? 'input_group input_group_active': 'input_group'}>
-                <label for='' className='custom_label'>
-                  Password
-                </label>
-                <input
-                    type='password'
-
-                    onChange={(e) =>
-                        this.setState({
-                          password: e.target.value,
-                        })
-                    }
-                    className='custom_input_field'
-                    onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
-                />
-              </div>
-
-              <div className={this.state.confirmPasswordActive === true || this.state.confirmPassword !== ''  ? 'input_group input_group_active': 'input_group'}>
-                <label htmlFor='' className='custom_label'>
-                  Confirm Password
-                </label>
-                <input
-                    type='confirmPassword'
-
-                    onChange={(e) =>
-                        this.setState({
-                          confirmPassword: e.target.value,
-                        })
-                    }
-                    className='custom_input_field'
-                    onClick={() => this.setState({confirmPasswordActive: !this.state.confirmPasswordActive})}
-                />
-
-              </div>
-
-              <div className='register_pp'>
-                <input
-                    type='checkbox'
-                    className='r_pp_checkbox'
-                    onChange={(e) => this.setState({ policy: e.target.checked })}
-                />
-                <span>
-                By creating an account, you agree to our{' '}
-                  <a> Privacy Policy</a>,{' '}
-                  <a>Term and Conditions</a>
-              </span>
+                  <span>Term &amp; Condition</span>
               </div>
               <Show when={this.state.show===true}>
                 <small className="form-text text-danger privacy_error">
@@ -166,33 +154,36 @@ class Registration extends Component {
                   <br/>
                 </small>
               </Show>
-              <button
-                  className='create_acc_btn rippleeffect-btn'
-                  onClick={() => this.onSubmit()}
-                  disabled={!this.isSubmitButtonDisable()}
-              >
-                Sign up
-              </button>
-
-              <button
-                  className='create_acc_btn rippleeffect-btn'
-                  onClick={() => this.props.history.push('/login')}
-              >
-                Sign In
-              </button>
-
-              <button className="mt-2 ml-2">
-                <FacebookLogin
+            <br/>
+            <div className="login-row login-form-item">
+              <div className="login-form-item-control">
+                <button 
+                onClick={() => this.onSubmit()}
+                disabled={!this.isSubmitButtonDisable()}
+                className="login-btn login-btn-primary"
+                >
+                  <span>Sign Up</span>
+                </button>
+                <span>or </span>
+                <a hre="#" onClick={() => this.props.history.push('/login')}>
+                  <span>Sign in</span>
+                </a>
+              </div>
+            </div>
+            <LoadingSpinner show={this.props.isLoading} />
+            <div className="dash-flex-row dash-justify-content-between">
+              <span>or connect with</span>
+              <FacebookLogin
                     appId="879890270328649"
                     autoLoad={false}
                     fields="name,email,picture"
                     callback={(e) => this.responseFacebook(e)}
                 />
-              </button>
-              <LoadingSpinner show={this.props.isLoading} />
             </div>
-          </section>
-        </>
+          </form>
+        </div>
+      </div>
+    </div>
     );
   }
 }
