@@ -7,6 +7,7 @@ export { LabelsAPI } from './LabelsAPI';
 export { MarketingLinksAPI } from './MarketingLinksAPI';
 export { SecAPI } from './SecAPI';
 export { SurveysAPI } from './SurveysAPI';
+export { SamplesAPI } from './SamplesAPI';
 
 
 

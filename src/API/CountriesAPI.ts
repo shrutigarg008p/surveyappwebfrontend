@@ -48,4 +48,26 @@ export class CountriesAPI {
           return _.get(res, 'data.data', null);
         });
       }
+
+
+
+    static getAllStates(
+        limit = 10000,
+        offset = 0,
+    ): Promise<any[]> {
+        return api.get(`${countryURL}/getAllStates/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+    static getAllCities(
+        limit = 10000,
+        offset = 0,
+    ): Promise<any[]> {
+        return api.get(`${countryURL}/getAllCities/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
 }

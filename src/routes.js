@@ -15,6 +15,7 @@ import {MarketingLinksList} from "./Components/MarketingLinks/MarketingLinksList
 import {SecList} from "./Components/Sec/SecList";
 import {ProfileManagement} from "./Components/ProfileManagement/ProfileManagement";
 import {Surveys} from "./Components/Surveys/Surveys";
+import {Samples} from "./Components/Samples/Samples";
 
 
 const dashboardRoutes = [
@@ -37,6 +38,13 @@ const dashboardRoutes = [
     name: "Surveys",
     icon: Dashboard,
     component: Surveys,
+    layout: "/admin",
+  },
+  {
+    path: "/samples",
+    name: "Samples",
+    icon: Dashboard,
+    component: Samples,
     layout: "/admin",
   },
   {
