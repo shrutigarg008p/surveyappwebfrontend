@@ -21,6 +21,7 @@ export const profileManagementURL = '/api/v1/profileManagement';
 export const questionsURL = '/api/v1/questions';
 export const optionsURL = '/api/v1/options';
 export const surveysURL = '/api/v1/surveys';
+export const samplesURL = '/api/v1/samples';
 
 
 
