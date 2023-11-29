@@ -43,4 +43,33 @@ export class SamplesAPI {
                 return _.get(res, 'data.data', {});
             });
     }
+
+
+    static createQuestion(values: any): Promise<any> {
+        return api.post(`${samplesURL}/create-questions`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static getOneQuestion(id: any): Promise<any> {
+        return api.get(`${samplesURL}/get-SampleQuestion/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static getQuestions(secId: any): Promise<any> {
+        return api.get(`${samplesURL}/get-SampleQuestions/${secId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
+    static removeQuestion(id: any): Promise<any> {
+        return api.delete(`${samplesURL}/remove-question/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 }

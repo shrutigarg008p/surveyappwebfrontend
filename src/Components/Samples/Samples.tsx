@@ -13,6 +13,8 @@ import Card from "../Card/Card";
 import moment from "moment/moment";
 import {exportToExcel} from "../../Utils/ExportToExcel";
 import {SamplesAPI} from "../../API";
+import {SecQuestionsList} from "../Sec/SecQuestionsList";
+import {SampleQuestionsList} from "./SampleQuestionsList";
 
 
 const MODAL_TYPES = {
@@ -21,6 +23,7 @@ const MODAL_TYPES = {
   UPDATE: 'UPDATE',
   DELETE: 'DELETE',
   DETAILS: 'DETAILS',
+  QUESTION: 'QUESTION'
 };
 
 type State = {
@@ -246,6 +249,24 @@ export class Samples extends Component<any, State> {
               />
             </Show>
 
+            <Show when={this.state.formType === MODAL_TYPES.QUESTION}>
+              <SampleQuestionsList
+                  show={this.state.formType === MODAL_TYPES.QUESTION}
+                  id={this.state.id}
+
+                  onClose={() => this.setState({
+                    formType: MODAL_TYPES.NONE,
+                    id: null,
+                  })}
+                  onSubmit={(id) => {
+                    this.fetchList();
+                    this.setState({
+                      formType: MODAL_TYPES.DETAILS, id: id,
+                    });
+                  }}
+              />
+            </Show>
+
           <Table responsive size="sm" bordered>
             <thead>
               <tr>
@@ -255,6 +276,7 @@ export class Samples extends Component<any, State> {
                 <th>Active</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -285,6 +307,21 @@ export class Samples extends Component<any, State> {
                     <td>{info.isActive === true ? 'Yes' : 'No' }</td>
                     <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                     <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
+                    <td>
+                      <span
+                          aria-label="button"
+                          role="button"
+                          tabIndex={0}
+                          className="text-primary"
+                          onKeyPress={() => null}
+                          onClick={() => {
+                            this.setState({
+                              formType: MODAL_TYPES.QUESTION,
+                              id: info.id,
+                            });
+                          }}
+                      >Questions</span>
+                    </td>
                   </tr>
                 ))
               }

@@ -146,7 +146,9 @@ class Details extends React.Component<any, State> {
                 </div>
                 <div className="col">
                   <strong>URL: </strong>
-                  {this.state.survey?.url}
+                  <a href={this.state.survey?.url} target="_blank" rel="noopener noreferrer">
+                    {this.state.survey?.url}
+                  </a>
                 </div>
               </div>
               <div className="row mt-2">
