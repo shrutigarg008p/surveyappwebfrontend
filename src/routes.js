@@ -17,7 +17,14 @@ import {ProfileManagement} from "./Components/ProfileManagement/ProfileManagemen
 import {Surveys} from "./Components/Surveys/Surveys";
 import {Samples} from "./Components/Samples/Samples";
 import {RegisteredOnly} from "./Components/Panelists/RegisteredOnly";
-import {ArrowBack} from "@material-ui/icons";
+import {
+  ArrowBack,
+  ArrowBackIosTwoTone,
+  ArrowDownward,
+  ArrowDropDown,
+  ArrowForward,
+  ArrowLeft, ArrowRight
+} from "@material-ui/icons";
 import {BasicProfileOnly} from "./Components/Panelists/BasicProfileOnly";
 
 
@@ -67,14 +74,14 @@ const dashboardRoutes = [
   {
     path: "/registeredOnlyPanelists",
     name: "Registered Only",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: RegisteredOnly,
     layout: "/admin",
   },
   {
     path: "/basicProfileOnly",
     name: "Basic Profile Only",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: BasicProfileOnly,
     layout: "/admin",
   },
