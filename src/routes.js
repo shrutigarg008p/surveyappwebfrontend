@@ -16,6 +16,9 @@ import {SecList} from "./Components/Sec/SecList";
 import {ProfileManagement} from "./Components/ProfileManagement/ProfileManagement";
 import {Surveys} from "./Components/Surveys/Surveys";
 import {Samples} from "./Components/Samples/Samples";
+import {RegisteredOnly} from "./Components/Panelists/RegisteredOnly";
+import {ArrowBack} from "@material-ui/icons";
+import {BasicProfileOnly} from "./Components/Panelists/BasicProfileOnly";
 
 
 const dashboardRoutes = [
@@ -41,20 +44,6 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/samples",
-    name: "Samples",
-    icon: Dashboard,
-    component: Samples,
-    layout: "/admin",
-  },
-  {
-    path: "/redemption",
-    name: "Redemption Request",
-    icon: Dashboard,
-    component: List,
-    layout: "/admin",
-  },
-  {
     path: "/rewards",
     name: "Rewards",
     icon: Dashboard,
@@ -66,6 +55,41 @@ const dashboardRoutes = [
     name: "Referrals",
     icon: Dashboard,
     component: ReferralsList,
+    layout: "/admin",
+  },
+  {
+    path: "/",
+    name: "PANELISTS",
+    icon: ArrowBack,
+    component: '',
+    layout: "",
+  },
+  {
+    path: "/registeredOnlyPanelists",
+    name: "Registered Only",
+    icon: Dashboard,
+    component: RegisteredOnly,
+    layout: "/admin",
+  },
+  {
+    path: "/basicProfileOnly",
+    name: "Basic Profile Only",
+    icon: Dashboard,
+    component: BasicProfileOnly,
+    layout: "/admin",
+  },
+  {
+    path: "/samples",
+    name: "Samples",
+    icon: Dashboard,
+    component: Samples,
+    layout: "/admin",
+  },
+  {
+    path: "/redemption",
+    name: "Redemption Request",
+    icon: Dashboard,
+    component: List,
     layout: "/admin",
   },
   {
@@ -130,7 +154,7 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: SecList,
     layout: "/admin",
-  }
+  },
 ];
 
 export default dashboardRoutes;

@@ -178,7 +178,7 @@ export class List extends Component<any, State> {
                     </form>
 
                     <div className="jumbotron bg-white p-1 mt-2 shadow-sm">
-                        <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Request</button>
+                        <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Redemptions</button>
                         <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export</button>
                         <button type="button" className="btn btn-danger ml-1" onClick={() => this.clearFilter()}>Clear Filter</button>
                     <button type="button" className="btn btn-warning ml-1">Approve Redemption</button>

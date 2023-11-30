@@ -4,9 +4,11 @@ import {
     createBasicProfileURL,
     getProfile,
     loginURL,
-    redemptionRequest, referralsUrl,
+    redemptionRequest,
+    referralsUrl,
     registrationURL,
-    rewardsURL
+    rewardsURL,
+    usersListURL
 } from '../Utils/urls';
 
 
@@ -75,6 +77,16 @@ export class AuthAPI {
         return api.get(`${referralsUrl}/${limit}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
+            });
+    }
+
+    static async usersList(
+        limit: number,
+        type: string
+    ): Promise<any> {
+        return api.get(`${usersListURL}/list/${limit}/${type}`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
             });
     }
 }
