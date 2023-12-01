@@ -307,7 +307,6 @@ class SecQuestionsForm extends React.Component<any, any> {
                             >
                                 Submit
                             </button>
-
                             {/*<button*/}
                             {/*    type="button"*/}
                             {/*    disabled={false}*/}
