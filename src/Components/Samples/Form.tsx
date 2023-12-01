@@ -48,10 +48,10 @@ class Form extends React.Component<any, any> {
       "gender": 'male',
       "isActive": true,
       "profileCount": 0,
-      "fromAge": '',
-      "toAge": '',
-      "fromRegistrationDate": "",
-      "toRegistrationDate": "",
+      "fromAge": null,
+      "toAge": null,
+      "fromRegistrationDate": null,
+      "toRegistrationDate": null,
       "stateIds": [],
       "cityIds": [],
       "tierIds": [],
@@ -199,7 +199,7 @@ class Form extends React.Component<any, any> {
 
   reset() {
     return this.setState({
-      name: ''
+      name: null
     });
   }
 
@@ -278,7 +278,7 @@ class Form extends React.Component<any, any> {
 
               <div className="row mt-2">
                 <div className="col">
-                  <label htmlFor="description">Description*</label>
+                  <label htmlFor="description">Description</label>
                   <input
                       className="form-control"
                       type="textbox"
@@ -286,14 +286,14 @@ class Form extends React.Component<any, any> {
                       onChange={(e) => this.setState({ description: e.target.value })}
                       value={this.state.description}
                       placeholder="Enter here"
-                      required
+
                   />
                 </div>
               </div>
 
               <div className="row mt-2">
                 <div className="col">
-                  <label htmlFor='gender'>Gender*</label>
+                  <label htmlFor='gender'>Gender</label>
                   <select
                       style={{
                         width: '100%',
@@ -311,7 +311,7 @@ class Form extends React.Component<any, any> {
                       name='gender'
                       id='gender'
                       value={this.state.gender}
-                      required
+
                       onChange={(e) =>
                           this.setState({ gender: e.target.value })
                       }
@@ -322,7 +322,7 @@ class Form extends React.Component<any, any> {
                   </select>
                 </div>
                 <div className="col">
-                  <label htmlFor="fromAge">Min Age*</label>
+                  <label htmlFor="fromAge">Min Age</label>
                   <input
                       className="form-control"
                       id="fromAge"
@@ -334,7 +334,7 @@ class Form extends React.Component<any, any> {
                   />
                 </div>
                 <div className="col">
-                  <label htmlFor="fromAge">Max Age*</label>
+                  <label htmlFor="fromAge">Max Age</label>
                   <input
                       className="form-control"
                       id="toAge"
@@ -349,7 +349,7 @@ class Form extends React.Component<any, any> {
 
               <div className="row mt-2">
                 <div className="col">
-                  <label htmlFor="fromRegistrationDate">Registration Start Date*</label>
+                  <label htmlFor="fromRegistrationDate">Registration Start Date</label>
                   <input
                       type="date"
                       className="form-control"
@@ -358,11 +358,11 @@ class Form extends React.Component<any, any> {
                       onChange={(e) => this.setState({ fromRegistrationDate: e.target.value })}
                       value={this.state.fromRegistrationDate}
                       placeholder="Enter here"
-                      required
+
                   />
                 </div>
                 <div className="col">
-                  <label htmlFor="toRegistrationDate">Registration End Date*</label>
+                  <label htmlFor="toRegistrationDate">Registration End Date</label>
                   <input
                       type="date"
                       className="form-control"
@@ -371,7 +371,7 @@ class Form extends React.Component<any, any> {
                       onChange={(e) => this.setState({ toRegistrationDate: e.target.value })}
                       value={this.state.toRegistrationDate}
                       placeholder="Enter here"
-                      required
+
                   />
                 </div>
               </div>
@@ -399,7 +399,7 @@ class Form extends React.Component<any, any> {
                       onChange={this.handleCityChange}
                       value={this.state.selectedCitiesOption}
                       isMulti
-                      required
+
                       options={this.state.cities}
                   />
                 </div>
@@ -413,7 +413,7 @@ class Form extends React.Component<any, any> {
                       onChange={this.handleStateChange}
                       value={this.state.selectedStatesOption}
                       isMulti
-                      required
+
                       options={this.state.states}
                   />
                 </div>

@@ -89,4 +89,14 @@ export class AuthAPI {
                 return _.get(res, 'data.data', []);
             });
     }
+
+    static async allPanelists(
+        body: any,
+        limit: number
+    ): Promise<any> {
+        return api.post(`${usersListURL}/allPanelist/${limit}`, body)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 }

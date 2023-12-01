@@ -26,6 +26,10 @@ import {
   ArrowLeft, ArrowRight
 } from "@material-ui/icons";
 import {BasicProfileOnly} from "./Components/Panelists/BasicProfileOnly";
+import {UnsubscribedPanelistOnly} from "./Components/Panelists/UnsubscribedPanelistsOnly";
+import {DeletedPanelistsOnly} from "./Components/Panelists/DeletedPanelistsOnly";
+import {Bounces} from "./Components/Panelists/BouncePenlistsOnly";
+import {AllPanelists} from "./Components/Panelists/AllPanelists";
 
 
 const dashboardRoutes = [
@@ -79,6 +83,13 @@ const dashboardRoutes = [
     layout: "",
   },
   {
+    path: "/panelistDashboard",
+    name: "All",
+    icon: ArrowRight,
+    component: AllPanelists,
+    layout: "/admin",
+  },
+  {
     path: "/registeredOnlyPanelists",
     name: "Registered Only",
     icon: ArrowRight,
@@ -90,6 +101,27 @@ const dashboardRoutes = [
     name: "Basic Profile Only",
     icon: ArrowRight,
     component: BasicProfileOnly,
+    layout: "/admin",
+  },
+  {
+    path: "/unsubscribeRequests",
+    name: "Unsubscribe Requests",
+    icon: ArrowRight,
+    component: UnsubscribedPanelistOnly,
+    layout: "/admin",
+  },
+  {
+    path: "/deleteRequests",
+    name: "Delete Requests",
+    icon: ArrowRight,
+    component: DeletedPanelistsOnly,
+    layout: "/admin",
+  },
+  {
+    path: "/bounces",
+    name: "Bonces",
+    icon: ArrowRight,
+    component: Bounces,
     layout: "/admin",
   },
   {
