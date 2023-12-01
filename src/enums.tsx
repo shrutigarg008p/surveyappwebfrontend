@@ -68,6 +68,14 @@ export enum DisplayTypes {
     TEXT_BOX = 5
 }
 
+export enum Operands {
+    All = 1,
+    ANSWERED = 2,
+    ANY = 3,
+    EXCEPT = 4,
+    NOT_ANSWERED = 5
+}
+
 export enum SeoPageTitle {
   Home = 'Home',
   Login = 'Login',

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import {Alert, Modal, Spinner, Table} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {DisplayTypes, PageStatus} from 'enums';
+import {DisplayTypes, Operands, PageStatus} from 'enums';
 import { Show } from 'Layout';
 import {SamplesAPI, SecAPI} from "../../API";
 import {Confirmation} from "../../Shared/Confirmation";
@@ -94,6 +94,10 @@ class SampleQuestionsDetails extends React.Component<any, State> {
                             <div className="mb-3">
                                 <strong>Display Type: </strong>
                                 {DisplayTypes[this.state.data?.question?.displayType]}
+                            </div>
+                            <div className="mb-3">
+                                <strong>Operand: </strong>
+                                {Operands[this.state.data?.operand]}
                             </div>
                             <div className="mb-3">
                                 <strong>SEC: </strong>

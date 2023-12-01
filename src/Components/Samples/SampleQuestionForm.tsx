@@ -7,7 +7,7 @@ import { Alert, Modal, Spinner } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 
 import { Show } from 'Layout';
-import { PageStatus } from 'enums';
+import {DisplayTypes, Operands, PageStatus} from 'enums';
 import Select from 'react-select';
 import * as _ from "lodash";
 import { SamplesAPI } from "../../API";
@@ -23,16 +23,17 @@ class SampleQuestionsForm extends React.Component<any, any> {
         this.state = {
             status: PageStatus.None,
             error: null,
-            questionId: '',
-            optionIds: '',
-            sampleId: '',
+            questionId: null,
+            optionIds: null,
+            sampleId: null,
             questions: [],
             profiles: [],
             options: [],
             selectedProfileOption: null,
             selectedQuestionOption: null,
             selectedOptionsOption: null,
-            tier: 1
+            tier: 1,
+            operand: null
         };
     }
 
@@ -141,7 +142,7 @@ class SampleQuestionsForm extends React.Component<any, any> {
             questionId: this.state.questionId,
             sampleId: this.props.secId,
             optionIds: this.state.optionIds,
-            operand: 1
+            operand: this.state.operand
         };
     }
 
@@ -149,7 +150,7 @@ class SampleQuestionsForm extends React.Component<any, any> {
         return this.setState({
             questionId: data.questionId,
             sampleId: this.props.secId,
-            operand: 1,
+            operand: data.operand,
             optionIds: data.optionIds,
 
         });
@@ -243,10 +244,44 @@ class SampleQuestionsForm extends React.Component<any, any> {
                             options={this.state.questions}
                         />
                     </div>
+                        <div className="row">
+                            <div className="col">
+                                <label htmlFor='gender'>Operands*</label>
+                                <select
+                                    style={{
+                                        width: '100%',
+                                        display: 'block',
+                                        height: '40px',
+                                        lineHeight: '1.5',
+                                        color: '#495057',
+                                        backgroundColor: '#fff',
+                                        backgroundClip: 'padding-box',
+                                        border: '1px solid #ced4da',
+                                        borderRadius: '5px',
+                                        transition:
+                                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+                                    }}
+                                    name='gender'
+                                    id='gender'
+                                    value={this.state.operand}
+                                    required
+                                    onChange={(e) =>
+                                        this.setState({ operand: e.target.value })
+                                    }
+                                >
+                                    <option value='' disabled>--Choose--</option>
+                                    <option value={Operands.All}>All</option>
+                                    <option value={Operands.ANSWERED}>Answered</option>
+                                    <option value={Operands.ANY}>Any</option>
+                                    <option value={Operands.EXCEPT}>Except</option>
+                                    <option value={Operands.NOT_ANSWERED}>Not Answered</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <Show when={this.state.questionId} >
                         <div className="form-group">
-                            <label htmlFor='optionIds'>Options*</label>
+                            <label htmlFor='optionIds'>Options</label>
                             <Select
                                 name='optionIds'
                                 id='optionIds'
@@ -266,7 +301,7 @@ class SampleQuestionsForm extends React.Component<any, any> {
                         <div className="d-flex align-items-center mt-2">
                             <button
                                 type="submit"
-                                disabled={!this.state.questionId || !this.state.optionIds}
+                                disabled={!this.state.questionId || !this.state.operand}
                                 className="btn btn-primary mr-3"
                             >
                                 Submit
