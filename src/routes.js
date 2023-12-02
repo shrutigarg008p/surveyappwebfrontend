@@ -30,6 +30,7 @@ import {UnsubscribedPanelistOnly} from "./Components/Panelists/UnsubscribedPanel
 import {DeletedPanelistsOnly} from "./Components/Panelists/DeletedPanelistsOnly";
 import {Bounces} from "./Components/Panelists/BouncePenlistsOnly";
 import {AllPanelists} from "./Components/Panelists/AllPanelists";
+import PenalistDetails from "Components/Panelists/PenalistDetails";
 
 
 const dashboardRoutes = [
@@ -87,6 +88,13 @@ const dashboardRoutes = [
     name: "All",
     icon: ArrowRight,
     component: AllPanelists,
+    layout: "/admin",
+  },
+  {
+    path: "/panelistDetails",
+    name: "Details",
+    icon: ArrowRight,
+    component: PenalistDetails,
     layout: "/admin",
   },
   {
