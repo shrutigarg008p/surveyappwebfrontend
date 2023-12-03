@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     Alert, Button, Spinner, Table,
 } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PageStatus } from 'enums';
 import {Show} from "../../Layout";
 import CardHeader from "../Card/CardHeader";
@@ -9,7 +10,7 @@ import GridContainer from "../Grid/GridContainer";
 import Card from "../Card/Card";
 import moment from "moment/moment";
 import {exportToExcel} from "../../Utils/ExportToExcel";
-import {AuthAPI, SamplesAPI} from "../../API";
+import {MessagesAPI, NewsLetterAPI} from "../../API";
 
 
 const MODAL_TYPES = {
@@ -18,23 +19,24 @@ const MODAL_TYPES = {
     UPDATE: 'UPDATE',
     DELETE: 'DELETE',
     DETAILS: 'DETAILS',
+    BODY: 'BODY'
 };
 
 type State = {
     status: PageStatus,
     error: string | null,
     formType: string,
+    body: string | null,
     data: any[],
     id?: string | null,
     filteredData: any[],
     filters: {
-        blackListType: '',
-        email: '',
-        phoneNumber: ''
+        queryType: any,
+        email: any
     },
 };
 
-export class Bounces extends Component<any, State> {
+export class Messages extends Component<any, State> {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,11 +45,11 @@ export class Bounces extends Component<any, State> {
             formType: MODAL_TYPES.NONE,
             data: [],
             id: null,
+            body: null,
             filteredData: [],
             filters: {
-                blackListType: '',
-                email: '',
-                phoneNumber: ''
+                queryType: '',
+                email: ''
             },
         };
         this.fetchList = this.fetchList.bind(this);
@@ -60,9 +62,9 @@ export class Bounces extends Component<any, State> {
     fetchList(): Promise<void> {
         return Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => AuthAPI.usersList(10000, 'bouncedOnly'))
-            .then((users) => {
-                this.setState({ data: users, filteredData: users,  status: PageStatus.Loaded });
+            .then(() => MessagesAPI.getAll(10000))
+            .then((countries) => {
+                this.setState({ data: countries, filteredData: countries,  status: PageStatus.Loaded });
             })
             .catch((error) => {
                 this.setState({ error: error.message, status: PageStatus.Error });
@@ -77,7 +79,6 @@ export class Bounces extends Component<any, State> {
 
     handleFilterChange = (e) => {
         const { name, value } = e.target;
-        console.log(name, value)
         this.setState(
             (prevState) => ({
                 filters: {
@@ -94,11 +95,8 @@ export class Bounces extends Component<any, State> {
         const filteredData = data.filter((user) => {
             return Object.keys(filters).every((key) => {
                 if (filters[key] === '') return true;
-                if (key === 'createdAt') {
-                    return new Date(user[key]).toDateString() === new Date(filters[key]).toDateString();
-                }
-                if (key === 'firstName') {
-                    return String(`${user.basic_profile['firstName']}${user.basic_profile['lastName']}`).toLowerCase().includes(String(filters[key]).toLowerCase());
+                if (key === 'email') {
+                    return String(user.user[key]).toLowerCase().includes(String(filters[key]).toLowerCase());
                 }
                 return String(user[key]).toLowerCase().includes(String(filters[key]).toLowerCase());
             });
@@ -109,24 +107,33 @@ export class Bounces extends Component<any, State> {
 
     clearFilter = () => {
         this.setState({ filters: {
-                blackListType: '',
-                email: '',
-                phoneNumber: ''
+                queryType: '',
+                email: ''
             },
         })
         this.fetchList()
     }
 
     handleExport(){
-        let obj = this.state.filteredData.map((user) => {
-            return {
-                ...user,
-                name: `${user.basic_profile.firstName} ${user.basic_profile.lastName}`,
-                'Date Of Birth': user.basic_profile.dateOfBirth
-            }
-        })
-        exportToExcel(obj, 'BasicProfileOnly');
+        exportToExcel(this.state.filteredData, 'Messages');
     };
+
+
+    markAsResolved(id): Promise<void> {
+        let values = { queryStatus: 'Resolved' }
+        return Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => MessagesAPI.update(id, values))
+            .then((countries) => {
+                this.setState({ data: countries, filteredData: countries,  status: PageStatus.Loaded }, () => {
+                    this.fetchList()
+                });
+            })
+            .catch((error) => {
+                this.setState({ error: error.message, status: PageStatus.Error });
+            });
+    }
+
 
     render() {
         const { filteredData, filters } = this.state;
@@ -136,7 +143,7 @@ export class Bounces extends Component<any, State> {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>Bounced Panelists</h4>
+                                <h4>Messages</h4>
                             </div>
                         </CardHeader>
                     </Card>
@@ -148,27 +155,7 @@ export class Bounces extends Component<any, State> {
                     <form>
                         <div className="row">
                             <div className="col">
-                                <label>Email</label>
-                                <input type="email"
-                                       className="form-control"
-                                       placeholder="Enter..."
-                                       name="email"
-                                       value={filters.email}
-                                       onChange={this.handleFilterChange}
-                                />
-                            </div>
-                            <div className="col">
-                                <label>Phone Number</label>
-                                <input type="text"
-                                       className="form-control"
-                                       placeholder="Enter..."
-                                       name="phoneNumber"
-                                       value={filters.phoneNumber}
-                                       onChange={this.handleFilterChange}
-                                />
-                            </div>
-                            <div className="col">
-                                <label>Blacklist Type</label>
+                                <label htmlFor='gender'>Query Status</label>
                                 <select
                                     style={{
                                         width: '100%',
@@ -183,27 +170,38 @@ export class Bounces extends Component<any, State> {
                                         transition:
                                             'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
                                     }}
-                                    name='blackListType'
-                                    id='type'
+                                    name='queryStatus'
+                                    id='queryStatus'
                                     required
                                     onChange={this.handleFilterChange}
                                 >
-                                    <option value='' disabled>--Choose--</option>
-                                    <option value='bounce'>Bounce</option>
-                                    <option value='spam'>Spam</option>
+                                    <option value='select'>--Choose--</option>
+                                    <option value='Pending'>Pending</option>
+                                    <option value='Resolved'>Resolved</option>
                                 </select>
+                            </div>
+                            <div className="col">
+                                <label>Email</label>
+                                <input type="text"
+                                       className="form-control"
+                                       placeholder="Enter..."
+                                       name="email"
+                                       value={filters.email}
+                                       onChange={this.handleFilterChange}
+                                />
                             </div>
                         </div>
                     </form>
 
                     <div className="jumbotron bg-white p-1 mt-2 shadow-sm">
-                        <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Panelists</button>
+                        <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Samples</button>
                         <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export</button>
                         <button type="button" className="btn btn-danger ml-1" onClick={() => this.clearFilter()}>Clear Filter</button>
                     </div>
 
 
                 </div>
+
 
                 <div className="jumbotron bg-white p-3 border shadow-sm">
                     <Alert variant="danger" show={this.state.status === PageStatus.Error}>
@@ -229,12 +227,10 @@ export class Bounces extends Component<any, State> {
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>City</th>
-                                    <th>Date Of Birth</th>
+                                    <th>QueryType</th>
                                     <th>CreatedAt</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
 
@@ -243,29 +239,18 @@ export class Bounces extends Component<any, State> {
                                     this.state.filteredData.map((info, index) => (
                                         <tr key={info.id}>
                                             <td>{index + 1}</td>
-                                            <td>
-                                              <span
-                                                  aria-label="button"
-                                                  role="button"
-                                                  tabIndex={0}
-                                                  className="text-primary"
-                                                  onKeyPress={() => null}
-                                                  onClick={() => {
-                                                      this.setState({
-                                                          formType: MODAL_TYPES.NONE,
-                                                          id: info.id,
-                                                      });
-                                                  }}
-                                                  dangerouslySetInnerHTML={{
-                                                      __html: `${info.basic_profile ? info.basic_profile.firstName : ''} ${info.basic_profile ? info.basic_profile.lastName : ''}` || '-',
-                                                  }}
-                                              />
-                                            </td>
-                                            <td>{info.email}</td>
-                                            <td>{info.phoneNumber}</td>
-                                            <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
-                                            <td>{moment(info.basic_profile ? info.basic_profile.dateOfBirth : '-').format('MM/DD/YYYY HH:mm A')}</td>
+                                            <td>{info.user ? info.user.email : '-'}</td>
+                                            <td>{info.queryType}</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                            <td>
+                                                {info.queryStatus === 'Pending' ? (
+                                                    <button type="button" className="btn btn-red" onClick={() => this.markAsResolved(info.id)}>
+                                                        Mark as Resolved
+                                                    </button>
+                                                ) : (
+                                                    info.queryStatus
+                                                )}
+                                            </td>
                                         </tr>
                                     ))
                                 }

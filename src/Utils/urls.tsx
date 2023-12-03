@@ -23,6 +23,9 @@ export const optionsURL = '/api/v1/options';
 export const surveysURL = '/api/v1/surveys';
 export const samplesURL = '/api/v1/samples';
 export const usersListURL = '/api/v1/auth/user';
+export const newsLettersURL = '/api/v1/newsLetters';
+export const messagesURL = '/api/v1/messages';
+
 
 
 

@@ -31,6 +31,9 @@ import {DeletedPanelistsOnly} from "./Components/Panelists/DeletedPanelistsOnly"
 import {Bounces} from "./Components/Panelists/BouncePenlistsOnly";
 import {AllPanelists} from "./Components/Panelists/AllPanelists";
 import PenalistDetails from "Components/Panelists/PenalistDetails";
+import {NewsLetters} from "./Components/NewsLetters/NewsLetters";
+import {Messages} from "./Components/Messsages/Messages";
+import {Help} from "./Components/Help/Help";
 
 
 const dashboardRoutes = [
@@ -127,7 +130,7 @@ const dashboardRoutes = [
   },
   {
     path: "/bounces",
-    name: "Bonces",
+    name: "Bounces",
     icon: ArrowRight,
     component: Bounces,
     layout: "/admin",
@@ -137,6 +140,27 @@ const dashboardRoutes = [
     name: "Samples",
     icon: Dashboard,
     component: Samples,
+    layout: "/admin",
+  },
+  {
+    path: "/newsletters",
+    name: "Newsletters",
+    icon: Dashboard,
+    component: NewsLetters,
+    layout: "/admin",
+  },
+  {
+    path: "/messages",
+    name: "Messages",
+    icon: Dashboard,
+    component: Messages,
+    layout: "/admin",
+  },
+  {
+    path: "/help",
+    name: "Help",
+    icon: Dashboard,
+    component: Help,
     layout: "/admin",
   },
   {
