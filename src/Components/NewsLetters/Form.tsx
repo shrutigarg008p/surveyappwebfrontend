@@ -11,6 +11,8 @@ import {NewsLetterAPI, SamplesAPI} from "../../API";
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
 import moment from "moment/moment";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export type FormValue = {
   name: string,
@@ -36,7 +38,107 @@ class Form extends React.Component<any, any> {
       subject: "",
       "sendDate": null,
       "newsletterStatus": 'inProgress',
-      "body": '',
+      "body": '<div class="ta-scroll-window ng-scope ta-text ta-editor form-control" ng-hide="showHtml"><div class="popover fade bottom" style="max-width: none; width: 305px;"><div class="arrow"></div><div class="popover-content"></div></div><div class="ta-resizer-handle-overlay"><div class="ta-resizer-handle-background"></div><div class="ta-resizer-handle-corner ta-resizer-handle-corner-tl"></div><div class="ta-resizer-handle-corner ta-resizer-handle-corner-tr"></div><div class="ta-resizer-handle-corner ta-resizer-handle-corner-bl"></div><div class="ta-resizer-handle-corner ta-resizer-handle-corner-br"></div><div class="ta-resizer-handle-info"></div></div><div id="taTextElement9972333766307336" contenteditable="true" ta-bind="ta-bind" ng-model="html" class="ng-pristine ng-valid ta-bind">\n' +
+          '\n' +
+          '\n' +
+          '    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">\n' +
+          '    <title>IndiaPolls Doc</title> <br />\n' +
+          '\n' +
+          '\n' +
+          '    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '    <table width="600" border="0" style="margin:0 auto;">\n' +
+          '        <tbody><tr>\n' +
+          '            <td>\n' +
+          '\n' +
+          '                <div class="wrapper" style="box-shadow:0px 2px 2px 2px #F3F3F3; o-box-shadow:0px 2px 2px 2px #F3F3F3; moz-box-shadow:0px 2px 2px 2px #F3F3F3;\n' +
+          '\twebkit-box-shadow:0px 2px 2px 2px #F3F3F3; min-height:100%; overflow:hidden;  border-left:1px solid #ddd !important; border-right:1px solid #ddd !important; max-width:600px; margin:0 auto; padding:0px !important;">\n' +
+          '\n' +
+          '                    <div class="" style="padding-left:0px !important; padding-right:0px !important;">\n' +
+          '                        <img src="https://indiapolls.com:9000/Images/logo.jpeg" class="img-responsive center-block">\n' +
+          '                    </div>\n' +
+          '\n' +
+          '\n' +
+          '                    <div id="text-area">\n' +
+          '                        <div class="">\n' +
+          '                            <br>\n' +
+          '                            <br>\n' +
+          '\n' +
+          '                            <p style="padding-left:45px; padding-right:45px; padding-top:15px;\n' +
+          'font-size:18px; line-height:32px; font-family: \'Open Sans\', sans-serif;">\n' +
+          '                                Dear Panelist ,</p><div class="clearfix"></div>\n' +
+          '                            <p></p>\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '                            <p style="padding-left:45px; padding-right:45px; padding-top:15px;\n' +
+          'font-size:18px; line-height:32px; font-family: \'Open Sans\', sans-serif;">\n' +
+          '\n' +
+          '                                Thank You for choosing IndiaPolls to voice your valuable opinion!<br><br>Congratulations! You have redeemed yourself cash as part of IndiaPolls rewards redemption benefits for successful referrals/surveys that you have completed.<br><br>IndiaPolls is India’s premium survey portal – where we invite registered users to take part in product / brand surveys and earn attractive reward points for their opinions.<br><br>Also, remember that there are more prizes to be won regularly. All you need to do is fill in the surveys that we will send out to you from time to time. And that gives you a chance to earn rewards from Rs. 20 to Rs. 2000 and enter into monthly sweepstakes. You can either REDEEM your points or donate them to a charitable organization of your choice.<br><br>Don’t let this be a secret…talk about us. If you successfully bring a person a friend on-board, you also earn 20 IndiaPolls points whenever a person referred by you becomes a member.<br><br>All the surveys that you respond to are used by various companies to provide better products or services to customers - so your opinion will count!<br><br>We hope that this will be the beginning of a lasting and a fruitful relationship.\n' +
+          '                                                        </p>\n' +
+          '                            <br><br>\n' +
+          '\n' +
+          '                            <h3 class="sign" style="font-size:22px; font-weight:900; padding-left:45px;\n' +
+          '\tpadding-top:25px; margin-bottom:60px; font-family: \'Open Sans\', sans-serif;">\n' +
+          '                                <b>Warm Regards,<br>\n' +
+          '                                IndiaPolls Online Panel</b>\n' +
+          '                            </h3>\n' +
+          '\n' +
+          '\n' +
+          '                            <div class="panel-footer" style="font-family: \'Open Sans\', sans-serif; margin-left:10px;">\n' +
+          '                                <div class="col-md-6" style="width:280px; float:left;">\n' +
+          '                                    <img src="https://indiapolls.com:9000/Images/logo.jpeg" class="img-responsive" style="margin-top:90px !important;">\n' +
+          '                                </div>\n' +
+          '\n' +
+          '                                <div class="col-md-6" style="width:280px; float: right; margin-right:10px; margin-top: -130px;">\n' +
+          '                                    <div class="right-footer" style="border-left:2px solid #ddd;\n' +
+          '\tpadding-left:20px; ">\n' +
+          '\n' +
+          '<!--                                        <h4 style="border-bottom:3px solid #f47a20;-->\n' +
+          '                                        <!-- font-weight:700; font-size:18px; padding-bottom:4px; padding-top:0px !important; font-family: \'Open Sans\', sans-serif;">-->\n' +
+          '                                        <h4 style="color: #000000;border-bottom:2px solid orange">\n' +
+          '                                            www.IndiaPolls.net\n' +
+          '                                        </h4>\n' +
+          '\n' +
+          '                                        <h5 style="font-weight: 800; font-size: 12px; font-style: italic; font-family: \'Open Sans\', sans-serif;"><b>Keep voicing your valuable opinions and earn more rewards!</b></h5>\n' +
+          '\n' +
+          '                                        <b><p style="font-weight: 600; font-size: 12px; font-family: \'Open Sans\', sans-serif;">AbsolutData Research &amp; Analytics</p></b>\n' +
+          '                                        <b><p style="font-weight: 600; font-size: 12px; font-family: \'Open Sans\', sans-serif;">Building 14 A, 4th Floor, DLF Cyber City SEZ, DLF Phase-III, Gurgaon-122002</p></b>\n' +
+          '                                        <b><p style="font-weight: 600; font-size: 12px; font-family: \'Open Sans\', sans-serif;">Phone: +91.124.495.3400; Fax: 91.124.495.3430</p></b>\n' +
+          '                                        <b><p style="font-weight:600; font-size:12px; font-family: \'Open Sans\', sans-serif; text-decoration: underline"><a href="#" style="color: blue">Email: feedback@IndiaPolls.net</a></p></b>\n' +
+          '\n' +
+          '\n' +
+          '                                    </div>\n' +
+          '\n' +
+          '                                </div>\n' +
+          '\n' +
+          '                            </div>\n' +
+          '\n' +
+          '                        </div>\n' +
+          '\n' +
+          '                    </div>\n' +
+          '\n' +
+          '\n' +
+          '                </div>\n' +
+          '\n' +
+          '            </td>\n' +
+          '        </tr>\n' +
+          '    </tbody></table>\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '\n' +
+          '</div></div>',
       emails: [],
       createdById: '',
       selectedSampleOption: null
@@ -253,15 +355,26 @@ class Form extends React.Component<any, any> {
                   />
                 </div>
               </div>
+              {/*<div className="row mt-2">*/}
+              {/*  <div className="col">*/}
+              {/*    <label htmlFor="body">Body</label>*/}
+              {/*    <textarea*/}
+              {/*        className="form-control"*/}
+              {/*        onChange={(e) => this.setState({ body: e.target.value })}*/}
+              {/*        value={this.state.body}*/}
+              {/*        placeholder="Enter here"*/}
+
+              {/*    />*/}
+              {/*  </div>*/}
+              {/*</div>*/}
+
               <div className="row mt-2">
                 <div className="col">
                   <label htmlFor="body">Body</label>
-                  <textarea
-                      className="form-control"
-                      onChange={(e) => this.setState({ body: e.target.value })}
+                  <ReactQuill
+                      theme="snow" // other themes: 'bubble', 'core'
                       value={this.state.body}
-                      placeholder="Enter here"
-
+                      onChange={(e) => this.setState({ body: e })}
                   />
                 </div>
               </div>
