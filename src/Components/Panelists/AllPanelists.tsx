@@ -14,6 +14,7 @@ import {CountriesAPI} from "../../API/CountriesAPI";
 import Select from 'react-select';
 import {Form} from "../Samples/Form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
 
 function removeDuplicates(arr, property) {
     const uniqueMap = {};
@@ -595,7 +596,7 @@ export class AllPanelists extends Component<any, any> {
                                         <tr key={info.userId}>
                                             <td>{index + 1}</td>
                                             <td>
-                                              <span
+                                              {/* <span
                                                   aria-label="button"
                                                   role="button"
                                                   tabIndex={0}
@@ -610,7 +611,8 @@ export class AllPanelists extends Component<any, any> {
                                                   dangerouslySetInnerHTML={{
                                                       __html: info ? `${info.firstName} ${info.lastName}` : '-',
                                                   }}
-                                              />
+                                              /> */}
+                                              <Link to={"/admin/panelistDetails/"+info.userId} target='_blank'> {info.firstName} {info.lastName} </Link>
                                             </td>
                                             <td>{info.email}</td>
                                             <td>{info.mobile}</td>

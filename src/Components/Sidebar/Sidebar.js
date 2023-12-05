@@ -31,6 +31,7 @@ export default function Sidebar(props) {
       {routes.map((prop, key) => {
         var activePro = " ";
         var listItemClasses;
+        if(!prop.hasOwnProperty('isVisible')){
         if (prop.path === "/upgrade-to-pro") {
           activePro = classes.activePro + " ";
           listItemClasses = classNames({
@@ -77,7 +78,7 @@ export default function Sidebar(props) {
             </ListItem>
           </NavLink>
         );
-      })}
+        }})}
     </List>
   );
   var brand = (

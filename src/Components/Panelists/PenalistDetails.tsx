@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import GridContainer from '../../Components/Grid/GridContainer'
 import Card from '../../Components/Card/Card'
 import CardHeader from '../../Components/Card/CardHeader'
@@ -18,6 +18,36 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+export default function PenalistDetails(props:any) {
+
+const [penalistData, setPenalistData] = useState<any>([]);
+const [profileData, setProfileData] = useState<any>([]);
+const [error, setError] = useState<any>(false); 
+useEffect(()=>{
+    const { userId } = props.match.params;
+    console.log(userId); 
+    const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/panelistProfile/'+userId;
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>{
+        setPenalistData(data);
+    })
+    .catch((err)=>{
+        setError(true);
+        console.log(err)
+    }); 
+    const url2 = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/get-user/'+userId;
+    fetch(url2)
+    .then(res=>res.json())
+    .then(data=>{
+        setProfileData(data);
+    })
+    .catch((err)=>{
+        setError(true);
+        console.log(err)
+    }); 
+}, []); 
+ 
 function TopHeading() {
     return <Card>
         <CardHeader color="primary">
@@ -29,6 +59,8 @@ function TopHeading() {
 }
 
 function BasicProfile() {
+    if(!profileData.hasOwnProperty('data')) return <></>; 
+    const { profile, dataValues } = profileData?.data; 
     return (
         <Card>
             <CardHeader color="info">
@@ -45,7 +77,7 @@ function BasicProfile() {
                                 alt="Profile"
                                 className="circle responsive-img"
                             />
-                            <p className="flow-text">John Doe</p>
+                            <p className="flow-text">{profile.firstName} {profile.lastName}</p>
                         </div>
                     </div>
                     <div className="col s4">
@@ -53,31 +85,31 @@ function BasicProfile() {
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Email:</strong>
                             </div>
-                            <div className="col s6">john.doe@example.com</div>
+                            <div className="col s6">{ dataValues.email } </div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Mobile:</strong>
                             </div>
-                            <div className="col s6">123-456-7890</div>
+                            <div className="col s6">{ dataValues.phoneNumber}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Gender:</strong>
                             </div>
-                            <div className="col s6">Male</div>
+                            <div className="col s6">{profile.gender}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Address Line 1:</strong>
                             </div>
-                            <div className="col s6">123 Main St</div>
+                            <div className="col s6">{profile.addressLine1}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Address Line 2:</strong>
                             </div>
-                            <div className="col s6">Apt 4B</div>
+                            <div className="col s6">{profile.addressLine2}</div>
                         </div>
                     </div>
                     <div className="col s4">
@@ -85,37 +117,37 @@ function BasicProfile() {
                             <div className="col s6">
                                 <strong className="mb-3 d-block">DOB:</strong>
                             </div>
-                            <div className="col s6">01/01/1990</div>
+                            <div className="col s6">{profile.dateOfBirth}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Country:</strong>
                             </div>
-                            <div className="col s6">United States</div>
+                            <div className="col s6">{profile.country}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">City:</strong>
                             </div>
-                            <div className="col s6">Cityville</div>
+                            <div className="col s6">{profile.city}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">State:</strong>
                             </div>
-                            <div className="col s6">CA</div>
+                            <div className="col s6">{profile.state}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Pin Code:</strong>
                             </div>
-                            <div className="col s6">12345</div>
+                            <div className="col s6">{profile.pinCode}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Referral Source:</strong>
                             </div>
-                            <div className="col s6">Friend</div>
+                            <div className="col s6">{profile.referralSource}</div>
                         </div>
                     </div>
                 </div>
@@ -123,6 +155,7 @@ function BasicProfile() {
         </Card>
     )
 }
+
 
 function Label() {
     const [inputValue, setInputValue] = useState<string>('');
@@ -185,47 +218,10 @@ function Label() {
 }
 
 function Profiles() {
-    const data = [
-        {
-            name : "About", 
-            status : "93% completed"
-        }, 
-        {
-            name : "Personal Finance", 
-            status : "93% completed"
-        }, 
-        {
-            name : "Shopping", 
-            status : "93% completed"
-        }, 
-        {
-            name : "Travek", 
-            status : "93% completed"
-        }, 
-        {
-            name : "Media", 
-            status : "93% completed"
-        }, 
-        {
-            name : "Household", 
-            status : "Completed"
-        }, 
-        {
-            name : "Health", 
-            status : "Completed"
-        }, 
-        {
-            name : "Professional", 
-            status : "Completed"
-        }, 
-        {
-            name : "Electronics", 
-            status : "Completed"
-        }
-        
-    ]
+    if(!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>; 
     const notCompletedStyle = { backgroundColor: '#FFFFE0', color: 'black', fontSize: '12px', marginTop: '10px' }
-    const completedStyle =  { backgroundColor: '#28a745', color: 'black', fontSize: '12px', marginTop: '10px' }
+    // const completedStyle =  { backgroundColor: '#28a745', color: 'black', fontSize: '12px', marginTop: '10px' }
+    const { profile, profilesTotalPercentage } = penalistData.data; 
     return (
         <>
             <Card>
@@ -233,7 +229,7 @@ function Profiles() {
                     <div className="d-flex align-items-center justify-content-between">
                         <h4 className="text-center">Profiles &nbsp;
                             <Chip
-                                label="73% Completed"
+                                label={profilesTotalPercentage+" Completed"}
                                 color="default"
                                 variant="outlined"
                             />
@@ -243,25 +239,25 @@ function Profiles() {
                 <CardBody>
                 <Grid container spacing={4}>
                 {
-                    data &&
-                    data.length > 0 &&
-                    data.map((value, key) => (
+                    profile &&
+                    Object.keys(profile).length > 0 &&
+                    Object.keys(profile).map((value, key) => (
                     <Grid item xs={12} sm={4} key={key}>
                         <Card2>
                         <CardHeader2
-                            title={value.name}
+                            title={value.toUpperCase()}
                             titleTypographyProps={{ style: { fontSize: '16px' } }}
                             style={{ background: '#454545', color: 'white'}}
                             action={
                             <Chip
-                                label={value.status}
-                                style={(value.status === 'Completed') ? completedStyle : notCompletedStyle}
+                                label={profile[value]}
+                                style={notCompletedStyle}
                             />
                             }
                         />
                         <CardContent>
                             <img
-                            src="https://placekitten.com/400/100" // Replace with the actual image URL
+                            src={"https://picsum.photos/400/"+Math.round((140+key))} 
                             alt="Full Size Image"
                             style={{ width: '100%', height: 'auto' }}
                             />
@@ -277,56 +273,14 @@ function Profiles() {
     )
 }
 
-function DataGridTable() {
+function DataGridTable(columns:any, rows:any) {
     function CustomToolbar() {
         return (
           <GridToolbarContainer>
             <GridToolbarExport />
           </GridToolbarContainer>
         );
-      }
-
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        {
-          field: 'firstName',
-          headerName: 'First name',
-          width : 200
-        },
-        {
-          field: 'lastName',
-          headerName: 'Last name',
-          width : 200
-        },
-        {
-          field: 'age',
-          headerName: 'Age',
-          width : 200,
-        },
-        {
-          field: 'fullName',
-          headerName: 'Full name',
-          description: 'This column has a value getter and is not sortable.',
-          width : 200,
-          valueGetter: (params) =>
-            `${params.getValue(params.id, 'firstName') || ''} ${
-              params.getValue(params.id, 'lastName') || ''
-            }`,
-        },
-      ];
-      
-      const rows:any = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: 26 },
-        { id: 6, lastName: 'Melisandre', firstName: 'Harley', age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-      ];
-      
+    }  
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <DataGrid
@@ -343,7 +297,9 @@ function DataGridTable() {
 }
 
 function Surveys(){
+    if(!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>; 
     const classes = useStyles();
+    const {surveys} = penalistData.data; 
     return(
         <>
         <Card>
@@ -356,26 +312,28 @@ function Surveys(){
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Total Surveys : 11
+                            Total Surveys : {surveys.totalCount}
                         </Paper>   
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Completed Surveys : 1
+                            Completed Surveys : {surveys.completedCount}
                         </Paper>   
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Incomplete Surveys: 7
+                            Incomplete Surveys: {surveys.totalCount}
                         </Paper>   
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Surveys Not Started : 3
+                            Surveys Not Started : {surveys.totalCount}
                         </Paper>   
                     </Grid>
                 </Grid>
-                 <DataGridTable/>
+                {
+                    surveys.list && surveys.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
+                }
             </CardBody>
         </Card>
         </>
@@ -384,35 +342,44 @@ function Surveys(){
 
 function Rewards(){
     const classes = useStyles();
-   
+    if (!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>;
+    const { rewards } = penalistData.data;
     return(
         <>
+       
         <Card>
-            <CardHeader color="info">
-                <div className="d-flex align-items-center justify-content-between">
-                    <h4 className="text-center">Rewards</h4>
-                </div>
-            </CardHeader>
-            <CardBody>
-                <Grid container spacing={4}>
-                    <Grid item xs={12} sm={4}>
-                        <Paper className={classes.paper} elevation={3}>
-                            Total Surveys : 11
-                        </Paper>   
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Paper className={classes.paper} elevation={3}>
-                            Completed Surveys : 1
-                        </Paper>   
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Paper className={classes.paper} elevation={3}>
-                            Incomplete Surveys: 7
-                        </Paper>   
-                    </Grid>
-                </Grid>
-                <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography>
-            </CardBody>
+        <CardHeader color="info">
+            <div className="d-flex align-items-center justify-content-between">
+            <h4 className="text-center">Rewards</h4>
+            </div>
+        </CardHeader>
+        <CardBody>
+            <Grid container spacing={3}>
+            <Grid item xs={12} sm={3}>
+                <Paper className={classes.paper} elevation={3}>
+                Total Rewards : {rewards.totalCount}
+                </Paper>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+                <Paper className={classes.paper} elevation={3}>
+                Completed Rewards : {rewards.completedCount}
+                </Paper>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+                <Paper className={classes.paper} elevation={3}>
+                Incomplete Rewards: {rewards.inCompletedCount}
+                </Paper>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+                <Paper className={classes.paper} elevation={3}>
+                Incomplete Rewards: {rewards.notStartedCount}
+                </Paper>
+            </Grid>
+            </Grid>
+            {
+                rewards.list && rewards.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
+            }
+        </CardBody>
         </Card>
         </>
     )
@@ -420,7 +387,8 @@ function Rewards(){
 
 function Referrals(){
     const classes = useStyles();
-   
+    if (!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>;
+    const { referrals } = penalistData.data;
     return(
         <>
         <Card>
@@ -433,16 +401,18 @@ function Referrals(){
                 <Grid container spacing={6}>
                     <Grid item xs={12} sm={6}>
                         <Paper className={classes.paper} elevation={3}>
-                            Total Surveys : 11
+                            Total Referrals : {referrals.totalCount}
                         </Paper>   
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Paper className={classes.paper} elevation={3}>
-                            Completed Surveys : 1
+                            Completed Referrals : {referrals.completedCount}
                         </Paper>   
                     </Grid>
                 </Grid>
-                <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography>
+                {
+                    referrals.list && referrals.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
+                }
             </CardBody>
         </Card>
         </>
@@ -451,7 +421,8 @@ function Referrals(){
 
 function Redemptions(){
     const classes = useStyles();
-   
+    if (!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>;
+    const { redemption } = penalistData.data;
     return(
         <>
         <Card>
@@ -464,45 +435,64 @@ function Redemptions(){
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Total Surveys : 11
+                            Total Redemptions :  {redemption.completedCount}
                         </Paper>   
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Completed Surveys : 1
+                            Completed Redemptions :  {redemption.completedCount}
                         </Paper>   
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Incomplete Surveys: 7
+                            Incomplete Redemptions:  {redemption.completedCount}
                         </Paper>   
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
-                            Surveys Not Started : 3
+                            Redemptions Not Started : {redemption.completedCount}
                         </Paper>   
                     </Grid>
                 </Grid>
-                <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography>
+                {
+                    redemption.list && redemption.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
+                }
+               
             </CardBody>
         </Card>
         </>
     )
 }
 
-
-export default function PenalistDetails() {
+function Loading(){
+    if(error) return <>Something went wrong, and data could not be fetched</> 
+    return(
+        <>
+        Please wait
+        </>
+    )
+}   
+     if (!penalistData.hasOwnProperty('data') || penalistData.data === null) return <>
+     <TopHeading />
+     No Penalist Found
+     </>;
     return (
         <>
             <GridContainer>
                 <TopHeading />
-                <BasicProfile />
-                <Label />
-                <Profiles />
-                <Surveys/>
-                <Rewards/>
-                <Referrals/>
-                <Redemptions/>
+                {
+                    penalistData.length === 0  && profileData.length === 0 ? <Loading/> : 
+                    <React.Fragment>
+                        <BasicProfile/>
+                        <Label />
+                        <Profiles />
+                        <Surveys/>
+                        <Rewards/>
+                        <Referrals/>
+                        <Redemptions/>
+                    </React.Fragment>
+                }
+                
             </GridContainer>
         </>
     )
