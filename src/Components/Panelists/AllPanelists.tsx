@@ -215,7 +215,6 @@ export class AllPanelists extends Component<any, any> {
                     return String(`${user.basic_profile[key]}${user.basic_profile[key]}`).toLowerCase().includes(String(filters[key]).toLowerCase());
                 }
                 if (key === 'isActive') {
-                    console.log('ser[\'activeStatus\']--->', user['activeStatus'])
                     return user['activeStatus'] == filters['isActive']
                 }
                 if (key === 'cities' && user.basic_profile && filters['cities'].length > 0) {
@@ -238,9 +237,6 @@ export class AllPanelists extends Component<any, any> {
 
                 if (key == 'startAge' && user.basic_profile) {
                     const age = calculateAge(user.basic_profile.dateOfBirth);
-                    console.log('age:', age);
-                    console.log('startAge:', parseInt(filters['startAge'], 10));
-                    console.log('endAge:', parseInt(filters['endAge'], 10));
                     return age >= parseInt(filters['startAge'], 10) && age <= parseInt(filters['endAge'], 10);
                 }
                 return String(user[key]).toLowerCase().includes(String(filters[key]).toLowerCase());
