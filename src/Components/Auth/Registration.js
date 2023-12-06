@@ -79,7 +79,7 @@ class Registration extends Component {
         </div>
         <div className="dash-login-content">
 
-        <form >
+        {/*<form >*/}
             <div className="login-row login-form-item login-form-item-control">
               <input
                type='text'
@@ -164,7 +164,7 @@ class Registration extends Component {
                   <span>Sign Up</span>
                 </button>
                 <span>or </span>
-                <a hre="#" onClick={() => this.props.history.push('/login')}>
+                <a onClick={() => this.props.history.push('/login')}>
                   <button className="btn-white">
                   <span>Sign in</span>
                   </button>
@@ -181,7 +181,7 @@ class Registration extends Component {
                     callback={(e) => this.responseFacebook(e)}
                 />
             </div>
-          </form>
+          {/*</form>*/}
         </div>
       </div>
     </div>

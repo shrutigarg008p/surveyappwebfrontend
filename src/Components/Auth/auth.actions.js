@@ -55,7 +55,6 @@ export const authLogin =
 export const authBasicProfile =
     (history, id) => async (dispatch) => {
         try {
-            console.log('Calling Basvi Profile======>>')
             dispatch(authStart());
             let obj = { id }
             dispatch(basicProfileCompleted(obj));
@@ -73,7 +72,6 @@ export const authRegistration =
         dispatch(authRegisterSuccess(user));
           history.push("/verify-screen");
       } catch (error) {
-          console.log('error---->', error)
         dispatch(authFail(error.message));
       }
     };

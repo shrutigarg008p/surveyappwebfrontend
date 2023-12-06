@@ -85,7 +85,7 @@ function Login(props) {
               <span>Sign In</span>
             </button>
             <span>or </span>
-            <a hre="#"  onClick={handleClick}>
+            <a onClick={handleClick}>
               <button className="btn-white">
                 <span>Sign Up</span>
               </button>
