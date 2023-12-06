@@ -70,6 +70,7 @@ export const authRegistration =
       try {
         dispatch(authStart());
         const user = await AuthAPI.registration(data);
+          console.log('authRegistration---->', user)
         dispatch(authRegisterSuccess(user));
         history.push("/verify-screen");
       } catch (error) {

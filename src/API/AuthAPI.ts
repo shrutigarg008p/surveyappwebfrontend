@@ -39,6 +39,7 @@ export class AuthAPI {
     ): Promise<any> {
         return api.post(registrationURL, body)
             .then((res) => {
+                console.log('res-resres--->', res)
                 return _.get(res, 'data.data', {});
             });
     }
