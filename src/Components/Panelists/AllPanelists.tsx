@@ -27,6 +27,22 @@ function removeDuplicates(arr, property) {
     });
 }
 
+function calculateAge(dateOfBirth) {
+    const birthDate = new Date(dateOfBirth);
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+
+    if (
+        currentDate.getMonth() < birthDate.getMonth() ||
+        (currentDate.getMonth() === birthDate.getMonth() &&
+            currentDate.getDate() < birthDate.getDate())
+    ) {
+        return age - 1;
+    }
+
+    return age;
+}
+
 const MODAL_TYPES = {
     NONE: 'NONE',
     CREATE: 'CREATE',
@@ -133,24 +149,24 @@ export class AllPanelists extends Component<any, any> {
             .then(([statesList, citiesList, surveyList, secList]) => {
                 const stateOptions = statesList.map((item) => ({
                     label: item.name,
-                    value: item.id,
+                    value: item.name,
                 }));
                 const citiesOptions = citiesList.map((item) => ({
                     label: item.name,
-                    value: item.id,
+                    value: item.name,
                 }));
                 const tierOpt = citiesList.map((item) => ({
                     label: item.tier,
-                    value: item.tier,
+                    value: item.name,
                 }));
                 const tierOptions = removeDuplicates(tierOpt, 'id');
                 const surveysOptions = surveyList.map((item) => ({
                     label: item.name,
-                    value: item.id,
+                    value: item.name,
                 }));
                 const secOptions = secList.map((item) => ({
                     label: item.name,
-                    value: item.id,
+                    value: item.name,
                 }));
 
                 this.setState({
@@ -194,8 +210,37 @@ export class AllPanelists extends Component<any, any> {
                 if (key === 'createdAt') {
                     return new Date(user[key]).toDateString() === new Date(filters[key]).toDateString();
                 }
-                if (key === 'firstName') {
-                    return String(`${user.basic_profile['firstName']}${user.basic_profile['lastName']}`).toLowerCase().includes(String(filters[key]).toLowerCase());
+                if (key === 'firstName' && user.basic_profile) {
+                    return String(`${user.basic_profile[key]}${user.basic_profile[key]}`).toLowerCase().includes(String(filters[key]).toLowerCase());
+                }
+                if (key === 'isActive') {
+                    console.log('ser[\'activeStatus\']--->', user['activeStatus'])
+                    return user['activeStatus'] == filters['isActive']
+                }
+                if (key === 'cities' && user.basic_profile && filters['cities'].length > 0) {
+                    return filters['cities'].includes(user.basic_profile.city)
+                }
+                if (key === 'gender' && user.basic_profile && filters['gender']) {
+                    return String(`${user.basic_profile[key]}${user.basic_profile[key]}`).toLowerCase().includes(String(filters[key]).toLowerCase());
+                }
+                if (key === 'states' && user.basic_profile && filters['states'].length > 0) {
+                    return filters['states'].includes(user.basic_profile.state)
+                }
+                if (key == 'registrationStarts') {
+                    const userCreatedAt = new Date(user.createdAt);
+                    const minCreatedAt = new Date(filters['registrationStarts']);
+                    const maxCreatedAt = new Date(filters['registrationEnds']);
+                    minCreatedAt.setHours(0, 0, 0, 0);
+                    maxCreatedAt.setHours(23, 59, 59, 999);
+                    return userCreatedAt >= minCreatedAt && userCreatedAt <= maxCreatedAt;
+                }
+
+                if (key == 'startAge' && user.basic_profile) {
+                    const age = calculateAge(user.basic_profile.dateOfBirth);
+                    console.log('age:', age);
+                    console.log('startAge:', parseInt(filters['startAge'], 10));
+                    console.log('endAge:', parseInt(filters['endAge'], 10));
+                    return age >= parseInt(filters['startAge'], 10) && age <= parseInt(filters['endAge'], 10);
                 }
                 return String(user[key]).toLowerCase().includes(String(filters[key]).toLowerCase());
             });
@@ -463,10 +508,10 @@ export class AllPanelists extends Component<any, any> {
                                     required
                                     onChange={this.handleFilterChange}
                                 >
-                                    <option value='' disabled>--Choose--</option>
-                                    <option value='active'>Active</option>
-                                    <option value='dormant'>Dormant</option>
-                                    <option value='inactive'>Inactive</option>
+                                    <option>--Choose--</option>
+                                    <option value={0}>Active</option>
+                                    <option value={0}>Dormant</option>
+                                    <option value={1}>Inactive</option>
                                 </select>
                             </div>
                         </div>
@@ -479,7 +524,7 @@ export class AllPanelists extends Component<any, any> {
                                     id="registrationStarts"
                                     name="registrationStarts"
                                     onChange={this.handleFilterChange}
-                                    // value={this.state.fromRegistrationDate}
+                                    value={this.state.fromRegistrationDate}
                                     placeholder="Enter here"
                                     required
                                 />
@@ -492,7 +537,7 @@ export class AllPanelists extends Component<any, any> {
                                     id="registrationEnds"
                                     name="registrationEnds"
                                     onChange={this.handleFilterChange}
-                                    // value={this.state.toRegistrationDate}
+                                    value={this.state.toRegistrationDate}
                                     placeholder="Enter here"
                                     required
                                 />
@@ -604,18 +649,18 @@ export class AllPanelists extends Component<any, any> {
                                                   onClick={() => {
                                                       this.setState({
                                                           formType: MODAL_TYPES.NONE,
-                                                          id: info.userId,
+                                                          id: info.id,
                                                       });
                                                   }}
                                                   dangerouslySetInnerHTML={{
-                                                      __html: info ? `${info.firstName} ${info.lastName}` : '-',
+                                                      __html: info.basic_profile ? `${info.basic_profile.firstName} ${info.basic_profile.lastName}` : '-',
                                                   }}
                                               />
                                             </td>
                                             <td>{info.email}</td>
-                                            <td>{info.mobile}</td>
-                                            <td>{info.city ? info.city : '-'}</td>
-                                            <td>{info.dateOfBirth ? moment(info.dateOfBirth).format('MM/DD/YYYY HH:mm A') : 'NA'}</td>
+                                            <td>{info.phoneNumber}</td>
+                                            <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
+                                            <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY HH:mm A') : 'NA'}</td>
                                         </tr>
                                     ))
                                 }

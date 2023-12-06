@@ -17,7 +17,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/rsz_screenshot_6.png" />
+                            <img src="../../assets/img/login.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
