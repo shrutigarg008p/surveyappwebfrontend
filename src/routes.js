@@ -94,11 +94,12 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/panelistDetails",
+    path: "/panelistDetails/:userId",
     name: "Details",
     icon: ArrowRight,
     component: PenalistDetails,
     layout: "/admin",
+    isVisible : false
   },
   {
     path: "/registeredOnlyPanelists",

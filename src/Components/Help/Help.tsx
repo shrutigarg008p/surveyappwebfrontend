@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './Help.css'
 export class Help extends Component<any, any> {
 
     render() {
