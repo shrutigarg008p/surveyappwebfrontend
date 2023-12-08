@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import { Card as Card2, CardHeader as CardHeader2, CardContent, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
+import $ from 'jquery';
+import 'jquery-confirm'; 
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -23,8 +25,11 @@ export default function PenalistDetails(props:any) {
 const [penalistData, setPenalistData] = useState<any>([]);
 const [profileData, setProfileData] = useState<any>([]);
 const [error, setError] = useState<any>(false); 
+const [userID, setUserID] = useState<String>(''); 
+
 useEffect(()=>{
     const { userId } = props.match.params;
+    setUserID(userId);
     console.log(userId); 
     const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/panelistProfile/'+userId;
     fetch(url)
@@ -49,11 +54,129 @@ useEffect(()=>{
 }, []); 
  
 function TopHeading() {
+    const unSubscriptionService = (dialoge) =>{
+        const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/unSubscribeUser/'+userID;
+        fetch(url)
+        .then(res=>res.json())
+        .then((data)=>{
+            console.log(data)
+            $.alert("You Unsubscribed Successfully", function(){
+                // window.location.reload();
+                dialoge.close() 
+            }); 
+        })
+        .catch((err)=>{
+            $.alert("Something went wrong, please try again later"); 
+            console.error(err)
+        })
+    }
+    const unsubscribe = () =>{
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Are you sure, You want to unsubscribe?',
+            buttons: {
+                confirm: function () {
+                    var dialoge = $.dialog({
+                        title: 'Please wait..!',
+                        content: 'Please wait, While we unsubscribe you!',
+                    });
+                    unSubscriptionService(dialoge); 
+                },
+                cancel: function () {
+                   
+                }
+            }
+        });
+                    
+    }
+
+    const changePasswordService = (newPassword, dialoge) =>{
+        const data = {
+            userId: userID,
+            password: newPassword
+          };
+        const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/change-password';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+        .then(res=>res.json())
+        .then((data)=>{
+            console.log(data)
+            $.alert("Password Changed Successfully", function(){
+                // window.location.reload();
+                dialoge.close() 
+            }); 
+        })
+        .catch((err)=>{
+            $.alert("Something went wrong, please try again later"); 
+            console.error(err)
+        })
+    }
+
+    const changePassword = () =>{
+        $.confirm({
+            title: 'Change Password',
+            content: '' +
+            '<form action="" class="changePasswordForm">' +
+            '<div class="form-group">' +
+            '<label for="newPassword">New Password:</label>' +
+            '<input type="password" id="newPassword" class="newPassword form-control" required />' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="confirmPassword">Confirm Password:</label>' +
+            '<input type="password" id="confirmPassword" class="confirmPassword form-control" required />' +
+            '</div>' +
+            '</form>',
+            buttons: {
+              formSubmit: {
+                text: 'Change Password',
+                btnClass: 'btn-blue',
+                action: function (this:any) {
+                  var newPassword = this.$content.find('.newPassword').val();
+                  var confirmPassword = this.$content.find('.confirmPassword').val();
+        
+                  
+                  if (newPassword !== confirmPassword) {
+                    $.alert('New password and confirm password do not match.');
+                    return false;
+                  } else {
+                    var dialoge = $.dialog({
+                        title: 'Please wait..!',
+                        content: 'Please wait, While we are changing the password!',
+                    });
+                    changePasswordService(newPassword, dialoge); 
+                  }
+                }
+              },
+              cancel: function () {
+              },
+            },
+            onContentReady: function () {
+              var jc = this;
+              this.$content.find('.changePasswordForm').on('submit', function (e) {
+                e.preventDefault();
+                jc.$$formSubmit.trigger('click'); 
+              });
+            }
+          });
+    }
+
     return <Card>
         <CardHeader color="primary">
             <div className="d-flex align-items-center justify-content-between">
                 <h4>Penalist Details</h4>
+                <span className="align-items-right">
+                <button type="button" className="btn btn-info" onClick={unsubscribe}>Unsubscribe</button>
+                <button type="button" className="btn btn-success ml-1" onClick={changePassword}>Change Password</button>
+                {/* <button type="button" className="btn btn-warning ml-1" >Temporary Delete</button> */}
+                {/* <button type="button" className="btn btn-danger ml-1" >Permanently Delete</button> */}
+                </span>
             </div>
+            
         </CardHeader>
     </Card>
 }
@@ -66,6 +189,7 @@ function BasicProfile() {
             <CardHeader color="info">
                 <div className="d-flex align-items-center justify-content-between">
                     <h4 className="text-center">Basic Profile</h4>
+                   
                 </div>
             </CardHeader>
             <CardBody>
@@ -77,7 +201,7 @@ function BasicProfile() {
                                 alt="Profile"
                                 className="circle responsive-img"
                             />
-                            <p className="flow-text">{profile.firstName} {profile.lastName}</p>
+                            <p className="flow-text">{profile?.firstName} {profile?.lastName}</p>
                         </div>
                     </div>
                     <div className="col s4">
@@ -85,31 +209,31 @@ function BasicProfile() {
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Email:</strong>
                             </div>
-                            <div className="col s6">{ dataValues.email } </div>
+                            <div className="col s6">{ dataValues?.email } </div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Mobile:</strong>
                             </div>
-                            <div className="col s6">{ dataValues.phoneNumber}</div>
+                            <div className="col s6">{ dataValues?.phoneNumber}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Gender:</strong>
                             </div>
-                            <div className="col s6">{profile.gender}</div>
+                            <div className="col s6">{profile?.gender}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Address Line 1:</strong>
                             </div>
-                            <div className="col s6">{profile.addressLine1}</div>
+                            <div className="col s6">{profile?.addressLine1}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Address Line 2:</strong>
                             </div>
-                            <div className="col s6">{profile.addressLine2}</div>
+                            <div className="col s6">{profile?.addressLine2}</div>
                         </div>
                     </div>
                     <div className="col s4">
@@ -117,37 +241,37 @@ function BasicProfile() {
                             <div className="col s6">
                                 <strong className="mb-3 d-block">DOB:</strong>
                             </div>
-                            <div className="col s6">{profile.dateOfBirth}</div>
+                            <div className="col s6">{profile?.dateOfBirth}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Country:</strong>
                             </div>
-                            <div className="col s6">{profile.country}</div>
+                            <div className="col s6">{profile?.country}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">City:</strong>
                             </div>
-                            <div className="col s6">{profile.city}</div>
+                            <div className="col s6">{profile?.city}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">State:</strong>
                             </div>
-                            <div className="col s6">{profile.state}</div>
+                            <div className="col s6">{profile?.state}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Pin Code:</strong>
                             </div>
-                            <div className="col s6">{profile.pinCode}</div>
+                            <div className="col s6">{profile?.pinCode}</div>
                         </div>
                         <div className="row">
                             <div className="col s6">
                                 <strong className="mb-3 d-block">Referral Source:</strong>
                             </div>
-                            <div className="col s6">{profile.referralSource}</div>
+                            <div className="col s6">{profile?.referralSource}</div>
                         </div>
                     </div>
                 </div>
@@ -160,6 +284,24 @@ function BasicProfile() {
 function Label() {
     const [inputValue, setInputValue] = useState<string>('');
     const [tags, setTags] = useState<string[]>([]);
+
+    const tempTags = [...tags];  
+    useEffect(()=>{
+        const url = process.env.REACT_APP_BASE_URL_API+ "/api/v1/labels/getAll/50"
+        fetch(url)
+        .then(res=>res.json())
+        .then((data)=>{
+            if(data && data.status === 1 && data.hasOwnProperty('data')){
+                const allTags =  data.data.map(item=>item.name); 
+                tempTags.push(...allTags);
+                setTags(tempTags);
+            }
+        })
+        .catch((err)=>{
+            $.alert("Something went wrong, please try again later"); 
+            console.error(err)
+        })
+    },[]);
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -182,15 +324,18 @@ function Label() {
             updatedTags.splice(index, 1);
             return updatedTags;
         });
-    };
+    }; 
 
+    const assignLabels = () =>{
+            
+    }
 
     return (
         <Card>
             <CardHeader color="info">
                 <div className="d-flex align-items-center justify-content-between">
                     <h4 className="text-center">Labels</h4>
-                    <button className='btn btn-primary'>Assign Labels</button>
+                    <button className='btn btn-primary' onClick={assignLabels}>Assign Labels</button>
                 </div>
             </CardHeader>
             <CardBody>
@@ -472,28 +617,30 @@ function Loading(){
         </>
     )
 }   
-     if (!penalistData.hasOwnProperty('data') || penalistData.data === null) return <>
-     <TopHeading />
-     No Penalist Found
-     </>;
-    return (
-        <>
-            <GridContainer>
-                <TopHeading />
-                {
-                    penalistData.length === 0  && profileData.length === 0 ? <Loading/> : 
-                    <React.Fragment>
-                        <BasicProfile/>
-                        <Label />
-                        <Profiles />
-                        <Surveys/>
-                        <Rewards/>
-                        <Referrals/>
-                        <Redemptions/>
-                    </React.Fragment>
-                }
-                
-            </GridContainer>
-        </>
-    )
+
+
+if (!penalistData.hasOwnProperty('data') || penalistData.data === null) return <>
+<TopHeading />
+No Penalist Found
+</>;
+return (
+<>
+    <GridContainer>
+        <TopHeading />
+        {
+            penalistData.length === 0  && profileData.length === 0 ? <Loading/> : 
+            <React.Fragment>
+                <BasicProfile/>
+                <Label />
+                <Profiles />
+                <Surveys/>
+                <Rewards/>
+                <Referrals/>
+                <Redemptions/>
+            </React.Fragment>
+        }
+        
+    </GridContainer>
+</>
+)
 }

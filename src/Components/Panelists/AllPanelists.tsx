@@ -653,9 +653,9 @@ export class AllPanelists extends Component<any, any> {
                                                       __html: info.basic_profile ? `${info.basic_profile.firstName} ${info.basic_profile.lastName}` : '-',
                                                   }}
                                               /> */}
-                                              <Link to={"/admin/panelistDetails/"+info.userId} target='_blank'> {info.firstName} {info.lastName} </Link>
+                                              <Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.firstName} {info.lastName} </Link>
                                             </td>
-                                            <td>{info.email}</td>
+                                            <td><Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>
                                             <td>{info.phoneNumber}</td>
                                             <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
                                             <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY HH:mm A') : 'NA'}</td>
