@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { authLogin } from "./auth.actions";
 import "./Login.scss";
-
+import { Assets } from 'enums';
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
 import FacebookLogin from 'react-facebook-login';
@@ -45,7 +45,7 @@ function Login(props) {
         <p>Get an account !!!</p>
       </div>
       <div className="dash-logo">
-        <img alt="example" src="/assets/img/logo2.png" style={{width:'100%'}}/>
+        <img alt="example" src={Assets.Logo} style={{width:'100%'}}/>
       </div>
     </div>
     <div className="dash-login-content">

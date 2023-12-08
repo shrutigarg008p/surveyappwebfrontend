@@ -96,3 +96,7 @@ export enum SeoPageTitle {
   Faq = 'Faq',
   PartnerWithUs = 'PartnerWithUs',
 }
+
+export enum Assets { 
+  Logo = "/assets/img/logo2.png"
+}
