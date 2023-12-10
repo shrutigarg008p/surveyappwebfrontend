@@ -44,7 +44,7 @@ export default function AdminNavbarLinks() {
   };
 
   const handleCloseProfile = () => {
-    console.log('calling logot---->')
+    // console.log('calling logot---->')
     localStorage.clear();
     window.location.href = '/';
     setOpenProfile(null);

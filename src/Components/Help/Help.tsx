@@ -17,7 +17,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/login.png" />
+                            <img className="helper-image"  src="../../assets/img/login.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -33,7 +33,7 @@ export class Help extends Component<any, any> {
                     {/*<div className="row">*/}
                     {/*    <div className="col-md-3" />*/}
                     {/*    <div className="col-md-6">*/}
-                    {/*        <img src="../../assets/img/rsz_screenshot_7.png" />*/}
+                    {/*        <img className="helper-image"  src="../../assets/img/rsz_screenshot_7.png" />*/}
                     {/*    </div>*/}
                     {/*    <div className="col-md-3" />*/}
                     {/*</div>*/}
@@ -43,7 +43,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div />
                         <div className="size-sm">
-                            <img src="../../assets/img/surveyscreen.png" />
+                            <img className="helper-image"  src="../../assets/img/surveyscreen.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -64,7 +64,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/surveyCreate.png" />
+                            <img className="helper-image"  src="../../assets/img/surveyCreate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -78,7 +78,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/RedemptionRequest.png" />
+                            <img className="helper-image"  src="../../assets/img/RedemptionRequest.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -102,7 +102,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/RewardsScreen.png" />
+                            <img className="helper-image"  src="../../assets/img/RewardsScreen.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -119,7 +119,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/rewardsDetails.png" />
+                            <img className="helper-image"  src="../../assets/img/rewardsDetails.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -129,7 +129,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/referralsscreen.png" />
+                            <img className="helper-image"  src="../../assets/img/referralsscreen.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -149,7 +149,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/referralsscreen.png" />
+                            <img className="helper-image"  src="../../assets/img/referralsscreen.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -167,7 +167,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/panelists.png" />
+                            <img className="helper-image"  src="../../assets/img/panelists.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -184,7 +184,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/panelisDetails.png" />
+                            <img className="helper-image"  src="../../assets/img/panelisDetails.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -195,7 +195,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/registeredOnly.png" />
+                            <img className="helper-image"  src="../../assets/img/registeredOnly.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -211,7 +211,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/basicProfile.png" />
+                            <img className="helper-image"  src="../../assets/img/basicProfile.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -227,7 +227,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/unsubscriber.png" />
+                            <img className="helper-image"  src="../../assets/img/unsubscriber.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -245,7 +245,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/deleteRequest.png" />
+                            <img className="helper-image"  src="../../assets/img/deleteRequest.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -264,7 +264,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/sample.png" />
+                            <img className="helper-image"  src="../../assets/img/sample.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -280,7 +280,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/samplecreate.png" />
+                            <img className="helper-image"  src="../../assets/img/samplecreate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -292,7 +292,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/samplecreate.png" />
+                            <img className="helper-image"  src="../../assets/img/samplecreate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -303,7 +303,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/QUestionsSec.png" />
+                            <img className="helper-image"  src="../../assets/img/QUestionsSec.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -313,7 +313,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createQuestions.png" />
+                            <img className="helper-image"  src="../../assets/img/createQuestions.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -324,7 +324,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/deleteQuestion.png" />
+                            <img className="helper-image"  src="../../assets/img/deleteQuestion.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -334,7 +334,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/newsletter.png" />
+                            <img className="helper-image"  src="../../assets/img/newsletter.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -345,7 +345,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createnewsletter.png" />
+                            <img className="helper-image"  src="../../assets/img/createnewsletter.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -357,7 +357,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/detailsnewsletter.png" />
+                            <img className="helper-image"  src="../../assets/img/detailsnewsletter.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -369,7 +369,7 @@ export class Help extends Component<any, any> {
                     {/*<div className="row">*/}
                     {/*    <div className="col-md-3" />*/}
                     {/*    <div className="col-md-6">*/}
-                    {/*        <img src="../../assets/img/rsz_screenshot_29.png" />*/}
+                    {/*        <img className="helper-image"  src="../../assets/img/rsz_screenshot_29.png" />*/}
                     {/*    </div>*/}
                     {/*    <div className="col-md-3" />*/}
                     {/*</div>*/}
@@ -380,7 +380,7 @@ export class Help extends Component<any, any> {
                     {/*<div className="row">*/}
                     {/*    <div className="col-md-3" />*/}
                     {/*    <div className="col-md-6">*/}
-                    {/*        <img src="../../assets/img/rsz_screenshot_30.png" />*/}
+                    {/*        <img className="helper-image"  src="../../assets/img/rsz_screenshot_30.png" />*/}
                     {/*    </div>*/}
                     {/*    <div className="col-md-3" />*/}
                     {/*</div>*/}
@@ -393,7 +393,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/message.png" />
+                            <img className="helper-image"  src="../../assets/img/message.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -413,7 +413,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/redemptionMode.png" />
+                            <img className="helper-image"  src="../../assets/img/redemptionMode.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -425,7 +425,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/RedemptionModeCreate.png" />
+                            <img className="helper-image"  src="../../assets/img/RedemptionModeCreate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -435,7 +435,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/RedemptionModeCreate.png" />
+                            <img className="helper-image"  src="../../assets/img/RedemptionModeCreate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -444,7 +444,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/Country.png" />
+                            <img className="helper-image"  src="../../assets/img/Country.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -454,7 +454,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createCOuntry.png" />
+                            <img className="helper-image"  src="../../assets/img/createCOuntry.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -464,7 +464,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createCOuntry.png" />
+                            <img className="helper-image"  src="../../assets/img/createCOuntry.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -475,7 +475,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createstate.png" />
+                            <img className="helper-image"  src="../../assets/img/createstate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -485,7 +485,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createstate.png" />
+                            <img className="helper-image"  src="../../assets/img/createstate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -496,7 +496,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createcity.png" />
+                            <img className="helper-image"  src="../../assets/img/createcity.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -507,7 +507,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createcity.png" />
+                            <img className="helper-image"  src="../../assets/img/createcity.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -516,7 +516,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/partners.png" />
+                            <img className="helper-image"  src="../../assets/img/partners.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -527,7 +527,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createPartner.png" />
+                            <img className="helper-image"  src="../../assets/img/createPartner.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -537,7 +537,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createPartner.png" />
+                            <img className="helper-image"  src="../../assets/img/createPartner.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -546,7 +546,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/profile.png" />
+                            <img className="helper-image"  src="../../assets/img/profile.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -558,7 +558,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/profileCreate.png" />
+                            <img className="helper-image"  src="../../assets/img/profileCreate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -569,7 +569,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/profileCreate.png" />
+                            <img className="helper-image"  src="../../assets/img/profileCreate.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -579,7 +579,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/profiledetails.png" />
+                            <img className="helper-image"  src="../../assets/img/profiledetails.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -589,7 +589,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/QUestionsSec.png" />
+                            <img className="helper-image"  src="../../assets/img/QUestionsSec.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -601,7 +601,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createQuestions.png" />
+                            <img className="helper-image"  src="../../assets/img/createQuestions.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -611,7 +611,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/deleteQuestion.png" />
+                            <img className="helper-image"  src="../../assets/img/deleteQuestion.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -621,7 +621,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/questiondetails.png" />
+                            <img className="helper-image"  src="../../assets/img/questiondetails.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -631,7 +631,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createQuestions.png" />
+                            <img className="helper-image"  src="../../assets/img/createQuestions.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -640,7 +640,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/labels.png" />
+                            <img className="helper-image"  src="../../assets/img/labels.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -652,7 +652,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/CreateLabel.png" />
+                            <img className="helper-image"  src="../../assets/img/CreateLabel.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -662,7 +662,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/CreateLabel.png" />
+                            <img className="helper-image"  src="../../assets/img/CreateLabel.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -672,7 +672,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/labelsDetails.png" />
+                            <img className="helper-image"  src="../../assets/img/labelsDetails.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -681,7 +681,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/marketinglinks.png" />
+                            <img className="helper-image"  src="../../assets/img/marketinglinks.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -696,7 +696,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createmarketing.png" />
+                            <img className="helper-image"  src="../../assets/img/createmarketing.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -706,7 +706,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createmarketing.png" />
+                            <img className="helper-image"  src="../../assets/img/createmarketing.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -716,7 +716,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/markwtinglinksdetails.png" />
+                            <img className="helper-image"  src="../../assets/img/markwtinglinksdetails.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -727,7 +727,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/marketinglinks.png" />
+                            <img className="helper-image"  src="../../assets/img/marketinglinks.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -735,7 +735,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/sec.png" />
+                            <img className="helper-image"  src="../../assets/img/sec.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -753,7 +753,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createSec.png" />
+                            <img className="helper-image"  src="../../assets/img/createSec.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -763,7 +763,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createSec.png" />
+                            <img className="helper-image"  src="../../assets/img/createSec.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -774,7 +774,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/QUestionsSec.png" />
+                            <img className="helper-image"  src="../../assets/img/QUestionsSec.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -784,7 +784,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/createQuestions.png" />
+                            <img className="helper-image"  src="../../assets/img/createQuestions.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>
@@ -795,7 +795,7 @@ export class Help extends Component<any, any> {
                     <div className="row">
                         <div className="col-md-3" />
                         <div className="col-md-6">
-                            <img src="../../assets/img/deleteRequest.png" />
+                            <img className="helper-image"  src="../../assets/img/deleteRequest.png" />
                         </div>
                         <div className="col-md-3" />
                     </div>

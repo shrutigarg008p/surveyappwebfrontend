@@ -13,7 +13,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
 // core components
 import AdminNavbarLinks from "../../Components/Navbars/AdminNavbarLinks.js";
-
+import { Assets } from 'enums';
 import styles from "../../assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
 const useStyles = makeStyles(styles);
@@ -90,10 +90,10 @@ export default function Sidebar(props) {
         })}
         target="_blank"
       >
-        <div className={`${classes.logoImage}`} >
-          <img src={logo} alt="logo" className={classes.img} />
+        <div>
+          <img src={Assets.Logo}   alt="logo" style={{width:'100%'}} />
         </div>
-        {logoText}
+        {/* {logoText} */}
       </a>
     </div>
   );

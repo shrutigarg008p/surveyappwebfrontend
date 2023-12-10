@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import LoadingSpinner from "../../Layout/LoadingSpinner";
 import { authRegistration } from "./auth.actions";
 import FacebookLogin from 'react-facebook-login';
-
+import { Assets } from 'enums';
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +75,7 @@ class Registration extends Component {
             <p>Get an account !!!</p>
           </div>
           <div className="dash-logo">
-            <img alt="example" src="/assets/img/logo2.png" style={{width:'100%'}}/>
+            <img alt="example" src={Assets.Logo}     style={{width:'100%'}}/>
           </div>
         </div>
         <div className="dash-login-content">

@@ -12,6 +12,8 @@ import Select from 'react-select';
 import {AuthAPI, MasterDataAPI} from "../../API";
 import {connect} from "react-redux";
 import {authBasicProfile} from "./auth.actions";
+import { Grid, Typography, Container } from '@material-ui/core';
+import { Assets } from 'enums';
 
 export type FormValue = {
     "firstName":string,
@@ -195,7 +197,16 @@ class BasicProfile extends React.Component<any, State> {
     render() {
         const {selectedCountryOption, selectedStateOption, selectedCityOption}=this.state
         return (
-            <div className="jumbotron bg-white p-3 border shadow-sm">
+            <Container maxWidth="lg">
+                <Grid container justify="center" alignItems="center">
+                    <Grid item>
+                        <img
+                        src={Assets.Logo}  
+                        alt="Logo"
+                        style={{ maxWidth: '100%', maxHeight: '100%', display: 'block' }}
+                        />
+                    </Grid>
+                </Grid>
                 <div className='text-center mb-3'>Please provide following information to continue</div>
                 <Show when={this.state.status === PageStatus.Loading}>
                     <div className="d-flex justify-content-center w-100 p-5">
@@ -206,8 +217,6 @@ class BasicProfile extends React.Component<any, State> {
                 <Alert variant="danger" show={this.state.status === PageStatus.Error}>
                     {this.state.error}
                 </Alert>
-
-
                 <form
                     onSubmit={this.props.handleSubmit((event) => this.onSubmit())}
                     className="mt-4"
@@ -404,7 +413,7 @@ class BasicProfile extends React.Component<any, State> {
                         {this.state.error}
                     </Alert>
 
-                    <div className="d-flex align-items-center mt-2">
+                    <div className="mt-2 d-flex justify-content-center">
                         <button
                             type="submit"
                             disabled={false}
@@ -427,7 +436,7 @@ class BasicProfile extends React.Component<any, State> {
                         </Show>
                     </div>
                 </form>
-            </div>
+            </Container>
         );
     }
 }

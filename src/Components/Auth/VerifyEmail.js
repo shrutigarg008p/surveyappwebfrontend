@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-
+import { Assets } from 'enums';
 
 class VerifyEmail extends React.Component {
   constructor(props) {
@@ -60,6 +60,7 @@ class VerifyEmail extends React.Component {
 
     return (
         <div style={containerStyle}>
+          <img src={Assets.Logo}  />
           <div style={messageStyle}>
             <p>{this.state.isVerified}</p>
             <p>Click the button below to log in:</p>
