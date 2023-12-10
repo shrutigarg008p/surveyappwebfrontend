@@ -112,7 +112,7 @@ class BasicProfile extends React.Component<any, State> {
                 .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId))
                 .then((profile) => {
                     this.setState({status: PageStatus.Submitted});
-                        return this.props.authBasicProfile(this.props.history, this.props.userId)
+                        return this.props.authBasicProfile(this.props.history, this.props.userId, profile.role)
                 })
                 .catch((error) => {
                     this.setState({status: PageStatus.Error, error: error.message});
@@ -436,9 +436,10 @@ const basicProfileFormRedux = reduxForm<FormValue, any>({
     form: 'profileForm',
 })(BasicProfile);
 
-const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; }; }; }) => {
+const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
     return {
         userId: state.adminUser.adminUser.userId,
+        role: state.adminUser.adminUser.role,
         phoneNumber: state.adminUser.adminUser.phoneNumber,
         email: state.adminUser.adminUser.email,
         isLoading: state.adminUser.adminUser.loading,

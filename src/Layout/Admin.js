@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "../Components/Navbars/Navbar";
 import Footer from "../Components/Footer/Footer.js";
 import Sidebar from "../Components/Sidebar/Sidebar.js";
-import routes from "../routes.js";
+import routesIn from "../routes.js";
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 import bgImage from "../assets/img/sidebar-2.jpg";
 import logo from "../assets/img/logo.jpeg";
@@ -15,10 +15,10 @@ import {connect} from "react-redux";
 let ps;
 let role;
 
-const switchRoutes = () => (
+const switchRoutes = (role, routesIn) => (
   <Switch>
-    {routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+    {routesIn.map((prop, key) => {
+      if (prop.layout === "/admin" && role === 'admin') {
           return (
           <Route
               path={prop.layout + prop.path}
@@ -26,7 +26,15 @@ const switchRoutes = () => (
               key={key}
           />
         );
-        } else if(prop.layout === "/master") {
+        } else if(prop.layout === "/master" && role === 'admin') {
+        return (
+            <Route
+                path={prop.layout + prop.path}
+                component={prop.component}
+                key={key}
+            />
+        )
+      } else if(prop.layout === "/panelist" && role === 'panelist') {
         return (
             <Route
                 path={prop.layout + prop.path}
@@ -35,7 +43,6 @@ const switchRoutes = () => (
             />
         )
       }
-      return null;
     })}
     <Redirect from="/" to="/admin/dashboard" />
   </Switch>
@@ -44,7 +51,15 @@ const switchRoutes = () => (
 const useStyles = makeStyles(styles);
 
 function Admin({ ...rest }) {
-  role = rest.todos.adminUser.adminUser.roleName || 'admin'
+  role = rest.role || 'admin'
+  let routes = [];
+  if (role === 'panelist') {
+    routes = routesIn.filter((item) => item.layout === '/panelist');
+  }
+  if (role === 'admin') {
+    routes = routesIn.filter((item) => item.layout !== '/panelist');
+  }
+  console.log(routes)
   const classes = useStyles();
   const mainPanel = React.createRef();
   const [image] = React.useState(bgImage);
@@ -82,7 +97,7 @@ function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"IndiaPolls admin"}
+        logoText={role === 'admin' ? "IndiaPolls Admin" : "IndiaPolls"}
         logo={logo}
         image=""
         handleDrawerToggle={handleDrawerToggle}
@@ -99,10 +114,10 @@ function Admin({ ...rest }) {
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
           <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes(role)}</div>
+            <div className={classes.container}>{switchRoutes(role, routes)}</div>
           </div>
         ) : (
-          <div className={classes.map}>{switchRoutes(role)}</div>
+          <div className={classes.map}>{switchRoutes(role, routes)}</div>
         )}
         {getRoute() ? <Footer /> : null}
       </div>
@@ -113,6 +128,7 @@ function Admin({ ...rest }) {
 function mapStateToProps(state) {
   return {
     todos: state,
+    role: state.adminUser.adminUser.role,
   };
 }
 

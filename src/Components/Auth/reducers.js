@@ -54,6 +54,7 @@ export const authReducers = (state = initialState, action) => {
       const adminUser = {
         isAuthenticated: true,
         userId: action.user.id,
+        role: action.user.role,
         isBasicProfile: false,
         loading: false,
         error: null,

@@ -53,10 +53,10 @@ export const authLogin =
   };
 
 export const authBasicProfile =
-    (history, id) => async (dispatch) => {
+    (history, id, role) => async (dispatch) => {
         try {
             dispatch(authStart());
-            let obj = { id }
+            let obj = { id, role }
             dispatch(basicProfileCompleted(obj));
             history.push("/");
         } catch (error) {

@@ -11,6 +11,8 @@ import Card from "../Card/Card";
 import moment from "moment/moment";
 import {exportToExcel} from "../../Utils/ExportToExcel";
 import {MessagesAPI, NewsLetterAPI} from "../../API";
+import {Confirmation} from "../../Shared/Confirmation";
+import Details from "./Details";
 
 
 const MODAL_TYPES = {
@@ -222,6 +224,17 @@ export class Messages extends Component<any, State> {
                             </Alert>
                         </Show>
 
+                        <Show when={this.state.formType === MODAL_TYPES.BODY}>
+                            <Details
+                                show={this.state.formType === MODAL_TYPES.BODY}
+                                body={this.state.body}
+                                onClose={() => this.setState({
+                                    formType: MODAL_TYPES.NONE,
+                                    body: null,
+                                })}
+                            />
+                        </Show>
+
                         <Show when={!!this.state.filteredData.length}>
                             <Table responsive size="sm" bordered>
                                 <thead>
@@ -230,6 +243,7 @@ export class Messages extends Component<any, State> {
                                     <th>Email</th>
                                     <th>QueryType</th>
                                     <th>CreatedAt</th>
+                                    <th>Click to view</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
@@ -243,12 +257,48 @@ export class Messages extends Component<any, State> {
                                             <td>{info.queryType}</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>
+                                              <span
+                                                  aria-label="button"
+                                                  role="button"
+                                                  tabIndex={0}
+                                                  className="text-primary"
+                                                  onKeyPress={() => null}
+                                                  onClick={() => {
+                                                      this.setState({
+                                                          formType: MODAL_TYPES.BODY,
+                                                          body: info.body,
+                                                      });
+                                                  }}
+                                              >Click to view</span>
+                                            </td>
+                                            <td>
                                                 {info.queryStatus === 'Pending' ? (
-                                                    <button type="button" className="btn btn-red" onClick={() => this.markAsResolved(info.id)}>
-                                                        Mark as Resolved
-                                                    </button>
+                                                        <Confirmation onAction={() =>  this.markAsResolved(info.id)} body="Are You Sure Want To Mark As Resolved?">
+                                                            <button
+                                                                type="button"
+                                                                title="End the call"
+                                                                className="btn btn-primary"
+                                                            >
+                                                                <FontAwesomeIcon
+                                                                    icon={['fas', 'resolving']}
+                                                                    className="mr-2"
+                                                                />
+                                                                Mark as Resolved
+                                                            </button>
+                                                        </Confirmation>
                                                 ) : (
-                                                    info.queryStatus
+                                                    <button
+                                                        type="button"
+                                                        title="End the call"
+                                                        disabled
+                                                        className="btn btn-success"
+                                                    >
+                                                        <FontAwesomeIcon
+                                                            icon={['fas', 'resolving']}
+                                                            className="mr-2"
+                                                        />
+                                                        {info.queryStatus}
+                                                    </button>
                                                 )}
                                             </td>
                                         </tr>

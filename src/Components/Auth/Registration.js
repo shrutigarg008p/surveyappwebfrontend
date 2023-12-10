@@ -39,6 +39,7 @@ class Registration extends Component {
         phoneNumber: this.state.phoneNumber,
         password: this.state.password,
         registerType: this.state.registerType,
+        role: 'panelist'
       }
       return this.props.authRegistration(
           data,

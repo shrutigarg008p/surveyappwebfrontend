@@ -34,6 +34,7 @@ import PenalistDetails from "Components/Panelists/PenalistDetails";
 import {NewsLetters} from "./Components/NewsLetters/NewsLetters";
 import {Messages} from "./Components/Messsages/Messages";
 import {Help} from "./Components/Help/Help";
+import {MessageForm} from "./Components/Messsages/MessageForm";
 
 
 const dashboardRoutes = [
@@ -233,6 +234,27 @@ const dashboardRoutes = [
     icon: ArrowRight,
     component: SecList,
     layout: "/admin",
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: Dashboard,
+    component: DashboardPage,
+    layout: "/panelist",
+  },
+  {
+    path: "/profile",
+    name: "User Profile",
+    icon: Dashboard,
+    component: UserProfile,
+    layout: "/panelist",
+  },
+  {
+    path: "/panelist-message",
+    name: "Messages",
+    icon: Dashboard,
+    component: MessageForm,
+    layout: "/panelist",
   },
 ];
 
