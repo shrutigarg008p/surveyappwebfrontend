@@ -35,6 +35,7 @@ import {NewsLetters} from "./Components/NewsLetters/NewsLetters";
 import {Messages} from "./Components/Messsages/Messages";
 import {Help} from "./Components/Help/Help";
 import {MessageForm} from "./Components/Messsages/MessageForm";
+import {DashboardSurvey} from "./Components/Surveys/DashboardSurvey";
 
 
 const dashboardRoutes = [
@@ -42,7 +43,7 @@ const dashboardRoutes = [
     path: "/dashboard",
     name: "Dashboard",
     icon: Dashboard,
-    component: DashboardPage,
+    component: DashboardSurvey,
     layout: "/admin",
   },
   {

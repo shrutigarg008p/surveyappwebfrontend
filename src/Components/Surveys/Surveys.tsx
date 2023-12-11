@@ -50,7 +50,7 @@ type State = {
   },
 };
 
-export class Surveys extends Component<any, State> {
+export class Surveys extends Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {

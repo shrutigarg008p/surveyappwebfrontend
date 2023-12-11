@@ -150,12 +150,6 @@ class Details extends React.Component<any, State> {
                   {this.state.data?.emails.map(item => item.value).join(', ')}
                 </div>
               </div>
-              <div className="row mt-2">
-                <div className="col">
-                  <strong>Body: </strong>
-                  {this.state.data?.body}
-                </div>
-              </div>
             <Alert
               variant="danger"
               show={this.state.status === PageStatus.Error}

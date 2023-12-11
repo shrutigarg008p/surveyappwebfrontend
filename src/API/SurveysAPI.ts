@@ -43,4 +43,53 @@ export class SurveysAPI {
                 return _.get(res, 'data.data', {});
             });
     }
+
+    static addPartners(values: any): Promise<any> {
+        return api.post(`${surveysURL}/add-partners`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
+
+    static getAllTemplate(
+        id: string,
+        limit = 100000,
+    ): Promise<any[]> {
+        return api.get(`${surveysURL}/getAll-template/${id}/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
+    static createTemplate(values: any): Promise<any> {
+        return api.post(`${surveysURL}/create-template`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static getOneTemplate(
+        id : string
+    ): Promise<any[]> {
+        return api.get(`${surveysURL}/getOne-template/${id}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', {});
+        });
+    }
+
+    static updateTemplate(id: string, values: any): Promise<any> {
+        return api.put(`${surveysURL}/update-template/${id}`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static deleteOneTemplate(id: string): Promise<any> {
+        return api.delete(`${surveysURL}/delete-template/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 }

@@ -48,7 +48,7 @@ type State = {
     cities: any
 };
 
-class BasicProfile extends React.Component<any, State> {
+class BasicProfile extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -201,7 +201,7 @@ class BasicProfile extends React.Component<any, State> {
                 <Grid container justify="center" alignItems="center">
                     <Grid item>
                         <img
-                        src={Assets.Logo}  
+                        src={Assets.Logo}
                         alt="Logo"
                         style={{ maxWidth: '100%', maxHeight: '100%', display: 'block' }}
                         />
