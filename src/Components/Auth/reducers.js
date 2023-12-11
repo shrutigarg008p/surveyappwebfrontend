@@ -27,6 +27,7 @@ export const authReducers = (state = initialState, action) => {
         isBasicProfile: false,
         token: action.user.token,
         userId: action.user.id,
+        role: action.user.role,
         firstName: action.user.firstName,
         lastName: action.user.lastName,
         roleName: action.user.roleName,
