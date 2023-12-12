@@ -40,9 +40,10 @@ function Login(props) {
     <div className="dash-logo-content">
       <div className="dash-logo-content-bg"><img src="https://flexile.g-axon.work/static/media/neature.e7f17afb.jpg" /></div>
       <div className="dash-logo-wid">
-        <h1>Sign In</h1>
-        <p>By Signing Up, you can avail full features of our services.</p>
-        <p>Get an account !!!</p>
+        <h1>Sign IN</h1>
+        <p>By Signing In, you can avail full features of our services.</p>
+        <p><h6>Unlock Rewards, Embrace Community - Your Journey to earn Begins with Sign IN !</h6>
+          Get your own account !!!</p>
       </div>
       <div className="dash-logo">
         <img alt="example" src={Assets.Logo} style={{width:'100%'}}/>

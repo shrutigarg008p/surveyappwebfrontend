@@ -10,11 +10,12 @@ import { Card as Card2, CardHeader as CardHeader2, CardContent, Paper, Typograph
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import $ from 'jquery';
-import 'jquery-confirm'; 
+import 'jquery-confirm';
+import {log} from "fabric/fabric-impl";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-      padding: theme.spacing(4), 
+      padding: theme.spacing(4),
       fontSize: '16px',
       textAlign: 'center'
     },
@@ -24,13 +25,14 @@ export default function PenalistDetails(props:any) {
 
 const [penalistData, setPenalistData] = useState<any>([]);
 const [profileData, setProfileData] = useState<any>([]);
-const [error, setError] = useState<any>(false); 
-const [userID, setUserID] = useState<String>(''); 
+const [error, setError] = useState<any>(false);
+const [userID, setUserID] = useState<String>('');
+
 
 useEffect(()=>{
     const { userId } = props.match.params;
     setUserID(userId);
-    console.log(userId); 
+    console.log(userId);
     const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/panelistProfile/'+userId;
     fetch(url)
     .then(res=>res.json())
@@ -40,7 +42,7 @@ useEffect(()=>{
     .catch((err)=>{
         setError(true);
         console.log(err)
-    }); 
+    });
     const url2 = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/get-user/'+userId;
     fetch(url2)
     .then(res=>res.json())
@@ -50,46 +52,146 @@ useEffect(()=>{
     .catch((err)=>{
         setError(true);
         console.log(err)
-    }); 
-}, []); 
- 
+    });
+}, []);
+
 function TopHeading() {
-    const unSubscriptionService = (dialoge) =>{
+    const unSubscriptionService = (dialoge, type) =>{
         const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/unSubscribeUser/'+userID;
-        fetch(url)
+        fetch(url, { method: 'POST' })
         .then(res=>res.json())
         .then((data)=>{
+            const url2 = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/get-user/'+userID;
+            fetch(url2)
+                .then(res=>res.json())
+                .then(data=>{
+                    setProfileData(data);
+                })
+                .catch((err)=>{
+                    setError(true);
+                    console.log(err)
+                });
             console.log(data)
-            $.alert("You Unsubscribed Successfully", function(){
+            $.alert(`You ${type} Successfully`, function(){
                 // window.location.reload();
-                dialoge.close() 
-            }); 
+                dialoge.close()
+            });
         })
         .catch((err)=>{
-            $.alert("Something went wrong, please try again later"); 
+            $.alert("Something went wrong, please try again later");
             console.error(err)
         })
     }
-    const unsubscribe = () =>{
+    const unsubscribe = (type) =>{
         $.confirm({
             title: 'Confirm!',
-            content: 'Are you sure, You want to unsubscribe?',
+            content: `Are you sure, You want to ${type}?`,
             buttons: {
                 confirm: function () {
                     var dialoge = $.dialog({
                         title: 'Please wait..!',
-                        content: 'Please wait, While we unsubscribe you!',
+                        content: `Please wait, While we ${type} you!`,
                     });
-                    unSubscriptionService(dialoge); 
+                    unSubscriptionService(dialoge, type);
                 },
                 cancel: function () {
-                   
+
                 }
             }
         });
-                    
     }
 
+
+    const temporaryDeleted = (dialoge, type) =>{
+        const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/temporaryDelete/'+userID;
+        fetch(url, { method: 'POST' })
+            .then(res=>res.json())
+            .then((data)=>{
+                const url2 = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/get-user/'+userID;
+                fetch(url2)
+                    .then(res=>res.json())
+                    .then(data=>{
+                        setProfileData(data);
+                    })
+                    .catch((err)=>{
+                        setError(true);
+                        console.log(err)
+                    });
+                console.log(data)
+                $.alert(`You ${type} Successfully`, function(){
+                    // window.location.reload();
+                    dialoge.close()
+                });
+            })
+            .catch((err)=>{
+                $.alert("Something went wrong, please try again later");
+                console.error(err)
+            })
+    }
+    const temporaryDelete = (type) =>{
+        $.confirm({
+            title: 'Confirm!',
+            content: `Are you sure, You want to ${type}?`,
+            buttons: {
+                confirm: function () {
+                    var dialoge = $.dialog({
+                        title: 'Please wait..!',
+                        content: `Please wait, While we ${type} you!`,
+                    });
+                    temporaryDeleted(dialoge, type);
+                },
+                cancel: function () {
+
+                }
+            }
+        });
+    }
+
+
+    const permanentlyDeleted = (dialoge) =>{
+        const url = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/permanentlyDelete/'+userID;
+        fetch(url, { method: 'POST' })
+            .then(res=>res.json())
+            .then((data)=>{
+                const url2 = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/get-user/'+userID;
+                fetch(url2)
+                    .then(res=>res.json())
+                    .then(data=>{
+                        setProfileData(data);
+                    })
+                    .catch((err)=>{
+                        setError(true);
+                        console.log(err)
+                    });
+                console.log(data)
+                $.alert(`Successfully Deleted`, function(){
+                    // window.location.reload();
+                    dialoge.close()
+                });
+            })
+            .catch((err)=>{
+                $.alert("Something went wrong, please try again later");
+                console.error(err)
+            })
+    }
+    const permanentlyDelete = (type) =>{
+        $.confirm({
+            title: 'Confirm!',
+            content: `Are you sure, You want to permanently delete?`,
+            buttons: {
+                confirm: function () {
+                    var dialoge = $.dialog({
+                        title: 'Please wait..!',
+                        content: `Please wait, While we permanently deleting!`,
+                    });
+                    permanentlyDeleted(dialoge);
+                },
+                cancel: function () {
+
+                }
+            }
+        });
+    }
     const changePasswordService = (newPassword, dialoge) =>{
         const data = {
             userId: userID,
@@ -108,11 +210,11 @@ function TopHeading() {
             console.log(data)
             $.alert("Password Changed Successfully", function(){
                 // window.location.reload();
-                dialoge.close() 
-            }); 
+                dialoge.close()
+            });
         })
         .catch((err)=>{
-            $.alert("Something went wrong, please try again later"); 
+            $.alert("Something went wrong, please try again later");
             console.error(err)
         })
     }
@@ -138,8 +240,8 @@ function TopHeading() {
                 action: function (this:any) {
                   var newPassword = this.$content.find('.newPassword').val();
                   var confirmPassword = this.$content.find('.confirmPassword').val();
-        
-                  
+
+
                   if (newPassword !== confirmPassword) {
                     $.alert('New password and confirm password do not match.');
                     return false;
@@ -148,7 +250,7 @@ function TopHeading() {
                         title: 'Please wait..!',
                         content: 'Please wait, While we are changing the password!',
                     });
-                    changePasswordService(newPassword, dialoge); 
+                    changePasswordService(newPassword, dialoge);
                   }
                 }
               },
@@ -159,37 +261,47 @@ function TopHeading() {
               var jc = this;
               this.$content.find('.changePasswordForm').on('submit', function (e) {
                 e.preventDefault();
-                jc.$$formSubmit.trigger('click'); 
+                jc.$$formSubmit.trigger('click');
               });
             }
           });
     }
 
     return <Card>
+        <>
         <CardHeader color="primary">
             <div className="d-flex align-items-center justify-content-between">
                 <h4>Penalist Details</h4>
                 <span className="align-items-right">
-                <button type="button" className="btn btn-info" onClick={unsubscribe}>Unsubscribe</button>
-                <button type="button" className="btn btn-success ml-1" onClick={changePassword}>Change Password</button>
-                {/* <button type="button" className="btn btn-warning ml-1" >Temporary Delete</button> */}
-                {/* <button type="button" className="btn btn-danger ml-1" >Permanently Delete</button> */}
+                {profileData.length !== 0 && profileData?.data.dataValues.unsubscribeDate === null ?
+                <button type="button" className="btn btn-info" onClick={() => unsubscribe('unsubscribe')}>Unubscribe </button>
+                :
+                <button type="button" className="btn btn-info" onClick={() => unsubscribe('Subscribe')}>Subscribe</button>
+                }
+                    <button type="button" className="btn btn-blue ml-1" onClick={changePassword}>Change Password</button>
+
+                    {profileData.length !== 0 && profileData?.data.dataValues.deletedAt === null ?
+                        <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('temporary delete')}>Temporary Delete </button>
+                        :
+                        <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('re-active')}>Re-Enable</button>
+                    }
+                    <button type="button" className="btn btn-red ml-1" onClick={permanentlyDelete}>Permanently Deleted</button>
                 </span>
             </div>
-            
         </CardHeader>
+         </>
     </Card>
 }
 
 function BasicProfile() {
-    if(!profileData.hasOwnProperty('data')) return <></>; 
-    const { profile, dataValues } = profileData?.data; 
+    if(!profileData.hasOwnProperty('data')) return <></>;
+    const { profile, dataValues } = profileData?.data;
     return (
         <Card>
             <CardHeader color="info">
                 <div className="d-flex align-items-center justify-content-between">
                     <h4 className="text-center">Basic Profile</h4>
-                   
+
                 </div>
             </CardHeader>
             <CardBody>
@@ -285,20 +397,20 @@ function Label() {
     const [inputValue, setInputValue] = useState<string>('');
     const [tags, setTags] = useState<string[]>([]);
 
-    const tempTags = [...tags];  
+    const tempTags = [...tags];
     useEffect(()=>{
         const url = process.env.REACT_APP_BASE_URL_API+ "/api/v1/labels/getAll/50"
         fetch(url)
         .then(res=>res.json())
         .then((data)=>{
             if(data && data.status === 1 && data.hasOwnProperty('data')){
-                const allTags =  data.data.map(item=>item.name); 
+                const allTags =  data.data.map(item=>item.name);
                 tempTags.push(...allTags);
                 setTags(tempTags);
             }
         })
         .catch((err)=>{
-            $.alert("Something went wrong, please try again later"); 
+            $.alert("Something went wrong, please try again later");
             console.error(err)
         })
     },[]);
@@ -324,10 +436,10 @@ function Label() {
             updatedTags.splice(index, 1);
             return updatedTags;
         });
-    }; 
+    };
 
     const assignLabels = () =>{
-            
+
     }
 
     return (
@@ -363,10 +475,10 @@ function Label() {
 }
 
 function Profiles() {
-    if(!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>; 
+    if(!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>;
     const notCompletedStyle = { backgroundColor: '#FFFFE0', color: 'black', fontSize: '12px', marginTop: '10px' }
     // const completedStyle =  { backgroundColor: '#28a745', color: 'black', fontSize: '12px', marginTop: '10px' }
-    const { profile, profilesTotalPercentage } = penalistData.data; 
+    const { profile, profilesTotalPercentage } = penalistData.data;
     return (
         <>
             <Card>
@@ -402,7 +514,7 @@ function Profiles() {
                         />
                         <CardContent>
                             <img
-                            src={"https://picsum.photos/400/"+Math.round((140+key))} 
+                            src={"https://picsum.photos/400/"+Math.round((140+key))}
                             alt="Full Size Image"
                             style={{ width: '100%', height: 'auto' }}
                             />
@@ -425,7 +537,7 @@ function DataGridTable(columns:any, rows:any) {
             <GridToolbarExport />
           </GridToolbarContainer>
         );
-    }  
+    }
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <DataGrid
@@ -442,9 +554,9 @@ function DataGridTable(columns:any, rows:any) {
 }
 
 function Surveys(){
-    if(!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>; 
+    if(!penalistData.hasOwnProperty('data') || penalistData.data === null) return <></>;
     const classes = useStyles();
-    const {surveys} = penalistData.data; 
+    const {surveys} = penalistData.data;
     return(
         <>
         <Card>
@@ -458,22 +570,22 @@ function Surveys(){
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Total Surveys : {surveys.totalCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Completed Surveys : {surveys.completedCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Incomplete Surveys: {surveys.totalCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Surveys Not Started : {surveys.totalCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                 </Grid>
                 {
@@ -491,7 +603,7 @@ function Rewards(){
     const { rewards } = penalistData.data;
     return(
         <>
-       
+
         <Card>
         <CardHeader color="info">
             <div className="d-flex align-items-center justify-content-between">
@@ -547,12 +659,12 @@ function Referrals(){
                     <Grid item xs={12} sm={6}>
                         <Paper className={classes.paper} elevation={3}>
                             Total Referrals : {referrals.totalCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Paper className={classes.paper} elevation={3}>
                             Completed Referrals : {referrals.completedCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                 </Grid>
                 {
@@ -581,28 +693,28 @@ function Redemptions(){
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Total Redemptions :  {redemption.completedCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Completed Redemptions :  {redemption.completedCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Incomplete Redemptions:  {redemption.completedCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <Paper className={classes.paper} elevation={3}>
                             Redemptions Not Started : {redemption.completedCount}
-                        </Paper>   
+                        </Paper>
                     </Grid>
                 </Grid>
                 {
                     redemption.list && redemption.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
                 }
-               
+
             </CardBody>
         </Card>
         </>
@@ -610,13 +722,13 @@ function Redemptions(){
 }
 
 function Loading(){
-    if(error) return <>Something went wrong, and data could not be fetched</> 
+    if(error) return <>Something went wrong, and data could not be fetched</>
     return(
         <>
         Please wait
         </>
     )
-}   
+}
 
 
 if (!penalistData.hasOwnProperty('data') || penalistData.data === null) return <>
@@ -626,9 +738,11 @@ No Penalist Found
 return (
 <>
     <GridContainer>
+        {penalistData.length !== 0 ?
         <TopHeading />
+            : null }
         {
-            penalistData.length === 0  && profileData.length === 0 ? <Loading/> : 
+            penalistData.length === 0  && profileData.length === 0 ? <Loading/> :
             <React.Fragment>
                 <BasicProfile/>
                 <Label />
@@ -639,7 +753,7 @@ return (
                 <Redemptions/>
             </React.Fragment>
         }
-        
+
     </GridContainer>
 </>
 )

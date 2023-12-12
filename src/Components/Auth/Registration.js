@@ -71,8 +71,9 @@ class Registration extends Component {
           <div className="dash-logo-content-bg"><img src="https://flexile.g-axon.work/static/media/neature.e7f17afb.jpg" /></div>
           <div className="dash-logo-wid">
             <h1>Sign Up</h1>
-            <p>By Signing Up, you can avail full features of our services.</p>
-            <p>Get an account !!!</p>
+            <p>Sign up now to enjoy the full spectrum of our services and unlock rewarding experiences.</p>
+            <p><h6>Participate in market research projects and reap instant rewards for sharing your valuable opinions</h6>
+              Join, Earn, Redeem – Your Gateway to Rewards and Experience !!!</p>
           </div>
           <div className="dash-logo">
             <img alt="example" src={Assets.Logo}     style={{width:'100%'}}/>
