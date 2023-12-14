@@ -168,7 +168,7 @@ class Registration extends Component {
                 <span>or </span>
                 <a onClick={() => this.props.history.push('/login')}>
                   <button className="btn-white">
-                  <span>Sign in</span>
+                  <span>Sign IN</span>
                   </button>
                 </a>
               </div>

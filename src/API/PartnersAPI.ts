@@ -21,6 +21,7 @@ export class PartnersAPI {
             successUrl: values.successUrl,
             overQuotaUrl: values.overQuotaUrl,
             disqualifiedUrl: values.disqualifiedUrl,
+            badTerminatedUrl: values.badTerminatedUrl,
         };
         return api.post(`${partnersURL}/create`, data)
             .then((res) => {
@@ -35,6 +36,7 @@ export class PartnersAPI {
             successUrl: values.successUrl,
             overQuotaUrl: values.overQuotaUrl,
             disqualifiedUrl: values.disqualifiedUrl,
+            badTerminatedUrl: values.badTerminatedUrl,
         };
         return api.put(`${partnersURL}/update/${id}`, data)
             .then((res) => {

@@ -36,6 +36,7 @@ import {Messages} from "./Components/Messsages/Messages";
 import {Help} from "./Components/Help/Help";
 import {MessageForm} from "./Components/Messsages/MessageForm";
 import {DashboardSurvey} from "./Components/Surveys/DashboardSurvey";
+import {PanelistSurveys} from "./Components/PanelistSurveys/PanelistsSurveys";
 
 
 const dashboardRoutes = [
@@ -248,6 +249,13 @@ const dashboardRoutes = [
     name: "User Profile",
     icon: Dashboard,
     component: UserProfile,
+    layout: "/panelist",
+  },
+  {
+    path: "/panelist-surveys",
+    name: "My Surveys",
+    icon: Dashboard,
+    component: PanelistSurveys,
     layout: "/panelist",
   },
   {

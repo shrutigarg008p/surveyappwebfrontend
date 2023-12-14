@@ -25,6 +25,7 @@ export const samplesURL = '/api/v1/samples';
 export const usersListURL = '/api/v1/auth/user';
 export const newsLettersURL = '/api/v1/newsLetters';
 export const messagesURL = '/api/v1/messages';
+export const surveyEmailSchedule = '/api/v1/SurveyEmailSchedule';
 
 
 

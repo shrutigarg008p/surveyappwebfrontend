@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 import { api } from '../axiosConfig';
-import {surveysURL} from "../Utils/urls";
+import {surveysURL, surveyEmailSchedule} from "../Utils/urls";
 
 export class SurveysAPI {
     static getAll(
@@ -88,6 +88,70 @@ export class SurveysAPI {
 
     static deleteOneTemplate(id: string): Promise<any> {
         return api.delete(`${surveysURL}/delete-template/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
+
+    static getAllEmailSchedule(
+        id: string,
+        limit = 100000,
+    ): Promise<any[]> {
+        return api.get(`${surveyEmailSchedule}/getAll/${id}/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
+    static createEmailSchedule(values: any): Promise<any> {
+        return api.post(`${surveyEmailSchedule}/create`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static getOneEmailSchedule(
+        id : string
+    ): Promise<any[]> {
+        return api.get(`${surveyEmailSchedule}/getOne/${id}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', {});
+        });
+    }
+
+    static updateEmailSchedule(id: string, values: any): Promise<any> {
+        return api.put(`${surveyEmailSchedule}/update/${id}`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static deleteEmailSchedule(id: string): Promise<any> {
+        return api.delete(`${surveyEmailSchedule}/delete/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static sendInviteNow(id: string): Promise<any> {
+        return api.get(`${surveyEmailSchedule}/sendNow/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
+    static panelistSurveys(id: string): Promise<any> {
+        return api.get(`${surveysURL}/panelist-surveys/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static panelistOneSurvey(id: string): Promise<any> {
+        return api.get(`${surveysURL}/panelist-one-surveys/${id}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

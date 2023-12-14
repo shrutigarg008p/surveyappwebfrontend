@@ -383,7 +383,7 @@ class Form extends React.Component<any, any> {
                   />
                 </div>
                 <div className="col">
-                  <label htmlFor="ceggPoints">CEGG Points*</label>
+                  <label htmlFor="ceggPoints">IP Points*</label>
                   <input
                       type="number"
                       className="form-control"

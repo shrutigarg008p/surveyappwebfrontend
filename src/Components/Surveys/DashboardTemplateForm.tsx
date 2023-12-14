@@ -36,7 +36,8 @@ class DashboardTemplateForm extends React.Component<any, any> {
             data: '',
             name: "",
             subject: "",
-            "isActive": 1,
+            isActive: 1,
+            body: '<p>Survey Invitation</p><p><br></p><p><br></p><p>Dear {{firstName}} {{lastName}},</p><p><br></p><p>We hope this message finds you well.</p><p>You have been invited to participate in our survey! Your feedback is valuable to us, and we appreciate your time in helping us improve our services.</p><p><br></p><p>Survey Details:</p><ul><li>Survey Name: {{surveyName}}</li><li>Survey Description: {{surveyDescription}}</li></ul><p>Click the following link to access the survey: <a href="{{surveyLink}}" rel="noopener noreferrer" target="_blank">Take Survey</a></p><p><br></p><p>Please let us know if you have any questions or concerns. Your input is highly appreciated.</p><p><br></p><p><br></p><p>Thank you for your participation!</p><p>Best regards,</p><p>IndiaPolls</p>',
         };
     }
 
@@ -158,7 +159,7 @@ class DashboardTemplateForm extends React.Component<any, any> {
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        NewsLetter
+                        Email Template
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>

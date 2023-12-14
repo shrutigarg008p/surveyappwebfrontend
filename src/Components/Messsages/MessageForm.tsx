@@ -186,6 +186,7 @@ class MessageForm extends React.Component<any, any> {
                         </label>
                         <textarea
                             className="form-control"
+                            style={{ height: '180px' }}
                             onChange={(e) => this.setState({body: e.target.value})}
                             value={this.state.body}
                             placeholder="Please enter"

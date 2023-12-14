@@ -8,6 +8,7 @@ class BodyViewer extends React.Component<any, any> {
 
     render() {
         const { body } = this.props;
+        const isValidHTML = typeof body === 'string' && body.trim() !== '';
         return (
             <Modal
                 centered
@@ -18,19 +19,17 @@ class BodyViewer extends React.Component<any, any> {
                 style={{ zIndex: 1201 }}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>
-                        NewsLetter
-                    </Modal.Title>
+                    <Modal.Title>Body</Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
-                    <div>
-                        <h2>Body</h2>
-                        <div dangerouslySetInnerHTML={{ __html: body ? body : '' }} />
-                    </div>
+                    {isValidHTML ? (
+                        <div dangerouslySetInnerHTML={{ __html: body }} />
+                    ) : (
+                        <p>No valid HTML content</p>
+                    )}
                 </Modal.Body>
             </Modal>
         );
     }
 }
-
 export default BodyViewer;

@@ -83,7 +83,7 @@ function Login(props) {
             <button type="submit" className="login-btn login-btn-primary"
             disabled={submitting || invalid}
             >
-              <span>Sign In</span>
+              <span>Sign IN</span>
             </button>
             <span>or </span>
             <a onClick={handleClick}>

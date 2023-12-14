@@ -7,9 +7,9 @@ import {PageStatus} from 'enums';
 import {Show} from 'Layout';
 import {PartnersAPI, SurveysAPI} from "../../API";
 import Select from 'react-select';
-import {Confirmation} from "../../Shared/Confirmation";
-import moment from "moment";
 import {DashboardTemplates} from "./DashboardTemplates";
+import {SurveyEmailSchedule} from "./SurveyEmailSchedule";
+
 
 type State = {
     survey: any | null,
@@ -48,7 +48,6 @@ class DashboardDetails extends React.Component<any, any> {
     componentDidMount() {
         if (!!this.props.id) {
             this.fetchSurvey();
-            this.fetchPartners()
         }
     }
 
@@ -63,7 +62,9 @@ class DashboardDetails extends React.Component<any, any> {
             })
             .then((survey) => {
                 if(!!survey) {
-                    this.setState({ survey, status: PageStatus.Loaded });
+                    this.setState({ survey, status: PageStatus.Loaded }, () => {
+                        this.fetchPartners()
+                    });
                 }
             })
             .catch((error) => {
@@ -85,7 +86,14 @@ class DashboardDetails extends React.Component<any, any> {
                     label: item.name,
                     value: item.id,
                 }));
-              this.setState({ partners: options, status: PageStatus.Loaded });
+                console.log('this.state.survey && this.state.survey.surveypartners.length > 0--->', this.state.survey && this.state.survey.surveypartners.length > 0)
+                if (this.state.survey && this.state.survey.surveypartners.length > 0) {
+                    const partnerIds = this.state.survey.surveypartners.map((partner) => partner.partnerId);
+                    console.log('partnerIds---->', partnerIds)
+                    const option = options.find((item) => partnerIds.includes(item.value));
+                    this.setState({ selectedSurveyOption: option });
+                }
+                this.setState({ partners: options, status: PageStatus.Loaded });
             })
             .catch((error) => {
                 this.setState({ status: PageStatus.Error, error: error.message });
@@ -305,7 +313,7 @@ class DashboardDetails extends React.Component<any, any> {
                                             name='partners'
                                             id='partners'
                                             onChange={this.handlePartnersChange}
-                                            value={this.state.selectedPartnersOption}
+                                            value={this.state.selectedSurveyOption}
                                             isMulti
                                             options={this.state.partners}
                                         />
@@ -319,6 +327,7 @@ class DashboardDetails extends React.Component<any, any> {
                         </div>
 
                         <DashboardTemplates id={this.props.id}/>
+                        <SurveyEmailSchedule id={this.props.id}/>
                     </Modal.Body>
                 </Modal>
             </>

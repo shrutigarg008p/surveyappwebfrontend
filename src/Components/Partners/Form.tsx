@@ -32,7 +32,8 @@ class Form extends React.Component<any, any> {
       description: "",
       successUrl: "",
       overQuotaUrl: "",
-      disqualifiedUrl: ""
+      disqualifiedUrl: "",
+      badTerminatedUrl: ''
     };
   }
 
@@ -70,7 +71,8 @@ class Form extends React.Component<any, any> {
       description: this.state.description,
       successUrl: this.state.successUrl,
       overQuotaUrl: this.state.overQuotaUrl,
-      disqualifiedUrl: this.state.disqualifiedUrl
+      disqualifiedUrl: this.state.disqualifiedUrl,
+      badTerminatedUrl: this.state.badTerminatedUrl
     };
   }
 
@@ -80,7 +82,8 @@ class Form extends React.Component<any, any> {
       description: data.description,
       successUrl: data.successUrl,
       overQuotaUrl: data.overQuotaUrl,
-      disqualifiedUrl: data.disqualifiedUrl
+      disqualifiedUrl: data.disqualifiedUrl,
+      badTerminatedUrl: data.badTerminatedUrl
     });
   }
   onSubmit() {
@@ -177,7 +180,7 @@ class Form extends React.Component<any, any> {
                   required
               />
               <label htmlFor="titleEng">
-                Success Url*
+                Completed URL*
               </label>
               <input
                   className="form-control"
@@ -189,7 +192,7 @@ class Form extends React.Component<any, any> {
 
 
               <label htmlFor="titleEng">
-                Over Quota Url*
+                Quota Full URL*
               </label>
               <input
                   className="form-control"
@@ -199,12 +202,22 @@ class Form extends React.Component<any, any> {
                   required
               />
               <label htmlFor="titleEng">
-                Disqualified Url*
+                Terminate URL*
               </label>
               <input
                   className="form-control"
                   onChange={(e) => this.setState({disqualifiedUrl: e.target.value})}
                   value={this.state.disqualifiedUrl}
+                  placeholder="Enter..."
+                  required
+              />
+              <label htmlFor="titleEng">
+                Bad Terminate URL*
+              </label>
+              <input
+                  className="form-control"
+                  onChange={(e) => this.setState({badTerminatedUrl: e.target.value})}
+                  value={this.state.badTerminatedUrl}
                   placeholder="Enter..."
                   required
               />

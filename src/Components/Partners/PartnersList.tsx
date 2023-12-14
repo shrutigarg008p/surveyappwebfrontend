@@ -53,7 +53,7 @@ type State = {
   id?: string | null,
 };
 
-export class PartnersList extends Component<any, State> {
+export class PartnersList extends Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -195,9 +195,8 @@ export class PartnersList extends Component<any, State> {
                 <th>S.No</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Success URL</th>
-                <th>Over Quota URL</th>
-                <th>Disqualified URL</th>
+                <th>Completed URL</th>
+                <th>Quota Full URL</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
               </tr>
@@ -229,7 +228,6 @@ export class PartnersList extends Component<any, State> {
                     <td>{data.description}</td>
                     <td>{data.successUrl}</td>
                     <td>{data.overQuotaUrl}</td>
-                    <td>{data.disqualifiedUrl}</td>
                     <td>{moment(data.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                     <td>{moment(data.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                   </tr>

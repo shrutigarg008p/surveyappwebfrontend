@@ -102,16 +102,20 @@ class Details extends React.Component<any, State> {
                 {this.state.data?.description}
               </div>
               <div className=" mb-3">
-                <strong>Success URL: </strong>
+                <strong>Completed URL: </strong>
                 {this.state.data?.successUrl}
               </div>
               <div className=" mb-3">
-                <strong>Over Quota URL: </strong>
+                <strong>Quota Full URL: </strong>
                 {this.state.data?.overQuotaUrl}
               </div>
               <div className=" mb-3">
-                <strong>Disqualified URL: </strong>
+                <strong>Terminate URL: </strong>
                 {this.state.data?.disqualifiedUrl}
+              </div>
+              <div className=" mb-3">
+                <strong>Bad Terminate URL: </strong>
+                {this.state.data?.badTerminatedUrl}
               </div>
             <Alert
               variant="danger"
