@@ -11,6 +11,7 @@ import {SamplesAPI, SurveysAPI} from "../../API";
 import Select from 'react-select';
 import 'react-quill/dist/quill.snow.css';
 import moment from "moment";
+import {inputUTCToLocal} from "../../Utils/dates";
 
 export type FormValue = {
     name: string,
@@ -250,8 +251,8 @@ class SurveyEmailScheduleForm extends React.Component<any, any> {
                                     className="form-control"
                                     name="datetime"
                                     type="datetime-local"
-                                    onChange={(e) => this.setState({ scheduleDate: e.target.value })}
-                                    value={this.state.scheduleDate}
+                                    onChange={(e) => this.setState({ scheduleDate: inputUTCToLocal(e.target.value)})}
+                                    value={inputUTCToLocal(this.state.scheduleDate)}
                                     placeholder="Enter here"
                                 />
                             </div>
