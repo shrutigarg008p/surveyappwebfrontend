@@ -12,6 +12,7 @@ import {VerificationEmailScreens} from "./Components/Auth/VerificationEmailScree
 import {AuthRouter} from "./Components/Auth/AuthRouter";
 import {RedemptionRouter} from "./Components/Redemptions";
 import PrivacyPolicy from "./Components/PrivacyPolicy/privacyPolicy";
+import ResetPasswordForm from "./Components/Auth/UpdateResetPasswordForm";
 
 class App extends React.Component<any, any> {
 
@@ -23,6 +24,7 @@ class App extends React.Component<any, any> {
             <Route path="/auth" component={AuthRouter} />
             <Route path="/verify-screen" component={VerificationEmailScreens} />
             <Route path='/privacy-policy' component={PrivacyPolicy} />
+            <Route path='/reset-password/:token' component={ResetPasswordForm} />
 
             <PrivateRouteWithRedux path="/admin" component={Admin} />
             <PrivateRouteWithRedux path="/" component={Admin} />

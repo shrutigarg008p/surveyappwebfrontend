@@ -8,7 +8,7 @@ import {
     referralsUrl,
     registrationURL,
     rewardsURL,
-    usersListURL
+    usersListURL, userURL
 } from '../Utils/urls';
 
 
@@ -75,6 +75,20 @@ export class AuthAPI {
         limit: number,
     ): Promise<any> {
         return api.get(`${referralsUrl}/${limit}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static ResetPasswordLink(email): Promise<any> {
+        return api.post(`${userURL}/reset-password`, { email: email })
+            .then((res) => {
+                return _.get(res, 'data.message', {});
+            });
+    }
+
+    static UpdateNewPassword(token, password): Promise<any> {
+        return api.post(`${userURL}/Updatenew-password/${token}`, { password: password })
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });
