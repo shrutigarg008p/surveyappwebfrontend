@@ -8,7 +8,7 @@ export class VerificationEmailScreens extends React.Component {
     render() {
         return (
             <div style={styles.container}>
-                 <img src={Assets.Logo} />
+                 <img src={Assets.Logo}  style={{width:'100%'}}/>
                 <h2 style={styles.heading}>Please Verify Your Email</h2>
                 <p style={styles.message}>
                     We have sent a verification link to your email address. Please click on
