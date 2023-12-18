@@ -89,7 +89,7 @@ class BasicProfile extends React.Component<any, any> {
             dateOfBirth: this.state.dateOfBirth,
             country: this.state.country,
             addressLine1: this.state.addressLine1,
-            addressLine2: this.state.addressLine2,
+            addressLine2: this.state.addressLine2 || 'NA',
             state: this.state.state,
             city: this.state.city,
             pinCode: this.state.pinCode,

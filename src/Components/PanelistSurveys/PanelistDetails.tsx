@@ -113,23 +113,30 @@ class PanelistDetails extends React.Component<any, any> {
                                 </div>
                             </div>
 
+                            {/*<div className="row mt-2">*/}
+                            {/*    <div className="col">*/}
+                            {/*        <strong>Points: </strong>*/}
+                            {/*        {this.state.survey?.survey.ceggPoints}*/}
+                            {/*    </div>*/}
+
+                            {/*    { this.state.survey?.isCompleted === false ?*/}
+                            {/*    <div className="col">*/}
+                            {/*        <strong>Attempt Status: </strong>*/}
+                            {/*        {this.state.survey?.isStarted === true ? 'Started' : 'Not Started'}*/}
+                            {/*    </div>*/}
+                            {/*        :*/}
+                            {/*        <div className="col">*/}
+                            {/*            <strong>Attempt Status: </strong>*/}
+                            {/*            {this.state.survey?.isCompleted === true ? 'Completed' : 'Not Completed'}*/}
+                            {/*        </div>*/}
+                            {/*    }*/}
+                            {/*</div>*/}
+
                             <div className="row mt-2">
                                 <div className="col">
-                                    <strong>Points: </strong>
-                                    {this.state.survey?.survey.ceggPoints}
+                                    <strong>Status: </strong>
+                                    {this.state.survey?.status}
                                 </div>
-
-                                { this.state.survey?.isCompleted === false ?
-                                <div className="col">
-                                    <strong>Attempt Status: </strong>
-                                    {this.state.survey?.isStarted === true ? 'Started' : 'Not Started'}
-                                </div>
-                                    :
-                                    <div className="col">
-                                        <strong>Attempt Status: </strong>
-                                        {this.state.survey?.isCompleted === true ? 'Completed' : 'Not Completed'}
-                                    </div>
-                                }
                             </div>
 
                             <div className="row mt-2">

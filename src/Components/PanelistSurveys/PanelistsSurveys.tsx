@@ -262,11 +262,12 @@ class PanelistSurveys extends Component<any, any> {
                           }}
                       />
                     </td>
-                    { info.isCompleted === false ?
-                        <td>{info.isStarted === true ? 'Started' : 'Not Started' }</td>
-                        :
-                        <td>{info.isCompleted === true ? 'Completed' : 'Not Completed' }</td>
-                    }
+                    {/*{ info.isCompleted === false ?*/}
+                    {/*    <td>{info.isStarted === true ? 'Started' : 'Not Started' }</td>*/}
+                    {/*    :*/}
+                    {/*    <td>{info.isCompleted === true ? 'Completed' : 'Not Completed' }</td>*/}
+                    {/*}*/}
+                    <td>{info.status}</td>
                     <td>{info.survey.ceggPoints}</td>
                     <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                     <td><a href={info?.temporarySurveyLink} target="_blank" rel="noopener noreferrer">

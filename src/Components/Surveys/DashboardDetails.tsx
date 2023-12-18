@@ -123,10 +123,12 @@ class DashboardDetails extends React.Component<any, any> {
 
 
     formValues() {
-        return this.state.selectedPartnerOption.map((item) => ({
-            surveyId: this.props.id,
-            partnerId: item.value,
-        }))
+        if(this.state.selectedPartnerOption) {
+            return this.state.selectedPartnerOption.map((item) => ({
+                surveyId: this.props.id,
+                partnerId: item.value,
+            }))
+        }
     }
 
     handlePartnersChange = async (selectedPartnerOption) => {
