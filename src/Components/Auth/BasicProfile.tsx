@@ -132,6 +132,11 @@ class BasicProfile extends React.Component<any, any> {
                     label: country.name,
                     value: country.id
                 }));
+                options.sort((a, b) => {
+                    if(a.label < b.label) { return -1; }
+                    if(a.label > b.label) { return 1; }
+                    return 0;
+                  });
                 this.setState({ countries: options, status: PageStatus.Loaded });
             })
             .catch((error) => {
@@ -170,6 +175,11 @@ class BasicProfile extends React.Component<any, any> {
                     label: state.name,
                     value: state.id
                 }));
+                options.sort((a, b) => {
+                    if(a.label < b.label) { return -1; }
+                    if(a.label > b.label) { return 1; }
+                    return 0;
+                  });
                 this.setState({ states: options, status: PageStatus.Loaded });
             })
             .catch((error) => {
@@ -187,12 +197,54 @@ class BasicProfile extends React.Component<any, any> {
                     label: city.name,
                     value: city.id
                 }));
+                options.sort((a, b) => {
+                    if(a.label < b.label) { return -1; }
+                    if(a.label > b.label) { return 1; }
+                    return 0;
+                  });
                 this.setState({ cities: options, status: PageStatus.Loaded });
             })
             .catch((error) => {
                 this.setState({ error: error.message, status: PageStatus.Error });
             });
     }
+
+    
+
+    handleDateOfBirthChange(e) {
+        const enteredDate = e.target.value;
+        console.log("Entered Date:", enteredDate);
+      
+        const currentDate = new Date();
+        const minAgeDate = new Date(currentDate.getFullYear() - 100, currentDate.getMonth(), currentDate.getDate());
+        const maxAgeDate = new Date(currentDate.getFullYear() - 16, currentDate.getMonth(), currentDate.getDate());
+      
+        // Parse the entered date in the "YYYY-MM-DD" format
+        const selectedDate:any = new Date(enteredDate);
+        console.log("Parsed Date:", selectedDate);
+      
+        const enteredTimestamp = selectedDate.getTime();
+        const minAgeTimestamp = minAgeDate.getTime();
+        const maxAgeTimestamp = maxAgeDate.getTime();
+        console.log(enteredDate)
+        if (!isNaN(selectedDate) && enteredTimestamp >= minAgeTimestamp && enteredTimestamp <= maxAgeTimestamp) {
+
+          this.setState({ dateOfBirth: enteredDate });
+          
+          e.target.setCustomValidity(""); 
+        } else {
+          e.target.value="";
+          console.error("Invalid age range. Please enter a date of birth between 16 and 100 years.");
+          e.target.setCustomValidity("Invalid age range. Please enter a date of birth between 16 and 100 years."); 
+        }
+      
+        e.target.reportValidity();
+      }
+      
+      
+      
+      
+      
 
     render() {
         const {selectedCountryOption, selectedStateOption, selectedCityOption}=this.state
@@ -224,7 +276,7 @@ class BasicProfile extends React.Component<any, any> {
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="title">First name</label>
+                            <label htmlFor="title">First name*</label>
                             <input
                                 className="form-control"
                                 name="firstName"
@@ -235,7 +287,7 @@ class BasicProfile extends React.Component<any, any> {
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="lastName">Last Name*</label>
+                            <label htmlFor="lastName">Last Name</label>
                             <input
                                 className="form-control"
                                 id="lastName"
@@ -243,7 +295,6 @@ class BasicProfile extends React.Component<any, any> {
                                 onChange={(e) => this.setState({ lastName: e.target.value })}
                                 value={this.state.lastName}
                                 placeholder="Enter.."
-                                required
                             />
                         </div>
                     </div>
@@ -300,13 +351,15 @@ class BasicProfile extends React.Component<any, any> {
                                 id="description"
                                 type="date"
                                 name="description"
-                                value={this.state.dateOfBirth}
-                                onChange={(e) => this.setState({ dateOfBirth: e.target.value })}
-                                placeholder="Enter dob in format DD/MM/YYYY"
+                                onChange={(e) => this.handleDateOfBirthChange(e)}
+                                onKeyDown={(e) =>{
+                                    e.preventDefault()
+                                }}
+                                required
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="description">pincode*</label>
+                            <label htmlFor="description">Pincode*</label>
                             <input
                                 className="form-control"
                                 id="pinCode"
@@ -328,6 +381,7 @@ class BasicProfile extends React.Component<any, any> {
                                 value={this.state.addressLine1}
                                 onChange={(e) => this.setState({ addressLine1: e.target.value })}
                                 placeholder="Enter here"
+                                required
                             />
                         </div>
                         <div className="col">
@@ -404,7 +458,18 @@ class BasicProfile extends React.Component<any, any> {
                             }
                         >
                             <option value="" className="">Select Referral</option>
-                            <option value="adFlierNewspaper">Ad flier with newspaper</option><option value="adFlierOther">Ad flier at market/outdoors</option><option value="adOnWebsite">Saw an ad on a website</option><option value="blogForum">Read about it on a blog/forum</option><option value="cafeCoffeeDay">Ad at Café Coffee Day</option><option value="emailFromFriend">Got an email from a friend/colleague</option><option value="emailFromWebPortal">Email from a web portal/service/jobsite</option><option value="googleSearch">Searched on google.com</option><option value="other">Other</option><option value="otherSearchEngine">Searched on another search engine</option><option value="referredViaIndiaSpeaks">Referred via Indiaspeaks.net from a friend/colleague</option><option value="shopRestaurant">Ad at a shop/restaurant</option><option value="smsFromIndiaSpeaks">SMS invite from Indiaspeaks.net</option><option value="wordOfMouth">Word of mouth from friend/colleague</option>
+                            <option value="adFlierNewspaper">Ad flier with newspaper</option>
+                            <option value="adFlierOther">Ad flier at market/outdoors</option>
+                            <option value="adOnWebsite">Saw an ad on a website</option>
+                            <option value="blogForum">Read about it on a blog/forum</option>
+                            <option value="cafeCoffeeDay">Ad at Café Coffee Day</option>
+                            <option value="emailFromFriend">Got an email from a friend/colleague</option>
+                            <option value="emailFromWebPortal">Email from a web portal/service/jobsite</option>
+                            <option value="googleSearch">Searched on google.com</option>
+                            <option value="other">Other</option>
+                            <option value="otherSearchEngine">Searched on another search engine</option>
+                            <option value="shopRestaurant">Ad at a shop/restaurant</option>
+                            <option value="wordOfMouth">Word of mouth from friend/colleague</option>
                         </select>
                     </div>
                     <hr />

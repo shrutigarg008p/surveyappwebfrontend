@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import LoadingSpinner from "../../Layout/LoadingSpinner";
 import { authRegistration } from "./auth.actions";
 import FacebookLogin from 'react-facebook-login';
+
 import { Assets } from 'enums';
 class Registration extends Component {
   constructor(props) {
@@ -20,7 +21,12 @@ class Registration extends Component {
       phoneNumberActive: false,
       emailActive: false,
       passwordActive: false,
-      confirmPasswordActive:false
+      confirmPasswordActive:false, 
+      isPasswordMatched : false, 
+      error : {
+        status : false, 
+        message : ''
+      }
     };
   }
 
@@ -28,7 +34,7 @@ class Registration extends Component {
     return password === confirmPassword
   }
 
-  onSubmit() {
+    onSubmit() {
     if (this.state.policy === false) {
       this.setState({ show: true })
     } else if(!this.validate(this.state.password, this.state.confirmPassword)) {
@@ -41,10 +47,25 @@ class Registration extends Component {
         registerType: this.state.registerType,
         role: 'panelist'
       }
-      return this.props.authRegistration(
+      this.props.authRegistration(
           data,
           this.props.history,
       );
+      if(this.props.error && this.props.error !== ''){
+        this.setState({
+          error : {
+            status : true, 
+            message : this.props.error
+          }
+        })
+      }else{
+        this.setState({
+          error : {
+            status : false, 
+            message : ''
+          }
+        })
+      }
     }
   }
 
@@ -63,7 +84,26 @@ class Registration extends Component {
     }
   };
 
+  onChangePassword(value, type){
+    let { password, confirmPassword } = this.state;
+    if(type === 'confirmpassword'){
+      confirmPassword = value;
+    }else{
+      password = value; 
+    }
+    if(password !== '' && confirmPassword !== '' && password === confirmPassword){
+      this.setState({
+        isPasswordMatched : true
+      })
+    }else{
+      this.setState({
+        isPasswordMatched : false
+      })
+    }
+  }
+
   render() {
+    const { isPasswordMatched } = this.state; 
     return (
       <div className="dash-login-wrap">
       <div className="dash-login-main-content">
@@ -97,11 +137,11 @@ class Registration extends Component {
               <input
                type='text'
                value={this.state.phoneNumber}
-               onChange={(e) =>
-                   this.setState({
-                     phoneNumber: e.target.value,
-                   })
-               }
+               onChange={(e) => {
+                this.setState({
+                  phoneNumber: e.target.value,
+                })
+               }}
                onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
                placeholder='Phone'
               className="login-input"
@@ -111,29 +151,33 @@ class Registration extends Component {
             <div className="login-row login-form-item login-form-item-control">
               <input
               type='password'
-              onChange={(e) =>
-                  this.setState({
-                    password: e.target.value,
-                  })
-              }
+              onChange={(e) => {
+                this.onChangePassword(e.target.value, 'password');
+                this.setState({
+                  password: e.target.value,
+                })
+              }}
               onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
               placeholder='Password'
               className="login-input" />
             </div>
-
+            
             <div className="login-row login-form-item login-form-item-control">
               <input
-              type='confirmPassword'
-              onChange={(e) =>
-                  this.setState({
-                    confirmPassword: e.target.value,
-                  })
-              }
+              type='password'
+              onChange={(e) =>{
+                this.onChangePassword(e.target.value, 'confirmpassword');
+                this.setState({
+                  confirmPassword: e.target.value,
+                })
+              }}
               onClick={() => this.setState({confirmPasswordActive: !this.state.confirmPasswordActive})}
               placeholder='Confirm Password'
               className="login-input" />
             </div>
-
+            {
+              isPasswordMatched ?  <div className="alert alert-success">Passwords matched!</div> : ''
+            }
               <div className="login-row login-form-item login-form-item-control">
                 <label>
                   <input
@@ -154,6 +198,11 @@ class Registration extends Component {
                 <small className="form-text text-danger privacy_error">
                   Please enter same password in both password and confirm password
 
+                </small>
+              </Show>
+              <Show when={this.state.error.status === true}>
+                <small className="form-text text-danger privacy_error">
+                  {this.state.error.message}
                 </small>
               </Show>
             <div className="login-row login-form-item">
