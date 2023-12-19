@@ -11,7 +11,7 @@ import {SamplesAPI, SurveysAPI} from "../../API";
 import Select from 'react-select';
 import 'react-quill/dist/quill.snow.css';
 import moment from "moment";
-import {inputUTCToLocal} from "../../Utils/dates";
+import {inputUTCToLocal, utcToLocal} from "../../Utils/dates";
 
 export type FormValue = {
     name: string,
@@ -142,7 +142,7 @@ class SurveyEmailScheduleForm extends React.Component<any, any> {
             sampleId: this.state.sampleId,
             count: this.state.count,
             isSendAll: this.state.count > 0 ? false : this.state.isSendAll,
-            scheduleDate: this.state.scheduleDate,
+            scheduleDate: new Date(this.state.scheduleDate).toISOString(),
             scheduleType: this.state.scheduleType,
             scheduleStatus: this.state.scheduleStatus,
         };
@@ -218,6 +218,7 @@ class SurveyEmailScheduleForm extends React.Component<any, any> {
     };
 
     render() {
+        console.log('utc--->', utcToLocal('2023-12-19T22:08:00.000Z'))
         console.log('this.state.selectedSurveyOption---->', this.state)
         return (
             <Modal
@@ -251,8 +252,8 @@ class SurveyEmailScheduleForm extends React.Component<any, any> {
                                     className="form-control"
                                     name="datetime"
                                     type="datetime-local"
-                                    onChange={(e) => this.setState({ scheduleDate: inputUTCToLocal(e.target.value)})}
-                                    value={inputUTCToLocal(this.state.scheduleDate)}
+                                    onChange={(e) => this.setState({ scheduleDate: e.target.value})}
+                                    value={this.state.scheduleDate}
                                     placeholder="Enter here"
                                 />
                             </div>
