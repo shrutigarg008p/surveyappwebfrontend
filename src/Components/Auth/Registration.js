@@ -7,6 +7,7 @@ import { authRegistration } from "./auth.actions";
 import FacebookLogin from 'react-facebook-login';
 
 import { Assets } from 'enums';
+import { Link } from 'react-router-dom';
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -178,7 +179,7 @@ class Registration extends Component {
             {
               isPasswordMatched ?  <div className="alert alert-success">Passwords matched!</div> : ''
             }
-              <div className="login-row login-form-item login-form-item-control">
+              <div className="login-row login-form-item-control" style={{marginBottom : '-11px'}}>
                 <label>
                   <input
                   type='checkbox'
@@ -186,18 +187,16 @@ class Registration extends Component {
                   className="r_pp_checkbox login-checkbox-input" defaultValue />
                   <span> By signing up, I accept</span>
                 </label>
-                  <span>Term &amp; Condition</span>
+                  <span><Link to="/terms"> Term &amp; Condition</Link></span>
               </div>
               <Show when={this.state.show===true}>
                 <small className="form-text text-danger privacy_error">
                   Please accept the terms to our privacy policy and our terms and conditions
-
                 </small>
               </Show>
               <Show when={this.state.showConfirmPassword === true}>
                 <small className="form-text text-danger privacy_error">
                   Please enter same password in both password and confirm password
-
                 </small>
               </Show>
               <Show when={this.state.error.status === true}>
