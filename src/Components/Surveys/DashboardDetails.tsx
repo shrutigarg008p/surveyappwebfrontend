@@ -9,6 +9,7 @@ import {PartnersAPI, SurveysAPI} from "../../API";
 import Select from 'react-select';
 import {DashboardTemplates} from "./DashboardTemplates";
 import {SurveyEmailSchedule} from "./SurveyEmailSchedule";
+import moment from "moment";
 
 
 type State = {
@@ -40,6 +41,7 @@ class DashboardDetails extends React.Component<any, any> {
             status: PageStatus.None,
             error: null,
             partners: [],
+            users: [],
             partnersSelected: null,
             selectedPartnerOption: null,
         };
@@ -60,9 +62,13 @@ class DashboardDetails extends React.Component<any, any> {
                 }
                 return SurveysAPI.getOne(this.props.id);
             })
-            .then((survey) => {
+            .then((survey: any) => {
                 if(!!survey) {
-                    this.setState({ survey, status: PageStatus.Loaded }, () => {
+                    const user = survey.user.map(user => ({
+                        ...user,
+                        assignUser: survey.assignUsers.find(assignUser => assignUser.userId === user.userId)
+                    }));
+                    this.setState({ survey: survey.data, users: user, status: PageStatus.Loaded }, () => {
                         this.fetchPartners()
                     });
                 }
@@ -327,6 +333,40 @@ class DashboardDetails extends React.Component<any, any> {
                                 <button type="button" className="btn btn-success" onClick={() => this.addPartners()}>Add partners</button>
                             </div>
                         </div>
+                        <Show when={this.state.users.length !== 0} >
+                        <div className="mt-5">
+                            <Table responsive size="sm" bordered>
+                                <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>CreatedAt</th>
+                                    <th>UpdatedAt</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {
+                                    this.state.users.map((info, index) => (
+                                        <tr key={info.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{info.firstName} {info.lastName}</td>
+                                            <td>{info.gender}</td>
+                                            <td>{info.user ? info.user.email : '-'}</td>
+                                            <td>{info.assignUser ? info.assignUser.status : '-' }</td>
+                                            <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                            <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                        </tr>
+                                    ))
+                                }
+                                </tbody>
+
+                            </Table>
+                        </div>
+                        </Show>
 
                         <DashboardTemplates id={this.props.id}/>
                         <SurveyEmailSchedule id={this.props.id}/>
