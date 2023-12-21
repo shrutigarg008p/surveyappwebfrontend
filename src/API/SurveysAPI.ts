@@ -30,6 +30,15 @@ export class SurveysAPI {
         });
     }
 
+    static getOneDetails(
+        id : string
+    ): Promise<any[]> {
+        return api.get(`${surveysURL}/getOneDetails/${id}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', {});
+        });
+    }
+
     static update(id: string, values: any): Promise<any> {
         return api.put(`${surveysURL}/update/${id}`, values)
             .then((res) => {

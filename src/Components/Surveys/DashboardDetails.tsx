@@ -60,7 +60,7 @@ class DashboardDetails extends React.Component<any, any> {
                 if (!this.props.id) {
                     return Promise.reject(new Error('Invalid ID'));
                 }
-                return SurveysAPI.getOne(this.props.id);
+                return SurveysAPI.getOneDetails(this.props.id);
             })
             .then((survey: any) => {
                 if(!!survey) {
