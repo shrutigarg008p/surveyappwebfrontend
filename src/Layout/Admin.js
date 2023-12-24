@@ -54,10 +54,10 @@ function Admin({ ...rest }) {
   role = rest.role || 'admin'
   let routes = [];
   if (role === 'panelist') {
-    routes = routesIn.filter((item) => item.layout === '/panelist');
+    routes = routesIn.filter((item) => item.layout === '/panelist' || item.type === 'panelist');
   }
   if (role === 'admin') {
-    routes = routesIn.filter((item) => item.layout !== '/panelist');
+    routes = routesIn.filter((item) => item.layout !== '/panelist' && item.type !== 'panelist');
   }
   console.log(routes)
   const classes = useStyles();

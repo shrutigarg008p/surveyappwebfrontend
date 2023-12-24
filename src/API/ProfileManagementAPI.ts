@@ -46,6 +46,13 @@ export class ProfileManagementAPI {
             });
     }
 
+    static getOneDetails(id: any, userId: any): Promise<any> {
+        return api.get(`${profileManagementURL}/getOneDetails/${id}/${userId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
     static deleteOne(id: any): Promise<any> {
         return api.delete(`${profileManagementURL}/delete/${id}`)
             .then((res) => {
@@ -53,6 +60,12 @@ export class ProfileManagementAPI {
             });
     }
 
+    static createUserProfile(data: any): Promise<any> {
+        return api.post(`${profileManagementURL}/createUserProfiles`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 
     //Questions
 

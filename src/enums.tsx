@@ -97,6 +97,13 @@ export enum SeoPageTitle {
   PartnerWithUs = 'PartnerWithUs',
 }
 
-export enum Assets { 
+export enum Assets {
   Logo = "/assets/img/logo2.png"
+}
+
+export enum ProfilesIds {
+    About = 'b6e9d661-bd50-492c-a2ab-a4551607d9be',
+    PersonalFinance = 'bafbf42a-38b2-439d-895f-96ae267a6b28',
+    Shopping = '04789a48-98b0-40cb-ac56-a3bb6674dd71',
+    Travel = '01af1240-ecb4-4a32-bcf4-fdbba548d2e0'
 }

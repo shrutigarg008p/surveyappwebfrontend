@@ -37,6 +37,10 @@ import {Help} from "./Components/Help/Help";
 import {MessageForm} from "./Components/Messsages/MessageForm";
 import {DashboardSurvey} from "./Components/Surveys/DashboardSurvey";
 import {PanelistSurveys} from "./Components/PanelistSurveys/PanelistsSurveys";
+import {About} from "./Components/PanelistProfile/About";
+import {PersonalFinance} from "./Components/PanelistProfile/FinancialFinance";
+import {Shopping} from "./Components/PanelistProfile/Shoppings";
+import {Travels} from "./Components/PanelistProfile/Travels";
 
 
 const dashboardRoutes = [
@@ -243,6 +247,7 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: DashboardPage,
     layout: "/panelist",
+    type: 'panelist'
   },
   {
     path: "/profile",
@@ -250,6 +255,7 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: UserProfile,
     layout: "/panelist",
+    type: 'panelist'
   },
   {
     path: "/panelist-surveys",
@@ -257,6 +263,7 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: PanelistSurveys,
     layout: "/panelist",
+    type: 'panelist'
   },
   {
     path: "/panelist-message",
@@ -264,6 +271,47 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: MessageForm,
     layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/",
+    name: "PROFILE",
+    icon: ArrowBack,
+    component: '',
+    layout: "",
+    type: 'panelist'
+  },
+  {
+    path: "/about",
+    name: "About",
+    icon: Dashboard,
+    component: About,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/personal-finance",
+    name: "Personal Finance",
+    icon: Dashboard,
+    component: PersonalFinance,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/shopping",
+    name: "Shopping",
+    icon: Dashboard,
+    component: Shopping,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/travels",
+    name: "Travel",
+    icon: Dashboard,
+    component: Travels,
+    layout: "/panelist",
+    type: 'panelist'
   },
 ];
 
