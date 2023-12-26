@@ -105,5 +105,16 @@ export enum ProfilesIds {
     About = 'b6e9d661-bd50-492c-a2ab-a4551607d9be',
     PersonalFinance = 'bafbf42a-38b2-439d-895f-96ae267a6b28',
     Shopping = '04789a48-98b0-40cb-ac56-a3bb6674dd71',
-    Travel = '01af1240-ecb4-4a32-bcf4-fdbba548d2e0'
+    Travel = '01af1240-ecb4-4a32-bcf4-fdbba548d2e0',
+    LeisureAndActivity = '5c7e2649-aee9-43e5-abeb-bc0fc3aa1dc3',
+    Media = 'a5187f72-dc4f-4207-a520-57d2714ce6e9',
+    HouseHold = 'db66c69d-8137-45e6-8c22-5d1e81d78f13',
+    HealthAndWellness = 'e6ace457-6fec-4b67-b3a1-f28f716c7679',
+    Professional = '2339588b-55cc-4d20-976c-ea83283caa83',
+    Electronics = '1ce0afed-01c9-46b0-b16c-35069d7236ca',
+    Smokers = '9ce620cd-bd19-4cd4-9135-1bcdc167a802',
+    Auto = 'd0c9cbee-b5b7-4e18-a872-9210bd4668df',
+    FoodAndBeverage = 'd5219ed7-6855-4f68-89f3-27d748eece68'
+
+
 }

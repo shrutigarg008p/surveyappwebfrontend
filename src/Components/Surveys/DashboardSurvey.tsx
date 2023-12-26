@@ -316,9 +316,9 @@ export class DashboardSurvey extends Component<any, any> {
                                     <th>Active</th>
                                     <th>CEGG Points</th>
                                     <th>PublishedAt</th>
-                                    <th>ExpireAt</th>
-                                    <th>CreatedAt</th>
-                                    <th>UpdatedAt</th>
+                                    <th>Expire On</th>
+                                    <th>Created</th>
+                                    <th>Updated</th>
                                 </tr>
                                 </thead>
 

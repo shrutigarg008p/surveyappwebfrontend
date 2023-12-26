@@ -23,7 +23,7 @@ type State = {
     name: string,
 };
 
-class Travels extends React.Component<any, any> {
+class HouseHold extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,7 +43,7 @@ class Travels extends React.Component<any, any> {
     fetchDetails() {
         Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => ProfileManagementAPI.getOneDetails(ProfilesIds.Travel, this.props.userId))
+            .then(() => ProfileManagementAPI.getOneDetails(ProfilesIds.HouseHold, this.props.userId))
             .then((data) => {
                 this.initializeValues(data)
                 this.setState({
@@ -59,14 +59,14 @@ class Travels extends React.Component<any, any> {
     formValues() {
         return {
             userId: this.props.userId,
-            profileId: ProfilesIds.Travel,
+            profileId: ProfilesIds.HouseHold,
             response: this.state.userResponse,
         };
     }
 
     initializeValues(data) {
         return this.setState({
-            profileId: ProfilesIds.Travel,
+            profileId: ProfilesIds.HouseHold,
             userResponse: Object.keys(data.response).length === 0 ? {} : data.response.response,
         });
     }
@@ -110,7 +110,7 @@ class Travels extends React.Component<any, any> {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>Travel</h4>
+                                <h4>House Hold</h4>
                                 <div>
                                     <Button
                                         onClick={() => this.create()}
@@ -169,9 +169,9 @@ class Travels extends React.Component<any, any> {
     }
 }
 
-const TravelsRedux = reduxForm<FormValue, any>({
-    form: 'Travels',
-})(Travels);
+const HouseHoldRedux = reduxForm<FormValue, any>({
+    form: 'HouseHold',
+})(HouseHold);
 
 const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
     return {
@@ -184,6 +184,6 @@ const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, em
     };
 };
 
-const TravelsWithRouter = withRouter(connect(mapStateToProps)(TravelsRedux));
+const HouseHoldWithRouter = withRouter(connect(mapStateToProps)(HouseHoldRedux));
 
-export { TravelsWithRouter as Travels };
+export { HouseHoldWithRouter as HouseHold };

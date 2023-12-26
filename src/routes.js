@@ -41,6 +41,12 @@ import {About} from "./Components/PanelistProfile/About";
 import {PersonalFinance} from "./Components/PanelistProfile/FinancialFinance";
 import {Shopping} from "./Components/PanelistProfile/Shoppings";
 import {Travels} from "./Components/PanelistProfile/Travels";
+import {HealthAndWellness} from "./Components/PanelistProfile/HealthAndWellness";
+import {HouseHold} from "./Components/PanelistProfile/HouseHold";
+import {LeisureActivity} from "./Components/PanelistProfile/LeisureAndActivity";
+import {Medias} from "./Components/PanelistProfile/Media";
+import {Professional} from "./Components/PanelistProfile/Professional";
+import {Electronics} from "./Components/PanelistProfile/Electronics";
 
 
 const dashboardRoutes = [
@@ -310,6 +316,54 @@ const dashboardRoutes = [
     name: "Travel",
     icon: Dashboard,
     component: Travels,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/health-wellness",
+    name: "Health And Wellness",
+    icon: Dashboard,
+    component: HealthAndWellness,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/household",
+    name: "House Hold",
+    icon: Dashboard,
+    component: HouseHold,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/Leisure-activity",
+    name: "Leisure And Activity",
+    icon: Dashboard,
+    component: LeisureActivity,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/media",
+    name: "Media",
+    icon: Dashboard,
+    component: Medias,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/professionals",
+    name: "Professional",
+    icon: Dashboard,
+    component: Professional,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/electronics",
+    name: "Electronics",
+    icon: Dashboard,
+    component: Electronics,
     layout: "/panelist",
     type: 'panelist'
   },
