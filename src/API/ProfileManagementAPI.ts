@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 import { api } from '../axiosConfig';
-import {profileManagementURL, questionsURL, optionsURL} from "../Utils/urls";
+import {profileManagementURL, questionsURL, optionsURL, userURL} from "../Utils/urls";
 
 export class ProfileManagementAPI {
     static getAll(
@@ -48,6 +48,13 @@ export class ProfileManagementAPI {
 
     static getOneDetails(id: any, userId: any): Promise<any> {
         return api.get(`${profileManagementURL}/getOneDetails/${id}/${userId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static respondentProfileOverview(userId: any): Promise<any> {
+        return api.get(`${userURL}/respondentProfileOverview/${userId}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

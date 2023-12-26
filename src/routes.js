@@ -47,6 +47,10 @@ import {LeisureActivity} from "./Components/PanelistProfile/LeisureAndActivity";
 import {Medias} from "./Components/PanelistProfile/Media";
 import {Professional} from "./Components/PanelistProfile/Professional";
 import {Electronics} from "./Components/PanelistProfile/Electronics";
+import {Smokers} from "./Components/PanelistProfile/Smokers";
+import {Auto} from "./Components/PanelistProfile/Auto";
+import {FoodAndBeverage} from "./Components/PanelistProfile/FoodAndBeverage";
+import {Profiles} from "./Components/PanelistProfile/Profiles";
 
 
 const dashboardRoutes = [
@@ -280,17 +284,17 @@ const dashboardRoutes = [
     type: 'panelist'
   },
   {
-    path: "/",
+    path: "/profile-overview",
     name: "PROFILE",
     icon: ArrowBack,
-    component: '',
-    layout: "",
+    component: Profiles,
+    layout: "/panelist",
     type: 'panelist'
   },
   {
     path: "/about",
     name: "About",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: About,
     layout: "/panelist",
     type: 'panelist'
@@ -298,7 +302,7 @@ const dashboardRoutes = [
   {
     path: "/personal-finance",
     name: "Personal Finance",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: PersonalFinance,
     layout: "/panelist",
     type: 'panelist'
@@ -306,7 +310,7 @@ const dashboardRoutes = [
   {
     path: "/shopping",
     name: "Shopping",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: Shopping,
     layout: "/panelist",
     type: 'panelist'
@@ -314,7 +318,7 @@ const dashboardRoutes = [
   {
     path: "/travels",
     name: "Travel",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: Travels,
     layout: "/panelist",
     type: 'panelist'
@@ -322,7 +326,7 @@ const dashboardRoutes = [
   {
     path: "/health-wellness",
     name: "Health And Wellness",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: HealthAndWellness,
     layout: "/panelist",
     type: 'panelist'
@@ -330,7 +334,7 @@ const dashboardRoutes = [
   {
     path: "/household",
     name: "House Hold",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: HouseHold,
     layout: "/panelist",
     type: 'panelist'
@@ -338,7 +342,7 @@ const dashboardRoutes = [
   {
     path: "/Leisure-activity",
     name: "Leisure And Activity",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: LeisureActivity,
     layout: "/panelist",
     type: 'panelist'
@@ -346,7 +350,7 @@ const dashboardRoutes = [
   {
     path: "/media",
     name: "Media",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: Medias,
     layout: "/panelist",
     type: 'panelist'
@@ -354,7 +358,7 @@ const dashboardRoutes = [
   {
     path: "/professionals",
     name: "Professional",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: Professional,
     layout: "/panelist",
     type: 'panelist'
@@ -362,8 +366,32 @@ const dashboardRoutes = [
   {
     path: "/electronics",
     name: "Electronics",
-    icon: Dashboard,
+    icon: ArrowRight,
     component: Electronics,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/smokers",
+    name: "Smokers",
+    icon: ArrowRight,
+    component: Smokers,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/auto",
+    name: "Auto",
+    icon: ArrowRight,
+    component: Auto,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/food-beverage",
+    name: "Food And Beverage",
+    icon: ArrowRight,
+    component: FoodAndBeverage,
     layout: "/panelist",
     type: 'panelist'
   },
