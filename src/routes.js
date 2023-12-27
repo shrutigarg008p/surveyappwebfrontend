@@ -51,7 +51,8 @@ import {Smokers} from "./Components/PanelistProfile/Smokers";
 import {Auto} from "./Components/PanelistProfile/Auto";
 import {FoodAndBeverage} from "./Components/PanelistProfile/FoodAndBeverage";
 import {Profiles} from "./Components/PanelistProfile/Profiles";
-
+import MyRewards from "./Components/Rewards/MyRewards";
+import MyRequests from "Components/Requests/MyRequests";
 
 const dashboardRoutes = [
   {
@@ -59,6 +60,20 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardSurvey,
+    layout: "/admin",
+  },
+  {
+    path: "/my-rewards",
+    name: "My Rewards",
+    icon: Dashboard,
+    component: MyRewards,
+    layout: "/admin",
+  },
+  {
+    path: "/my-requests",
+    name: "My Requests",
+    icon: Dashboard,
+    component: MyRequests,
     layout: "/admin",
   },
   {
