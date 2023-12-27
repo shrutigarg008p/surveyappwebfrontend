@@ -55,7 +55,7 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
                         <Grid container justify="center" alignItems="center">
                             <Grid item>
                                 <img
-                                    src={Assets.Logo}
+                                    src={Assets.CallBackLogo}
                                     alt="Logo"
                                     style={{ maxWidth: '100%', maxHeight: '100%' }}
                                 />

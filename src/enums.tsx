@@ -99,6 +99,7 @@ export enum SeoPageTitle {
 
 export enum Assets {
   Logo = "/assets/img/logo-white.png",
+  CallBackLogo = "/assets/img/logo-black.png",
   Logo2 = "/assets/img/logo-black.png",
 }
 
