@@ -194,14 +194,12 @@ class DashboardDetails extends React.Component<any, any> {
 
                             <div className="row mt-2">
                                 <div className="col">
-                                    <strong>Description: </strong>
-                                    {this.state.survey?.description}
+                                    <strong>Active: </strong>
+                                    {this.state.survey?.isActive === true ? 'Yes': 'No'}
                                 </div>
                                 <div className="col">
-                                    <strong>URL: </strong>
-                                    <a href={this.state.survey?.url} target="_blank" rel="noopener noreferrer">
-                                        {this.state.survey?.url}
-                                    </a>
+                                    <strong>Description: </strong>
+                                    {this.state.survey?.description}
                                 </div>
                             </div>
                             <div className="row mt-2">
@@ -296,12 +294,48 @@ class DashboardDetails extends React.Component<any, any> {
                                     {this.state.survey?.surveyUrlIdentifier}
                                 </div>
                             </div>
+
                             <div className="row mt-2">
                                 <div className="col">
-                                    <strong>Active: </strong>
-                                    {this.state.survey?.isActive === true ? 'Yes': 'No'}
+                                    <strong>URL: </strong>
+                                    <a href={this.state.survey?.url} target="_blank" rel="noopener noreferrer">
+                                        {this.state.survey?.url}
+                                    </a>
                                 </div>
                             </div>
+                            <div className="row mt-2">
+                                <div className="col">
+                                    <strong>Complete URL: </strong>
+                                    <a href={'https://indiapolls.com/surveys/{id}/{userId}/completed'} target="_blank" rel="noopener noreferrer">
+                                        {'https://indiapolls.com/surveys/{id}/{userId}/completed'}
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col">
+                                    <strong>Over Quota URL: </strong>
+                                    <a href={'https://indiapolls.com/surveys/{id}/{userId}/overquota'} target="_blank" rel="noopener noreferrer">
+                                        {'https://indiapolls.com/surveys/{id}/{userId}/overquota'}
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col">
+                                    <strong>Terminate URL: </strong>
+                                    <a href={'https://indiapolls.com/surveys/{id}/{userId}/terminate'} target="_blank" rel="noopener noreferrer">
+                                        {'https://indiapolls.com/surveys/{id}/{userId}/terminate'}
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col">
+                                    <strong>Quality Terminate URL: </strong>
+                                    <a href={'https://indiapolls.com/surveys/{id}/{userId}/qualityterminate'} target="_blank" rel="noopener noreferrer">
+                                        {'https://indiapolls.com/surveys/{id}/{userId}/qualityterminate'}
+                                    </a>
+                                </div>
+                            </div>
+
                             <Alert
                                 variant="danger"
                                 show={this.state.status === PageStatus.Error}
