@@ -306,24 +306,24 @@ class DashboardDetails extends React.Component<any, any> {
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Complete URL: </strong>
-                                    <a href={'https://indiapolls.com/surveys/{id}/{userId}/completed'} target="_blank" rel="noopener noreferrer">
-                                        {'https://indiapolls.com/surveys/{id}/{userId}/completed'}
+                                    <a href={'https://indiapolls.com/#/surveys/{id}/{userId}/completed'} target="_blank" rel="noopener noreferrer">
+                                        {'https://indiapolls.com/#/surveys/{id}/{userId}/completed'}
                                     </a>
                                 </div>
                             </div>
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Over Quota URL: </strong>
-                                    <a href={'https://indiapolls.com/surveys/{id}/{userId}/overquota'} target="_blank" rel="noopener noreferrer">
-                                        {'https://indiapolls.com/surveys/{id}/{userId}/overquota'}
+                                    <a href={'https://indiapolls.com/#/surveys/{id}/{userId}/overquota'} target="_blank" rel="noopener noreferrer">
+                                        {'https://indiapolls.com/#/surveys/{id}/{userId}/overquota'}
                                     </a>
                                 </div>
                             </div>
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Terminate URL: </strong>
-                                    <a href={'https://indiapolls.com/surveys/{id}/{userId}/terminate'} target="_blank" rel="noopener noreferrer">
-                                        {'https://indiapolls.com/surveys/{id}/{userId}/terminate'}
+                                    <a href={'https://indiapolls.com/#/surveys/{id}/{userId}/terminate'} target="_blank" rel="noopener noreferrer">
+                                        {'https://indiapolls.com/#/surveys/{id}/{userId}/terminate'}
                                     </a>
                                 </div>
                             </div>
@@ -331,7 +331,7 @@ class DashboardDetails extends React.Component<any, any> {
                                 <div className="col">
                                     <strong>Quality Terminate URL: </strong>
                                     <a href={'https://indiapolls.com/surveys/{id}/{userId}/qualityterminate'} target="_blank" rel="noopener noreferrer">
-                                        {'https://indiapolls.com/surveys/{id}/{userId}/qualityterminate'}
+                                        {'https://indiapolls.com/#/surveys/{id}/{userId}/qualityterminate'}
                                     </a>
                                 </div>
                             </div>
