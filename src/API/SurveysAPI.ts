@@ -165,4 +165,12 @@ export class SurveysAPI {
                 return _.get(res, 'data.data', {});
             });
     }
+
+    static GetUserOneAssignedSurveyCallback(data: any): Promise<any> {
+        return api.post(`${surveysURL}/GetUserOneAssignedSurveyCallback`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
 }

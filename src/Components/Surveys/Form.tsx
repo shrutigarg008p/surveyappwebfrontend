@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-  Field,
-  reduxForm,
-} from 'redux-form';
-import { Alert, Modal, Spinner } from 'react-bootstrap';
-import { withRouter } from 'react-router';
-import { Show } from 'Layout';
-import { PageStatus } from 'enums';
+import {reduxForm,} from 'redux-form';
+import {Alert, Modal, Spinner} from 'react-bootstrap';
+import {withRouter} from 'react-router';
+import {Show} from 'Layout';
+import {PageStatus} from 'enums';
 import {SurveysAPI} from "../../API";
 import Select from 'react-select';
 import moment from "moment";
@@ -21,6 +18,20 @@ type State = {
   data: any,
   name: string,
 };
+
+
+function replacePlaceholderWithAnchor(text) {
+  const regex = /<([^>]+)>/;
+  const match = text.match(regex);
+  if (match) {
+    const placeholder = match[0];
+    const url = match[1];
+    const anchorTag = `<a href="${url}" target="_blank">${url}</a>`;
+    return text.replace(placeholder, anchorTag);
+  } else {
+    return text;
+  }
+}
 
 class Form extends React.Component<any, any> {
   constructor(props) {
@@ -51,6 +62,7 @@ class Form extends React.Component<any, any> {
       "url": "",
       "surveyType": "Open",
       "pointAllocationType": "Manual",
+      disclaimer: '',
       isPaused: false
     };
   }
@@ -140,7 +152,8 @@ class Form extends React.Component<any, any> {
       "surveyType": this.state.surveyType,
       "pointAllocationType": this.state.pointAllocationType,
       minimumInterviewDuration: 20,
-      isPaused: false
+      isPaused: false,
+      disclaimer: replacePlaceholderWithAnchor(this.state.disclaimer)
     };
   }
 
@@ -168,6 +181,7 @@ class Form extends React.Component<any, any> {
       "pointAllocationType": data.pointAllocationType,
       minimumInterviewDuration: data.minimumInterviewDuration,
       isPaused: data.isPaused,
+      disclaimer: data.disclaimer
     });
   }
   onSubmit() {
@@ -542,6 +556,20 @@ class Form extends React.Component<any, any> {
                   </div>
                 </div>
               </Show>
+
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="url">Disclaimer</label>
+                  <textarea
+                      className="form-control"
+                      style={{ height: '180px' }}
+                      onChange={(e) => this.setState({disclaimer: e.target.value})}
+                      value={this.state.disclaimer}
+                      placeholder="Please enter"
+                      required
+                  />
+                </div>
+              </div>
               <hr />
 
               <Alert variant="danger" show={!!this.state.error} className="mt-2">

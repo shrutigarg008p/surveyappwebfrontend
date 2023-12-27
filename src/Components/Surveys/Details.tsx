@@ -249,6 +249,14 @@ class Details extends React.Component<any, State> {
                   {this.state.survey?.isActive === true ? 'Yes': 'No'}
                 </div>
               </div>
+              <div className="row mt-2">
+                <div className="col">
+                  <strong>Disclaimer: </strong>
+                 <span dangerouslySetInnerHTML={{
+                    __html: this.state.survey?.disclaimer || 'Title',
+                  }} />
+                </div>
+              </div>
             <Alert
               variant="danger"
               show={this.state.status === PageStatus.Error}

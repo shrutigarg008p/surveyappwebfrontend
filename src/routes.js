@@ -63,20 +63,6 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/my-rewards",
-    name: "My Rewards",
-    icon: Dashboard,
-    component: MyRewards,
-    layout: "/admin",
-  },
-  {
-    path: "/my-requests",
-    name: "My Requests",
-    icon: Dashboard,
-    component: MyRequests,
-    layout: "/admin",
-  },
-  {
     path: "/profile",
     name: "User Profile",
     icon: Dashboard,
@@ -279,6 +265,22 @@ const dashboardRoutes = [
     name: "User Profile",
     icon: Dashboard,
     component: UserProfile,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/my-rewards",
+    name: "My Rewards",
+    icon: Dashboard,
+    component: MyRewards,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/my-requests",
+    name: "My Requests",
+    icon: Dashboard,
+    component: MyRequests,
     layout: "/panelist",
     type: 'panelist'
   },
