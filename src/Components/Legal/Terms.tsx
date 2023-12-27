@@ -46,7 +46,7 @@ function App() {
             </AppBar>
             <Container maxWidth="lg" className={classes.content}>
                 <Paper className={classes.paper}>
-                    <img alt="Logo" src={Assets.Logo} className={classes.logo} />
+                    <img alt="Logo" src={Assets.Logo2} className={classes.logo} />
                     <Typography variant="h4" gutterBottom>
                         Terms and Conditions
                     </Typography>
@@ -153,8 +153,8 @@ function App() {
                         <p><span style={{ color: '#000000' }}><span style={{ fontFamily: 'Times New Roman,serif' }}><span style={{ fontSize: 'xx-large' }}><u><strong>Changes to Our Privacy Policy</strong></u></span></span></span></p>
                         <p><span style={{ color: '#000000' }}><span style={{ fontFamily: 'Times New Roman,serif' }}><span style={{ fontSize: 'large' }}>We keep our privacy policy under regular review and we update this on our website at regular intervals. We will also inform you of any changes via email or when you log-on after any change. Our privacy policy was last updated on 12 June 2020.</span></span></span></p>
                         <p><span style={{ color: '#000000' }}><span style={{ fontFamily: 'Times New Roman,serif' }}><span style={{ fontSize: 'xx-large' }}><u><strong>Useful Links</strong></u></span></span></span></p>
-                        <p><span style={{ color: '#000000' }}><span style={{ fontFamily: 'Times New Roman,serif' }}><span style={{ fontSize: 'large' }}>For more details, please visit â€“&nbsp;</span></span></span><a href="https://www.indiaspeaks.net/Public/%C3%A2%E2%82%AC%C2%9Dhttp:/indiaspeaks.net/Home/Faq%C3%A2%E2%82%AC%C2%9D"><span style={{ color: '#0000ff' }}><span style={{ fontFamily: 'Times New Roman,serif' }}><span style={{ fontSize: 'large' }}><u>http://indiaspeaks.net/Home/Faq</u></span></span></span></a></p>
-                        <p><span style={{ color: '#000000' }}><span style={{ fontFamily: 'Times New Roman,serif' }}><span style={{ fontSize: 'large' }}>If you have additional questions or require more information about our Privacy Policy / how we process your data, do not hesitate to contact us at support@indiaspeaks,net.</span></span></span></p>
+                        
+                        <p><span style={{ color: '#000000' }}><span style={{ fontFamily: 'Times New Roman,serif' }}><span style={{ fontSize: 'large' }}>If you have additional questions or require more information about our Privacy Policy / how we process your data, do not hesitate to contact us at support@indiapolls.com.</span></span></span></p>
                         <p><br />
                             &nbsp;</p>
                     </div>

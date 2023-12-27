@@ -98,7 +98,8 @@ export enum SeoPageTitle {
 }
 
 export enum Assets {
-  Logo = "/assets/img/logo2.png"
+  Logo = "/assets/img/logo-3.png",
+  Logo2 = "/assets/img/logo-black.png",
 }
 
 export enum ProfilesIds {
