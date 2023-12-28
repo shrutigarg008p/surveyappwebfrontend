@@ -6,8 +6,8 @@ import {
     loginURL,
     redemptionRequest,
     referralsUrl,
-    registrationURL,
-    rewardsURL,
+    registrationURL, rewardsAPIURL,
+    rewardsURL, surveysURL,
     usersListURL, userURL
 } from '../Utils/urls';
 
@@ -69,6 +69,16 @@ export class AuthAPI {
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });
+    }
+
+    static getAllByUserId(
+        limit = 100000,
+        userId,
+    ): Promise<any[]> {
+        return api.get(`${rewardsAPIURL}/getAllByUserId/${userId}/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
     }
 
     static async referralsList(

@@ -33,7 +33,7 @@ type State = {
     filters: any
 };
 
-export class List extends Component<any, State> {
+export class List extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -215,11 +215,12 @@ export class List extends Component<any, State> {
                                     <th>S.No</th>
                                     <th>Points Redeemed</th>
                                     <th>Points Requested</th>
-                                    <th>Redemption Mode Title</th>
-                                    <th>Redemption Status</th>
+                                    <th>Mode</th>
+                                    <th>Status</th>
                                     <th>Approved By</th>
                                     <th>Request Date</th>
-                                    <th>Created At</th>
+                                    <th>User</th>
+                                    <th>Phone No/Data Card No/DTH No</th>
                                 </tr>
                                 </thead>
 
@@ -248,7 +249,16 @@ export class List extends Component<any, State> {
                                             <td>{redemption.redemptionRequestStatus}</td>
                                             <td>{redemption.approvedById || 'Not Approved'}</td>
                                             <td>{moment(redemption.requestDate).format('MM/DD/YYYY HH:mm A')}</td>
-                                            <td>{moment(redemption.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                            <td>
+                                                {redemption.user
+                                                    ? redemption.user.email
+                                                    : '-'}
+                                            </td>
+                                            <td>
+                                                {redemption.user
+                                                    ? redemption.user.phoneNumber
+                                                    : '-'}
+                                            </td>
                                         </tr>
                                     ))
                                 }

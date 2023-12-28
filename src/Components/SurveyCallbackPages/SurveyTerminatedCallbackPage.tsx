@@ -50,7 +50,7 @@ export default class SurveyTerminatedCallbackPage extends React.Component<any, a
     render() {
         console.log('survey----->', this.state.survey)
         return (
-            <>
+                <div style={{ background: 'white' }}>
                 <div>
                     <GridContainer>
                         <Grid container justify="center" alignItems="center">
@@ -96,7 +96,7 @@ export default class SurveyTerminatedCallbackPage extends React.Component<any, a
                                     <td>{this.state.survey.user.firstName} {this.state.survey.user.lastName}</td>
                                     <td>{this.state.survey.surveysDetails.survey.name}</td>
                                     <td>{this.state.survey.surveysDetails.survey.ceggPoints}</td>
-                                    <td>{moment(this.state.survey.surveysDetails.survey.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                    <td>{moment(this.state.survey.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -123,7 +123,7 @@ export default class SurveyTerminatedCallbackPage extends React.Component<any, a
                         {this.state.error}
                     </Alert>
                 </Show>
-            </>
+                </div>
         );
     }
 }

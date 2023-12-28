@@ -6,7 +6,7 @@ import {
     loginURL,
     redemptionRequest, referralsUrl,
     registrationURL,
-    rewardsURL
+    rewardsURL, redemptionRespondentRequestURL
 } from '../Utils/urls';
 
 
@@ -45,6 +45,27 @@ export class RedemptionModeAPI {
         return api.get(`${redemptionMode}/getAll/${limit}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
+            });
+    }
+
+
+    //Redemption request
+    static async createRedemptionRequest(
+        body: any,
+    ): Promise<any> {
+        return api.post(`${redemptionRespondentRequestURL}/create`, body)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static async redemptionRequestListByUserId(
+        limit: number,
+        userId,
+    ): Promise<any> {
+        return api.get(`${redemptionRespondentRequestURL}/getAllByUserId/${userId}/${limit}`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
             });
     }
 }

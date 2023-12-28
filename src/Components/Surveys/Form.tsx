@@ -26,7 +26,7 @@ function replacePlaceholderWithAnchor(text) {
   if (match) {
     const placeholder = match[0];
     const url = match[1];
-    const anchorTag = `<a href="${url}" target="_blank">${url}</a>`;
+    const anchorTag = `<a href="${url}" target="_blank" style="color: orange;">${url}</a>`;
     return text.replace(placeholder, anchorTag);
   } else {
     return text;
@@ -62,7 +62,7 @@ class Form extends React.Component<any, any> {
       "url": "",
       "surveyType": "Open",
       "pointAllocationType": "Manual",
-      disclaimer: '',
+      disclaimer: 'Disclaimer: Dear Respondent, Thank you for your continued patronage. To serve you more Research Polls, we request that you always keep your profile up to date. Your valuable profile is a guiding light for the Online Market Research Industry, please visit <indiapolls.com> to login and update your profile for a more rewarding journey ahead ! Thank you.',
       isPaused: false
     };
   }

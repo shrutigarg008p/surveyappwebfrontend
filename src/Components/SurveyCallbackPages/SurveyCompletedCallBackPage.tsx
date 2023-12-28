@@ -50,7 +50,7 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
     render() {
         console.log('survey----->', this.state.survey)
         return (
-            <>
+            <div style={{ background: 'white' }}>
                 <div>
                 <GridContainer>
                     <Grid container justify="center" alignItems="center">
@@ -96,7 +96,7 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
                             <td>{this.state.survey.user.firstName} {this.state.survey.user.lastName}</td>
                             <td>{this.state.survey.surveysDetails.survey.name}</td>
                             <td>{this.state.survey.surveysDetails.survey.ceggPoints}</td>
-                            <td>{moment(this.state.survey.surveysDetails.survey.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                            <td>{moment(this.state.survey.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -109,7 +109,7 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
                     <div className="row ml-4 mt-2">
                         <div className="col">
                             <strong>Disclaimer: </strong>
-                            <span dangerouslySetInnerHTML={{
+                            <p dangerouslySetInnerHTML={{
                                 __html: this.state.survey?.surveysDetails.survey.disclaimer || 'NA',
                             }} />
                         </div>
@@ -123,7 +123,7 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
                         {this.state.error}
                     </Alert>
                 </Show>
-            </>
+            </div>
         );
     }
 }

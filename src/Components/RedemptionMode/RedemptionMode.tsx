@@ -53,7 +53,7 @@ type State = {
   id?: string | null,
 };
 
-export class RedemptionMode extends Component<any, State> {
+export class RedemptionMode extends Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {

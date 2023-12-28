@@ -76,6 +76,12 @@ export enum Operands {
     NOT_ANSWERED = 5
 }
 
+export enum VoucherType {
+    Amazon_Vouchers = 'Amazon Vouchers',
+    Paytm_Vouchers = 'Paytm Vouchers',
+    Flipkart_Vouchers = 'Flipkart Vouchers'
+}
+
 export enum SeoPageTitle {
   Home = 'Home',
   Login = 'Login',

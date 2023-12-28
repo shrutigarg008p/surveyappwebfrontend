@@ -1,0 +1,31 @@
+.mainCard {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    padding: 8px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+}
+
+.nestedCard {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.cardHeader {
+    background-color: #eeeeee;
+}
+
+.gridContainer {
+    margin-top: 16px;
+}
+
+.gridItem {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}

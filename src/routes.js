@@ -51,8 +51,8 @@ import {Smokers} from "./Components/PanelistProfile/Smokers";
 import {Auto} from "./Components/PanelistProfile/Auto";
 import {FoodAndBeverage} from "./Components/PanelistProfile/FoodAndBeverage";
 import {Profiles} from "./Components/PanelistProfile/Profiles";
-import MyRewards from "./Components/Rewards/MyRewards";
 import MyRequests from "Components/Requests/MyRequests";
+import MyRewards from "./Components/Rewards/MyRewards";
 
 const dashboardRoutes = [
   {

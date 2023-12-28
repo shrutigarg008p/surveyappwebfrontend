@@ -30,7 +30,7 @@ type State = {
     filters: any
 };
 
-export class RewardsList extends Component<any, State> {
+export class RewardsList extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
