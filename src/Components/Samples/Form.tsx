@@ -82,10 +82,10 @@ class Form extends React.Component<any, any> {
 
           return SamplesAPI.getOne(this.props.id);
         })
-        .then((data) => {
-          this.initializeValues(data);
+        .then((data: any) => {
+          this.initializeValues(data.sample);
           this.setState({
-            data,
+            data: data.sample,
             status: PageStatus.Loaded,
           }, () => {
             this.fetchList()
