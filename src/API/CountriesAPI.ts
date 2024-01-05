@@ -70,4 +70,15 @@ export class CountriesAPI {
         });
     }
 
+
+    static getAllCitiesAndStateBasedOnZipCode(
+        limit = 10000,
+        zipCode = 0,
+    ): Promise<any[]> {
+        return api.get(`${countryURL}/getAllStatesAndCitiesByZipCode/${zipCode}/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
 }

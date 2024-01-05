@@ -14,6 +14,7 @@ import {connect} from "react-redux";
 import {authBasicProfile} from "./auth.actions";
 import { Grid, Typography, Container } from '@material-ui/core';
 import { Assets } from 'enums';
+import {CountriesAPI} from "../../API/CountriesAPI";
 
 export type FormValue = {
     "firstName":string,
@@ -138,6 +139,9 @@ class BasicProfile extends React.Component<any, any> {
                     return 0;
                   });
                 this.setState({ countries: options, status: PageStatus.Loaded });
+                if(options.length > 0) {
+                    this.setState({country: options[0].label, selectedCountryOption: options[0]});
+                }
             })
             .catch((error) => {
                 this.setState({ error: error.message, status: PageStatus.Error });
@@ -154,12 +158,12 @@ class BasicProfile extends React.Component<any, any> {
 
     handleCountryChange = async (selectedCountryOption) => {
         this.setState({country: selectedCountryOption.label, selectedCountryOption});
-        return await this.fetchStatesList(selectedCountryOption.value)
+        // return await this.fetchStatesList(selectedCountryOption.value)
     };
 
     handleStateChange = async (selectedStateOption) => {
         this.setState({state: selectedStateOption.label, selectedStateOption});
-        return await this.fetchCitiesList(selectedStateOption.value)
+        // return await this.fetchCitiesList(selectedStateOption.value)
     };
 
     handleCityChange = async (selectedCityOption) => {
@@ -209,20 +213,56 @@ class BasicProfile extends React.Component<any, any> {
             });
     }
 
-    
+
+    fetchStateAndCitiesByZipCode(code): Promise<void> {
+        return Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loaded }))
+            .then(() => CountriesAPI.getAllCitiesAndStateBasedOnZipCode(1000, code))
+            .then((states: any) => {
+                const options = states.state.map(state => ({
+                    label: state.name,
+                    value: state.id
+                }));
+                options.sort((a, b) => {
+                    if(a.label < b.label) { return -1; }
+                    if(a.label > b.label) { return 1; }
+                    return 0;
+                });
+                const optionsCities = states.cities.map(city => ({
+                    label: city.name,
+                    value: city.id
+                }));
+                options.sort((a, b) => {
+                    if(a.label < b.label) { return -1; }
+                    if(a.label > b.label) { return 1; }
+                    return 0;
+                });
+                this.setState({ states: options, cities: optionsCities, status: PageStatus.Loaded });
+                if(options.length > 0) {
+                    this.setState({state: options[0].label, selectedStateOption: options[0]});
+                }
+                if(optionsCities.length > 0) {
+                    this.setState({city: optionsCities[0].label, selectedCityOption: optionsCities[0]});
+                }
+            })
+            .catch((error) => {
+                this.setState({ error: error.message, status: PageStatus.Error });
+            });
+    }
+
 
     handleDateOfBirthChange(e) {
         const enteredDate = e.target.value;
         console.log("Entered Date:", enteredDate);
-      
+
         const currentDate = new Date();
         const minAgeDate = new Date(currentDate.getFullYear() - 100, currentDate.getMonth(), currentDate.getDate());
         const maxAgeDate = new Date(currentDate.getFullYear() - 16, currentDate.getMonth(), currentDate.getDate());
-      
+
         // Parse the entered date in the "YYYY-MM-DD" format
         const selectedDate:any = new Date(enteredDate);
         console.log("Parsed Date:", selectedDate);
-      
+
         const enteredTimestamp = selectedDate.getTime();
         const minAgeTimestamp = minAgeDate.getTime();
         const maxAgeTimestamp = maxAgeDate.getTime();
@@ -230,21 +270,30 @@ class BasicProfile extends React.Component<any, any> {
         if (!isNaN(selectedDate) && enteredTimestamp >= minAgeTimestamp && enteredTimestamp <= maxAgeTimestamp) {
 
           this.setState({ dateOfBirth: enteredDate });
-          
-          e.target.setCustomValidity(""); 
+
+          e.target.setCustomValidity("");
         } else {
           e.target.value="";
           console.error("Invalid age range. Please enter a date of birth between 16 and 100 years.");
-          e.target.setCustomValidity("Invalid age range. Please enter a date of birth between 16 and 100 years."); 
+          e.target.setCustomValidity("Invalid age range. Please enter a date of birth between 16 and 100 years.");
         }
-      
+
         e.target.reportValidity();
       }
-      
-      
-      
-      
-      
+
+
+    handleZipCodeChange = (event) => {
+        const { value } = event.target;
+        this.setState({ pinCode: value });
+        if (value.length === 6 ) {
+            this.fetchStateAndCitiesByZipCode(value)
+        } else {
+            this.setState({state: '', selectedStateOption: null });
+            this.setState({city: '', selectedCityOption: null });
+        }
+    };
+
+
 
     render() {
         const {selectedCountryOption, selectedStateOption, selectedCityOption}=this.state
@@ -365,7 +414,7 @@ class BasicProfile extends React.Component<any, any> {
                                 id="pinCode"
                                 name="pinCode"
                                 value={this.state.pinCode}
-                                onChange={(e) => this.setState({ pinCode: e.target.value })}
+                                onChange={(e) => this.handleZipCodeChange(e)}
                                 placeholder="Enter here"
                             />
                         </div>
@@ -473,11 +522,6 @@ class BasicProfile extends React.Component<any, any> {
                         </select>
                     </div>
                     <hr />
-
-                    <Alert variant="danger" show={!!this.state.error} className="mt-2">
-                        {this.state.error}
-                    </Alert>
-
                     <div className="mt-2 d-flex justify-content-center">
                         <button
                             type="submit"
