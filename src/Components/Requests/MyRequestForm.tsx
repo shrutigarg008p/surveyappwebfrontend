@@ -38,7 +38,7 @@ class Form extends React.Component<any, any> {
         return {
             pointsRequested: parseInt(this.state.points, 10),
             redemptionModeTitle: this.state.mode,
-            redemptionModeId: 'a8a39cc6-d3ab-48e7-aab2-564a267476c7',
+            redemptionModeId: 'a8a39cc6-d3ab-48e7-aab2-564a267476c7', //Temp
             userId: this.props.userId,
             redemptionRequestStatus: 'New',
             notes: 'NA',

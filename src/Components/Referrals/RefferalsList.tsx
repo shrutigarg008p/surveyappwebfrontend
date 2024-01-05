@@ -36,6 +36,7 @@ export class ReferralsList extends Component<any, any> {
                 referralStatus: '',
                 referralMethod: '',
                 phoneNumber: '',
+                userEmail: '',
                 Ip: ''
             },
         };
@@ -63,6 +64,9 @@ export class ReferralsList extends Component<any, any> {
                 if (key === 'createdAt' || key === 'updatedAt') {
                     return new Date(user[key]).toDateString() === new Date(filters[key]).toDateString();
                 }
+                if (key === 'userEmail') {
+                    return String(user.user[key]).toLowerCase().includes(String(filters[key]).toLowerCase());
+                }
                 return String(user[key]).toLowerCase().includes(String(filters[key]).toLowerCase());
             });
         });
@@ -78,6 +82,7 @@ export class ReferralsList extends Component<any, any> {
                 referralStatus: '',
                 referralMethod: '',
                 phoneNumber: '',
+                userEmail: '',
                 Ip: ''
             },
         })
@@ -155,9 +160,9 @@ export class ReferralsList extends Component<any, any> {
                                     value={filters.referralStatus}
                                     onChange={this.handleFilterChange}
                                 >
-                                    <option value='' disabled>--Choose--</option>
-                                    <option value='Pending'>Pending</option>
-                                    <option value='Others'>Others</option>
+                                    <option value=''>--Choose--</option>
+                                    <option value='Invited'>Invited</option>
+                                    <option value='Accepted'>Accepted</option>
                                 </select>
                             </div>
                             <div className="col">
@@ -182,9 +187,10 @@ export class ReferralsList extends Component<any, any> {
                                     value={filters.referralMethod}
                                     onChange={this.handleFilterChange}
                                 >
-                                    <option value='' disabled>--Choose--</option>
-                                    <option value='SMS'>SMS</option>
-                                    <option value='Email'>Email</option>
+                                    <option value=''>--Choose--</option>
+                                    <option value='File'>File</option>
+                                    <option value='Manual'>Manual</option>
+                                    <option value='Link'>Direct Link</option>
                                 </select>
                             </div>
                         </div>
@@ -201,7 +207,7 @@ export class ReferralsList extends Component<any, any> {
                             </div>
                             <div className="col">
                                 <label>User Email</label>
-                                <input type="text" className="form-control" placeholder="Email..." value={filters.email}
+                                <input type="text" name="userEmail" className="form-control" placeholder="Email..." value={filters.userEmail}
                                        onChange={this.handleFilterChange} />
                             </div>
                             <div className="col">

@@ -4,7 +4,7 @@ import {
     createBasicProfileURL,
     getProfile,
     loginURL,
-    redemptionRequest,
+    redemptionRequest, redemptionRespondentRequestURL,
     referralsUrl,
     registrationURL, rewardsAPIURL,
     rewardsURL, surveysURL,
@@ -81,15 +81,6 @@ export class AuthAPI {
         });
     }
 
-    static async referralsList(
-        limit: number,
-    ): Promise<any> {
-        return api.get(`${referralsUrl}/${limit}`)
-            .then((res) => {
-                return _.get(res, 'data.data', {});
-            });
-    }
-
     static ResetPasswordLink(email): Promise<any> {
         return api.post(`${userURL}/reset-password`, { email: email })
             .then((res) => {
@@ -121,6 +112,47 @@ export class AuthAPI {
         return api.post(`${usersListURL}/allPanelist/${limit}`, body)
             .then((res) => {
                 return _.get(res, 'data.data', {});
+            });
+    }
+
+
+    //Referrals
+    static async referralsList(
+        limit: number,
+    ): Promise<any> {
+        return api.get(`${referralsUrl}/getAll/${limit}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
+    static async createReferralRequest(
+        body: any,
+    ): Promise<any> {
+        return api.post(`${referralsUrl}/create`, body)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
+    static async createBulkReferralRequest(
+        body: any,
+    ): Promise<any> {
+        return api.post(`${referralsUrl}/bulkCreateReferrals`, body)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static async referralsListByUserId(
+        limit: number,
+        userId: string
+    ): Promise<any> {
+        return api.get(`${referralsUrl}/getAllUserReferrals/${userId}/${limit}`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
             });
     }
 }

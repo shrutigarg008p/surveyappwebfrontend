@@ -14,6 +14,7 @@ import SurveyCompletedCallBackPage from "./Components/SurveyCallbackPages/Survey
 import SurveyOverQuotaCallbackPage from "./Components/SurveyCallbackPages/SurveyOverQuotaCallbackPage";
 import SurveyTerminatedCallbackPage from "./Components/SurveyCallbackPages/SurveyTerminatedCallbackPage";
 import SurveyQualityTerminatedCallbackPage from "./Components/SurveyCallbackPages/SurveyQualityTerminatedCallbackPage";
+import {LinkViewWithState} from "./Components/Referrals/LinkView";
 class App extends React.Component<any, any> {
 
   render() {
@@ -25,6 +26,7 @@ class App extends React.Component<any, any> {
             <Route path='/surveys/:surveyId/:userId/overquota' component={SurveyOverQuotaCallbackPage} />
             <Route path='/surveys/:surveyId/:userId/terminate' component={SurveyTerminatedCallbackPage} />
             <Route path='/surveys/:surveyId/:userId/qualityterminate' component={SurveyQualityTerminatedCallbackPage} />
+            <Route path='/referrals/view/:userId' component={LinkViewWithState} />
             <Route path="/auth" component={AuthRouter} />
             <Route path="/verify-screen" component={VerificationEmailScreens} />
             <Route path='/privacy-policy' component={PrivacyPolicy} />

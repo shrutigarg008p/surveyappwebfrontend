@@ -53,6 +53,7 @@ import {FoodAndBeverage} from "./Components/PanelistProfile/FoodAndBeverage";
 import {Profiles} from "./Components/PanelistProfile/Profiles";
 import MyRequests from "Components/Requests/MyRequests";
 import MyRewards from "./Components/Rewards/MyRewards";
+import MyReferralsList from "./Components/Referrals/MyReferralsList";
 
 const dashboardRoutes = [
   {
@@ -281,6 +282,14 @@ const dashboardRoutes = [
     name: "My Requests",
     icon: Dashboard,
     component: MyRequests,
+    layout: "/panelist",
+    type: 'panelist'
+  },
+  {
+    path: "/my-referrals",
+    name: "My Referrals",
+    icon: Dashboard,
+    component: MyReferralsList,
     layout: "/panelist",
     type: 'panelist'
   },

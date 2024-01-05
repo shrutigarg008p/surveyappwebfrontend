@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -21,9 +21,17 @@ function Login(props) {
   const [username, setUsername] = useState({ username: null });
   const [password, setPassword] = useState({ password: null });
   const [isPasswordReset, setResetPassword] = useState(false );
-
+  const [referralId, setReferralId] = useState('' );
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
+
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    const referralIdMatch = hash.match(/referralId=([^&]*)/);
+    const referralId = referralIdMatch ? referralIdMatch[1] : null;
+    setReferralId(referralId)
+  }, []);
 
   const onSubmit = () =>
       props.authLogin(
@@ -34,7 +42,18 @@ function Login(props) {
       );
 
   const handleClick = () => {
-    history.push('/auth/signup');
+      if(referralId) {
+        const queryParams = {
+          referralId: referralId,
+        };
+        const queryString = Object.keys(queryParams)
+            .map(key => `${key}=${encodeURIComponent(queryParams[key])}`)
+            .join('&');
+        const loginUrl = `/auth/signup?${queryString}`;
+        history.push(loginUrl)
+      } else {
+        history.push('/auth/signup')
+      }
   };
 
   const responseFacebook = (info) => {

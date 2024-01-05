@@ -22,13 +22,24 @@ class Registration extends Component {
       phoneNumberActive: false,
       emailActive: false,
       passwordActive: false,
-      confirmPasswordActive:false, 
-      isPasswordMatched : false, 
+      confirmPasswordActive:false,
+      isPasswordMatched : false,
+      referralId: '',
       error : {
-        status : false, 
+        status : false,
         message : ''
       }
     };
+  }
+
+  componentDidMount() {
+    const fullUrl = window.location.href;
+    const queryString = fullUrl.split('?')[1] || '';
+    const urlSearchParams = new URLSearchParams(queryString);
+    const referralId = urlSearchParams.get('referralId');
+    if(referralId){
+      this.setState({ referralId })
+    }
   }
 
   validate(password, confirmPassword) {
@@ -46,7 +57,8 @@ class Registration extends Component {
         phoneNumber: this.state.phoneNumber,
         password: this.state.password,
         registerType: this.state.registerType,
-        role: 'panelist'
+        role: 'panelist',
+        referralId: this.state.referralId
       }
       this.props.authRegistration(
           data,
@@ -55,14 +67,14 @@ class Registration extends Component {
       if(this.props.error && this.props.error !== ''){
         this.setState({
           error : {
-            status : true, 
+            status : true,
             message : this.props.error
           }
         })
       }else{
         this.setState({
           error : {
-            status : false, 
+            status : false,
             message : ''
           }
         })
@@ -90,7 +102,7 @@ class Registration extends Component {
     if(type === 'confirmpassword'){
       confirmPassword = value;
     }else{
-      password = value; 
+      password = value;
     }
     if(password !== '' && confirmPassword !== '' && password === confirmPassword){
       this.setState({
@@ -103,8 +115,23 @@ class Registration extends Component {
     }
   }
 
+  onLogin() {
+    if(this.state.referralId) {
+      const queryParams = {
+        referralId: this.state.referralId,
+      };
+      const queryString = Object.keys(queryParams)
+          .map(key => `${key}=${encodeURIComponent(queryParams[key])}`)
+          .join('&');
+      const loginUrl = `/auth/login?${queryString}`;
+      this.props.history.push(loginUrl)
+    } else {
+      this.props.history.push('/login')
+    }
+  }
+
   render() {
-    const { isPasswordMatched } = this.state; 
+    const { isPasswordMatched } = this.state;
     return (
       <div className="dash-login-wrap">
       <div className="dash-login-main-content">
@@ -162,7 +189,7 @@ class Registration extends Component {
               placeholder='Password'
               className="login-input" />
             </div>
-            
+
             <div className="login-row login-form-item login-form-item-control">
               <input
               type='password'
@@ -214,7 +241,7 @@ class Registration extends Component {
                   <span>Sign Up</span>
                 </button>
                 <span>or </span>
-                <a onClick={() => this.props.history.push('/login')}>
+                <a onClick={() => this.onLogin()}>
                   <button className="btn-white">
                   <span>Sign IN</span>
                   </button>
