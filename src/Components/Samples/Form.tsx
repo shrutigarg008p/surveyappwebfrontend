@@ -100,11 +100,12 @@ class Form extends React.Component<any, any> {
     return Promise.resolve()
         .then(() => this.setState({ status: PageStatus.Loading }))
         .then(() => Promise.all([
-          CountriesAPI.getAllStates(10000),
-          CountriesAPI.getAllCities(10000)
+          CountriesAPI.getAllStates(1000),
+          CountriesAPI.getAllCities(20000),
+          CountriesAPI.getAllCities(160000)
             ]
         ))
-        .then(([statesList, citiesList]) => {
+        .then(([statesList, citiesList, tiersList]) => {
           const stateOptions = statesList.map((item) => ({
             label: item.name,
             value: item.id,
@@ -113,11 +114,12 @@ class Form extends React.Component<any, any> {
             label: item.name,
             value: item.id,
           }));
-          const tierOpt = citiesList.map((item) => ({
+          const tierOpt = tiersList.map((item) => ({
             label: item.tier,
             value: item.tier,
           }));
-          const tierOptions = removeDuplicates(tierOpt, 'id');
+          console.log('--->', tierOpt.length)
+          const tierOptions = removeDuplicates(tierOpt, 'label');
 
           this.setState({ states: stateOptions, cities: citiesOptions, tiers: tierOptions, status: PageStatus.Loaded });
         })

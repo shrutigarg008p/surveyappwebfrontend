@@ -10,6 +10,7 @@ import Card from "../Card/Card";
 import moment from "moment/moment";
 import {exportToExcel} from "../../Utils/ExportToExcel";
 import {AuthAPI, SamplesAPI} from "../../API";
+import {Confirmation} from "../../Shared/Confirmation";
 
 
 const MODAL_TYPES = {
@@ -34,7 +35,7 @@ type State = {
     },
 };
 
-export class DeletedPanelistsOnly extends Component<any, State> {
+export class DeletedPanelistsOnly extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -128,6 +129,33 @@ export class DeletedPanelistsOnly extends Component<any, State> {
         exportToExcel(obj, 'BasicProfileOnly');
     };
 
+
+    deleteAcceptActions(id): Promise<void> {
+        return Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => AuthAPI.deleteActions(id, 'accept'))
+            .then((users) => {
+                this.fetchList()
+                this.setState({ data: users,  status: PageStatus.Loaded });
+            })
+            .catch((error) => {
+                this.setState({ error: error.message, status: PageStatus.Error });
+            });
+    }
+
+    deleteRejectActions(id): Promise<void> {
+        return Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => AuthAPI.deleteActions(id, 'reject'))
+            .then((users) => {
+                this.fetchList()
+                this.setState({ data: users,  status: PageStatus.Loaded });
+            })
+            .catch((error) => {
+                this.setState({ error: error.message, status: PageStatus.Error });
+            });
+    }
+
     render() {
         const { filteredData, filters } = this.state;
         return (
@@ -219,6 +247,7 @@ export class DeletedPanelistsOnly extends Component<any, State> {
                                     <th>City</th>
                                     <th>Date Of Birth</th>
                                     <th>CreatedAt</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
 
@@ -250,6 +279,28 @@ export class DeletedPanelistsOnly extends Component<any, State> {
                                             <td>{info.basic_profile.city}</td>
                                             <td>{moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                            <td>
+                                                <Confirmation onAction={() => this.deleteAcceptActions(info.id)} body="Are you sure want to approve delete request ?">
+                                                    <Button
+                                                        variant="success"
+                                                        size="sm"
+                                                        disabled={info.deleteConfirmDate}
+                                                        className="mx-1"
+                                                    >
+                                                        Approved
+                                                    </Button>
+                                                </Confirmation>
+                                                <Confirmation onAction={() => this.deleteRejectActions(info.id)} body="Are you sure want to reject delete request ?">
+                                                    <Button
+                                                        variant="danger"
+                                                        size="sm"
+                                                        disabled={info.deleteConfirmDate}
+                                                        className="mx-1"
+                                                    >
+                                                        Reject
+                                                    </Button>
+                                                </Confirmation>
+                                            </td>
                                         </tr>
                                     ))
                                 }

@@ -13,16 +13,16 @@ import {
 
 
 export class AuthAPI {
-  static async login(
-      username: string,
-      password: string,
-      registerType: string
-  ): Promise<any> {
-    return api.post(loginURL, {email: username, password, registerType})
-        .then((res) => {
-          return _.get(res, 'data.data', {});
-        });
-  }
+    static async login(
+        username: string,
+        password: string,
+        registerType: string
+    ): Promise<any> {
+        return api.post(loginURL, {email: username, password, registerType})
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 
 
     static async profile(
@@ -90,6 +90,34 @@ export class AuthAPI {
 
     static UpdateNewPassword(token, password): Promise<any> {
         return api.post(`${userURL}/Updatenew-password/${token}`, { password: password })
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static ChangePassword(value): Promise<any> {
+        return api.post(`${userURL}/change-password`, value)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static UnSubscribeUser(userId): Promise<any> {
+        return api.post(`${userURL}/unSubscribeUser/${userId}`, {})
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static requestForDelete(userId): Promise<any> {
+        return api.post(`${userURL}/permanentlyDelete/${userId}/user`, {})
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static deleteActions(userId, action): Promise<any> {
+        return api.put(`${userURL}/deleteActions/${userId}/${action}`, {})
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });
