@@ -2,26 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { authLogin } from "./auth.actions";
-import "./Login.scss";
+// import "./Login.scss";
 import { Assets } from 'enums';
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
 import FacebookLogin from 'react-facebook-login';
-import {ForgetPasswordEmail} from "./ForgetPasswordEmailForm";
-import {Show} from "../../Layout";
+import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
+import { Show } from "../../Layout";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Login(props) {
   const [state, setState] = useState({ isVisible: false });
   const [username, setUsername] = useState({ username: null });
   const [password, setPassword] = useState({ password: null });
-  const [isPasswordReset, setResetPassword] = useState(false );
-  const [referralId, setReferralId] = useState('' );
+  const [isPasswordReset, setResetPassword] = useState(false);
+  const [referralId, setReferralId] = useState('');
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
 
@@ -34,26 +35,26 @@ function Login(props) {
   }, []);
 
   const onSubmit = () =>
-      props.authLogin(
-          username.username,
-          password.password,
-          'password',
-          history
-      );
+    props.authLogin(
+      username.username,
+      password.password,
+      'password',
+      history
+    );
 
   const handleClick = () => {
-      if(referralId) {
-        const queryParams = {
-          referralId: referralId,
-        };
-        const queryString = Object.keys(queryParams)
-            .map(key => `${key}=${encodeURIComponent(queryParams[key])}`)
-            .join('&');
-        const loginUrl = `/auth/signup?${queryString}`;
-        history.push(loginUrl)
-      } else {
-        history.push('/auth/signup')
-      }
+    if (referralId) {
+      const queryParams = {
+        referralId: referralId,
+      };
+      const queryString = Object.keys(queryParams)
+        .map(key => `${key}=${encodeURIComponent(queryParams[key])}`)
+        .join('&');
+      const loginUrl = `/auth/signup?${queryString}`;
+      history.push(loginUrl)
+    } else {
+      history.push('/auth/signup')
+    }
   };
 
   const responseFacebook = (info) => {
@@ -61,90 +62,70 @@ function Login(props) {
   }
 
   return (
-      <>
-        <div className="dash-login-wrap">
-          <div className="dash-login-main-content">
-            <div className="dash-logo-content">
-              <div className="dash-logo-content-bg"><img src="https://flexile.g-axon.work/static/media/neature.e7f17afb.jpg" /></div>
-              <div className="dash-logo-wid">
-                <h1>Sign IN</h1>
-                <p>By Signing In, you can avail full features of our services.</p>
-                <p><h6>Unlock Rewards, Embrace Community - Your Journey to earn Begins with Sign IN !</h6>
-                  Get your own account !!!</p>
-              </div>
-              <div className="dash-logo">
-                <img alt="example" src={Assets.Logo} style={{width:'100%'}}/>
+    <>
+      <section className="formSec">
+        <div className="container">
+          <div className="row marginTop">
+            <div className="col-md-6">
+              <div className="logoDiv">
+                <img src={Assets.Logo} style={{width:'100%'}} className="img-fluid mobileNone" alt />
+                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>Sign in or create an account</p>
               </div>
             </div>
-            <div className="dash-login-content">
-              <div className="alret-msg">
-                <Alert variant="danger" show={!!props.authError}>
-                  {props.authError}
-                </Alert>
+            <div className="col-md-5">
+              <div>
+                <div className="formdesign">
+                  <i className="fa fa-info-circle" aria-hidden="true" /> For your protection, please verify your identity.
+                </div>
               </div>
-              <form onSubmit={props.handleSubmit(onSubmit)}>
-                <div className="login-row login-form-item login-form-item-control">
-                  <input
-                      type="text"
-                      name="username"
-                      className="login-input"
-                      id="username"
-                      onChange={(e) => setUsername({ username: e.target.value })}
-                      placeholder="Enter username"
-                      required
-                  />
-                </div>
-                <div className="login-row login-form-item login-form-item-control">
-                  <input
-                      name="password"
-                      onChange={(e) => setPassword({ password: e.target.value })}
-                      type={state.isVisible ? "text" : "password"}
-                      id="password"
-                      placeholder="Enter Password"
-                      required
-                      className="login-input" />
-                </div>
-                <br/>
-                <div className="login-row login-form-item">
-                  <div className="login-form-item-control">
-                    <button type="submit" className="login-btn login-btn-primary"
-                            disabled={submitting || invalid}
-                    >
-                      <span>Sign IN</span>
-                    </button>
-                    <span>or </span>
-                    <a onClick={handleClick}>
-                      <button className="btn-white">
-                        <span>Sign Up</span>
-                      </button>
-                    </a>
-                  </div>
-                </div>
-                <Show when={true}>
-                  <a className='frgt_pass' onClick={(e)=>setResetPassword(true)}>
-                    Forgot Password?
-                  </a>
-                </Show>
-                <LoadingSpinner show={props.isLoading} />
-                <div className="dash-flex-row dash-justify-content-between">
-                  <span>or connect with</span>
+              <div className="formdesign2">
+                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt />
+                <h2>Sign in</h2>
+                <p>New user? <Link to="#" onClick={handleClick}>Create an account</Link></p>
+                <div className="social-login">
+                  <a href="#"><img src="assets/img/google.svg" alt /></a>
                   <FacebookLogin
                       appId="879890270328649"
                       autoLoad={false}
                       fields="name,email,picture"
                       callback={(e) => responseFacebook(e)}
+                      icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}
+                      cssClass="facebook-login-btn"
+                      textButton=""
                   />
                 </div>
-              </form>
+                <div className="RuleWithText">Or</div>
+                <form onSubmit={props.handleSubmit(onSubmit)}>
+                  <div className="mb-3 mt-3">
+                    <label htmlFor="email">Email address</label>
+                    <input type="email" className="form-control" name="email" onChange={(e) => setUsername({ username: e.target.value })} required />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="pwd">Password</label>
+                    <input type="password" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
+                  </div>
+                  <p>
+                  <Show when={true}>
+                  <a className='frgt_pass' onClick={(e)=>setResetPassword(true)}>
+                    Forgot Password?
+                  </a>
+                </Show>
+                <LoadingSpinner show={props.isLoading} />
+                <span className="text-right"><button type="submit" style={{float:'right'}} className="btn btn-primary" disabled={submitting || invalid}>Login</button></span>
+                  </p>
+                </form>
+                
+              </div>
             </div>
           </div>
         </div>
-        <ForgetPasswordEmail
+      </section>
+      <ForgetPasswordEmail
             show={isPasswordReset}
             onHide={() => setResetPassword(false)}
             onClose={() => setResetPassword(false)}
         />
-      </>
+    </>
 
   );
 }

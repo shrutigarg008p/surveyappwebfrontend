@@ -60,7 +60,7 @@ class VerifyEmail extends React.Component {
 
     return (
         <div style={containerStyle}>
-          <img src={Assets.Logo}  style={{width:'100%'}}/>
+          <img src={Assets.Logo2}  style={{width:'100%'}}/>
           <div style={messageStyle}>
             <p>{this.state.isVerified}</p>
             <p>Click the button below to log in:</p>

@@ -1,176 +1,145 @@
-body{
-    font-family: 'Noto Sans', sans-serif;
-    background-color: #f5f5f5;
-    }
-    .dash-login-wrap {
-    height: 100vh;
-    max-width: 680px;
-    width: 94%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    }
-    .dash-login-main-content {
-    display: flex;
-    background-color: #fff;
-    box-shadow: 0 0 2px rgba(0,0,0,.35);
-    border-radius: 10px;
-    font-size: 14px;
-    }
-    .dash-logo-content {
-    padding: 35px 35px 20px;
-    width: 40%;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px 0 0 10px;
-    color: #fff;
-    }
-    .dash-logo-content-bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+body {
     height: 100%;
-    z-index: 2;
-    }
-    .dash-logo-content-bg:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(107 81 32 / 70%);
-    }
-    .dash-logo-content-bg img {
-    width: 100%;
-    height:100%
-    }
-    .dash-logo-wid {
-    margin-bottom: auto;
-    }
-    .dash-logo-content>* {
-    z-index: 2;
-    }
-    .dash-login-content {
-    padding: 35px 35px 20px;
-    width: 60%;
-    }
-    .login-row {
-    display: -ms-flexbox;
-    display: -ms-flex;
-    display: flex;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    }
-    .login-form-item {
-    margin-bottom: 20px;
-    }
-    .login-form-item-control {
-    line-height: 40px;
-    }
-    .login-form-item-control label {
-    margin-right: 6px;
-    }
-    .dash-login-content .login-input {
-    background-color: #f5f5f5;
-    border: 1px solid #d9d9d9;
-    border-radius: 4px;
-    box-sizing: border-box;
-    padding: 4px 11px;
-    width: 100%;
-    height: 36px;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+.formSec {
+    background-image: url('../../assets/img/backgroundImg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+
+
+}
+
+.marginTop {
+    padding-top: 10%;
+}
+
+.formdesign {
+    background: #0d66d0;
     font-size: 14px;
-    }
-    .dash-justify-content-between {
-    -ms-justify-content: space-between!important;
-    -ms-flex-pack: justify!important;
-    justify-content: space-between!important;
-    }
-    .dash-flex-column, .dash-flex-row {
-    display: flex!important;
-    }
-    .dash-flex-row {
-    flex-direction: row!important;
-    flex-wrap: wrap!important;
-    }
-    .dash-social-link {
-    list-style: none;
-    display: flex;
-    margin: 0 -5px 10px;
-    }
-    .dash-social-link li {
-    padding: 0 5px;
-    }
-    .dash-social-link li a:hover {
-    background-color: #3c1990;
-    }
-    .dash-social-link li a {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 50%;
-    display: block;
-    border: 1px solid #3c1990;
-    }
-    .dash-login-wrap .anticon {
-    display: inline-block;
-    font-style: normal;
-    vertical-align: baseline;
-    text-align: center;
-    text-transform: none;
-    line-height: 1;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    }
-    .dash-text-light {
-    color: #ababab !important;
-    }
-    .dash-fs-sm {
-    font-size: 12px;
-    }
-    .dash-login-wrap a {
-    color: #ff8100;
-    text-decoration: none;
-    }
-    .dash-social-link li a:hover {
     color: #fff;
-    }
-    .login-btn-primary {
-    color: #ffffff !important;
-    background-color: #ff8100 !important;
-    border-color: #ff8100 !important;
-    }
-    .login-btn {
-    border: solid 1px #d9d9d9;
-    border-radius: 2px;
-    padding: 5px 10px;
-    }
-    .login-btn:not(:last-child) {
-    margin-right: 5px;
-    }
-    @media screen and (max-width: 768px){
-       .dash-logo-content {
-           width: 100%;
-           padding: 20px 20px 10px;
-           border-radius: 10px 10px 0 0;
-       }
+    padding: 15px;
+}
 
-       .dash-login-content {
-           padding: 20px 20px 10px;
-           width: 100%;
-       }
+.formdesign2 {
+    background: #fff;
+    padding: 40px;
 
-       .dash-login-main-content {
-           flex-wrap: wrap;
-       }
-       }
+}
+
+.social-login a {
+    border: 1.5px solid #c9c9c9;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.social-login img {
+    height: 50px;
+}
+
+.RuleWithText {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+    color: #4b4b4b;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 23px;
+}
+
+.RuleWithText:after,
+.RuleWithText:before {
+    content: "";
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.btn-primary {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 16px;
+    min-height: 32px;
+    height: auto;
+    min-width: 72px;
+    padding: 3.5px 14px 4.5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-control {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0px;
+    padding-left: 0px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-bottom: 2px solid #86b7fe;
+}
+
+label {
+    padding: 4px 0 5px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.logoDiv {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+@media only screen and (min-width: 769px) {
+    .desktopNone {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .formSec {
+        background: #fff !important;
+    }
+
+    .formdesign2 {
+        background: #fff;
+        padding: 10px;
+        padding-top: 40px;
+    }
+    .mobileNone{
+        display: none;
+    }
+}
+.facebook-login-btn{
+    background: transparent;
+}
+.facebook-login-btn span {
+    text-indent: -9999px;
+  }
