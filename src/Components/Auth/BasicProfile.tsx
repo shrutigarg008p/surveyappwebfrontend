@@ -302,7 +302,7 @@ class BasicProfile extends React.Component<any, any> {
                 <Grid container justify="center" alignItems="center">
                     <Grid item>
                         <img
-                        src={Assets.Logo}
+                        src={Assets.Logo2}
                         alt="Logo"
                         style={{ maxWidth: '100%', maxHeight: '100%', display: 'block' }}
                         />
