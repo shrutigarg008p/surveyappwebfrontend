@@ -4,7 +4,7 @@ import {Alert, Modal, Spinner} from 'react-bootstrap';
 import {withRouter} from 'react-router';
 import {Show} from 'Layout';
 import {PageStatus} from 'enums';
-import {SurveysAPI} from "../../API";
+import {MasterDataAPI, SurveysAPI} from "../../API";
 import Select from 'react-select';
 import moment from "moment";
 
@@ -63,7 +63,15 @@ class Form extends React.Component<any, any> {
       "surveyType": "Open",
       "pointAllocationType": "Manual",
       disclaimer: 'Disclaimer: Dear Respondent, Thank you for your continued patronage. To serve you more Research Polls, we request that you always keep your profile up to date. Your valuable profile is a guiding light for the Online Market Research Industry, please visit <indiapolls.com> to login and update your profile for a more rewarding journey ahead ! Thank you.',
-      isPaused: false
+      isPaused: false,
+      countries:[],
+      selectedCountryOption: null,
+      country: '',
+      description_one: '',
+      description_two: '',
+      description_three: '',
+      description_four: '',
+      colorCode: ''
     };
   }
 
@@ -73,6 +81,7 @@ class Form extends React.Component<any, any> {
     } else {
       this.fetchList()
     }
+    this.fetchCountryList()
   }
 
   fetchDetails() {
@@ -98,6 +107,32 @@ class Form extends React.Component<any, any> {
           this.setState({ status: PageStatus.Error, error: error.message });
         });
   }
+
+
+  fetchCountryList(): Promise<void> {
+    return Promise.resolve()
+        .then(() => this.setState({ status: PageStatus.Loading }))
+        .then(() => MasterDataAPI.countryList('10'))
+        .then((countries) => {
+          const options = countries.map(country => ({
+            label: country.name,
+            value: country.id
+          }));
+          options.sort((a, b) => {
+            if(a.label < b.label) { return -1; }
+            if(a.label > b.label) { return 1; }
+            return 0;
+          });
+          this.setState({ countries: options, status: PageStatus.Loaded });
+          if(options.length > 0) {
+            this.setState({country: options[0].label, selectedCountryOption: options[0]});
+          }
+        })
+        .catch((error) => {
+          this.setState({ error: error.message, status: PageStatus.Error });
+        });
+  }
+
 
   fetchList(): Promise<void> {
     return Promise.resolve()
@@ -153,7 +188,13 @@ class Form extends React.Component<any, any> {
       "pointAllocationType": this.state.pointAllocationType,
       minimumInterviewDuration: 20,
       isPaused: false,
-      disclaimer: replacePlaceholderWithAnchor(this.state.disclaimer)
+      disclaimer: replacePlaceholderWithAnchor(this.state.disclaimer),
+      description_one: this.state.description_one,
+      description_two: this.state.description_two,
+      description_three: this.state.description_three,
+      description_four: this.state.description_four,
+      country: this.state.country,
+      colorcode: this.state.colorCode
     };
   }
 
@@ -181,7 +222,13 @@ class Form extends React.Component<any, any> {
       "pointAllocationType": data.pointAllocationType,
       minimumInterviewDuration: data.minimumInterviewDuration,
       isPaused: data.isPaused,
-      disclaimer: data.disclaimer
+      disclaimer: data.disclaimer,
+      description_one: data.description_one,
+      description_two: data.description_two,
+      description_three: data.description_three,
+      description_four: data.description_four,
+      country: data.country,
+      colorCode: data.colorcode
     });
   }
   onSubmit() {
@@ -230,9 +277,11 @@ class Form extends React.Component<any, any> {
     this.setState({ blacklistSurvey: [selectedSurveyOption.value], selectedSurveyOption});
   };
 
+  handleCountryChange = async (selectedCountryOption) => {
+    this.setState({country: selectedCountryOption.label, selectedCountryOption});
+  };
 
   render() {
-    console.log('this.state.selectedSurveyOption---->', this.state.selectedSurveyOption)
     return (
         <Modal
             centered
@@ -567,6 +616,81 @@ class Form extends React.Component<any, any> {
                       value={this.state.disclaimer}
                       placeholder="Please enter"
                       required
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col">
+                  <label htmlFor='country'>Country*</label>
+                  <Select
+                      name='countryTitle'
+                      id='countryTitle'
+                      onChange={this.handleCountryChange}
+                      value={this.state.selectedCountryOption}
+                      required
+                      options={this.state.countries}
+                  />
+                </div>
+              </div>
+
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="description">Description One</label>
+                  <input
+                      className="form-control"
+                      name="description"
+                      onChange={(e) => this.setState({ description_one: e.target.value })}
+                      value={this.state.description_one}
+                      placeholder="Enter here"
+                  />
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="description">Description Two</label>
+                  <input
+                      className="form-control"
+                      name="description"
+                      onChange={(e) => this.setState({ description_two: e.target.value })}
+                      value={this.state.description_two}
+                      placeholder="Enter here"
+                  />
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="description">Description Three</label>
+                  <input
+                      className="form-control"
+                      name="description"
+                      onChange={(e) => this.setState({ description_three: e.target.value })}
+                      value={this.state.description_three}
+                      placeholder="Enter here"
+                  />
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="description">Description Four</label>
+                  <input
+                      className="form-control"
+                      name="description"
+                      onChange={(e) => this.setState({ description_four: e.target.value })}
+                      value={this.state.description_four}
+                      placeholder="Enter here"
+                  />
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="description">Color Code</label>
+                  <input
+                      className="form-control"
+                      name="description"
+                      onChange={(e) => this.setState({ colorCode: e.target.value })}
+                      value={this.state.colorCode}
+                      placeholder="Enter here"
                   />
                 </div>
               </div>

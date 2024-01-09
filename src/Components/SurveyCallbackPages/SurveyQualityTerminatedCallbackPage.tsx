@@ -25,16 +25,17 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
         const urlSearchParams = new URLSearchParams(queryString);
         const surveyId = urlSearchParams.get('surveyid');
         const userId = urlSearchParams.get('userid');
+        const partnerId = urlSearchParams.get('partnerid');
         console.log('==-->', surveyId, userId)
         if (!!surveyId && !! userId) {
-            this.fetchSurvey(surveyId, userId);
+            this.fetchSurvey(surveyId, userId, partnerId || 'NA');
         }
     }
 
-    fetchSurvey(surveyId, userId) {
+    fetchSurvey(surveyId, userId, partnerId) {
         Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => SurveysAPI.GetUserOneAssignedSurveyCallback({ surveyId, userId, status: 'Quality Terminated' }))
+            .then(() => SurveysAPI.GetUserOneAssignedSurveyCallback({ surveyId, userId, partnerId, status: 'Quality Terminated' }))
             .then((survey) => {
                 if(!!survey) {
                     this.setState({ survey, status: PageStatus.Loaded });

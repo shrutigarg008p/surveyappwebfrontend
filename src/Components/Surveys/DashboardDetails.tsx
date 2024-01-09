@@ -95,9 +95,8 @@ class DashboardDetails extends React.Component<any, any> {
                 console.log('this.state.survey && this.state.survey.surveypartners.length > 0--->', this.state.survey && this.state.survey.surveypartners.length > 0)
                 if (this.state.survey && this.state.survey.surveypartners.length > 0) {
                     const partnerIds = this.state.survey.surveypartners.map((partner) => partner.partnerId);
-                    console.log('partnerIds---->', partnerIds)
-                    const option = options.find((item) => partnerIds.includes(item.value));
-                    this.setState({ selectedSurveyOption: option });
+                    const filteredOptions = options.filter((item) => partnerIds.includes(item.value));
+                    this.setState({ selectedPartnerOption: filteredOptions });
                 }
                 this.setState({ partners: options, status: PageStatus.Loaded });
             })
@@ -355,7 +354,7 @@ class DashboardDetails extends React.Component<any, any> {
                                             name='partners'
                                             id='partners'
                                             onChange={this.handlePartnersChange}
-                                            value={this.state.selectedSurveyOption}
+                                            value={this.state.selectedPartnerOption}
                                             isMulti
                                             options={this.state.partners}
                                         />
@@ -366,6 +365,16 @@ class DashboardDetails extends React.Component<any, any> {
                             <div className="jumbotron bg-white p-1 mt-2 shadow-sm">
                                 <button type="button" className="btn btn-success" onClick={() => this.addPartners()}>Add partners</button>
                             </div>
+
+                            {this.state.selectedPartnerOption && this.state.selectedPartnerOption.map((data, index) => (
+                                <div key={data.value} className="row mt-2">
+                                    <div key={data.value} className="col">
+                                        <strong key={data.value}>{data.label}: </strong>
+                                        {`${this.state.survey?.url}?partnerid=${data.value}`}
+                                    </div>
+                                </div>
+                            ))}
+
                         </div>
                         <Show when={this.state.users.length !== 0} >
                         <div className="mt-5">

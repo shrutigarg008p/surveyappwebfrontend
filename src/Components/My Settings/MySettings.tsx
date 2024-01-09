@@ -131,7 +131,7 @@ class MySettings extends React.Component<any, any> {
             })
             .then((country) => {
                 this.fetchDetails()
-                alert(`${this.state.data?.users?.unsubscribeDate !== null ? "Unsubscribe from IndiaPolls Successfully" : 'Subscribe IndiaPolls Successfully'}`)
+                alert(`${this.state.data?.users?.unsubscribeDate !== null ? "Subscribe IndiaPolls Successfully" : 'Unsubscribe from IndiaPolls Successfully'}`)
                 this.setState({ status: PageStatus.Loaded });
             })
             .catch((error) => {

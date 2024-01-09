@@ -226,8 +226,8 @@ export class PartnersList extends Component<any, any> {
                       />
                     </td>
                     <td>{data.description}</td>
-                    <td>{data.successUrl}</td>
-                    <td>{data.overQuotaUrl}</td>
+                    <td>{`${data.successUrl}?partnerid=${data?.id}`}</td>
+                    <td>{`${data.overQuotaUrl}?partnerid=${data?.id}`}</td>
                     <td>{moment(data.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                     <td>{moment(data.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                   </tr>
