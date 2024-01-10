@@ -59,7 +59,7 @@ function Admin({ ...rest }) {
   if (role === 'admin') {
     routes = routesIn.filter((item) => item.layout !== '/panelist' && item.type !== 'panelist');
   }
-  console.log(routes)
+
   const classes = useStyles();
   const mainPanel = React.createRef();
   const [image] = React.useState(bgImage);
@@ -93,6 +93,7 @@ function Admin({ ...rest }) {
       window.removeEventListener("resize", resizeFunction);
     };
   }, [mainPanel]);
+  // console.log(routes);
   return (
     <div className={classes.wrapper}>
       <Sidebar

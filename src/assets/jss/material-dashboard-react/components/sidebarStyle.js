@@ -298,6 +298,10 @@ const sidebarStyle = (theme) => ({
       bottom: "13px",
     },
   },
+  flexContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 });
 
 export default sidebarStyle;
