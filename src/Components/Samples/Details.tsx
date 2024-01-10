@@ -171,6 +171,16 @@ class Details extends React.Component<any, any> {
               </div>
               <div className="row mt-2">
                 <div className="col">
+                  <strong>Regions: </strong>
+                  {this.state.data?.regions.map(item => item.label).join(', ')}
+                </div>
+                <div className="col">
+                  <strong>Segments: </strong>
+                  {this.state.data?.segments.map(item => item.label).join(', ')}
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col">
                   <strong>Profile Count: </strong>
                   {this.state.data?.profileCount}
                 </div>

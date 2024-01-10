@@ -37,7 +37,9 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
             .then(() => this.setState({ status: PageStatus.Loading }))
             .then(() => SurveysAPI.GetUserOneAssignedSurveyCallback({ surveyId, userId, partnerId, status: 'Quality Terminated' }))
             .then((survey) => {
-                if(!!survey) {
+                if(!!survey && survey.url) {
+                    window.location.href = survey.url;
+                } else {
                     this.setState({ survey, status: PageStatus.Loaded });
                 }
             })
@@ -51,19 +53,21 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
         console.log('survey----->', this.state.survey)
         return (
             <div style={{ background: 'white' }}>
-                <div>
-                    <GridContainer>
-                        <Grid container justify="center" alignItems="center">
-                            <Grid item>
-                                <img
-                                    src={Assets.CallBackLogo}
-                                    alt="Logo"
-                                    style={{ maxWidth: '100%', maxHeight: '100%' }}
-                                />
+                <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
+                    <div>
+                        <GridContainer>
+                            <Grid container justify="center" alignItems="center">
+                                <Grid item>
+                                    <img
+                                        src={Assets.CallBackLogo}
+                                        alt="Logo"
+                                        style={{ maxWidth: '100%', maxHeight: '100%' }}
+                                    />
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </GridContainer>
-                </div>
+                        </GridContainer>
+                    </div>
+                </Show>
 
                 <Show when={this.state.status === PageStatus.Loading}>
                     <div className="d-flex justify-content-center w-100 p-5">

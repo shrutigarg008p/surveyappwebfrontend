@@ -27,12 +27,14 @@ type State = {
 function removeDuplicates(arr, property) {
   const uniqueMap = {};
   return arr.filter(obj => {
-    const value = obj[property];
-    if (!uniqueMap[value]) {
-      uniqueMap[value] = true;
-      return true;
+    if(obj[property]) {
+      const value = obj[property];
+      if (!uniqueMap[value]) {
+        uniqueMap[value] = true;
+        return true;
+      }
+      return false;
     }
-    return false;
   });
 }
 
@@ -55,12 +57,18 @@ class Form extends React.Component<any, any> {
       "stateIds": [],
       "cityIds": [],
       "tierIds": [],
+      segmentsIds: [],
+      regionsIds: [],
       states: [],
       cities: [],
       tiers: [],
+      segments: [],
+      regions: [],
       selectedStatesOption: [],
       selectedCitiesOption: [],
-      selectedTiersOption: []
+      selectedTiersOption: [],
+      selectedSegmentsOption: [],
+      selectedRegionsOption: []
     };
   }
 
@@ -118,10 +126,27 @@ class Form extends React.Component<any, any> {
             label: item.tier,
             value: item.tier,
           }));
+          const segments = tiersList.map((item) => ({
+            label: item.segment,
+            value: item.segment,
+          }));
+          const regions = tiersList.map((item) => ({
+            label: item.region,
+            value: item.region,
+          }));
           console.log('--->', tierOpt.length)
           const tierOptions = removeDuplicates(tierOpt, 'label');
+          const segmentOptions = removeDuplicates(segments, 'label');
+          const regionOptions = removeDuplicates(regions, 'label');
 
-          this.setState({ states: stateOptions, cities: citiesOptions, tiers: tierOptions, status: PageStatus.Loaded });
+          this.setState({
+            states: stateOptions,
+            cities: citiesOptions,
+            tiers: tierOptions,
+            segments: segmentOptions,
+            regions: regionOptions,
+            status: PageStatus.Loaded
+          });
         })
         .catch((error) => {
           this.setState({ error: error.message, status: PageStatus.Error });
@@ -141,7 +166,9 @@ class Form extends React.Component<any, any> {
       "toRegistrationDate": this.state.toRegistrationDate,
       "stateIds": this.state.stateIds,
       "cityIds": this.state.cityIds,
-      "tierIds": this.state.tierIds
+      "tierIds": this.state.tierIds,
+      "segments": this.state.segmentsIds,
+      "regions": this.state.regionsIds
     };
   }
 
@@ -154,14 +181,18 @@ class Form extends React.Component<any, any> {
       "profileCount": data.profileCount,
       "fromAge": data.fromAge,
       "toAge": data.toAge,
-      fromRegistrationDate: moment(data.fromRegistrationDate).format("YYYY-MM-DD"),
-      toRegistrationDate: moment(data.toRegistrationDate).format("YYYY-MM-DD"),
+      fromRegistrationDate: data.fromRegistrationDate ?  moment(data.fromRegistrationDate).format("YYYY-MM-DD") : null,
+      toRegistrationDate: data.toRegistrationDate ? moment(data.toRegistrationDate).format("YYYY-MM-DD") : null,
       "stateIds": data.stateIds,
       "cityIds": data.cityIds,
       "tierIds": data.tierIds,
       selectedStatesOption: data.stateIds,
       selectedCitiesOption: data.cityIds,
-      selectedTiersOption: data.tierIds
+      selectedTiersOption: data.tierIds,
+      "segmentsIds": data.segments,
+      "regionsIds": data.regions,
+      selectedSegmentsOption: data.segments,
+      selectedRegionsOption: data.regions,
     });
   }
   onSubmit() {
@@ -216,6 +247,14 @@ class Form extends React.Component<any, any> {
 
   handleTierChange = async (selectedTiersOption) => {
     this.setState({ tierIds: selectedTiersOption, selectedTiersOption});
+  };
+
+  handleSegmentChange = async (selectedSegmentsOption) => {
+    this.setState({ segmentsIds: selectedSegmentsOption, selectedSegmentsOption});
+  };
+
+  handleRegionChange = async (selectedRegionsOption) => {
+    this.setState({ regionsIds: selectedRegionsOption, selectedRegionsOption});
   };
 
 
@@ -417,6 +456,33 @@ class Form extends React.Component<any, any> {
                       isMulti
 
                       options={this.state.states}
+                  />
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="text">Segments</label>
+                  <Select
+                      name='state'
+                      id='state'
+                      onChange={this.handleSegmentChange}
+                      value={this.state.selectedSegmentsOption}
+                      isMulti
+                      options={this.state.segments}
+                  />
+                </div>
+              </div>
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="text">Regions</label>
+                  <Select
+                      name='state'
+                      id='state'
+                      onChange={this.handleRegionChange}
+                      value={this.state.selectedRegionsOption}
+                      isMulti
+
+                      options={this.state.regions}
                   />
                 </div>
               </div>

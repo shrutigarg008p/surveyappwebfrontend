@@ -133,7 +133,7 @@ class MessageForm extends React.Component<any, any> {
 
                     <div className="row col-10 mt-3">
                         <div className="col">
-                            <label htmlFor='gender'>Gender*</label>
+                            <label htmlFor='gender'>Query*</label>
                             <select
                                 style={{
                                     width: '100%',

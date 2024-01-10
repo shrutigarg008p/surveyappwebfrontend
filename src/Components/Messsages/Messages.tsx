@@ -38,7 +38,7 @@ type State = {
     },
 };
 
-export class Messages extends Component<any, State> {
+export class Messages extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {

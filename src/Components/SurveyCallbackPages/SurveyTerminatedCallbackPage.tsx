@@ -1,13 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router';
-import {Alert, Button, Modal, Spinner, Table} from 'react-bootstrap';
+import {Alert, Spinner} from 'react-bootstrap';
 import {Assets, PageStatus} from 'enums';
-import { Show } from 'Layout';
+import {Show} from 'Layout';
 import {SurveysAPI} from "../../API";
 import GridContainer from "../Grid/GridContainer";
 import {Grid} from "@material-ui/core";
 import moment from "moment";
-
 
 
 export default class SurveyTerminatedCallbackPage extends React.Component<any, any> {
@@ -38,7 +36,9 @@ export default class SurveyTerminatedCallbackPage extends React.Component<any, a
             .then(() => this.setState({ status: PageStatus.Loading }))
             .then(() => SurveysAPI.GetUserOneAssignedSurveyCallback({ surveyId, userId, partnerId, status: 'Terminated' }))
             .then((survey) => {
-                if(!!survey) {
+                if(!!survey && survey.url) {
+                    window.location.href = survey.url;
+                } else {
                     this.setState({ survey, status: PageStatus.Loaded });
                 }
             })
@@ -52,6 +52,7 @@ export default class SurveyTerminatedCallbackPage extends React.Component<any, a
         console.log('survey----->', this.state.survey)
         return (
                 <div style={{ background: 'white' }}>
+              <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
                 <div>
                     <GridContainer>
                         <Grid container justify="center" alignItems="center">
@@ -65,6 +66,7 @@ export default class SurveyTerminatedCallbackPage extends React.Component<any, a
                         </Grid>
                     </GridContainer>
                 </div>
+              </Show>
 
                 <Show when={this.state.status === PageStatus.Loading}>
                     <div className="d-flex justify-content-center w-100 p-5">
