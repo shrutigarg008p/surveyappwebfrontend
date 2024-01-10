@@ -38,9 +38,7 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
             .then(() => this.setState({ status: PageStatus.Loading }))
             .then(() => SurveysAPI.GetUserOneAssignedSurveyCallback({ surveyId, userId, partnerId, status: 'Completed' }))
             .then((survey) => {
-                if(!!survey && survey.url) {
-                    window.location.href = survey.url;
-                } else {
+                if (!!survey) {
                     this.setState({ survey, status: PageStatus.Loaded });
                 }
             })
@@ -53,22 +51,18 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
     render() {
         console.log('survey----->', this.state.survey)
         return (
-            <div style={{ background: 'white' }}>
-                <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
-                   <div style={{ background: '#f5f5f5', border: '2px solid #ddd', padding: '20px'}}>
-                        <GridContainer>
-                            <Grid container justify="center" alignItems="center">
-                                <Grid item>
-                                    <img
-                                        src={Assets.CallBackLogo}
-                                        alt="Logo"
-                                        style={{ maxWidth: '100%', maxHeight: '100%' }}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </GridContainer>
-                    </div>
-                </Show>
+            <div style={{ background: '#f5f5f5', border: '2px solid #ddd', padding: '20px'}}>
+                <GridContainer>
+                    <Grid container justify="center" alignItems="center">
+                        <Grid item>
+                            <img
+                                src={Assets.CallBackLogo}
+                                alt="Logo"
+                                style={{ maxWidth: '100%', maxHeight: '100%' }}
+                            />
+                        </Grid>
+                    </Grid>
+                </GridContainer>
                 <Show when={this.state.status === PageStatus.Loading}>
                     <Container className="d-flex justify-content-center mt-5">
                         <Spinner animation="border" variant="primary" />
