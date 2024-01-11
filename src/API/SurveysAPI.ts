@@ -173,4 +173,11 @@ export class SurveysAPI {
             });
     }
 
+    static userRespondentDashboardWeb(userId: any): Promise<any> {
+        return api.get(`${surveysURL}/userRespondentDashboardWeb/${userId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
 }
