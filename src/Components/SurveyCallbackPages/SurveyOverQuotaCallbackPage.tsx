@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import {Alert, Button, Modal, Spinner, Table} from 'react-bootstrap';
+import {Alert, Button, Modal, Spinner, Table, Container, Row, Col} from 'react-bootstrap';
 import {Assets, PageStatus} from 'enums';
 import { Show } from 'Layout';
 import {SurveysAPI} from "../../API";
@@ -53,40 +53,35 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
     render() {
         console.log('survey----->', this.state.survey)
         return (
-            <div style={{ background: 'white' }}>
-                <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
-                    <div>
-                        <GridContainer>
-                            <Grid container justify="center" alignItems="center">
-                                <Grid item>
-                                    <img
-                                        src={Assets.CallBackLogo}
-                                        alt="Logo"
-                                        style={{ maxWidth: '100%', maxHeight: '100%' }}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </GridContainer>
-                    </div>
-                </Show>
-
-                <Show when={this.state.status === PageStatus.Loading}>
-                    <div className="d-flex justify-content-center w-100 p-5">
-                        <Spinner animation="border" variant="primary" />
-                    </div>
-                </Show>
-
-                <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
-                    <div className='text-center mt-5'>
-                        <h1>
+            <div style={{ background: '#f5f5f5', border: '2px solid #ddd', padding: '20px'}}>
+            <GridContainer>
+                <Grid container justify="center" alignItems="center">
+                    <Grid item>
+                        <img
+                            src={Assets.CallBackLogo}
+                            alt="Logo"
+                            style={{ maxWidth: '100%', maxHeight: '100%' }}
+                        />
+                    </Grid>
+                </Grid>
+            </GridContainer>
+            <Show when={this.state.status === PageStatus.Loading}>
+                <Container className="d-flex justify-content-center mt-5">
+                    <Spinner animation="border" variant="primary" />
+                </Container>
+            </Show>
+        
+            <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
+                <Container className='text-center mt-5'>
+                <h1>
                             Over Quota
                         </h1>
-                    </div>
-
-                    {this.state.survey && this.state.survey.surveysDetails ?
-                        <div className="row ml-4">
-                            <table className="table table-bordered">
-                                <thead>
+                </Container>
+        
+                {this.state.survey && this.state.survey.surveysDetails ?
+                    <Container className="d-flex justify-content-center mt-5">
+                        <Table bordered>
+                            <thead>
                                 <tr>
                                     <th scope="col">S No</th>
                                     <th scope="col">User Name</th>
@@ -94,8 +89,8 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
                                     <th scope="col">Points</th>
                                     <th scope="col">Date & Time</th>
                                 </tr>
-                                </thead>
-                                <tbody>
+                            </thead>
+                            <tbody>
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>{this.state.survey.user.firstName} {this.state.survey.user.lastName}</td>
@@ -103,32 +98,37 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
                                     <td>{this.state.survey.surveysDetails.survey.ceggPoints}</td>
                                     <td>{moment(this.state.survey.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                                 </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                        : null
-                    }
-
-                    {this.state.survey && this.state.survey.surveysDetails ?
-                        <div className="row ml-4 mt-2">
-                            <div className="col">
+                            </tbody>
+                        </Table>
+                    </Container>
+                    : null
+                }
+        
+                {this.state.survey && this.state.survey.surveysDetails ?
+                    <Container className="d-flex justify-content-center mt-5">
+                        <Row>
+                            <Col>
                                 <strong>Disclaimer: </strong>
-                                <span dangerouslySetInnerHTML={{
+                                <p dangerouslySetInnerHTML={{
                                     __html: this.state.survey?.surveysDetails.survey.disclaimer || 'NA',
                                 }} />
-                            </div>
-                        </div>
-                        : null
-                    }
+                            </Col>
+                        </Row>
+                    </Container>
+                    : null
+                }
+        
+                <Container className="d-flex justify-content-center mt-5">
                     <Alert
                         variant="danger"
                         show={this.state.status === PageStatus.Error}
                     >
                         {this.state.error}
                     </Alert>
-                </Show>
-            </div>
+                </Container>
+            </Show>
+        </div>
+        
         );
     }
 }

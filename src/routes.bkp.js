@@ -1,4 +1,4 @@
-// import Dashboard from "@material-ui/icons/Dashboard";
+import Dashboard from "@material-ui/icons/Dashboard";
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import {RedemptionRouter} from "./Components/Redemptions";
 import {List} from "./Components/Redemptions/List";
@@ -17,15 +17,14 @@ import {ProfileManagement} from "./Components/ProfileManagement/ProfileManagemen
 import {Surveys} from "./Components/Surveys/Surveys";
 import {Samples} from "./Components/Samples/Samples";
 import {RegisteredOnly} from "./Components/Panelists/RegisteredOnly";
-// import {
-//   ArrowBack,
-//   ArrowBackIosTwoTone,
-//   ArrowDownward,
-//   ArrowDropDown,
-//   ArrowForward,
-//   ArrowLeft, ArrowRight
-// } from "@material-ui/icons";
-import { Dashboard, AccountCircle, ListAlt, Redeem, CardGiftcard, Group, Apps, Description, HowToReg, Person, Cancel, DeleteForever, Block, Category, Email, Message, Help as HelpIcon, Settings, LocalOffer, Public, LocationCity, LocationOn, Business, AccountBox, Label, Link, Security, Info, AttachMoney, ShoppingCart, Flight, Favorite, Home, SportsEsports, Theaters, Work, Devices, SmokingRooms, DriveEta, Fastfood } from "@material-ui/icons";
+import {
+  ArrowBack,
+  ArrowBackIosTwoTone,
+  ArrowDownward,
+  ArrowDropDown,
+  ArrowForward,
+  ArrowLeft, ArrowRight
+} from "@material-ui/icons";
 import {BasicProfileOnly} from "./Components/Panelists/BasicProfileOnly";
 import {UnsubscribedPanelistOnly} from "./Components/Panelists/UnsubscribedPanelistsOnly";
 import {DeletedPanelistsOnly} from "./Components/Panelists/DeletedPanelistsOnly";
@@ -68,56 +67,56 @@ const dashboardRoutes = [
   {
     path: "/profile",
     name: "User Profile",
-    icon: AccountCircle,
+    icon: Dashboard,
     component: UserProfile,
     layout: "/admin",
   },
   {
     path: "/surveys",
     name: "Surveys",
-    icon: ListAlt,
+    icon: Dashboard,
     component: Surveys,
     layout: "/admin",
   },
   {
     path: "/redemption",
     name: "Redemption Request",
-    icon: Redeem,
+    icon: Dashboard,
     component: List,
     layout: "/admin",
   },
   {
     path: "/rewards",
     name: "Rewards",
-    icon: CardGiftcard,
+    icon: Dashboard,
     component: RewardsList,
     layout: "/admin",
   },
   {
     path: "/referrals",
     name: "Referrals",
-    icon: Group,
+    icon: Dashboard,
     component: ReferralsList,
     layout: "/admin",
   },
   {
     path: "/",
     name: "PANELISTS",
-    icon: Group,
+    icon: ArrowBack,
     component: '',
     layout: "",
   },
   {
     path: "/panelistDashboard",
     name: "All",
-    icon: Apps,
+    icon: ArrowRight,
     component: AllPanelists,
     layout: "/admin",
   },
   {
     path: "/panelistDetails/:userId",
     name: "Details",
-    icon: Description,
+    icon: ArrowRight,
     component: PenalistDetails,
     layout: "/admin",
     isVisible : false
@@ -125,133 +124,133 @@ const dashboardRoutes = [
   {
     path: "/registeredOnlyPanelists",
     name: "Registered Only",
-    icon: HowToReg,
+    icon: ArrowRight,
     component: RegisteredOnly,
     layout: "/admin",
   },
   {
     path: "/basicProfileOnly",
     name: "Basic Profile Only",
-    icon: Person,
+    icon: ArrowRight,
     component: BasicProfileOnly,
     layout: "/admin",
   },
   {
     path: "/unsubscribeRequests",
     name: "Unsubscribe Requests",
-    icon: Cancel,
+    icon: ArrowRight,
     component: UnsubscribedPanelistOnly,
     layout: "/admin",
   },
   {
     path: "/deleteRequests",
     name: "Delete Requests",
-    icon: DeleteForever,
+    icon: ArrowRight,
     component: DeletedPanelistsOnly,
     layout: "/admin",
   },
   {
     path: "/bounces",
     name: "Bounces",
-    icon: Block,
+    icon: ArrowRight,
     component: Bounces,
     layout: "/admin",
   },
   {
     path: "/samples",
     name: "Samples",
-    icon: Category,
+    icon: Dashboard,
     component: Samples,
     layout: "/admin",
   },
   {
     path: "/newsletters",
     name: "Newsletters",
-    icon: Email,
+    icon: Dashboard,
     component: NewsLetters,
     layout: "/admin",
   },
   {
     path: "/messages",
     name: "Messages",
-    icon: Message,
+    icon: Dashboard,
     component: Messages,
     layout: "/admin",
   },
   {
     path: "/help",
     name: "Help",
-    icon: HelpIcon,
+    icon: Dashboard,
     component: Help,
     layout: "/admin",
   },
   {
-    path: "/MASTER SETTINGS",
+    path: "/",
     name: "MASTER SETTINGS",
-    icon: Settings,
+    icon: ArrowBack,
     component: '',
     layout: "",
   },
   {
     path: "/redemption-mode",
     name: "Redemption Mode",
-    icon: LocalOffer,
+    icon: ArrowRight,
     component: RedemptionMode,
     layout: "/master",
   },
   {
     path: "/country",
     name: "Country",
-    icon: Public,
+    icon: ArrowRight,
     component: Countries,
     layout: "/master",
   },
   {
     path: "/states",
     name: "States",
-    icon: LocationCity,
+    icon: ArrowRight,
     component: States,
     layout: "/master",
   },
   {
     path: "/cities",
     name: "Cities",
-    icon: LocationOn,
+    icon: ArrowRight,
     component: City,
     layout: "/master",
   },
   {
     path: "/partners",
     name: "Partners",
-    icon: Business,
+    icon: ArrowRight,
     component: PartnersList,
     layout: "/master",
   },
   {
     path: "/profile-management",
     name: "Profiles",
-    icon: AccountBox,
+    icon: ArrowRight,
     component: ProfileManagement,
     layout: "/master",
   },
   {
     path: "/labels",
     name: "Labels",
-    icon: Label,
+    icon: ArrowRight,
     component: LabelsList,
     layout: "/master",
   },
   {
     path: "/marketing-links",
     name: "Marketing Links",
-    icon: Link,
+    icon: ArrowRight,
     component: MarketingLinksList,
     layout: "/admin",
   },
   {
-    path: "/SEC",
+    path: "/sec",
     name: "SEC",
-    icon: Security,
+    icon: ArrowRight,
     component: SecList,
     layout: "/admin",
   },
@@ -266,7 +265,7 @@ const dashboardRoutes = [
   {
     path: "/profile",
     name: "User Profile",
-    icon: AccountBox,
+    icon: Dashboard,
     component: UserProfile,
     layout: "/panelist",
     type: 'panelist'
@@ -274,7 +273,7 @@ const dashboardRoutes = [
   {
     path: "/my-rewards",
     name: "My Rewards",
-    icon: CardGiftcard,
+    icon: Dashboard,
     component: MyRewards,
     layout: "/panelist",
     type: 'panelist'
@@ -282,7 +281,7 @@ const dashboardRoutes = [
   {
     path: "/my-requests",
     name: "My Requests",
-    icon: Redeem,
+    icon: Dashboard,
     component: MyRequests,
     layout: "/panelist",
     type: 'panelist'
@@ -290,7 +289,7 @@ const dashboardRoutes = [
   {
     path: "/my-referrals",
     name: "My Referrals",
-    icon: Group,
+    icon: Dashboard,
     component: MyReferralsList,
     layout: "/panelist",
     type: 'panelist'
@@ -298,7 +297,7 @@ const dashboardRoutes = [
   {
     path: "/panelist-surveys",
     name: "My Surveys",
-    icon: ListAlt,
+    icon: Dashboard,
     component: PanelistSurveys,
     layout: "/panelist",
     type: 'panelist'
@@ -306,7 +305,7 @@ const dashboardRoutes = [
   {
     path: "/settings",
     name: "My Setting",
-    icon: Settings,
+    icon: Dashboard,
     component: MySettings,
     layout: "/panelist",
     type: 'panelist'
@@ -314,7 +313,7 @@ const dashboardRoutes = [
   {
     path: "/panelist-message",
     name: "Messages",
-    icon: Message,
+    icon: Dashboard,
     component: MessageForm,
     layout: "/panelist",
     type: 'panelist'
@@ -322,7 +321,7 @@ const dashboardRoutes = [
   {
     path: "/profile-overview",
     name: "PROFILE",
-    icon: AccountBox,
+    icon: ArrowBack,
     component: Profiles,
     layout: "/panelist",
     type: 'panelist'
@@ -330,7 +329,7 @@ const dashboardRoutes = [
   {
     path: "/about",
     name: "About",
-    icon: Info,
+    icon: ArrowRight,
     component: About,
     layout: "/panelist",
     type: 'panelist'
@@ -338,7 +337,7 @@ const dashboardRoutes = [
   {
     path: "/personal-finance",
     name: "Personal Finance",
-    icon: AttachMoney,
+    icon: ArrowRight,
     component: PersonalFinance,
     layout: "/panelist",
     type: 'panelist'
@@ -346,7 +345,7 @@ const dashboardRoutes = [
   {
     path: "/shopping",
     name: "Shopping",
-    icon: ShoppingCart,
+    icon: ArrowRight,
     component: Shopping,
     layout: "/panelist",
     type: 'panelist'
@@ -354,7 +353,7 @@ const dashboardRoutes = [
   {
     path: "/travels",
     name: "Travel",
-    icon: Flight,
+    icon: ArrowRight,
     component: Travels,
     layout: "/panelist",
     type: 'panelist'
@@ -362,7 +361,7 @@ const dashboardRoutes = [
   {
     path: "/health-wellness",
     name: "Health And Wellness",
-    icon: Favorite,
+    icon: ArrowRight,
     component: HealthAndWellness,
     layout: "/panelist",
     type: 'panelist'
@@ -370,7 +369,7 @@ const dashboardRoutes = [
   {
     path: "/household",
     name: "House Hold",
-    icon: Home,
+    icon: ArrowRight,
     component: HouseHold,
     layout: "/panelist",
     type: 'panelist'
@@ -378,7 +377,7 @@ const dashboardRoutes = [
   {
     path: "/Leisure-activity",
     name: "Leisure And Activity",
-    icon: SportsEsports,
+    icon: ArrowRight,
     component: LeisureActivity,
     layout: "/panelist",
     type: 'panelist'
@@ -386,7 +385,7 @@ const dashboardRoutes = [
   {
     path: "/media",
     name: "Media",
-    icon: Theaters,
+    icon: ArrowRight,
     component: Medias,
     layout: "/panelist",
     type: 'panelist'
@@ -394,7 +393,7 @@ const dashboardRoutes = [
   {
     path: "/professionals",
     name: "Professional",
-    icon: Work,
+    icon: ArrowRight,
     component: Professional,
     layout: "/panelist",
     type: 'panelist'
@@ -402,7 +401,7 @@ const dashboardRoutes = [
   {
     path: "/electronics",
     name: "Electronics",
-    icon: Devices,
+    icon: ArrowRight,
     component: Electronics,
     layout: "/panelist",
     type: 'panelist'
@@ -410,7 +409,7 @@ const dashboardRoutes = [
   {
     path: "/smokers",
     name: "Smokers",
-    icon: SmokingRooms,
+    icon: ArrowRight,
     component: Smokers,
     layout: "/panelist",
     type: 'panelist'
@@ -418,7 +417,7 @@ const dashboardRoutes = [
   {
     path: "/auto",
     name: "Auto",
-    icon: DriveEta,
+    icon: ArrowRight,
     component: Auto,
     layout: "/panelist",
     type: 'panelist'
@@ -426,12 +425,11 @@ const dashboardRoutes = [
   {
     path: "/food-beverage",
     name: "Food And Beverage",
-    icon: Fastfood,
+    icon: ArrowRight,
     component: FoodAndBeverage,
     layout: "/panelist",
     type: 'panelist'
   },
 ];
-
 
 export default dashboardRoutes;
