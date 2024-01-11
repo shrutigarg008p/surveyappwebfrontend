@@ -15,6 +15,9 @@ import SurveyOverQuotaCallbackPage from "./Components/SurveyCallbackPages/Survey
 import SurveyTerminatedCallbackPage from "./Components/SurveyCallbackPages/SurveyTerminatedCallbackPage";
 import SurveyQualityTerminatedCallbackPage from "./Components/SurveyCallbackPages/SurveyQualityTerminatedCallbackPage";
 import {LinkViewWithState} from "./Components/Referrals/LinkView";
+import { requestForToken } from './firebase';
+
+requestForToken();
 class App extends React.Component<any, any> {
 
   render() {
