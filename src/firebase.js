@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-
+import $ from 'jquery';
+import 'jquery-confirm';
+import { Assets } from 'enums';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5nevbSl0zW3PjFS1F_mxWdlNkth7lMBk",
@@ -39,11 +41,34 @@ const saveToken = (token) => {
   }
 }
 
+function showAlert(title, message) {
+  var audio = new Audio('./assets/sound/notification.mp3');
+  audio.play();
+  $.alert({
+    title: '<img src="/assets/img/logo-black.png" style="width:50%" alt="Logo" class="img-fluid"><br/><br/>' + title,
+    content: message,
+    type: 'blue',
+    theme: 'modern',
+    closeIcon: true, 
+    animation: 'scale',
+    closeAnimation: 'scale',
+    draggable: true,
+    columnClass: 'custom-alert', 
+    onOpenBefore: function () {
+        $('.custom-alert .title').css('font-size', '18px'); // Adjust title font size
+        $('.custom-alert .content').css('font-size', '16px'); // Adjust content font size
+    }
+});
+}
+
 
 export const foreGroundMessage = () => {
-  onMessage(function (payload) { 
+  onMessage(messaging, function(payload) { 
     console.log('Message received. ', payload); 
-  });
+    const notificationTitle = payload.notification.title;
+    const notificationBody = payload.notification.body; 
+    showAlert("New Notification Received: "+notificationTitle, notificationBody); 
+})
 }
 
 
