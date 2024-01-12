@@ -73,10 +73,10 @@ function Dashboard({...rest}) {
 
 
           <Show when={status === PageStatus.Loaded && !!data}>
-            <GridItem xs={12} sm={6} md={6}>
+            <GridItem xs={12} sm={6} md={3}>
               <Card>
                 <CardHeader color="info" stats icon>
-                  <CardIcon color="info">
+                  <CardIcon color="warning">
                     <Icon>content_copy</Icon>
                   </CardIcon>
                   <p className={classes.cardCategory}>{data ? data.totalSurveys.name : ''}</p>
@@ -92,11 +92,11 @@ function Dashboard({...rest}) {
                 </CardFooter>
               </Card>
             </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="warning" stats icon>
-                <CardIcon color="info">
-                  <Icon>content_copy</Icon>
+                <CardIcon color="success">
+                  <Store />
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.completeSurveys.name: ''}</p>
                 <h3 className={classes.cardTitle}>
@@ -111,11 +111,11 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="success" stats icon>
-                <CardIcon color="info">
-                  <Icon>content_copy</Icon>
+                <CardIcon color="danger">
+                  <Icon>info_outline</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.incompleteSurveys.name : ''}</p>
                 <h3 className={classes.cardTitle}>
@@ -129,11 +129,11 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="danger" stats icon>
                 <CardIcon color="info">
-                  <Icon>content_copy</Icon>
+                  <Accessibility />
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.notStartedSurveys.name: ''}</p>
                 <h3 className={classes.cardTitle}>
@@ -148,10 +148,10 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="info">
+                <CardIcon color="warning">
                   <Icon>content_copy</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.overallAttemptedPercentage.name : ''}</p>
@@ -167,11 +167,11 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <Icon>content_copy</Icon>
+                <CardIcon color="success">
+                  <Store />
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.totalLeft.name : 0}</p>
                 <h3 className={classes.cardTitle}>
@@ -186,11 +186,11 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <Icon>content_copy</Icon>
+                <CardIcon color="danger">
+                  <Icon>info_outline</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.totalReferralsApproved.name : ''}</p>
                 <h3 className={classes.cardTitle}>
@@ -205,11 +205,11 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
-                  <Icon>content_copy</Icon>
+                  <Accessibility />
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.totalReferralsPoints.name : ''}</p>
                 <h3 className={classes.cardTitle}>
@@ -224,10 +224,10 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="info">
+                <CardIcon color="warning">
                   <Icon>content_copy</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.totalReferralsStatistics.name : ''}</p>
@@ -243,11 +243,11 @@ function Dashboard({...rest}) {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={6}>
+          <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <Icon>content_copy</Icon>
+                <CardIcon color="success">
+                  <Store />
                 </CardIcon>
                 <p className={classes.cardCategory}>{data ? data.totalRewardPoints.name : ''}</p>
                 <h3 className={classes.cardTitle}>
@@ -264,130 +264,6 @@ function Dashboard({...rest}) {
           </GridItem>
           </Show>
         </GridContainer>
-
-
-
-
-        {/*<GridContainer>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <Card chart>*/}
-        {/*      <CardHeader color="success">*/}
-        {/*        <ChartistGraph*/}
-        {/*          className="ct-chart"*/}
-        {/*          data={dailySalesChart.data}*/}
-        {/*          type="Line"*/}
-        {/*          options={dailySalesChart.options}*/}
-        {/*          listener={dailySalesChart.animation}*/}
-        {/*        />*/}
-        {/*      </CardHeader>*/}
-        {/*      <CardBody>*/}
-        {/*        <h4 className={classes.cardTitle}>Daily Sales</h4>*/}
-        {/*        <p className={classes.cardCategory}>*/}
-        {/*          <span className={classes.successText}>*/}
-        {/*            <ArrowUpward className={classes.upArrowCardCategory} /> 55%*/}
-        {/*          </span>{" "}*/}
-        {/*          increase in today sales.*/}
-        {/*        </p>*/}
-        {/*      </CardBody>*/}
-        {/*      <CardFooter chart>*/}
-        {/*        <div className={classes.stats}>*/}
-        {/*          <AccessTime /> updated 4 minutes ago*/}
-        {/*        </div>*/}
-        {/*      </CardFooter>*/}
-        {/*    </Card>*/}
-        {/*  </GridItem>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <Card chart>*/}
-        {/*      <CardHeader color="warning">*/}
-        {/*        <ChartistGraph*/}
-        {/*          className="ct-chart"*/}
-        {/*          data={emailsSubscriptionChart.data}*/}
-        {/*          type="Bar"*/}
-        {/*          options={emailsSubscriptionChart.options}*/}
-        {/*          responsiveOptions={emailsSubscriptionChart.responsiveOptions}*/}
-        {/*          listener={emailsSubscriptionChart.animation}*/}
-        {/*        />*/}
-        {/*      </CardHeader>*/}
-        {/*      <CardBody>*/}
-        {/*        <h4 className={classes.cardTitle}>Email Subscriptions</h4>*/}
-        {/*        <p className={classes.cardCategory}>Last Campaign Performance</p>*/}
-        {/*      </CardBody>*/}
-        {/*      <CardFooter chart>*/}
-        {/*        <div className={classes.stats}>*/}
-        {/*          <AccessTime /> campaign sent 2 days ago*/}
-        {/*        </div>*/}
-        {/*      </CardFooter>*/}
-        {/*    </Card>*/}
-        {/*  </GridItem>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <Card chart>*/}
-        {/*      <CardHeader color="danger">*/}
-        {/*        <ChartistGraph*/}
-        {/*          className="ct-chart"*/}
-        {/*          data={completedTasksChart.data}*/}
-        {/*          type="Line"*/}
-        {/*          options={completedTasksChart.options}*/}
-        {/*          listener={completedTasksChart.animation}*/}
-        {/*        />*/}
-        {/*      </CardHeader>*/}
-        {/*      <CardBody>*/}
-        {/*        <h4 className={classes.cardTitle}>Completed Tasks</h4>*/}
-        {/*        <p className={classes.cardCategory}>Last Campaign Performance</p>*/}
-        {/*      </CardBody>*/}
-        {/*      <CardFooter chart>*/}
-        {/*        <div className={classes.stats}>*/}
-        {/*          <AccessTime /> campaign sent 2 days ago*/}
-        {/*        </div>*/}
-        {/*      </CardFooter>*/}
-        {/*    </Card>*/}
-        {/*  </GridItem>*/}
-        {/*</GridContainer>*/}
-        {/*<GridContainer>*/}
-        {/*  <GridItem xs={12} sm={12} md={6}>*/}
-        {/*    <Card>*/}
-        {/*      <CardHeader color="warning">*/}
-        {/*        <h4 className={classes.cardTitleWhite}>Cases Statuses</h4>*/}
-        {/*        <p className={classes.cardCategoryWhite}>*/}
-        {/*          All cases of IndiaPolls platform*/}
-        {/*        </p>*/}
-        {/*      </CardHeader>*/}
-        {/*      <CardBody>*/}
-        {/*        <Table*/}
-        {/*          tableHeaderColor="warning"*/}
-        {/*          tableHead={["ID", "Name", "Rating", "Details"]}*/}
-        {/*          tableData={[*/}
-        {/*            ["1", "Dakota Rice", "04/05", "Details"],*/}
-        {/*            ["2", "Minerva Hooper", "03/05", "Details"],*/}
-        {/*            ["3", "Sage Rodriguez", "03/05", "Details"],*/}
-        {/*            ["4", "Philip Chaney", "03/05", "Details"],*/}
-        {/*          ]}*/}
-        {/*        />*/}
-        {/*      </CardBody>*/}
-        {/*    </Card>*/}
-        {/*  </GridItem>*/}
-        {/*  <GridItem xs={12} sm={12} md={6}>*/}
-        {/*    <Card>*/}
-        {/*      <CardHeader color="warning">*/}
-        {/*        <h4 className={classes.cardTitleWhite}>Cases Statuses</h4>*/}
-        {/*        <p className={classes.cardCategoryWhite}>*/}
-        {/*          All cases of IndiaPolls platform*/}
-        {/*        </p>*/}
-        {/*      </CardHeader>*/}
-        {/*      <CardBody>*/}
-        {/*        <Table*/}
-        {/*          tableHeaderColor="warning"*/}
-        {/*          tableHead={["ID", "Name", "Open", "Pending", "Completed"]}*/}
-        {/*          tableData={[*/}
-        {/*            ["1", "Dakota Rice", "03", "01", "02"],*/}
-        {/*            ["2", "Minerva Hooper", "03", "01", "02"],*/}
-        {/*            ["3", "Sage Rodriguez", "03", "01", "02"],*/}
-        {/*            ["4", "Philip Chaney", "03", "01", "02"],*/}
-        {/*          ]}*/}
-        {/*        />*/}
-        {/*      </CardBody>*/}
-        {/*    </Card>*/}
-        {/*  </GridItem>*/}
-        {/*</GridContainer>*/}
       </div>
   );
 }

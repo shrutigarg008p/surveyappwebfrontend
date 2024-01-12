@@ -180,4 +180,11 @@ export class SurveysAPI {
             });
     }
 
+    static adminRespondentDashboardWeb(): Promise<any> {
+        return api.get(`${surveysURL}/adminRespondentDashboardWeb`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
 }

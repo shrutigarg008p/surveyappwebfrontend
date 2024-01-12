@@ -56,8 +56,17 @@ import MyRequests from "Components/Requests/MyRequests";
 import MyRewards from "./Components/Rewards/MyRewards";
 import MyReferralsList from "./Components/Referrals/MyReferralsList";
 import {MySettings} from "./Components/My Settings/MySettings";
+import DashboardOld from "./views/Dashboard/DashboardOld";
+import AdminDashboard from "./views/Dashboard/AdminDashboard";
 
 const dashboardRoutes = [
+  {
+    path: "/dashboard-admin",
+    name: "Admin Dashboard",
+    icon: Dashboard,
+    component: AdminDashboard,
+    layout: "/admin",
+  },
   {
     path: "/dashboard",
     name: "Dashboard",

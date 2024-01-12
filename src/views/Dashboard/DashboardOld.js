@@ -32,7 +32,7 @@ import {
 
 const useStyles = makeStyles(styles);
 
-export default function Dashboard() {
+export default function DashboardOld() {
     const classes = useStyles();
     return (
         <div>

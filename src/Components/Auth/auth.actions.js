@@ -32,6 +32,7 @@ export const authFail = (error) => (dispatch) => {
   });
 };
 
+
 export const authLogin =
   (username, password, registerType, history) => async (dispatch) => {
     try {
@@ -39,7 +40,11 @@ export const authLogin =
       const user = await AuthAPI.login(username, password, registerType);
       if(user.emailConfirmed === true && user.basicProfile) {
           dispatch(authSuccess(user));
-          history.push("/");
+          if (user.role === 'panelist') {
+              history.push("/panelist/dashboard");
+          } else {
+              history.push("/admin/dashboard-admin");
+          }
       } else if(user.basicProfile === null && user.emailConfirmed === true){
           dispatch(authSuccessLastStep(user));
           history.push("/auth/basic-profile");
@@ -58,7 +63,11 @@ export const authBasicProfile =
             dispatch(authStart());
             let obj = { id, role }
             dispatch(basicProfileCompleted(obj));
-            history.push("/");
+            if (obj.role === 'panelist') {
+                history.push("/panelist/dashboard");
+            } else {
+                history.push("/admin/dashboard-admin");
+            }
         } catch (error) {
             dispatch(authFail(error.message));
         }
