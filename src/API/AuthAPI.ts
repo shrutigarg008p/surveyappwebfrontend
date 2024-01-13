@@ -116,6 +116,13 @@ export class AuthAPI {
             });
     }
 
+    static userNotifications(userId): Promise<any> {
+        return api.get(`${userURL}/userNotifications/${userId}`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
     static deleteActions(userId, action): Promise<any> {
         return api.put(`${userURL}/deleteActions/${userId}/${action}`, {})
             .then((res) => {

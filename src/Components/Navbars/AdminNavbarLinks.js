@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -13,14 +13,51 @@ import Person from "@material-ui/icons/Person";
 import Button from "../../Components/CustomButtons/Button.js";
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 import { useHistory } from 'react-router-dom';
+import {Notifications} from "@material-ui/icons";
+import {connect} from "react-redux";
+import {PageStatus} from "../../enums";
+import {AuthAPI, SurveysAPI} from "../../API";
 
 const useStyles = makeStyles(styles);
 
-export default function AdminNavbarLinks() {
+function AdminNavbarLinks({...rest}) {
   const history = useHistory();
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
+  const [data, setData] = useState([]);
+  const [status, setStatus] = useState(PageStatus.None);
+  const [error, setError] = useState('');
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        Promise.resolve()
+            .then(() => setStatus(PageStatus.Loading))
+            .then(() => AuthAPI.userNotifications(rest.userId))
+            .then((response) => {
+              console.log('response--->', response)
+              if(response) {
+                setData(response)
+                setStatus(PageStatus.Loaded)
+              }
+            })
+            .catch((error) => {
+              setStatus(PageStatus.Error)
+              setError(error.message)
+            });
+      } catch (error) {
+        setError(error);
+      } finally {
+        setStatus(PageStatus.Loaded);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   const handleClickNotification = (event) => {
     if (openNotification && openNotification.contains(event.target)) {
       setOpenNotification(null);
@@ -86,84 +123,63 @@ export default function AdminNavbarLinks() {
       {/*    <p className={classes.linkText}>Dashboard</p>*/}
       {/*  </Hidden>*/}
       {/*</Button>*/}
-      {/*<div className={classes.manager}>*/}
-      {/*  <Button*/}
-      {/*    color={window.innerWidth > 959 ? "transparent" : "white"}*/}
-      {/*    justIcon={window.innerWidth > 959}*/}
-      {/*    simple={!(window.innerWidth > 959)}*/}
-      {/*    aria-owns={openNotification ? "notification-menu-list-grow" : null}*/}
-      {/*    aria-haspopup="true"*/}
-      {/*    onClick={handleClickNotification}*/}
-      {/*    className={classes.buttonLink}*/}
-      {/*  >*/}
-      {/*    <Notifications className={classes.icons} />*/}
-      {/*    <span className={classes.notifications}>5</span>*/}
-      {/*    <Hidden mdUp implementation="css">*/}
-      {/*      <p onClick={handleCloseNotification} className={classes.linkText}>*/}
-      {/*        Notification*/}
-      {/*      </p>*/}
-      {/*    </Hidden>*/}
-      {/*  </Button>*/}
-      {/*  <Poppers*/}
-      {/*    open={Boolean(openNotification)}*/}
-      {/*    anchorEl={openNotification}*/}
-      {/*    transition*/}
-      {/*    disablePortal*/}
-      {/*    className={*/}
-      {/*      classNames({ [classes.popperClose]: !openNotification }) +*/}
-      {/*      " " +*/}
-      {/*      classes.popperNav*/}
-      {/*    }*/}
-      {/*  >*/}
-      {/*    {({ TransitionProps, placement }) => (*/}
-      {/*      <Grow*/}
-      {/*        {...TransitionProps}*/}
-      {/*        id="notification-menu-list-grow"*/}
-      {/*        style={{*/}
-      {/*          transformOrigin:*/}
-      {/*            placement === "bottom" ? "center top" : "center bottom",*/}
-      {/*        }}*/}
-      {/*      >*/}
-      {/*        <Paper>*/}
-      {/*          <ClickAwayListener onClickAway={handleCloseNotification}>*/}
-      {/*            <MenuList role="menu">*/}
-      {/*              <MenuItem*/}
-      {/*                onClick={handleCloseNotification}*/}
-      {/*                className={classes.dropdownItem}*/}
-      {/*              >*/}
-      {/*                Mike John responded to your email*/}
-      {/*              </MenuItem>*/}
-      {/*              <MenuItem*/}
-      {/*                onClick={handleCloseNotification}*/}
-      {/*                className={classes.dropdownItem}*/}
-      {/*              >*/}
-      {/*                You have 5 new tasks*/}
-      {/*              </MenuItem>*/}
-      {/*              <MenuItem*/}
-      {/*                onClick={handleCloseNotification}*/}
-      {/*                className={classes.dropdownItem}*/}
-      {/*              >*/}
-      {/*                You{"'"}re now friend with Andrew*/}
-      {/*              </MenuItem>*/}
-      {/*              <MenuItem*/}
-      {/*                onClick={handleCloseNotification}*/}
-      {/*                className={classes.dropdownItem}*/}
-      {/*              >*/}
-      {/*                Another Notification*/}
-      {/*              </MenuItem>*/}
-      {/*              <MenuItem*/}
-      {/*                onClick={handleCloseNotification}*/}
-      {/*                className={classes.dropdownItem}*/}
-      {/*              >*/}
-      {/*                Another One*/}
-      {/*              </MenuItem>*/}
-      {/*            </MenuList>*/}
-      {/*          </ClickAwayListener>*/}
-      {/*        </Paper>*/}
-      {/*      </Grow>*/}
-      {/*    )}*/}
-      {/*  </Poppers>*/}
-      {/*</div>*/}
+      <div className={classes.manager}>
+        <Button
+          color={window.innerWidth > 959 ? "transparent" : "white"}
+          justIcon={window.innerWidth > 959}
+          simple={!(window.innerWidth > 959)}
+          aria-owns={openNotification ? "notification-menu-list-grow" : null}
+          aria-haspopup="true"
+          onClick={handleClickNotification}
+          className={classes.buttonLink}
+        >
+          <Notifications className={classes.icons} />
+          <span className={classes.notifications}>{data.length}</span>
+          <Hidden mdUp implementation="css">
+            <p onClick={handleCloseNotification} className={classes.linkText}>
+              Notification
+            </p>
+          </Hidden>
+        </Button>
+        <Poppers
+          open={Boolean(openNotification)}
+          anchorEl={openNotification}
+          transition
+          disablePortal
+          className={
+            classNames({ [classes.popperClose]: !openNotification }) +
+            " " +
+            classes.popperNav
+          }
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              id="notification-menu-list-grow"
+              style={{
+                transformOrigin:
+                  placement === "bottom" ? "center top" : "center bottom",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleCloseNotification}>
+                  <MenuList role="menu">
+                    {data && data.length > 0 ? data.map((info, index) => (
+                    <MenuItem
+                      key={info.id}
+                      onClick={handleCloseNotification}
+                      className={classes.dropdownItem}
+                    >
+                      {info.message}
+                    </MenuItem>
+                    )) : ''}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Poppers>
+      </div>
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -231,3 +247,12 @@ export default function AdminNavbarLinks() {
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    userId: state.adminUser.adminUser.userId,
+    role: state.adminUser.adminUser.role,
+  };
+}
+
+export default connect(mapStateToProps)(AdminNavbarLinks);
