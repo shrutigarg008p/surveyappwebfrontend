@@ -62,6 +62,24 @@ export class AuthAPI {
             });
     }
 
+    static async approveRedemptionRequest(
+        data: any,
+    ): Promise<any> {
+        return api.post(`${redemptionRespondentRequestURL}/approveRequest`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static async rejectRedemptionRequest(
+        data: any,
+    ): Promise<any> {
+        return api.post(`${redemptionRespondentRequestURL}/rejectRequest`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
     static async rewardsList(
         limit: number,
     ): Promise<any> {

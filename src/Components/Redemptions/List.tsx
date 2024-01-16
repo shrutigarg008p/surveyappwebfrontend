@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Alert, Spinner, Table,
+    Alert, Button, Spinner, Table,
 } from 'react-bootstrap';
 
 import { PageStatus } from 'enums';
@@ -14,6 +14,9 @@ import GridItem from "../Grid/GridItem";
 import CardBody from "../Card/CardBody";
 import CustomInput from "../CustomInput/CustomInput";
 import {exportToExcel} from "../../Utils/ExportToExcel";
+import {Confirmation} from "../../Shared/Confirmation";
+import {withRouter} from "react-router";
+import {connect} from "react-redux";
 
 const MODAL_TYPES = {
     NONE: 'NONE',
@@ -33,7 +36,7 @@ type State = {
     filters: any
 };
 
-export class List extends Component<any, any> {
+ class List extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -112,6 +115,40 @@ export class List extends Component<any, any> {
         exportToExcel(this.state.filteredData, 'output'); // 'output' is the filename without extension
     };
 
+
+    approvedActions(id): Promise<void> {
+        let obj = {
+            id, approvedById: this.props.userId
+        }
+        return Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => AuthAPI.approveRedemptionRequest(obj))
+            .then((users) => {
+                this.fetchList()
+                this.setState({ data: users,  status: PageStatus.Loaded });
+            })
+            .catch((error) => {
+                this.setState({ error: error.message, status: PageStatus.Error });
+            });
+    }
+
+    rejectActions(id): Promise<void> {
+        let obj = {
+            id, approvedById: this.props.userId
+        }
+        return Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => AuthAPI.rejectRedemptionRequest(obj))
+            .then((users) => {
+                this.fetchList()
+                this.setState({ data: users,  status: PageStatus.Loaded });
+            })
+            .catch((error) => {
+                this.setState({ error: error.message, status: PageStatus.Error });
+            });
+    }
+
+
     render() {
         const { filteredData, filters } = this.state;
 
@@ -162,9 +199,10 @@ export class List extends Component<any, any> {
                                     name="redemptionRequestStatus"
                                     onChange={this.handleFilterChange}
                                 >
-                                    <option value='' disabled>--Choose--</option>
+                                    <option value=''>--Choose--</option>
                                     <option value='New'>New</option>
-                                    <option value='Others'>Others</option>
+                                    <option value='Redeemed'>Redeemed</option>
+                                    <option value='Failed'>Failed</option>
                                 </select>
                             </div>
                             <div className="col">
@@ -221,6 +259,7 @@ export class List extends Component<any, any> {
                                     <th>Request Date</th>
                                     <th>User</th>
                                     <th>Phone No/Data Card No/DTH No</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
 
@@ -247,18 +286,45 @@ export class List extends Component<any, any> {
                                             <td>{redemption.pointsRequested}</td>
                                             <td>{redemption.redemptionModeTitle}</td>
                                             <td>{redemption.redemptionRequestStatus}</td>
-                                            <td>{redemption.approvedById || 'Not Approved'}</td>
+                                            <td>{redemption.approvedByUser ? 'Admin' : 'Not Approved'}</td>
                                             <td>{moment(redemption.requestDate).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>
-                                                {redemption.user
-                                                    ? redemption.user.email
+                                                {redemption.requestedUser
+                                                    ? redemption.requestedUser.email
                                                     : '-'}
                                             </td>
                                             <td>
-                                                {redemption.user
-                                                    ? redemption.user.phoneNumber
+                                                {redemption.requestedUser
+                                                    ? redemption.requestedUser.phoneNumber
                                                     : '-'}
                                             </td>
+
+                                            <td>
+                                                <Confirmation onAction={() => this.approvedActions(redemption.id)} body="Are you sure want to approve request ?">
+                                                    <Button
+                                                        variant="success"
+                                                        size="sm"
+                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'}
+                                                        className="mx-1"
+                                                    >
+                                                        Approved
+                                                    </Button>
+                                                </Confirmation>
+                                                <Confirmation onAction={() => this.rejectActions(redemption.id)} body="Are you sure want to reject request ?">
+                                                    <Button
+                                                        variant="danger"
+                                                        size="sm"
+                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'
+                                                            || redemption.redemptionRequestStatus === 'Rejected'
+                                                            || redemption.redemptionRequestStatus === 'Failed'
+                                                    }
+                                                        className="mx-1"
+                                                    >
+                                                        Reject
+                                                    </Button>
+                                                </Confirmation>
+                                            </td>
+
                                         </tr>
                                     ))
                                 }
@@ -272,3 +338,16 @@ export class List extends Component<any, any> {
         );
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        userId: state.adminUser.adminUser.userId,
+    };
+}
+
+const ListWithRouter = withRouter(connect(
+    mapStateToProps,
+)(List));
+
+export { ListWithRouter as List };
