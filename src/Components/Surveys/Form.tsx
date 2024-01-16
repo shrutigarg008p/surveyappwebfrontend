@@ -21,12 +21,15 @@ type State = {
 
 
 function replacePlaceholderWithAnchor(text) {
+  if (/<a\s+(?:[^>]*?\s+)?href=(?:'([^']*)'|"([^"]*)")/.test(text)) {
+    return text;
+  }
   const regex = /<([^>]+)>/;
   const match = text.match(regex);
   if (match) {
     const placeholder = match[0];
     const url = match[1];
-    const anchorTag = `<a href="${url}" target="_blank" style="color: orange;">${url}</a>`;
+    const anchorTag = `<a href='${url}' target='_blank' style='color: orange;'>${url}</a>`;
     return text.replace(placeholder, anchorTag);
   } else {
     return text;

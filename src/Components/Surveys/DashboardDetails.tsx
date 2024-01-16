@@ -387,7 +387,8 @@ class DashboardDetails extends React.Component<any, any> {
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>CreatedAt</th>
-                                    <th>UpdatedAt</th>
+                                    {/*<th>UpdatedAt</th>*/}
+                                    <th>Link</th>
                                 </tr>
                                 </thead>
 
@@ -401,7 +402,10 @@ class DashboardDetails extends React.Component<any, any> {
                                             <td>{info.user ? info.user.email : '-'}</td>
                                             <td>{info.assignUser ? info.assignUser.status : '-' }</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                                            <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                            {/*<td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
+                                            <td>{info.assignUser ? <a href={info.assignUser.temporarySurveyLink} target="_blank" rel="noopener noreferrer">
+                                                Click here to start survey
+                                            </a> : 'NA' }</td>
                                         </tr>
                                     ))
                                 }

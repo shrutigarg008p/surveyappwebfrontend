@@ -38,7 +38,14 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
             .then(() => this.setState({ status: PageStatus.Loading }))
             .then(() => SurveysAPI.GetUserOneAssignedSurveyCallback({ surveyId, userId, partnerId, status: 'Completed' }))
             .then((survey) => {
-                if (!!survey) {
+                if(!!survey && survey.url) {
+                    window.location.href = survey.url;
+                } else if (!!survey && survey.surveysDetails.survey.country.toLowerCase() === 'india') {
+                    let currentUrl = window.location.href;
+                    // let currentUrl = 'https://polls.dataxing.com/#/surveys/853946/e036ddf2-8aeb-47be-839e-934e704616b9/completed?surveyid=853946&userid=e036ddf2-8aeb-47be-839e-934e704616b9'
+                    currentUrl = currentUrl.replace('polls.dataxing.com', 'test.indiapolls.com');
+                    window.location.href = currentUrl;
+                } else {
                     this.setState({ survey, status: PageStatus.Loaded });
                 }
             })
@@ -49,7 +56,6 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
 
 
     render() {
-        console.log('survey----->', this.state.survey)
         return (
             <div style={{ background: '#f5f5f5', border: '2px solid #ddd', padding: '20px'}}>
                 <GridContainer>

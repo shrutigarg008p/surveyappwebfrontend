@@ -219,7 +219,7 @@ type State = {
                         <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Redemptions</button>
                         <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export</button>
                         <button type="button" className="btn btn-danger ml-1" onClick={() => this.clearFilter()}>Clear Filter</button>
-                    <button type="button" className="btn btn-warning ml-1">Approve Redemption</button>
+                    {/*<button type="button" className="btn btn-warning ml-1">Approve Redemption</button>*/}
                     </div>
 
 
@@ -286,7 +286,7 @@ type State = {
                                             <td>{redemption.pointsRequested}</td>
                                             <td>{redemption.redemptionModeTitle}</td>
                                             <td>{redemption.redemptionRequestStatus}</td>
-                                            <td>{redemption.approvedByUser ? 'Admin' : 'Not Approved'}</td>
+                                            <td>{redemption.approvedById || redemption.cancelledById ? 'Admin' : 'Not Approved'}</td>
                                             <td>{moment(redemption.requestDate).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>
                                                 {redemption.requestedUser
@@ -307,7 +307,7 @@ type State = {
                                                         disabled={redemption.redemptionRequestStatus === 'Redeemed'}
                                                         className="mx-1"
                                                     >
-                                                        Approved
+                                                        Approve
                                                     </Button>
                                                 </Confirmation>
                                                 <Confirmation onAction={() => this.rejectActions(redemption.id)} body="Are you sure want to reject request ?">
