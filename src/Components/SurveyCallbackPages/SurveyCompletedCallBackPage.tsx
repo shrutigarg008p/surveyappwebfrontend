@@ -41,10 +41,18 @@ export default class SurveyCompletedCallBackPage extends React.Component<any, an
                 if(!!survey && survey.url) {
                     window.location.href = survey.url;
                 } else if (!!survey && survey.surveysDetails.survey.country.toLowerCase() === 'india') {
+                    // let currentUrl = window.location.href;
+                    // // let currentUrl = 'https://polls.dataxing.com/#/surveys/853946/e036ddf2-8aeb-47be-839e-934e704616b9/completed?surveyid=853946&userid=e036ddf2-8aeb-47be-839e-934e704616b9'
+                    // currentUrl = currentUrl.replace('polls.dataxing.com', 'test.indiapolls.com');
+                    // window.location.href = currentUrl;
                     let currentUrl = window.location.href;
-                    // let currentUrl = 'https://polls.dataxing.com/#/surveys/853946/e036ddf2-8aeb-47be-839e-934e704616b9/completed?surveyid=853946&userid=e036ddf2-8aeb-47be-839e-934e704616b9'
-                    currentUrl = currentUrl.replace('polls.dataxing.com', 'test.indiapolls.com');
-                    window.location.href = currentUrl;
+                    const newHost = 'test.indiapolls.com';
+                    if (new URL(currentUrl).host !== newHost) {
+                        currentUrl = currentUrl.replace(window.location.host, newHost);
+                        window.location.href = currentUrl;
+                    } else {
+                        this.setState({ survey, status: PageStatus.Loaded });
+                    }
                 } else {
                     this.setState({ survey, status: PageStatus.Loaded });
                 }
