@@ -16,6 +16,7 @@ import SurveyTerminatedCallbackPage from "./Components/SurveyCallbackPages/Surve
 import SurveyQualityTerminatedCallbackPage from "./Components/SurveyCallbackPages/SurveyQualityTerminatedCallbackPage";
 import {LinkViewWithState} from "./Components/Referrals/LinkView";
 import { requestForToken, foreGroundMessage } from './firebase';
+import PartnerSurvey from "./Components/Partners/PartnerSurvey";
 
 requestForToken();
 foreGroundMessage();
@@ -30,6 +31,7 @@ class App extends React.Component<any, any> {
             <Route path='/surveys/:surveyId/:userId/overquota' component={SurveyOverQuotaCallbackPage} />
             <Route path='/surveys/:surveyId/:userId/terminate' component={SurveyTerminatedCallbackPage} />
             <Route path='/surveys/:surveyId/:userId/qualityterminate' component={SurveyQualityTerminatedCallbackPage} />
+            <Route path='/partner' component={PartnerSurvey} />
             <Route path='/referrals/view/:userId' component={LinkViewWithState} />
             <Route path="/auth" component={AuthRouter} />
             <Route path="/verify-screen" component={VerificationEmailScreens} />

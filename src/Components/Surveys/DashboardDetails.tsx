@@ -27,6 +27,23 @@ const MODAL_TYPES = {
     BODY: 'BODY'
 };
 
+function appendParamsToUrl(baseUrl, partnerId, surveyId) {
+    if (baseUrl && partnerId) {
+        try {
+            const url = new URL(baseUrl);
+            url.searchParams.append('partnerid', partnerId);
+            // url.searchParams.append('surveyid', surveyId);
+            // url.searchParams.append('rid', '');
+            return url.toString();
+        } catch (error) {
+            console.error('Invalid URL:', error.message);
+            return baseUrl;
+        }
+    }
+    console.error('Missing baseUrl or partnerId');
+    return baseUrl;
+}
+
 class DashboardDetails extends React.Component<any, any> {
     static defaultProps = {
         languageId: null,
@@ -370,7 +387,7 @@ class DashboardDetails extends React.Component<any, any> {
                                 <div key={data.value} className="row mt-2">
                                     <div key={data.value} className="col">
                                         <strong key={data.value}>{data.label}: </strong>
-                                        {`${this.state.survey?.url}?partnerid=${data.value}`}
+                                        {`https://polls.dataxing.com/#/partner?partnerid=${data.value}&surveyid=${this.props.id}&rid={respondent_id}`}
                                     </div>
                                 </div>
                             ))}

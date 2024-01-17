@@ -173,6 +173,13 @@ export class SurveysAPI {
             });
     }
 
+    static surveyPartner(data: any): Promise<any> {
+        return api.post(`${surveysURL}/createSurveyPartnerUser`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
     static userRespondentDashboardWeb(userId: any): Promise<any> {
         return api.get(`${surveysURL}/userRespondentDashboardWeb/${userId}`)
             .then((res) => {

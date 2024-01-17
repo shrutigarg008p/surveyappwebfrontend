@@ -69,7 +69,7 @@ const dashboardRoutes = [
   },
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Schedule Survey",
     icon: Dashboard,
     component: DashboardSurvey,
     layout: "/admin",
@@ -322,7 +322,7 @@ const dashboardRoutes = [
   },
   {
     path: "/panelist-message",
-    name: "Messages",
+    name: "Contact Us",
     icon: Message,
     component: MessageForm,
     layout: "/panelist",

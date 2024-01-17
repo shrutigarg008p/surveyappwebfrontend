@@ -118,7 +118,7 @@ class MessageForm extends React.Component<any, any> {
                             </div>
                         </CardHeader>
                     </Card>
-                    <h5 className="ml-5"><b>To contact us please call us at 0123456789 or fill the following form</b></h5>
+                    {/*<h5 className="ml-5"><b>To contact us please call us at 0123456789 or fill the following form</b></h5>*/}
                 </GridContainer>
                 <Show when={this.state.status === PageStatus.Loading}>
                     <div className="d-flex justify-content-center w-100 p-5">

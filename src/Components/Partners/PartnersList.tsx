@@ -13,8 +13,23 @@ import CardHeader from "../Card/CardHeader";
 import GridContainer from "../Grid/GridContainer";
 import Card from "../Card/Card";
 import moment from "moment/moment";
-import {CountriesAPI} from "../../API/CountriesAPI";
 import {PartnersAPI, RedemptionModeAPI} from "../../API";
+
+
+function appendParamsToUrl(baseUrl, partnerId) {
+  if (baseUrl && partnerId) {
+    try {
+      const url = new URL(baseUrl);
+      url.searchParams.append('partnerid', partnerId);
+      return url.toString();
+    } catch (error) {
+      console.error('Invalid URL:', error.message);
+      return baseUrl;
+    }
+  }
+  console.error('Missing baseUrl or partnerId');
+  return baseUrl;
+}
 
 
 const styles = {
@@ -226,8 +241,8 @@ export class PartnersList extends Component<any, any> {
                       />
                     </td>
                     <td>{data.description}</td>
-                    <td>{`${data.successUrl}?partnerid=${data?.id}`}</td>
-                    <td>{`${data.overQuotaUrl}?partnerid=${data?.id}`}</td>
+                    <td>{appendParamsToUrl(data.successUrl, data?.id)}</td>
+                    <td>{appendParamsToUrl(data.successUrl, data?.id)}</td>
                     <td>{moment(data.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                     <td>{moment(data.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                   </tr>
