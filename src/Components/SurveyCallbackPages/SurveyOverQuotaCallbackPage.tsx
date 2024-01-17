@@ -40,6 +40,15 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
             .then((survey) => {
                 if(!!survey && survey.url) {
                     window.location.href = survey.url;
+                } else if (!!survey && survey.surveysDetails.survey.country.toLowerCase() === 'india') {
+                    let currentUrl = window.location.href;
+                    const newHost = 'test.indiapolls.com';
+                    if (new URL(currentUrl).host !== newHost) {
+                        currentUrl = currentUrl.replace(window.location.host, newHost);
+                        window.location.href = currentUrl;
+                    } else {
+                        this.setState({ survey, status: PageStatus.Loaded });
+                    }
                 } else {
                     this.setState({ survey, status: PageStatus.Loaded });
                 }
@@ -70,14 +79,14 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
                     <Spinner animation="border" variant="primary" />
                 </Container>
             </Show>
-        
+
             <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
                 <Container className='text-center mt-5'>
                 <h1>
                             Over Quota
                         </h1>
                 </Container>
-        
+
                 {this.state.survey && this.state.survey.surveysDetails ?
                     <Container className="d-flex justify-content-center mt-5">
                         <Table bordered>
@@ -103,7 +112,7 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
                     </Container>
                     : null
                 }
-        
+
                 {this.state.survey && this.state.survey.surveysDetails ?
                     <Container className="d-flex justify-content-center mt-5">
                         <Row>
@@ -117,7 +126,7 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
                     </Container>
                     : null
                 }
-        
+
                 <Container className="d-flex justify-content-center mt-5">
                     <Alert
                         variant="danger"
@@ -128,7 +137,7 @@ export default class SurveyOverQuotaCallbackPage extends React.Component<any, an
                 </Container>
             </Show>
         </div>
-        
+
         );
     }
 }

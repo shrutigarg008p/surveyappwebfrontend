@@ -39,6 +39,15 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
             .then((survey) => {
                 if(!!survey && survey.url) {
                     window.location.href = survey.url;
+                } else if (!!survey && survey.surveysDetails.survey.country.toLowerCase() === 'india') {
+                    let currentUrl = window.location.href;
+                    const newHost = 'test.indiapolls.com';
+                    if (new URL(currentUrl).host !== newHost) {
+                        currentUrl = currentUrl.replace(window.location.host, newHost);
+                        window.location.href = currentUrl;
+                    } else {
+                        this.setState({ survey, status: PageStatus.Loaded });
+                    }
                 } else {
                     this.setState({ survey, status: PageStatus.Loaded });
                 }
@@ -68,20 +77,20 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
                     </GridContainer>
                 </div>
             </Show>
-        
+
             <Show when={this.state.status === PageStatus.Loading}>
                 <div className="d-flex justify-content-center mt-5">
                     <Spinner animation="border" variant="primary" />
                 </div>
             </Show>
-        
+
             <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey && this.state.survey.surveysDetails}>
                 <div className='text-center mt-5'>
                     <h1>
                     Quality Terminated
                     </h1>
                 </div>
-        
+
                 {this.state.survey && this.state.survey.surveysDetails ?
                     <div className="d-flex justify-content-center mt-5">
                         <Table bordered>
@@ -107,7 +116,7 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
                     </div>
                     : null
                 }
-        
+
                 {this.state.survey && this.state.survey.surveysDetails ?
                     <div className="d-flex justify-content-center mt-5">
                         <Row>
@@ -121,7 +130,7 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
                     </div>
                     : null
                 }
-        
+
                 <div className="d-flex justify-content-center mt-5">
                     <Alert
                         variant="danger"
@@ -132,7 +141,7 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
                 </div>
             </Show>
         </div>
-        
+
         );
     }
 }
