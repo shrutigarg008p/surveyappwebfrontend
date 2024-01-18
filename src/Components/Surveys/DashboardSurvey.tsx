@@ -317,8 +317,8 @@ export class DashboardSurvey extends Component<any, any> {
                                     <th>CEGG Points</th>
                                     <th>PublishedAt</th>
                                     <th>Expire On</th>
-                                    <th>Created</th>
-                                    <th>Updated</th>
+                                    <th>UUID</th>
+                                    <th>Unique Id</th>
                                 </tr>
                                 </thead>
 
@@ -328,30 +328,30 @@ export class DashboardSurvey extends Component<any, any> {
                                         <tr key={survey.id}>
                                             <td>{index + 1}</td>
                                             <td>
-                      <span
-                          aria-label="button"
-                          role="button"
-                          tabIndex={0}
-                          className="text-primary"
-                          onKeyPress={() => null}
-                          onClick={() => {
-                              this.setState({
-                                  formType: MODAL_TYPES.DETAILS,
-                                  id: survey.id,
-                              });
-                          }}
-                          dangerouslySetInnerHTML={{
-                              __html: survey.name || 'Title',
-                          }}
-                      />
+                                              <span
+                                                  aria-label="button"
+                                                  role="button"
+                                                  tabIndex={0}
+                                                  className="text-primary"
+                                                  onKeyPress={() => null}
+                                                  onClick={() => {
+                                                      this.setState({
+                                                          formType: MODAL_TYPES.DETAILS,
+                                                          id: survey.id,
+                                                      });
+                                                  }}
+                                                  dangerouslySetInnerHTML={{
+                                                      __html: survey.name || 'Title',
+                                                  }}
+                                              />
                                             </td>
                                             <td>{survey.company}</td>
                                             <td>{survey.isActive === true ? 'Yes' : 'No' }</td>
                                             <td>{survey.ceggPoints}</td>
                                             <td>{moment(survey.publishDate).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>{moment(survey.expiryDate).format('MM/DD/YYYY HH:mm A')}</td>
-                                            <td>{moment(survey.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                                            <td>{moment(survey.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                            <td>{survey.id}</td>
+                                            <td>{survey.assignedSurveys.length > 0 ? survey.assignedSurveys[0].temporarySurveyLinkId: '-'}</td>
                                         </tr>
                                     ))
                                 }

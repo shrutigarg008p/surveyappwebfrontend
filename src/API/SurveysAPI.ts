@@ -194,4 +194,11 @@ export class SurveysAPI {
             });
     }
 
+    static partnerSurveyUsers(): Promise<any> {
+        return api.get(`${surveysURL}/getAllPartnerUsers`)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
 }

@@ -13,6 +13,20 @@ type State = {
   error: string | null,
 };
 
+function appendParamsToUrl(baseUrl, partnerId) {
+  if (baseUrl && partnerId) {
+    try {
+      const url = new URL(baseUrl);
+      url.searchParams.append('partnerid', partnerId);
+      return url.toString();
+    } catch (error) {
+      console.error('Invalid URL:', error.message);
+      return baseUrl;
+    }
+  }
+  console.error('Missing baseUrl or partnerId');
+  return baseUrl;
+}
 
 class Details extends React.Component<any, State> {
   static defaultProps = {
@@ -103,19 +117,19 @@ class Details extends React.Component<any, State> {
               </div>
               <div className=" mb-3">
                 <strong>Completed URL: </strong>
-                {`${this.state.data?.successUrl}?partnerid=${this.state.data?.id}`}
+                {appendParamsToUrl(this.state.data?.successUrl, this.state.data?.id)}
               </div>
               <div className=" mb-3">
                 <strong>Quota Full URL: </strong>
-                {`${this.state.data?.overQuotaUrl}?partnerid=${this.state.data?.id}`}
+                {appendParamsToUrl(this.state.data?.overQuotaUrl, this.state.data?.id)}
               </div>
               <div className=" mb-3">
                 <strong>Terminate URL: </strong>
-                {`${this.state.data?.disqualifiedUrl}?partnerid=${this.state.data?.id}`}
+                {appendParamsToUrl(this.state.data?.disqualifiedUrl, this.state.data?.id)}
               </div>
               <div className=" mb-3">
                 <strong>Bad Terminate URL: </strong>
-                {`${this.state.data?.badTerminatedUrl}?partnerid=${this.state.data?.id}`}
+                {appendParamsToUrl(this.state.data?.badTerminatedUrl, this.state.data?.id)}
               </div>
             <Alert
               variant="danger"

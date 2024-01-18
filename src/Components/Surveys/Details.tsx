@@ -141,6 +141,13 @@ class Details extends React.Component<any, State> {
 
               <div className="row mt-2">
                 <div className="col">
+                  <strong>Survey UUID: </strong>
+                  {this.state.survey?.id}
+                </div>
+              </div>
+
+              <div className="row mt-2">
+                <div className="col">
                   <strong>Description: </strong>
                   {this.state.survey?.description}
                 </div>

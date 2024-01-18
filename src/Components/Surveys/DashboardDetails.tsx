@@ -199,6 +199,16 @@ class DashboardDetails extends React.Component<any, any> {
                         <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey}>
                             <div className="row mt-2">
                                 <div className="col">
+                                    <strong>Survey UUID: </strong>
+                                    {this.state.survey?.id}
+                                </div>
+                                <div className="col">
+                                    <strong>Survey Unique Id: </strong>
+                                    {this.state.users.length > 0 ? this.state.users[0].assignUser.temporarySurveyLinkId : 'NA'}
+                                </div>
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col">
                                     <strong>Name: </strong>
                                     {this.state.survey?.name}
                                 </div>

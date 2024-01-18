@@ -16,13 +16,15 @@ import styles from "../../assets/jss/material-dashboard-react/views/dashboardSty
 import {PageStatus} from "../../enums";
 import {SurveysAPI} from "../../API";
 import {connect} from "react-redux";
-import {Alert, Container, Spinner} from "react-bootstrap";
+import {Alert, Button, Container, Spinner} from "react-bootstrap";
 import {Show} from "../../Layout";
+import {exportToExcel} from "../../Utils/ExportToExcel";
 const useStyles = makeStyles(styles);
 
 function AdminDashboard({...rest}) {
     const classes = useStyles();
     const [data, setData] = useState(null);
+    const [partnerUsers, setUsersData] = useState(null);
     const [status, setStatus] = useState(PageStatus.None);
     const [error, setError] = useState('');
 
@@ -52,6 +54,45 @@ function AdminDashboard({...rest}) {
 
         fetchData();
     }, []);
+
+
+    const fetchPartnerUsers = async () => {
+        try {
+            Promise.resolve()
+                .then(() => setStatus(PageStatus.Loading))
+                .then(() => SurveysAPI.partnerSurveyUsers())
+                .then((response) => {
+                    console.log('response--->', response)
+                    if(response) {
+                        setUsersData(response)
+                        const transformedData = response.map(item => ({
+                            "Survey ID of the Project": item.survey_id,
+                            "Country": item.country,
+                            "India Polls respondent ID": item.rid,
+                            "Vendor Respondent ID": item.rid,
+                            "Status": item.status,
+                            "Start IP": item.ip,
+                            "End IP": item.ip,
+                            "Start Time": item.createdAt,
+                            "End Time": item.updatedAt,
+                            "LOI": item.updatedAt,
+                            "Survey Name": item.surveyName,
+                            "Partner Name": item.partnerName
+                        }));
+                        exportToExcel(transformedData, 'PartnerUsers');
+                        setStatus(PageStatus.Loaded)
+                    }
+                })
+                .catch((error) => {
+                    setStatus(PageStatus.Error)
+                    setError(error.message)
+                });
+        } catch (error) {
+            setError(error);
+        } finally {
+            setStatus(PageStatus.Loaded);
+        }
+    };
 
     return (
         <div>
@@ -253,6 +294,27 @@ function AdminDashboard({...rest}) {
                                 <h3 className={classes.cardTitle}>
                                     {data ? data.totalRewardPoints.points : 0}<small></small>
                                 </h3>
+                            </CardHeader>
+                            <CardFooter stats>
+                                <div className={classes.stats}>
+                                    <Update />
+                                    Just Updated
+                                </div>
+                            </CardFooter>
+                        </Card>
+                    </GridItem>
+                    <GridItem xs={12} sm={6} md={3}>
+                        <Card>
+                            <CardHeader color="info" stats icon>
+                                <CardIcon color="success">
+                                    <Store />
+                                </CardIcon>
+                                <p className={classes.cardCategory}>Partners Users</p>
+                                    <Button
+                                    onClick={() => fetchPartnerUsers()}
+                                    >
+                                        Download
+                                    </Button>
                             </CardHeader>
                             <CardFooter stats>
                                 <div className={classes.stats}>
