@@ -5,8 +5,7 @@ import { withRouter } from 'react-router';
 import LoadingSpinner from "../../Layout/LoadingSpinner";
 import { authRegistration } from "./auth.actions";
 import FacebookLogin from 'react-facebook-login';
-import Language from "../../Languages/Login/content.json"
-import { Helmet } from "react-helmet";
+import { signInWithGoogle } from './signInWithGoogle';
 import { Assets } from 'enums';
 import { Link } from 'react-router-dom';
 import GoogleSignIn from "./googleSignin";
@@ -170,195 +169,127 @@ class Registration extends Component {
     const { isPasswordMatched, pageContent } = this.state;
     const lang = this.props.language ?? 'en';
     return (
-      <>
-        <Helmet>
-          <title>Indiapolls - Sign up</title>
-        </Helmet>
-        <section className="formSec">
-          <div className="container zoom-70">
-            <div className="row" style={{ paddingTop: '2%' }}>
-              <div className="col-md-6">
-                <div className="logoDiv">
-                  <img src={Assets.Logo2} className="img-fluid mobileNone" alt="IndiaPolls" style={{ width: '100%' }} />
-                  <p className="mobileNone text-center" style={{ fontSize: 18 }}>{pageContent.items[12].title}</p>
+    <>
+     <section className="formSec">
+        <div className="container">
+          <div className="row" style={{paddingTop: '2%'}}>
+            <div className="col-md-6">
+              <div className="logoDiv">
+                <img src={Assets.Logo} className="img-fluid mobileNone" alt="IndiaPolls" style={{width:'100%'}}/>
+                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>Participate in market research projects and reap instant rewards for sharing your valuable opinions</p>
+              </div>
+            </div>
+            <div className="col-md-5">
+              <div>
+                <div className="formdesign">
+                  <i className="fa fa-info-circle" aria-hidden="true" /> For your protection, please verify your identity.
                 </div>
               </div>
-              <div className="col-md-5">
-                <div>
-                  <div className="formdesign">
-                    <i className="fa fa-info-circle" aria-hidden="true" /> {pageContent.title}
-                  </div>
+              <div className="formdesign2">
+                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt />
+                <h2>Create an account </h2>
+                <p>Already have an account? <Link to="#" onClick={() => this.onLogin()}>Sign in</Link></p>
+                <div className="social-login">
+                  <a href="#" onClick={signInWithGoogle}><img src="assets/img/google.svg" alt /></a>
+                  <FacebookLogin
+                      appId="879890270328649"
+                      autoLoad={false}
+                      fields="name,email,picture"
+                      callback={(e) => responseFacebook(e)}
+                      icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}
+                      cssClass="facebook-login-btn"
+                      textButton=""
+                  />
                 </div>
-                <div className="formdesign2">
-                  <img src={Assets.Logo2} style={{ width: '100%' }} className="img-fluid desktopNone" alt="" />
-                  <h2>{pageContent.items[0].title}</h2>
-                  <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
-                  <div className="social-login">
-                    <img src={'assets/img/google.png'} style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithGoogleClick()}/>
-                    &nbsp; &nbsp; <img src="assets/img/facebook.png" style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithFacebookClick()}/>
-                    {this.state.showGoogleSignIn && <GoogleSignIn />}
-                  {this.state.showFacebookSignIn && <FacebookSignIn />}
+                <div className="RuleWithText">Or</div>
+                {/* <form onSubmit={props.handleSubmit(onSubmit)}> */}
+                  <div className="mb-3 mt-3">
+                    <label htmlFor="email">Email address</label>
+                    <input type="email" className="form-control" name="email"
+                    value={this.state.email}
+                    onChange={(e) => this.setState({ email: e.target.value })}
+                    onClick={() => this.setState({emailActive: !this.state.emailActive})}
+                    placeholder='Email'
+                    required />
                   </div>
-                  <div className="RuleWithText">{pageContent.items[3].title}</div>
-                  {/* <form onSubmit={props.handleSubmit(onSubmit)}> */}
-                  <form onSubmit={(e) => {
-                    e.preventDefault();
-                    this.onSubmit();
-                  }}>
-                    <div className="mb-3 mt-3">
-                      <label htmlFor="email">{pageContent.items[4].title}</label>
-                      <input type="email" className="form-control" name="email"
-                        value={this.state.email}
-                       
-                        onChange={(e) => this.setState({ email: e.target.value })}
-                        onClick={() => this.setState({ emailActive: !this.state.emailActive })}
-                        // placeholder={pageContent.items[5].title}
-                        maxLength={200}
-                        onInvalid={(e)=>{
-                          let msg = registerDict[lang]['email_required'];
-                          e.target.setCustomValidity(msg)
-                        }}
-                        onInput={(e)=>e.target.setCustomValidity("")}
-                        required />
-                    </div>
-                    <div className="mb-3 mt-3">
-                      <label htmlFor="phone">{pageContent.items[6].title}</label>
-                      <input type="text" className="form-control" name="phone"
-                        value={this.state.phoneNumber}
-                        onChange={(e) => {
-                          this.setState({
-                            phoneNumber: e.target.value,
-                          })
-                        }}
-                        onClick={() => this.setState({ phoneNumberActive: !this.state.phoneNumberActive })}
-                        // placeholder={pageContent.items[6].title}
-                        required
-                        title={registerDict[lang]['phoneTitle']}
-                        pattern="[6-9]\d{9}"
-                        onInvalid={(e)=>{
-                          let msg = registerDict[lang]['validationMessage'] + ': '+ registerDict[lang]['phoneTitle']
-                          e.target.setCustomValidity(msg)
-                        }}
-                        onInput={(e)=>e.target.setCustomValidity("")}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="pwd">{pageContent.items[7].title}  {isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
-                      <div className="password-container" style={{ position: 'relative', height: '50px', marginBottom: '20px' }}>
-                      <input
-                       style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%' }}
-                        className="form-control"
-                        type={this.state.isPasswordVisible ? 'text' : 'password'}
-                        onChange={(e) => {
-                          this.onChangePassword(e.target.value, 'password');
-                          this.setState({
-                            password: e.target.value,
-                          })
-                        }}
-                        onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
-                        title={registerDict[lang]['passwordTitle']}
-                        pattern="^(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$"
-                        onInvalid={(e)=>{
-                          let msg = registerDict[lang]['validationMessage'] + ': '+ registerDict[lang]['passwordTitle']
-                          e.target.setCustomValidity(msg)
-                        }}
-                        onInput={(e)=>e.target.setCustomValidity("")}
-                        required />
-                        <button
-    type="button"
-    style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}
-    onClick={() => this.setState({ isPasswordVisible: !this.state.isPasswordVisible })}
-  >
-    <i className={this.state.isPasswordVisible ? "fa fa-eye-slash" : "fa fa-eye"}></i>
-  </button>
-                        </div>
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="pwd">{pageContent.items[8].title}  {isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
-                      <div className="password-container" style={{ position: 'relative', height: '50px', marginBottom: '20px' }}>
-                      <input
-                       style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%' }}
-                        className="form-control"
-                        type={this.state.isRepeatPasswordVisible ? 'text' : 'password'}
-                        pattern="^(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$"
-                        onInvalid={(e)=>{
-                          let msg = registerDict[lang]['validationMessage'] + ': '+ registerDict[lang]['passwordTitle']
-                          e.target.setCustomValidity(msg)
-                        }}
-                        onInput={(e)=>e.target.setCustomValidity("")}
-                        onChange={(e) => {
-                          this.onChangePassword(e.target.value, 'confirmpassword');
-                          this.setState({
-                            confirmPassword: e.target.value,
-                          })
-                        }}
-                        onClick={() => this.setState({ confirmPasswordActive: !this.state.confirmPasswordActive })}
-                      />
-                      <button
-    type="button"
-    style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}
-    onClick={() => this.setState({ isRepeatPasswordVisible: !this.state.isRepeatPasswordVisible })}
-  >
-    <i className={this.state.isRepeatPasswordVisible ? "fa fa-eye-slash" : "fa fa-eye"}></i>
-  </button>
-  </div>
-                    </div>
-
-                    <div className="login-row login-form-item-control" style={{ marginBottom: '-11px' }}>
-                      <label>
-                        <input
-                          type='checkbox'
-                          onChange={(e) => this.setState({ policy: e.target.checked })}
-                          required
-                          onInvalid={(e)=>{
-                            let msg = registerDict[lang]['acceptance_required'];
-                            e.target.setCustomValidity(msg)
-                          }}
-                          onInput={(e)=>e.target.setCustomValidity("")}
-                          className="r_pp_checkbox login-checkbox-input" defaultValue />
-                        &nbsp;&nbsp;
-                        <span
-                          dangerouslySetInnerHTML={{ __html: pageContent.items[9].title }}
-                        />
-                      </label>
-                      {/* <span><Link to="/terms">{pageContent.items[10].title}</Link></span>
-
-                  <span><Link to="/privacy-policy">Privacy Policy</Link></span> */}
-                    </div>
-                    <Show when={this.state.show === true}>
-                      <small className="form-text text-danger privacy_error">
-                        {pageContent.items[13].title}
-                      </small>
-                    </Show>
-                    <Show when={this.state.showConfirmPassword === true}>
-                      <small className="form-text text-danger privacy_error">
-                        {pageContent.items[14].title}
-                      </small>
-                    </Show>
-                    <Show when={this.state.error.status === true}>
-                      <small className="form-text text-danger privacy_error">
-                        {this.state.error.message}
-                      </small>
-                    </Show>
-                    <p>
-                      <LoadingSpinner show={this.props.isLoading} />
-                      <span className="text-right">
-                        <button
-                          type="submit"
-                          style={{ float: 'right' }}
-                          className="btn btn-primary"
-                          disabled={!this.isSubmitButtonDisable()}>{pageContent.items[11].title}</button>
-                      </span>
-                    </p>
-                    {/* <GoogleReCaptcha
-                      onCaptchaValidation={(res) => this.handleCaptchaValidation(res)}
-                    /> */}
-                  </form>
-                  <select className="text-center" onChange={(e) => this.languageChangeOptions(e)} value={this.props.language}>
-                    <option value="en">English</option>
-                    <option value="hi">Hindi</option>
-                  </select>
-                </div>
+                  <div className="mb-3 mt-3">
+                    <label htmlFor="phone">Phone</label>
+                    <input type="text" className="form-control" name="phone"
+                    value={this.state.phoneNumber}
+                    onChange={(e) => {
+                    this.setState({
+                       phoneNumber: e.target.value,
+                     })
+                    }}
+                    onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
+                    placeholder='Phone'
+                    required 
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="pwd">Password  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
+                    <input 
+                  className="form-control"
+                   type='password'
+                   onChange={(e) => {
+                     this.onChangePassword(e.target.value, 'password');
+                     this.setState({
+                       password: e.target.value,
+                     })
+                   }}
+                   onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
+                   placeholder='Password'
+                   required />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="pwd">Confirm Password  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
+                    <input 
+                    className="form-control"
+                    type='password'
+                    onChange={(e) =>{
+                      this.onChangePassword(e.target.value, 'confirmpassword');
+                      this.setState({
+                        confirmPassword: e.target.value,
+                      })
+                    }}
+                    onClick={() => this.setState({confirmPasswordActive: !this.state.confirmPasswordActive})}
+                    />
+                  </div>
+                  
+                   <div className="login-row login-form-item-control" style={{marginBottom : '-11px'}}>
+                <label>
+                  <input
+                  type='checkbox'
+                  onChange={(e) => this.setState({ policy: e.target.checked })}
+                  className="r_pp_checkbox login-checkbox-input" defaultValue />
+                  <span> By signing up, I accept</span>
+                </label>
+                  <span><Link to="/terms"> Term &amp; Condition</Link></span>
+              </div>
+              <Show when={this.state.show===true}>
+                <small className="form-text text-danger privacy_error">
+                  Please accept the terms to our privacy policy and our terms and conditions
+                </small>
+              </Show>
+              <Show when={this.state.showConfirmPassword === true}>
+                <small className="form-text text-danger privacy_error">
+                  Please enter same password in both password and confirm password
+                </small>
+              </Show>
+              <Show when={this.state.error.status === true}>
+                <small className="form-text text-danger privacy_error">
+                  {this.state.error.message}
+                </small>
+              </Show>
+                  <p>
+                <LoadingSpinner show={this.props.isLoading} />
+                <span className="text-right">
+                  <button type="submit" style={{float:'right'}} className="btn btn-primary" onClick={() => this.onSubmit()}
+                disabled={!this.isSubmitButtonDisable()}>Sign up</button>
+                </span>
+                  </p>
+                {/* </form> */}
+                
               </div>
             </div>
           </div>
