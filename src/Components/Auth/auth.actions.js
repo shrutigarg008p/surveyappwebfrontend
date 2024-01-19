@@ -1,5 +1,6 @@
 import * as authActions from "./actions";
 import { AuthAPI } from "../../API";
+import {AUTH_SUCCESS_MOBILE_STEP} from "./actions";
 
 export const authStart = () => ({
   type: authActions.AUTH_START,
@@ -12,6 +13,11 @@ export const authSuccess = (user) => ({
 
 export const authSuccessLastStep = (user) => ({
     type: authActions.AUTH_SUCCESS_LAST_STEP,
+    user,
+});
+
+export const authSuccessMobileStep = (user) => ({
+    type: authActions.AUTH_SUCCESS_MOBILE_STEP,
     user,
 });
 
@@ -38,7 +44,13 @@ export const authLogin =
     try {
       dispatch(authStart());
       const user = await AuthAPI.login(username, password, registerType);
-      if(user.emailConfirmed === true && user.basicProfile) {
+        if(user.phoneNumberConfirmed === false) {
+            dispatch(authSuccessMobileStep(user))
+            return history.push({
+                pathname: '/auth/verify-mobile',
+                state: { userId: user.id },
+            });
+        } else if(user.emailConfirmed === true && user.basicProfile) {
           dispatch(authSuccess(user));
           if (user.role === 'panelist') {
               history.push("/panelist/dashboard");
@@ -79,7 +91,10 @@ export const authRegistration =
         dispatch(authStart());
         const user = await AuthAPI.registration(data);
         dispatch(authRegisterSuccess(user));
-          history.push("/verify-screen");
+              return history.push({
+                  pathname: '/auth/verify-mobile',
+                  state: { userId: user.id },
+              });
       } catch (error) {
         dispatch(authFail(error.message));
       }

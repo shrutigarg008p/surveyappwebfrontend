@@ -17,7 +17,8 @@ import PropTypes from "prop-types";
 import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux";
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
-import {AuthAPI} from "../../API";
+import {AuthAPI, SurveysAPI} from "../../API";
+import {PageStatus} from "../../enums";
 
 const styles = {
   cardCategoryWhite: {
@@ -47,17 +48,20 @@ export default function UserProfile(props) {
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
+  const [imagePath, setImagePath] = useState(avatar);
   const [postalcode, setPostalcode] = useState("");
   const [aboutme, setAboutme] = useState("");
   const [disabled, setDisabled] = useState(true);
   const { invalid, pristine, submitting } = props;
+  const [status, setStatus] = useState(PageStatus.None);
+  const [error, setError] = useState('');
 
   const classes = useStyles();
   const { userId } = useSelector((state) => state.adminUser.adminUser);
 
   useEffect(() => {
     loadProfile();
-  }, []);
+  }, [status]);
 
   const loadProfile = async () => {
       Promise.resolve()
@@ -79,12 +83,38 @@ export default function UserProfile(props) {
             setCountry(user.profile.country);
             setPostalcode(user.profile.pinCode);
             setAboutme(user.aboutme);
+            setImagePath(`${process.env.REACT_APP_BASE_URL_API}${user.profile.imagePath}` || avatar)
           }
         })
         .catch((error) => {
           alert(error);
         });
   };
+
+
+  const handleProfilePictureChange = (e) => {
+    try {
+      const file = e.target.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('userId', userId);
+        Promise.resolve()
+            .then(() => setStatus(PageStatus.Loading))
+            .then(() => AuthAPI.uploadProfile(formData))
+            .then((response) => {
+              alert('Profile Uploaded Successfully')
+              setStatus(PageStatus.Loaded)
+            })
+            .catch((error) => {
+              setStatus(PageStatus.Error)
+              setError(error.message)
+            });
+      }
+    } catch (error) {
+      setError(error);
+    }
+  }
 
   const handleSubmit = async () => {
     const valuesIn = {
@@ -248,10 +278,17 @@ export default function UserProfile(props) {
         <GridItem xs={12} sm={12} md={4}>
           <Card profile>
             <CardAvatar profile>
-              <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
+              <label htmlFor="profilePictureInput">
+                <input
+                    type="file"
+                    id="profilePictureInput"
+                    style={{ display: 'none' }}
+                    onChange={handleProfilePictureChange}
+                />
+                <img src={imagePath} alt="Profile" style={{ cursor: 'pointer' }} />
+              </label>
             </CardAvatar>
+
             <CardBody profile>
               <h6 className={classes.cardCategory}>{email}</h6>
               <h4 className={classes.cardTitle}>{firstname} {lastName}</h4>
@@ -263,9 +300,3 @@ export default function UserProfile(props) {
     </div>
   );
 }
-
-UserProfile.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  invalid: PropTypes.bool.isRequired,
-};

@@ -4,7 +4,6 @@ export const baseApiURL = process.env.REACT_APP_BASE_URL_API;
 export const loginURL = '/api/v1/auth/user/login';
 export const getProfile = '/api/v1/auth/user/get-user';
 export const registrationURL = '/api/v1/auth/user/signup';
-
 export const userURL = '/api/v1/auth/user';
 export const createBasicProfileURL = '/api/v1/auth/user/update-basic-profile';
 export const countryListURL = '/api/v1/country/getAll';

@@ -34,6 +34,17 @@ export class AuthAPI {
             });
     }
 
+
+    static async uploadProfile(
+        body: any
+    ): Promise<any> {
+        return api.post(`${userURL}/uploadProfile`, body)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+
     static async registration(
         body: any
     ): Promise<any> {
@@ -41,6 +52,19 @@ export class AuthAPI {
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });
+    }
+
+    static async verifyMobileOtp(
+        data: any
+    ): Promise<any> {
+        return api.post(`${userURL}/verify-mobile`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            })
+        .catch((error) => {
+                console.error('Error in verifyMobileOtp:', error);
+                throw error;
+        });
     }
 
     static async createBasicProfile(

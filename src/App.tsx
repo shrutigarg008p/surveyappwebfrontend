@@ -17,6 +17,7 @@ import SurveyQualityTerminatedCallbackPage from "./Components/SurveyCallbackPage
 import {LinkViewWithState} from "./Components/Referrals/LinkView";
 import { requestForToken, foreGroundMessage } from './firebase';
 import PartnerSurvey from "./Components/Partners/PartnerSurvey";
+import VerifyOtp from "./Components/Auth/VerifyOtp";
 
 requestForToken();
 foreGroundMessage();

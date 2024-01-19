@@ -7,6 +7,7 @@ import { DocumentTitle } from '../../Shared/';
 import { RegistrationWithState} from "./Registration";
 import VerifyEmail from "./VerifyEmail";
 import {BasicProfile} from "./BasicProfile";
+import VerifyOtp from "./VerifyOtp";
 
 export function AuthRouter() {
   const { path } = useRouteMatch();
@@ -30,6 +31,11 @@ export function AuthRouter() {
         <Route exact path={`${path}/basic-profile`}>
             <DocumentTitle title="Profile | Admin Panel" />
             <BasicProfile />
+        </Route>
+
+        <Route exact path={`${path}/verify-mobile`}>
+            <DocumentTitle title="Verify | Admin Panel" />
+            <VerifyOtp />
         </Route>
 
       <Route>

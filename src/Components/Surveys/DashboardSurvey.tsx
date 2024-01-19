@@ -312,13 +312,13 @@ export class DashboardSurvey extends Component<any, any> {
                                 <tr>
                                     <th>S.No</th>
                                     <th>Name</th>
+                                    <th>Survey Id</th>
+                                    <th>Survey Unique Id</th>
                                     <th>Company</th>
                                     <th>Active</th>
                                     <th>CEGG Points</th>
                                     <th>PublishedAt</th>
                                     <th>Expire On</th>
-                                    <th>UUID</th>
-                                    <th>Unique Id</th>
                                 </tr>
                                 </thead>
 
@@ -345,13 +345,13 @@ export class DashboardSurvey extends Component<any, any> {
                                                   }}
                                               />
                                             </td>
+                                            <td>{survey.id}</td>
+                                            <td>{survey.assignedSurveys.length > 0 ? survey.assignedSurveys[0].temporarySurveyLinkId: '-'}</td>
                                             <td>{survey.company}</td>
                                             <td>{survey.isActive === true ? 'Yes' : 'No' }</td>
                                             <td>{survey.ceggPoints}</td>
                                             <td>{moment(survey.publishDate).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>{moment(survey.expiryDate).format('MM/DD/YYYY HH:mm A')}</td>
-                                            <td>{survey.id}</td>
-                                            <td>{survey.assignedSurveys.length > 0 ? survey.assignedSurveys[0].temporarySurveyLinkId: '-'}</td>
                                         </tr>
                                     ))
                                 }

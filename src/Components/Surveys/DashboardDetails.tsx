@@ -199,7 +199,7 @@ class DashboardDetails extends React.Component<any, any> {
                         <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey}>
                             <div className="row mt-2">
                                 <div className="col">
-                                    <strong>Survey UUID: </strong>
+                                    <strong>Survey Id: </strong>
                                     {this.state.survey?.id}
                                 </div>
                                 <div className="col">

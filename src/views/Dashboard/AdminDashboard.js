@@ -27,6 +27,7 @@ function AdminDashboard({...rest}) {
     const [partnerUsers, setUsersData] = useState(null);
     const [status, setStatus] = useState(PageStatus.None);
     const [error, setError] = useState('');
+    const [isExporting, setExporting] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,13 +57,18 @@ function AdminDashboard({...rest}) {
     }, []);
 
 
+    const calculateTime = (createdAt, updatedAt) => {
+        const created = new Date(createdAt);
+        const updated = new Date(updatedAt);
+        const timeDifferenceInMilliseconds = updated - created;
+        return timeDifferenceInMilliseconds / 1000;
+    }
     const fetchPartnerUsers = async () => {
         try {
             Promise.resolve()
-                .then(() => setStatus(PageStatus.Loading))
+                .then(() => setExporting(true))
                 .then(() => SurveysAPI.partnerSurveyUsers())
                 .then((response) => {
-                    console.log('response--->', response)
                     if(response) {
                         setUsersData(response)
                         const transformedData = response.map(item => ({
@@ -75,22 +81,22 @@ function AdminDashboard({...rest}) {
                             "End IP": item.ip,
                             "Start Time": item.createdAt,
                             "End Time": item.updatedAt,
-                            "LOI": item.updatedAt,
+                            "LOI (seconds)": calculateTime(item.createdAt, item.updatedAt),
                             "Survey Name": item.surveyName,
                             "Partner Name": item.partnerName
                         }));
                         exportToExcel(transformedData, 'PartnerUsers');
-                        setStatus(PageStatus.Loaded)
+                        setExporting(false)
                     }
                 })
                 .catch((error) => {
-                    setStatus(PageStatus.Error)
+                    setExporting(false)
                     setError(error.message)
                 });
         } catch (error) {
             setError(error);
         } finally {
-            setStatus(PageStatus.Loaded);
+            setExporting(false)
         }
     };
 
@@ -306,15 +312,19 @@ function AdminDashboard({...rest}) {
                     <GridItem xs={12} sm={6} md={3}>
                         <Card>
                             <CardHeader color="info" stats icon>
-                                <CardIcon color="success">
-                                    <Store />
+                                <CardIcon color="danger">
+                                    <Icon>info_outline</Icon>
                                 </CardIcon>
-                                <p className={classes.cardCategory}>Partners Users</p>
+                                <p className={classes.cardCategory}>Partners Reports</p>
                                     <Button
                                     onClick={() => fetchPartnerUsers()}
+                                    disabled={isExporting === true}
                                     >
                                         Download
                                     </Button>
+                                <Show when={isExporting === true}>
+                                    <Spinner size="sm" animation="border" variant="primary" />
+                                </Show>
                             </CardHeader>
                             <CardFooter stats>
                                 <div className={classes.stats}>

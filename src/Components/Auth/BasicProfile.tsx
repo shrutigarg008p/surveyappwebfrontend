@@ -359,6 +359,7 @@ class BasicProfile extends React.Component<any, any> {
                                 value={this.state.mobile}
                                 placeholder="Enter here.."
                                 required
+                                readOnly
                             />
                         </div>
                     </div>

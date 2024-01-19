@@ -27,17 +27,19 @@ const saveToken = (token) => {
       userId: userId,
       devicetoken: token
     };
-    const API_URL = process.env.REACT_APP_BASE_URL_API + '/api/v1/auth/user/updateDeviceToken';
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(requestBody)
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Response:", data))
-      .catch((error) => console.error("Error:", error));
+    if (userId && token) {
+      const API_URL = process.env.REACT_APP_BASE_URL_API + '/api/v1/auth/user/updateDeviceToken';
+      fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestBody)
+      })
+          .then((response) => response.json())
+          .then((data) => console.log("Response:", data))
+          .catch((error) => console.error("Error:", error));
+    }
   }
 }
 
@@ -49,11 +51,11 @@ function showAlert(title, message) {
     content: message,
     type: 'blue',
     theme: 'modern',
-    closeIcon: true, 
+    closeIcon: true,
     animation: 'scale',
     closeAnimation: 'scale',
     draggable: true,
-    columnClass: 'custom-alert', 
+    columnClass: 'custom-alert',
     onOpenBefore: function () {
         $('.custom-alert .title').css('font-size', '18px'); // Adjust title font size
         $('.custom-alert .content').css('font-size', '16px'); // Adjust content font size
@@ -63,11 +65,11 @@ function showAlert(title, message) {
 
 
 export const foreGroundMessage = () => {
-  onMessage(messaging, function(payload) { 
-    console.log('Message received. ', payload); 
+  onMessage(messaging, function(payload) {
+    console.log('Message received. ', payload);
     const notificationTitle = payload.notification.title;
-    const notificationBody = payload.notification.body; 
-    showAlert("New Notification Received: "+notificationTitle, notificationBody); 
+    const notificationBody = payload.notification.body;
+    showAlert("New Notification Received: "+notificationTitle, notificationBody);
 })
 }
 
