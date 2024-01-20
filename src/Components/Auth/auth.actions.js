@@ -93,7 +93,7 @@ export const authRegistration =
         dispatch(authRegisterSuccess(user));
               return history.push({
                   pathname: '/auth/verify-mobile',
-                  state: { userId: user.id },
+                  state: { userId: user.userId },
               });
       } catch (error) {
         dispatch(authFail(error.message));
