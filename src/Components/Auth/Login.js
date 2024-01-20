@@ -15,7 +15,7 @@ import FacebookLogin from 'react-facebook-login';
 import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { GoogleSignIn } from './googleSignin';
 
 function Login(props) {
   const [state, setState] = useState({ isVisible: false });
@@ -83,7 +83,7 @@ function Login(props) {
                 <h2>Sign in</h2>
                 <p>New user? <Link to="#" onClick={handleClick}>Create an account</Link></p>
                 <div className="social-login">
-                  <a href="#"><img src="assets/img/google.svg" alt /></a>
+                  <a href="#" onClick={GoogleSignIn}><img src="assets/img/google.svg" alt="" /></a>
                   <FacebookLogin
                       appId="879890270328649"
                       autoLoad={false}
