@@ -10,6 +10,9 @@ import {AuthRouter} from "./Components/Auth/AuthRouter";
 import PrivacyPolicy from "./Components/PrivacyPolicy/privacyPolicy";
 import ResetPasswordForm from "./Components/Auth/UpdateResetPasswordForm";
 import Terms from "./Components/Legal/Terms";
+import Privacy from "./Components/Legal/Privacy";
+import Faq from "./Components/Legal/Faq";
+import Support from "./Components/Legal/Support";
 import SurveyCompletedCallBackPage from "./Components/SurveyCallbackPages/SurveyCompletedCallBackPage";
 import SurveyOverQuotaCallbackPage from "./Components/SurveyCallbackPages/SurveyOverQuotaCallbackPage";
 import SurveyTerminatedCallbackPage from "./Components/SurveyCallbackPages/SurveyTerminatedCallbackPage";
@@ -36,11 +39,12 @@ class App extends React.Component<any, any> {
             <Route path='/referrals/view/:userId' component={LinkViewWithState} />
             <Route path="/auth" component={AuthRouter} />
             <Route path="/verify-screen" component={VerificationEmailScreens} />
-            <Route path='/privacy-policy' component={PrivacyPolicy} />
+            {/* <Route path='/privacy-policy' component={PrivacyPolicy} /> */}
             <Route path='/terms' component={Terms} />
+            <Route path='/privacy-policy' component={Privacy} />
+            <Route path='/faq' component={Faq} />
+            <Route path='/support' component={Support} />
             <Route path='/reset-password/:token' component={ResetPasswordForm} />
-
-
             <PrivateRouteWithRedux path="/admin" component={Admin} />
             <PrivateRouteWithRedux path="/" component={Admin} />
         </Switch>

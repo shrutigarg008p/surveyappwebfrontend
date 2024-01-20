@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function App() {
+function Terms() {
     const classes = useStyles();
 
     return (
@@ -169,4 +169,4 @@ function App() {
     );
 }
 
-export default App;
+export default Terms;
