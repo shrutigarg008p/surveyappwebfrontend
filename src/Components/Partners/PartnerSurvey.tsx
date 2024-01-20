@@ -24,6 +24,7 @@ export default class PartnerSurvey extends React.Component<any, any> {
         const urlSearchParams: any = new URLSearchParams(queryString);
         const surveyId = urlSearchParams.get('surveyid');
         const userId = urlSearchParams.get('rid');
+        const sid = urlSearchParams.get('sid');
         const partnerId = urlSearchParams.get('partnerid');
         const params = {};
         for (const [key, value] of urlSearchParams.entries()) {
@@ -32,14 +33,14 @@ export default class PartnerSurvey extends React.Component<any, any> {
             }
         }
 
-        console.log('params==-->', surveyId, userId, partnerId, params)
+        console.log('params==-->', surveyId, userId, partnerId, sid, params)
         if (!!surveyId && !!userId && partnerId) {
-            this.fetchSurvey(surveyId, userId, partnerId, params);
+            this.fetchSurvey(surveyId, userId, partnerId, sid, params);
         }
     }
 
-    fetchSurvey(surveyId, userId, partnerId, params) {
-        let obj = { surveyId, userId, partnerId, params }
+    fetchSurvey(surveyId, userId, partnerId, sid, params) {
+        let obj = { surveyId, userId, partnerId, sid, params }
         Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
             .then(() => SurveysAPI.surveyPartner(obj))

@@ -31,10 +31,10 @@ class App extends React.Component<any, any> {
       <Router basename='/'>
         <NetworkDetector />
         <Switch>
-            <Route path='/surveys/:surveyId/:userId/completed' component={SurveyCompletedCallBackPage} />
-            <Route path='/surveys/:surveyId/:userId/overquota' component={SurveyOverQuotaCallbackPage} />
-            <Route path='/surveys/:surveyId/:userId/terminate' component={SurveyTerminatedCallbackPage} />
-            <Route path='/surveys/:surveyId/:userId/qualityterminate' component={SurveyQualityTerminatedCallbackPage} />
+            <Route path='/surveys/completed' component={SurveyCompletedCallBackPage} />
+            <Route path='/surveys/overquota' component={SurveyOverQuotaCallbackPage} />
+            <Route path='/surveys/terminate' component={SurveyTerminatedCallbackPage} />
+            <Route path='/surveys/qualityterminate' component={SurveyQualityTerminatedCallbackPage} />
             <Route path='/partner' component={PartnerSurvey} />
             <Route path='/referrals/view/:userId' component={LinkViewWithState} />
             <Route path="/auth" component={AuthRouter} />

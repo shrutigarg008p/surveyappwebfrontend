@@ -14,12 +14,13 @@ import CardIcon from "../../Components/Card/CardIcon.js";
 import CardFooter from "../../Components/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import {PageStatus} from "../../enums";
-import {SurveysAPI} from "../../API";
+import {PartnersAPI, SurveysAPI} from "../../API";
 import {connect} from "react-redux";
 import {Alert, Button, Container, Spinner} from "react-bootstrap";
 import {Show} from "../../Layout";
 import {exportToExcel} from "../../Utils/ExportToExcel";
 const useStyles = makeStyles(styles);
+import Select from 'react-select';
 
 function AdminDashboard({...rest}) {
     const classes = useStyles();
@@ -28,6 +29,8 @@ function AdminDashboard({...rest}) {
     const [status, setStatus] = useState(PageStatus.None);
     const [error, setError] = useState('');
     const [isExporting, setExporting] = useState(false);
+    const [partners, setPartners] = useState([]);
+    const [selectPartners, setSelectPartners] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,7 +57,26 @@ function AdminDashboard({...rest}) {
         };
 
         fetchData();
+        fetchPartners()
     }, []);
+
+
+    const fetchPartners = () => {
+        Promise.resolve()
+            .then(() => {
+                return PartnersAPI.getPartners(10000);
+            })
+            .then((survey) => {
+                const options = survey.map((item) => ({
+                    label: item.name,
+                    value: item.id,
+                }));
+                setPartners(options);
+            })
+            .catch((error) => {
+                setError(error);
+            });
+    }
 
 
     const calculateTime = (createdAt, updatedAt) => {
@@ -65,39 +87,56 @@ function AdminDashboard({...rest}) {
     }
     const fetchPartnerUsers = async () => {
         try {
-            Promise.resolve()
-                .then(() => setExporting(true))
-                .then(() => SurveysAPI.partnerSurveyUsers())
-                .then((response) => {
-                    if(response) {
-                        setUsersData(response)
-                        const transformedData = response.map(item => ({
-                            "Survey ID of the Project": item.survey_id,
-                            "Country": item.country,
-                            "India Polls respondent ID": item.rid,
-                            "Vendor Respondent ID": item.rid,
-                            "Status": item.status,
-                            "Start IP": item.ip,
-                            "End IP": item.ip,
-                            "Start Time": item.createdAt,
-                            "End Time": item.updatedAt,
-                            "LOI (seconds)": calculateTime(item.createdAt, item.updatedAt),
-                            "Survey Name": item.surveyName,
-                            "Partner Name": item.partnerName
-                        }));
-                        exportToExcel(transformedData, 'PartnerUsers');
+            if(selectPartners) {
+                Promise.resolve()
+                    .then(() => setExporting(true))
+                    .then(() => SurveysAPI.partnerSurveyUsers(selectPartners.value))
+                    .then((response) => {
+                        if (response.length > 0) {
+                            setUsersData(response)
+                            const transformedData = response.map(item => ({
+                                "Survey ID of the Project": item.survey_id,
+                                "Country": item.country,
+                                "India Polls respondent ID": item.rid,
+                                "Vendor Respondent ID": item.rid,
+                                "Status": item.status,
+                                "Start IP": item.ip,
+                                "End IP": item.ip,
+                                "Start Time": item.createdAt,
+                                "End Time": item.updatedAt,
+                                "LOI (seconds)": calculateTime(item.createdAt, item.updatedAt),
+                                "Survey Name": item.surveyName,
+                                "Partner Name": item.partnerName
+                            }));
+                            if (transformedData.length > 0) {
+                                exportToExcel(transformedData, 'PartnerUsers');
+                                setExporting(false)
+                            }
+                        }
                         setExporting(false)
-                    }
-                })
-                .catch((error) => {
-                    setExporting(false)
-                    setError(error.message)
-                });
+                    })
+                    .catch((error) => {
+                        setExporting(false)
+                        setError(error.message)
+                    });
+            }
         } catch (error) {
             setError(error);
         } finally {
             setExporting(false)
         }
+    };
+
+
+   const handlePartnersChange = (selectedPartnerOption) => {
+       setSelectPartners(selectedPartnerOption);
+    };
+
+    const customStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            color: state.isSelected ? 'white' : 'black',
+        }),
     };
 
     return (
@@ -309,12 +348,22 @@ function AdminDashboard({...rest}) {
                             </CardFooter>
                         </Card>
                     </GridItem>
-                    <GridItem xs={12} sm={6} md={3}>
+                    <GridItem xs={12} sm={6} md={6}>
                         <Card>
                             <CardHeader color="info" stats icon>
                                 <CardIcon color="danger">
                                     <Icon>info_outline</Icon>
                                 </CardIcon>
+                                <Select
+                                    name='partners'
+                                    id='partners'
+                                    className="ql-color-red"
+                                    onChange={handlePartnersChange}
+                                    value={selectPartners}
+                                    options={partners}
+                                    styles={customStyles}
+                                />
+                                <div>Partners</div>
                                 <p className={classes.cardCategory}>Partners Reports</p>
                                     <Button
                                     onClick={() => fetchPartnerUsers()}

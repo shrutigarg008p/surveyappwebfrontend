@@ -61,6 +61,7 @@ class DashboardDetails extends React.Component<any, any> {
             users: [],
             partnersSelected: null,
             selectedPartnerOption: null,
+            checkboxChecked: false,
         };
     }
 
@@ -70,6 +71,11 @@ class DashboardDetails extends React.Component<any, any> {
         }
     }
 
+    handleCheckboxChange = () => {
+        this.setState((prevState) => ({
+            checkboxChecked: !prevState.checkboxChecked,
+        }));
+    };
     fetchSurvey() {
         Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))
@@ -113,7 +119,7 @@ class DashboardDetails extends React.Component<any, any> {
                 if (this.state.survey && this.state.survey.surveypartners.length > 0) {
                     const partnerIds = this.state.survey.surveypartners.map((partner) => partner.partnerId);
                     const filteredOptions = options.filter((item) => partnerIds.includes(item.value));
-                    this.setState({ selectedPartnerOption: filteredOptions });
+                    this.setState({ selectedPartnerOption: filteredOptions, checkboxChecked: this.state.survey.surveypartners[0].includesid ? this.state.survey.surveypartners[0].includesid : false });
                 }
                 this.setState({ partners: options, status: PageStatus.Loaded });
             })
@@ -149,6 +155,7 @@ class DashboardDetails extends React.Component<any, any> {
             return this.state.selectedPartnerOption.map((item) => ({
                 surveyId: this.props.id,
                 partnerId: item.value,
+                includesid: this.state.checkboxChecked
             }))
         }
     }
@@ -332,32 +339,32 @@ class DashboardDetails extends React.Component<any, any> {
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Complete URL: </strong>
-                                    <a href={'https://polls.dataxing.com/#/surveys/{id}/{userId}/completed'} target="_blank" rel="noopener noreferrer">
-                                        {'https://polls.dataxing.com/#/surveys/{id}/{userId}/completed'}
+                                    <a href={'https://polls.dataxing.com/#/surveys/completed?surveyid={surveyid}&userid={userid}'} target="_blank" rel="noopener noreferrer">
+                                        {'https://polls.dataxing.com/#/surveys/completed?surveyid={surveyid}&userid={userid}'}
                                     </a>
                                 </div>
                             </div>
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Over Quota URL: </strong>
-                                    <a href={'https://polls.dataxing.com/#/surveys/{id}/{userId}/overquota'} target="_blank" rel="noopener noreferrer">
-                                        {'https://polls.dataxing.com/#/surveys/{id}/{userId}/overquota'}
+                                    <a href={'https://polls.dataxing.com/#/surveys/overquota?surveyid={surveyid}&userid={userid}'} target="_blank" rel="noopener noreferrer">
+                                        {'https://polls.dataxing.com/#/surveys//overquota?surveyid={surveyid}&userid={userid}'}
                                     </a>
                                 </div>
                             </div>
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Terminate URL: </strong>
-                                    <a href={'https://polls.dataxing.com/#/surveys/{id}/{userId}/terminate'} target="_blank" rel="noopener noreferrer">
-                                        {'https://polls.dataxing.com/#/surveys/{id}/{userId}/terminate'}
+                                    <a href={'https://polls.dataxing.com/#/surveys/terminate?surveyid={surveyid}&userid={userid}'} target="_blank" rel="noopener noreferrer">
+                                        {'https://polls.dataxing.com/#/surveys/terminate?surveyid={surveyid}&userid={userid}'}
                                     </a>
                                 </div>
                             </div>
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Quality Terminate URL: </strong>
-                                    <a href={'https://polls.dataxing.com/surveys/{id}/{userId}/qualityterminate'} target="_blank" rel="noopener noreferrer">
-                                        {'https://polls.dataxing.com/#/surveys/{id}/{userId}/qualityterminate'}
+                                    <a href={'https://polls.dataxing.com/surveys/qualityterminate?surveyid={surveyid}&userid={userid}'} target="_blank" rel="noopener noreferrer">
+                                        {'https://polls.dataxing.com/#/surveys/qualityterminate?surveyid={surveyid}&userid={userid}'}
                                     </a>
                                 </div>
                             </div>
@@ -391,16 +398,26 @@ class DashboardDetails extends React.Component<any, any> {
 
                             <div className="jumbotron bg-white p-1 mt-2 shadow-sm">
                                 <button type="button" className="btn btn-success" onClick={() => this.addPartners()}>Add partners</button>
+                                <input
+                                    type="checkbox"
+                                    className="ml-3"
+                                    checked={this.state.checkboxChecked}
+                                    onChange={this.handleCheckboxChange}
+                                />
+                                <span className="ml-2">Include 2 Parameters</span>
                             </div>
 
-                            {this.state.selectedPartnerOption && this.state.selectedPartnerOption.map((data, index) => (
-                                <div key={data.value} className="row mt-2">
-                                    <div key={data.value} className="col">
-                                        <strong key={data.value}>{data.label}: </strong>
-                                        {`https://polls.dataxing.com/#/partner?partnerid=${data.value}&surveyid=${this.props.id}&rid={respondent_id}`}
+                            {this.state.selectedPartnerOption &&
+                                this.state.selectedPartnerOption.map((data, index) => (
+                                    <div key={data.value} className="row mt-2">
+                                        <div key={data.value} className="col">
+                                            <strong key={data.value}>{data.label}: </strong>
+                                            {`https://polls.dataxing.com/#/partner?partnerid=${data.value}&surveyid=${this.props.id}&rid={respondent_id}${
+                                                this.state.checkboxChecked ? `&sid={svar_id}` : ''
+                                            }`}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
 
                         </div>
                         <Show when={this.state.users.length !== 0} >
