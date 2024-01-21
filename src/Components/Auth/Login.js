@@ -15,7 +15,7 @@ import FacebookLogin from 'react-facebook-login';
 import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { GoogleSignIn } from './googleSignin';
+import GoogleSignIn from "./googleSignin";
 
 function Login(props) {
   const [state, setState] = useState({ isVisible: false });
@@ -23,9 +23,13 @@ function Login(props) {
   const [password, setPassword] = useState({ password: null });
   const [isPasswordReset, setResetPassword] = useState(false);
   const [referralId, setReferralId] = useState('');
+  const [showGoogleSignIn, setShowGoogleSignIn] = useState(false);
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
 
+  const handleContinueWithGoogleClick = () => {
+    setShowGoogleSignIn(true);
+  };
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -83,16 +87,18 @@ function Login(props) {
                 <h2>Sign in</h2>
                 <p>New user? <Link to="#" onClick={handleClick}>Create an account</Link></p>
                 <div className="social-login">
-                  <a href="#" onClick={GoogleSignIn}><img src="assets/img/google.svg" alt="" /></a>
-                  <FacebookLogin
-                      appId="879890270328649"
-                      autoLoad={false}
-                      fields="name,email,picture"
-                      callback={(e) => responseFacebook(e)}
-                      icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}
-                      cssClass="facebook-login-btn"
-                      textButton=""
-                  />
+                  <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  {showGoogleSignIn && <GoogleSignIn />}
+                  {/*<a href="#" onClick={GoogleSignIn}><img src="assets/img/google.svg" alt="" /></a>*/}
+                  {/*<FacebookLogin*/}
+                  {/*    appId="879890270328649"*/}
+                  {/*    autoLoad={false}*/}
+                  {/*    fields="name,email,picture"*/}
+                  {/*    callback={(e) => responseFacebook(e)}*/}
+                  {/*    icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}*/}
+                  {/*    cssClass="facebook-login-btn"*/}
+                  {/*    textButton=""*/}
+                  {/*/>*/}
                 </div>
                 <div className="RuleWithText">Or</div>
                 <form onSubmit={props.handleSubmit(onSubmit)}>
@@ -114,7 +120,7 @@ function Login(props) {
                 <span className="text-right"><button type="submit" style={{float:'right'}} className="btn btn-primary" disabled={submitting || invalid}>Login</button></span>
                   </p>
                 </form>
-                
+
               </div>
             </div>
           </div>

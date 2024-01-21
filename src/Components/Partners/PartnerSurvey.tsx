@@ -24,7 +24,7 @@ export default class PartnerSurvey extends React.Component<any, any> {
         const urlSearchParams: any = new URLSearchParams(queryString);
         const surveyId = urlSearchParams.get('surveyid');
         const userId = urlSearchParams.get('rid');
-        const sid = urlSearchParams.get('sid');
+        const sid = urlSearchParams.get('svid');
         const partnerId = urlSearchParams.get('partnerid');
         const params = {};
         for (const [key, value] of urlSearchParams.entries()) {

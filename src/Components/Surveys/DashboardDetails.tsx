@@ -413,7 +413,7 @@ class DashboardDetails extends React.Component<any, any> {
                                         <div key={data.value} className="col">
                                             <strong key={data.value}>{data.label}: </strong>
                                             {`https://polls.dataxing.com/#/partner?partnerid=${data.value}&surveyid=${this.props.id}&rid={respondent_id}${
-                                                this.state.checkboxChecked ? `&sid={svar_id}` : ''
+                                                this.state.checkboxChecked ? `&svid={svar_id}` : ''
                                             }`}
                                         </div>
                                     </div>
