@@ -26,7 +26,7 @@ font-weight: 400;
     src: url("fonts/Roboto-Black.ttf");
     font-weight: 900;
 } */
-body {font-family: 'Roboto', sans-serif !important;overflow-x: hidden;}
+body {font-family: 'Roboto', sans-serif !important; overflow-y:auto; }
 a {text-decoration: none;}
 a:hover {text-decoration: none;}
 section {padding: 0;}
