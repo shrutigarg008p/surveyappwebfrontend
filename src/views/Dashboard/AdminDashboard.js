@@ -97,7 +97,7 @@ function AdminDashboard({...rest}) {
                             const transformedData = response.map(item => ({
                                 "Survey ID of the Project": item.survey_id,
                                 "Country": item.country,
-                                "India Polls respondent ID": item.rid,
+                                "India Polls respondent ID": item.id,
                                 "Vendor Respondent ID": item.rid,
                                 "Status": item.status,
                                 "Start IP": item.ip,
