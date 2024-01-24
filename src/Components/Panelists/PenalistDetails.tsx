@@ -12,6 +12,7 @@ import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-g
 import $ from 'jquery';
 import 'jquery-confirm';
 import {log} from "fabric/fabric-impl";
+import avatar from "../../assets/img/faces/marc.jpg";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -309,7 +310,7 @@ export default function PenalistDetails(props:any) {
                         <div className="col s4 center-align">
                             <div style={{ textAlign: 'center' }}>
                                 <img
-                                    src="https://placekitten.com/200/200"
+                                    src={profile?.imagePath ? `${process.env.REACT_APP_BASE_URL_API}${profile?.imagePath}` : "https://placekitten.com/200/200"}
                                     alt="Profile"
                                     className="circle responsive-img"
                                 />
