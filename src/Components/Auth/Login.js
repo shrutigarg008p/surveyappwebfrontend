@@ -3,7 +3,7 @@ import { Field, formValueSelector, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { Alert } from "react-bootstrap";
+import {Alert, Button} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { authLogin } from "./auth.actions";
@@ -16,12 +16,14 @@ import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleSignIn from "./googleSignin";
+import {MobileLogin} from "./MobileLogin";
 
 function Login(props) {
   const [state, setState] = useState({ isVisible: false });
   const [username, setUsername] = useState({ username: null });
   const [password, setPassword] = useState({ password: null });
   const [isPasswordReset, setResetPassword] = useState(false);
+  const [isMobile, setMobile] = useState(false);
   const [referralId, setReferralId] = useState('');
   const [showGoogleSignIn, setShowGoogleSignIn] = useState(false);
   const history = useHistory();
@@ -93,6 +95,21 @@ function Login(props) {
                 <div className="social-login">
                   <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
                   {showGoogleSignIn && <GoogleSignIn />}
+
+                  <div className="RuleWithText">Or</div>
+                  <Button onClick={() => setMobile(true)} className="mobile-otp-button mt-2 mb-2">
+                    Continue with mobile OTP
+                  </Button>
+
+                  <MobileLogin
+                      referralId={referralId}
+                      show={isMobile}
+                      onClose={() => setMobile(false)}
+                      onSubmit={() =>{
+                        setMobile(false)}
+                      }
+                  />
+
                   {/*<a href="#" onClick={GoogleSignIn}><img src="assets/img/google.svg" alt="" /></a>*/}
                   {/*<FacebookLogin*/}
                   {/*    appId="879890270328649"*/}

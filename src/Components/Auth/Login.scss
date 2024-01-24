@@ -88,5 +88,18 @@
     .alret-msg {
       padding: 0 20px;
     }
+
+    .mobile-otp-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .mobile-otp-button:hover {
+      background-color: #0056b3;
+    }
   }
 }

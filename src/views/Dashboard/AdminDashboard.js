@@ -30,7 +30,10 @@ function AdminDashboard({...rest}) {
     const [error, setError] = useState('');
     const [isExporting, setExporting] = useState(false);
     const [partners, setPartners] = useState([]);
+    const [surveys, setSurveys] = useState([]);
     const [selectPartners, setSelectPartners] = useState(null);
+    const [selectSurvey, setSelectSurvey] = useState(null);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -79,18 +82,36 @@ function AdminDashboard({...rest}) {
     }
 
 
+    const fetchPartnersSurveys = (id) => {
+        Promise.resolve()
+            .then(() => {
+                return PartnersAPI.getAllPartnerSurveys(id);
+            })
+            .then((survey) => {
+                const options = survey.map((item) => ({
+                    label: item.survey.name,
+                    value: item.survey.id,
+                }));
+                setSurveys(options);
+            })
+            .catch((error) => {
+                setError(error);
+            });
+    }
+
+
     const calculateTime = (createdAt, updatedAt) => {
         const created = new Date(createdAt);
         const updated = new Date(updatedAt);
         const timeDifferenceInMilliseconds = updated - created;
-        return timeDifferenceInMilliseconds / 1000;
+        return timeDifferenceInMilliseconds / (1000 * 60);
     }
     const fetchPartnerUsers = async () => {
         try {
-            if(selectPartners) {
+            if(selectPartners && selectSurvey) {
                 Promise.resolve()
                     .then(() => setExporting(true))
-                    .then(() => SurveysAPI.partnerSurveyUsers(selectPartners.value))
+                    .then(() => SurveysAPI.partnerSurveyUsers(selectPartners.value, selectSurvey.value))
                     .then((response) => {
                         if (response.length > 0) {
                             setUsersData(response)
@@ -104,7 +125,7 @@ function AdminDashboard({...rest}) {
                                 "End IP": item.ip,
                                 "Start Time": item.createdAt,
                                 "End Time": item.updatedAt,
-                                "LOI (seconds)": calculateTime(item.createdAt, item.updatedAt),
+                                "LOI (Minutes)": calculateTime(item.createdAt, item.updatedAt),
                                 "Survey Name": item.surveyName,
                                 "Partner Name": item.partnerName
                             }));
@@ -130,6 +151,13 @@ function AdminDashboard({...rest}) {
 
    const handlePartnersChange = (selectedPartnerOption) => {
        setSelectPartners(selectedPartnerOption);
+       setSurveys([]);
+       setSelectSurvey(null);
+       fetchPartnersSurveys(selectedPartnerOption.value)
+    };
+
+    const handlePartnersSurveyChange = (selectedSurveyOption) => {
+        setSelectSurvey(selectedSurveyOption);
     };
 
     const customStyles = {
@@ -358,9 +386,20 @@ function AdminDashboard({...rest}) {
                                     name='partners'
                                     id='partners'
                                     className="ql-color-red"
+                                    placeholder="Select Partner"
                                     onChange={handlePartnersChange}
                                     value={selectPartners}
                                     options={partners}
+                                    styles={customStyles}
+                                />
+                                <Select
+                                    name='partners'
+                                    id='partners'
+                                    className="ml-100 mt-1 align-content-end"
+                                    placeholder="Select Survey"
+                                    onChange={handlePartnersSurveyChange}
+                                    value={selectSurvey}
+                                    options={surveys}
                                     styles={customStyles}
                                 />
                                 <div>Partners</div>

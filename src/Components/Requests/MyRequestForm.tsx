@@ -29,10 +29,36 @@ class Form extends React.Component<any, any> {
             error: null,
             isActive: 1,
             points: 0,
+            modes: [],
             mode: "",
         };
     }
 
+
+    componentDidMount() {
+            this.fetchModes();
+    }
+
+    fetchModes = () => {
+        Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => RedemptionModeAPI.redemptionList(10000))
+            .then((surveyData: any) => {
+                if (!!surveyData) {
+                    const options = surveyData.map((item) => ({
+                        label: item.name,
+                        value: item.name,
+                    }));
+                    this.setState({
+                        modes: options,
+                        status: PageStatus.Loaded
+                    });
+                }
+            })
+            .catch((err) => {
+                this.setState({ error: err.message, status: PageStatus.Error });
+            });
+    };
 
     formValues() {
         return {
@@ -147,9 +173,9 @@ class Form extends React.Component<any, any> {
                                 }
                             >
                                 <option value=''>--Choose--</option>
-                                <option value={VoucherType.Amazon_Vouchers}>Amazon Vouchers</option>
-                                <option value={VoucherType.Paytm_Vouchers}>Paytm Vouchers</option>
-                                <option value={VoucherType.Flipkart_Vouchers}>Flipkart Vouchers</option>
+                                { this.state.modes.length > 0 ? this.state.modes.map((item) => (
+                                    <option value={item.value}>{item.label}</option>
+                                    )) : ''}
                             </select>
 
                         </div>

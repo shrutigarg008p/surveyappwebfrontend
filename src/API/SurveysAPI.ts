@@ -194,8 +194,8 @@ export class SurveysAPI {
             });
     }
 
-    static partnerSurveyUsers(selectPartners): Promise<any> {
-        return api.get(`${surveysURL}/getAllPartnerUsers/${selectPartners}`)
+    static partnerSurveyUsers(selectPartners, surveyId): Promise<any> {
+        return api.get(`${surveysURL}/getAllPartnerUsers/${selectPartners}/${surveyId}`)
             .then((res) => {
                 return _.get(res, 'data.data', []);
             });
