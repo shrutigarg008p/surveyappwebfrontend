@@ -8,6 +8,7 @@ import FacebookLogin from 'react-facebook-login';
 
 import { Assets } from 'enums';
 import { Link } from 'react-router-dom';
+import GoogleSignIn from "./googleSignin";
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ class Registration extends Component {
       confirmPasswordActive:false,
       isPasswordMatched : false,
       referralId: '',
+      showGoogleSignIn: false,
       error : {
         status : false,
         message : ''
@@ -45,6 +47,10 @@ class Registration extends Component {
   validate(password, confirmPassword) {
     return password === confirmPassword
   }
+
+  handleContinueWithGoogleClick = () => {
+    this.setState({ showGoogleSignIn: true });
+  };
 
     onSubmit() {
     if (this.state.policy === false) {
@@ -154,16 +160,17 @@ class Registration extends Component {
                 <h2>Create an account </h2>
                 <p>Already have an account? <Link to="#" onClick={() => this.onLogin()}>Sign in</Link></p>
                 <div className="social-login">
-                  <a href="#"><img src="assets/img/google.svg" alt /></a>
-                  <FacebookLogin
-                      appId="879890270328649"
-                      autoLoad={false}
-                      fields="name,email,picture"
-                      callback={(e) => responseFacebook(e)}
-                      icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}
-                      cssClass="facebook-login-btn"
-                      textButton=""
-                  />
+                  <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  {this.state.showGoogleSignIn && <GoogleSignIn />}
+                  {/*<FacebookLogin*/}
+                  {/*    appId="879890270328649"*/}
+                  {/*    autoLoad={false}*/}
+                  {/*    fields="name,email,picture"*/}
+                  {/*    callback={(e) => responseFacebook(e)}*/}
+                  {/*    icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}*/}
+                  {/*    cssClass="facebook-login-btn"*/}
+                  {/*    textButton=""*/}
+                  {/*/>*/}
                 </div>
                 <div className="RuleWithText">Or</div>
                 {/* <form onSubmit={props.handleSubmit(onSubmit)}> */}
@@ -187,12 +194,12 @@ class Registration extends Component {
                     }}
                     onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
                     placeholder='Phone'
-                    required 
+                    required
                     />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="pwd">Password  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
-                    <input 
+                    <input
                   className="form-control"
                    type='password'
                    onChange={(e) => {
@@ -207,7 +214,7 @@ class Registration extends Component {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="pwd">Confirm Password  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
-                    <input 
+                    <input
                     className="form-control"
                     type='password'
                     onChange={(e) =>{
@@ -219,7 +226,7 @@ class Registration extends Component {
                     onClick={() => this.setState({confirmPasswordActive: !this.state.confirmPasswordActive})}
                     />
                   </div>
-                  
+
                    <div className="login-row login-form-item-control" style={{marginBottom : '-11px'}}>
                 <label>
                   <input
@@ -253,7 +260,7 @@ class Registration extends Component {
                 </span>
                   </p>
                 {/* </form> */}
-                
+
               </div>
             </div>
           </div>

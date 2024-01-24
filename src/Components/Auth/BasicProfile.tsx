@@ -471,7 +471,7 @@ class BasicProfile extends React.Component<any, any> {
                             />
                         </div>
                         <div className='col'>
-                            <label htmlFor='country'>City*</label>
+                            <label htmlFor='country'>City/Post Office*</label>
                             <Select
                                 name='city'
                                 id='city'

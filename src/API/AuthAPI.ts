@@ -54,6 +54,16 @@ export class AuthAPI {
             });
     }
 
+
+    static async continueWithMobile(
+        data: any
+    ): Promise<any> {
+        return api.post(`${userURL}/continueWithMobile`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
     static async verifyMobileOtp(
         data: any
     ): Promise<any> {

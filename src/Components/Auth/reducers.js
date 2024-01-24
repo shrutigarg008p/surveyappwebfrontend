@@ -10,6 +10,7 @@ const initialState = {
     expiry: null,
     loading: false,
     error: null,
+    language: 'en'
   },
 };
 

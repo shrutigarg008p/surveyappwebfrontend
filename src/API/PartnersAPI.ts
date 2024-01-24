@@ -14,6 +14,15 @@ export class PartnersAPI {
         });
     }
 
+    static getAllPartnerSurveys(
+        id ,
+    ): Promise<any[]> {
+        return api.get(`${partnersURL}/getAllPartnerSurveys/${id}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
     static createPartners(values: any): Promise<any> {
         const data = {
             name: values.name,
