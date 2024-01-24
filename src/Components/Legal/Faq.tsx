@@ -172,21 +172,23 @@ const faqData = [
     },
     {
         question: "My Xoxo day voucher code is not working. What should I do?",
-        answer: "For queries please raise a ticket at E-mail address: cs@xoxoday.com Whatsapp Number: +91 080 61915050. Please visit: https://help.xoxoday.com/plum/user-guide/for-end-users/getting-started."
+        answer: "For queries please raise a ticket at E-mail address: cs@xoxoday.com Whatsapp Number: +91 080 61915050. Please visit: <a href='https://help.xoxoday.com/plum/user-guide/for-end-users/getting-started'>https://help.xoxoday.com/plum/user-guide/for-end-users/getting-started.</a>"
     },
     {
         question: "My Flipkart voucher code is not working. What should I do?",
-        answer: "Click here to redeem your Flipkart gift card. Flipkart Customer Care Number: 18002089898. They are available 24 hours a day, 7 days a week to resolve your queries. For more details, click here."
+        answer: "<a href='/#/redemption'>Click here</a> to redeem your Flipkart gift card. Flipkart Customer Care Number: 18002089898. They are available 24 hours a day, 7 days a week to resolve your queries. For more details, click here."
     },
     {
         question: "My Amazon voucher code is not working. What should I do?",
-        answer: "Click here to redeem your Amazon Gift Card. Amazon Customer Care: 180030002049. They are available 24 hours a day, 7 days a week to resolve your queries. Click here to contact Amazon Care."
+        answer: "<a href='/#/redemption' target='_blank'>Click here</a> to redeem your Amazon Gift Card. Amazon Customer Care: 180030002049. They are available 24 hours a day, 7 days a week to resolve your queries. <a href='https://www.amazon.in/gp/help/customer/display.html'>Click here</a> to contact Amazon Care."
     }
 ];
   
 
 function FAQ() {
     const classes = useStyles();
+
+    
     return (
 
         <div className={classes.root}>
@@ -209,7 +211,7 @@ function FAQ() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                {faq.answer}
+              <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
               </Typography>
             </AccordionDetails>
           </Accordion>

@@ -49,7 +49,7 @@ export function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/#">
+                    <Link to="/faq">
                       FAQs Page
                     </Link>
                   </li>
