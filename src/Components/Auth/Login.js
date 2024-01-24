@@ -73,7 +73,11 @@ function Login(props) {
             <div className="col-md-6">
               <div className="logoDiv">
                 <img src={Assets.Logo} style={{width:'100%'}} className="img-fluid mobileNone" alt />
-                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>Sign in or create an account</p>
+                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>Sign in or create an account
+                <br/>
+                
+                </p>
+                  
               </div>
             </div>
             <div className="col-md-5">
@@ -120,7 +124,12 @@ function Login(props) {
                 <span className="text-right"><button type="submit" style={{float:'right'}} className="btn btn-primary" disabled={submitting || invalid}>Login</button></span>
                   </p>
                 </form>
-
+                  <div className="text-center">
+                    <select className="text-center">
+                    <option>English</option>
+                    <option>Hindi</option>
+                    </select>
+                  </div>
               </div>
             </div>
           </div>
