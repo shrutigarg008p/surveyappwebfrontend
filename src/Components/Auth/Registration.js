@@ -160,8 +160,8 @@ class Registration extends Component {
                 <h2>Create an account </h2>
                 <p>Already have an account? <Link to="#" onClick={() => this.onLogin()}>Sign in</Link></p>
                 <div className="social-login">
-                  <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
-                  {this.state.showGoogleSignIn && <GoogleSignIn />}
+                  {/* <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  {this.state.showGoogleSignIn && <GoogleSignIn />} */}
                   {/*<FacebookLogin*/}
                   {/*    appId="879890270328649"*/}
                   {/*    autoLoad={false}*/}

@@ -93,8 +93,8 @@ function Login(props) {
                 <h2>Sign in</h2>
                 <p>New user? <Link to="#" onClick={handleClick}>Create an account</Link></p>
                 <div className="social-login">
-                  <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
-                  {showGoogleSignIn && <GoogleSignIn />}
+                  {/* <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  {showGoogleSignIn && <GoogleSignIn />} */}
 
                   <div className="RuleWithText">Or</div>
                   <Button onClick={() => setMobile(true)} className="mobile-otp-button mt-2 mb-2">
