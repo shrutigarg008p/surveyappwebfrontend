@@ -93,7 +93,8 @@ class MobileLogin extends React.Component<any, any> {
     }
 
     render() {
-        const { pageContent } = this.state
+        let { pageContent } = this.state
+        pageContent = this.props.language === 'hi' ? Language.OTPVerifyHindi : Language.OTPVerifyEnglish
         return (
             <Modal
                 centered

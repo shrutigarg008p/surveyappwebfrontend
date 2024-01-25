@@ -12,7 +12,7 @@ import CardHeader from "../../Components/Card/CardHeader.js";
 import CardAvatar from "../../Components/Card/CardAvatar.js";
 import CardBody from "../../Components/Card/CardBody.js";
 import CardFooter from "../../Components/Card/CardFooter.js";
-import avatar from "../../assets/img/faces/marc.jpg";
+import avatar from "../../assets/img/faces/marc.jpeg";
 import PropTypes from "prop-types";
 import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux";

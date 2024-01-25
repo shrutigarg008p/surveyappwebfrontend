@@ -12,7 +12,7 @@ import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-g
 import $ from 'jquery';
 import 'jquery-confirm';
 import {log} from "fabric/fabric-impl";
-import avatar from "../../assets/img/faces/marc.jpg";
+import avatar from "../../assets/img/faces/marc1.jpg";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
