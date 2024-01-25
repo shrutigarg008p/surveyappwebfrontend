@@ -13,6 +13,8 @@ import Terms from "./Components/Legal/Terms";
 import Privacy from "./Components/Legal/Privacy";
 import Faq from "./Components/Legal/Faq";
 import Support from "./Components/Legal/Support";
+import CookiePolicy from 'Components/Legal/CookiePolicy';
+import RewardsProgramTerms from 'Components/Legal/RewardsProgramTerms';
 import SurveyCompletedCallBackPage from "./Components/SurveyCallbackPages/SurveyCompletedCallBackPage";
 import SurveyOverQuotaCallbackPage from "./Components/SurveyCallbackPages/SurveyOverQuotaCallbackPage";
 import SurveyTerminatedCallbackPage from "./Components/SurveyCallbackPages/SurveyTerminatedCallbackPage";
@@ -44,6 +46,8 @@ class App extends React.Component<any, any> {
             <Route path='/privacy-policy' component={Privacy} />
             <Route path='/faq' component={Faq} />
             <Route path='/support' component={Support} />
+            <Route path='/rewards-program-terms' component={RewardsProgramTerms} />
+            <Route path='/cookie-policy' component={CookiePolicy} />
             <Route path='/reset-password/:token' component={ResetPasswordForm} />
             <PrivateRouteWithRedux path="/admin" component={Admin} />
             <PrivateRouteWithRedux path="/" component={Admin} />
