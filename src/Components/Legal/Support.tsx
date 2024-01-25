@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 function ContactUs() {
     const classes = useStyles();
     const address = "123 Main Street, Anytown, AT 12345";
-    const email = "contact@example.com";
+    const email = "info@indiapolls.com";
     const mapSrc = "https://www.google.com/maps/embed?..."; // Your Google Maps embed link
 
     return (
