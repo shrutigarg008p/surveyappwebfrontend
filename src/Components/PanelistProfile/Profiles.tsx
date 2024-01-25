@@ -196,7 +196,7 @@ class Profiles extends React.Component<any, any> {
                                                     {/*    style={{ width: '100%', height: 'auto' }}*/}
                                                     {/*/>*/}
                                                     <img
-                                                        src={`${process.env.REACT_APP_BASE_URL_API}${data.image}`}
+                                                        src={`https://indiapolls.com:9000${data.image}`}
                                                         alt="Full Size Image"
                                                         style={{ width: '100%', height: '90' }}
                                                     />
