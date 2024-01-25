@@ -10,7 +10,7 @@ const initialState = {
     expiry: null,
     loading: false,
     error: null,
-    language: 'en'
+    language: null
   },
 };
 
@@ -19,7 +19,11 @@ export const authReducers = (state = initialState, action) => {
     case authActions.AUTH_START: {
       return {
         ...initialState,
-        adminUser: { ...initialState.adminUser, loading: true },
+        adminUser: {
+          ...initialState.adminUser,
+          loading: true,
+          language: state.adminUser.language
+        },
       };
     }
     case authActions.AUTH_SUCCESS: {
@@ -32,6 +36,7 @@ export const authReducers = (state = initialState, action) => {
         firstName: action.user.firstName,
         lastName: action.user.lastName,
         roleName: action.user.roleName,
+        language: state.adminUser.language,
         loading: false,
         error: null,
       };
@@ -46,6 +51,7 @@ export const authReducers = (state = initialState, action) => {
         userId: action.user.id,
         phoneNumber: action.user.phoneNumber,
         email: action.user.email,
+        language: state.adminUser.language,
         loading: false,
         error: null,
       };
@@ -53,10 +59,12 @@ export const authReducers = (state = initialState, action) => {
     }
 
     case authActions.AUTH_SUCCESS_MOBILE_STEP: {
+      console.log('state--->', state, initialState)
       const adminUser = {
         isAuthenticated: false,
         loading: false,
         error: null,
+        language: state.adminUser.language
       };
       return { ...state, adminUser };
     }
@@ -67,6 +75,22 @@ export const authReducers = (state = initialState, action) => {
         userId: action.user.id,
         role: action.user.role,
         isBasicProfile: false,
+        language: state.adminUser.language,
+        loading: false,
+        error: null,
+      };
+      return { ...state, adminUser };
+    }
+
+    case authActions.LANGUAGE_CHANGE: {
+      const adminUser = {
+       language: action.user,
+        isAuthenticated: false,
+        token: null,
+        firstName: null,
+        lastName: null,
+        roleName: null,
+        expiry: null,
         loading: false,
         error: null,
       };
@@ -77,6 +101,7 @@ export const authReducers = (state = initialState, action) => {
       const adminUser = {
         isAuthenticated: false,
         loading: false,
+        language: state.adminUser.language,
         error: null,
       };
       return { ...state, adminUser };
@@ -87,6 +112,7 @@ export const authReducers = (state = initialState, action) => {
         adminUser: {
           ...initialState.adminUser,
           error: action.error,
+          language: state.adminUser.language,
         },
       };
     }

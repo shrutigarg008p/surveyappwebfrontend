@@ -1,0 +1,156 @@
+{
+  "LoginHindi": {
+    "title": "अपनी सुरक्षा के लिए, कृपया अपनी पहचान कि पुष्टी करें.",
+    "items": [
+      {"title": "लॉग इन करें"},
+      {"title": "नए उपयोगकर्ता? "},
+      {"title": "खाता बनाएं"},
+      {"title": "या"},
+      {"title": "ईमेल"},
+      {"title": "पासवर्ड"},
+      {"title": "पासवर्ड भूल गए?"},
+      {"title": "लॉग इन करें"},
+      {"title": "खाता बनाएं"},
+      {"title": "मोबाइल ओटीपी के साथ पंजीकरण / लॉगिन करें"},
+      {"title": "लॉग इन करें या खाता बनाएं"}
+    ]
+  },
+  "LoginEnglish": {
+    "title": "For your protection, please verify your identity.",
+    "items": [
+      {"title": "Sign in"},
+      {"title": "New user? "},
+      {"title": "Create an account"},
+      {"title": "Or"},
+      {"title": "Email address"},
+      {"title": "Password"},
+      {"title": "Forgot Password?"},
+      {"title": "Sign in"},
+      {"title": "create an account"},
+      {"title": "Register / Login with mobile OTP"},
+      {"title": "Sign in or create an account"}
+    ]
+  },
+  "SignupEnglish": {
+    "title": "For your protection, please verify your identity.",
+    "items": [
+      {"title": "Create an account"},
+      {"title": "Already have an account? "},
+      {"title": "Sign in"},
+      {"title": "Or"},
+      {"title": "Email address"},
+      {"title": "Email"},
+      {"title": "Phone"},
+      {"title": "Password"},
+      {"title": "Confirm Password"},
+      {"title": "By signing up, I accept"},
+      {"title": "Term & Condition"},
+      {"title": "Signup"},
+      {"title": "Participate in market research projects and reap instant rewards for sharing your valuable opinions"},
+      {"title": "Please accept the terms to our privacy policy and our terms and conditions"},
+      {"title": "Please enter same password in both password and confirm password"}
+    ]
+  },
+  "SignupHindi": {
+    "title": "अपनी सुरक्षा के लिए, कृपया अपनी पहचान सत्यापित करें.",
+    "items": [
+      {"title": "खाता बनाएं"},
+      {"title": "अगर आपके पास पहले से एक खाता मौजूद है?"},
+      {"title": "लॉग इन करें"},
+      {"title": "या"},
+      {"title": "ईमेल"},
+      {"title": "ईमेल"},
+      {"title": "फ़ोन"},
+      {"title": "पासवर्ड"},
+      {"title": "पासवर्ड की पुष्टि कीजिये"},
+      {"title": "मैं सभी"},
+      {"title": "नियम एवं शर्तें स्वीकार करता हूं"},
+      {"title": "पंजीकरण करें"},
+      {"title": "मार्केट रिसर्च सर्वेक्षण में भाग लें और अपनी बहुमूल्य राय साझा करने के लिए तुरंत पुरस्कार प्राप्त करें"},
+      {"title": "कृपया हमारी गोपनीयता नीति की शर्तों और हमारे नियमों और शर्तों को स्वीकार करें"},
+      {"title": "कृपया दोनों पासवर्ड में एक ही पासवर्ड डालें और पासवर्ड की पुष्टि करें"}
+    ]
+  },
+  "OTPVerifyHindi": {
+    "title": "कृपया अपनी मोबाइल संख्या को सत्यापित करें।",
+    "description": "हमने आपके मोबाइल नंबर पर एक सत्यापन कोड भेजा है। कृपया मोबाइल सत्यापन पूरा करने के लिए OTP दर्ज करें.",
+    "items": [
+      {"title": "कृपया OTP दर्ज करें"},
+      {"title": "ओटीपी को सत्यापित करें"},
+      {"title": "मोबाइल संख्या सफलतापूर्वक सत्यापित हो गई है"}
+    ]
+  },
+  "OTPVerifyEnglish": {
+    "title": "Please Verify Your Mobile.",
+    "description": "We have sent a verification code to your mobile number. Please enter OTP to complete mobile verification.",
+    "items": [
+      {"title": "Please enter OTP"},
+      {"title": "Verify OTP"},
+      {"title": "Mobile verified successfully"}
+    ]
+  },
+  "VerifyEmailHindi": {
+    "title": "कृपया अपना ईमेल सत्यापित करें।",
+    "description": "हमने आपके ईमेल पर एक सत्यापन लिंक भेजा है। कृपया अपना ईमेल पुष्टीकरण करने के लिए लिंक पर क्लिक करें.",
+    "items": [
+      {"title": "अपने ईमेल को सत्यापित करने के लिए नीचे दिए गए बटन पर क्लिक करें:"},
+      {"title": "ईमेल सत्यापित करें"},
+      {"title": "आपके ईमेल की सफलतापूर्वक पुष्टि हो गई है!"},
+      {"title": "लॉग इन करने के लिए नीचे दिए गए बटन पर क्लिक करें:"},
+      {"title": "लॉग इन करें"}
+    ]
+  },
+  "VerifyEmailEnglish": {
+    "title": "Please Verify Your Email.",
+    "description": "We have sent a verification link to your email address. Please click on the link to verify your email.",
+    "items": [
+      {"title": "Click the button below to verify your email:"},
+      {"title": "Verify Email"},
+      {"title": "Your email has been confirmed successfully!"},
+      {"title": "Click the button below to login:"},
+      {"title": "Login"}
+    ]
+  },
+  "BasicProfileHindi": {
+    "title": "जारी रखने के लिए कृपया निम्नलिखित जानकारी प्रदान करें",
+    "items": [
+      {"title": "मौलिक जानकारी"},
+      {"title": "कृपया भरें"},
+      {"title": "पहला नाम*"},
+      {"title": "उपनाम"},
+      {"title": "मोबाइल नंबर*"},
+      {"title": "लिंग*"},
+      {"title": "जन्म की तारीख*"},
+      {"title": "पिन कोड*"},
+      {"title": "पता पंक्ति 1*"},
+      {"title": "पता पंक्ति 2"},
+      {"title": "देश*"},
+      {"title": "राज्य*"},
+      {"title": "शहर*"},
+      {"title": "रेफ़रल स्रोत"},
+      {"title": "जमा करना"},
+      {"title": "रीसेट"}
+    ]
+  },
+  "BasicProfileEnglish": {
+    "title": "Please provide the following information to continue",
+    "items": [
+      {"title": "Basic Info"},
+      {"title": "Enter Here"},
+      {"title": "First name*"},
+      {"title": "Last Name"},
+      {"title": "Mobile Number*"},
+      {"title": "Gender*"},
+      {"title": "Date Of Birth*"},
+      {"title": "Pincode*"},
+      {"title": "Address Line 1*"},
+      {"title": "Address Line 2"},
+      {"title": "Country*"},
+      {"title": "State*"},
+      {"title": "City/Post Office*"},
+      {"title": "Referral Source"},
+      {"title": "Submit"},
+      {"title": "Reset"}
+    ]
+  }
+}

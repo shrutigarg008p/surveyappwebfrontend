@@ -3,6 +3,9 @@ import {Assets, PageStatus} from "../../enums";
 import {AuthAPI} from "../../API";
 import {withRouter} from "react-router";
 import {Alert} from "react-bootstrap";
+import Language from "../../Languages/Login/content.json"
+import {connect} from "react-redux";
+import {authRegistration} from "./auth.actions";
 
 class VerifyOtp extends Component {
     constructor(props) {
@@ -11,7 +14,8 @@ class VerifyOtp extends Component {
             otp: '',
             status: PageStatus.None,
             error: null,
-            userId: null
+            userId: null,
+            pageContent: this.props.language === 'hi' ? Language.OTPVerifyHindi : Language.OTPVerifyEnglish,
         };
     }
 
@@ -32,7 +36,7 @@ class VerifyOtp extends Component {
             .then(() => this.setState({status: PageStatus.Submitting}))
             .then(() => AuthAPI.verifyMobileOtp(obj))
             .then((res) => {
-                alert('Mobile verifications successfully')
+                alert(this.state.pageContent.items[2].title)
                 if(res.emailConfirmed === false) {
                     this.props.history.push({
                         pathname: '/verify-screen'
@@ -51,7 +55,7 @@ class VerifyOtp extends Component {
     }
 
     render() {
-        const { otp, error } = this.state;
+        const { otp, error, pageContent } = this.state;
         console.log('erre---->', error)
         const styles = {
             container: {
@@ -85,12 +89,12 @@ class VerifyOtp extends Component {
             <div>
                 <div style={styles.container}>
                     <img src={Assets.Logo2}  style={{width:'100%'}}/>
-                    <h2 style={styles.heading}>Please Verify Your Mobile</h2>
+                    <h2 style={styles.heading}>{pageContent.title}</h2>
                     <p style={styles.message}>
-                        We have sent a verification code to your mobile number. Please enter otp to complete mobile verification.
+                        {pageContent.description}
                     </p>
-                        <input placeholder="Please enter otp" type="text" value={otp} onChange={this.handleChange} />
-                    <button className="ml-3" onClick={this.handleVerify}>Verify OTP</button>
+                        <input placeholder={pageContent.items[0].title} type="text" value={otp} onChange={this.handleChange} />
+                    <button className="ml-3" onClick={this.handleVerify}>{pageContent.items[1].title}</button>
                 </div>
                 <Alert variant="danger" show={!!this.state.error} className="mt-2">
                     {this.state.error}
@@ -100,4 +104,21 @@ class VerifyOtp extends Component {
     }
 }
 
-export default withRouter(VerifyOtp);
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.adminUser.adminUser.isAuthenticated,
+        token: state.adminUser.adminUser.token,
+        language: state.adminUser.adminUser.language,
+        isLoading: state.adminUser.adminUser.loading,
+        error: state.adminUser.adminUser.error,
+    };
+};
+
+const VerifyOtpWithState = withRouter(connect(
+    mapStateToProps, { authRegistration },
+)(VerifyOtp));
+
+export {
+    VerifyOtp,
+    VerifyOtpWithState,
+};

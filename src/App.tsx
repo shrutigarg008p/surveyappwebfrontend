@@ -5,9 +5,8 @@ import {connect} from "react-redux";
 import NetworkDetector from "./Layout/NetworkDetector";
 import Admin from "./Layout/Admin";
 import {PrivateRouteWithRedux} from "./PrivateRoute";
-import {VerificationEmailScreens} from "./Components/Auth/VerificationEmailScreen";
+import { VerificationEmailScreensWithState} from "./Components/Auth/VerificationEmailScreen";
 import {AuthRouter} from "./Components/Auth/AuthRouter";
-import PrivacyPolicy from "./Components/PrivacyPolicy/privacyPolicy";
 import ResetPasswordForm from "./Components/Auth/UpdateResetPasswordForm";
 import Terms from "./Components/Legal/Terms";
 import Privacy from "./Components/Legal/Privacy";
@@ -20,7 +19,6 @@ import SurveyQualityTerminatedCallbackPage from "./Components/SurveyCallbackPage
 import {LinkViewWithState} from "./Components/Referrals/LinkView";
 import { requestForToken, foreGroundMessage } from './firebase';
 import PartnerSurvey from "./Components/Partners/PartnerSurvey";
-import VerifyOtp from "./Components/Auth/VerifyOtp";
 
 requestForToken();
 foreGroundMessage();
@@ -38,7 +36,7 @@ class App extends React.Component<any, any> {
             <Route path='/partner' component={PartnerSurvey} />
             <Route path='/referrals/view/:userId' component={LinkViewWithState} />
             <Route path="/auth" component={AuthRouter} />
-            <Route path="/verify-screen" component={VerificationEmailScreens} />
+            <Route path="/verify-screen" component={VerificationEmailScreensWithState} />
             {/* <Route path='/privacy-policy' component={PrivacyPolicy} /> */}
             <Route path='/terms' component={Terms} />
             <Route path='/privacy-policy' component={Privacy} />

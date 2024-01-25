@@ -5,6 +5,8 @@ import { withRouter } from 'react-router';
 import LoadingSpinner from "../../Layout/LoadingSpinner";
 import { authRegistration } from "./auth.actions";
 import FacebookLogin from 'react-facebook-login';
+import Language from "../../Languages/Login/content.json"
+
 
 import { Assets } from 'enums';
 import { Link } from 'react-router-dom';
@@ -27,6 +29,7 @@ class Registration extends Component {
       isPasswordMatched : false,
       referralId: '',
       showGoogleSignIn: false,
+      pageContent: this.props.language === 'hi' ? Language.SignupHindi : Language.SignupEnglish,
       error : {
         status : false,
         message : ''
@@ -64,7 +67,8 @@ class Registration extends Component {
         password: this.state.password,
         registerType: this.state.registerType,
         role: 'panelist',
-        referralId: this.state.referralId
+        referralId: this.state.referralId,
+        language: this.props.language
       }
       this.props.authRegistration(
           data,
@@ -137,7 +141,7 @@ class Registration extends Component {
   }
 
   render() {
-    const { isPasswordMatched } = this.state;
+    const { isPasswordMatched, pageContent } = this.state;
     return (
     <>
      <section className="formSec">
@@ -146,19 +150,19 @@ class Registration extends Component {
             <div className="col-md-6">
               <div className="logoDiv">
                 <img src={Assets.Logo} className="img-fluid mobileNone" alt="IndiaPolls" style={{width:'100%'}}/>
-                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>Participate in market research projects and reap instant rewards for sharing your valuable opinions</p>
+                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>{pageContent.items[12].title}</p>
               </div>
             </div>
             <div className="col-md-5">
               <div>
                 <div className="formdesign">
-                  <i className="fa fa-info-circle" aria-hidden="true" /> For your protection, please verify your identity.
+                  <i className="fa fa-info-circle" aria-hidden="true" /> {pageContent.title}
                 </div>
               </div>
               <div className="formdesign2">
-                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt />
-                <h2>Create an account </h2>
-                <p>Already have an account? <Link to="#" onClick={() => this.onLogin()}>Sign in</Link></p>
+                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt="" />
+                <h2>{pageContent.items[0].title}</h2>
+                <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
                 <div className="social-login">
                   <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
                   {this.state.showGoogleSignIn && <GoogleSignIn />}
@@ -172,19 +176,19 @@ class Registration extends Component {
                   {/*    textButton=""*/}
                   {/*/>*/}
                 </div>
-                <div className="RuleWithText">Or</div>
+                <div className="RuleWithText">{pageContent.items[3].title}</div>
                 {/* <form onSubmit={props.handleSubmit(onSubmit)}> */}
                   <div className="mb-3 mt-3">
-                    <label htmlFor="email">Email address</label>
+                    <label htmlFor="email">{pageContent.items[4].title}</label>
                     <input type="email" className="form-control" name="email"
                     value={this.state.email}
                     onChange={(e) => this.setState({ email: e.target.value })}
                     onClick={() => this.setState({emailActive: !this.state.emailActive})}
-                    placeholder='Email'
+                    placeholder={pageContent.items[5].title}
                     required />
                   </div>
                   <div className="mb-3 mt-3">
-                    <label htmlFor="phone">Phone</label>
+                    <label htmlFor="phone">{pageContent.items[6].title}</label>
                     <input type="text" className="form-control" name="phone"
                     value={this.state.phoneNumber}
                     onChange={(e) => {
@@ -198,7 +202,7 @@ class Registration extends Component {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="pwd">Password  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
+                    <label htmlFor="pwd">{pageContent.items[7].title}  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
                     <input
                   className="form-control"
                    type='password'
@@ -213,7 +217,7 @@ class Registration extends Component {
                    required />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="pwd">Confirm Password  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
+                    <label htmlFor="pwd">{pageContent.items[8].title}  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
                     <input
                     className="form-control"
                     type='password'
@@ -233,18 +237,18 @@ class Registration extends Component {
                   type='checkbox'
                   onChange={(e) => this.setState({ policy: e.target.checked })}
                   className="r_pp_checkbox login-checkbox-input" defaultValue />
-                  <span> By signing up, I accept</span>
+                  <span> {pageContent.items[9].title}</span>
                 </label>
-                  <span><Link to="/terms"> Term &amp; Condition</Link></span>
+                  <span><Link to="/terms">{pageContent.items[10].title}</Link></span>
               </div>
               <Show when={this.state.show===true}>
                 <small className="form-text text-danger privacy_error">
-                  Please accept the terms to our privacy policy and our terms and conditions
+                  {pageContent.items[13].title}
                 </small>
               </Show>
               <Show when={this.state.showConfirmPassword === true}>
                 <small className="form-text text-danger privacy_error">
-                  Please enter same password in both password and confirm password
+                  {pageContent.items[14].title}
                 </small>
               </Show>
               <Show when={this.state.error.status === true}>
@@ -256,7 +260,7 @@ class Registration extends Component {
                 <LoadingSpinner show={this.props.isLoading} />
                 <span className="text-right">
                   <button type="submit" style={{float:'right'}} className="btn btn-primary" onClick={() => this.onSubmit()}
-                disabled={!this.isSubmitButtonDisable()}>Sign up</button>
+                disabled={!this.isSubmitButtonDisable()}>{pageContent.items[11].title}</button>
                 </span>
                   </p>
                 {/* </form> */}
@@ -275,6 +279,7 @@ const mapStateToProps = (state) => {
   return {
     isAuth: state.adminUser.adminUser.isAuthenticated,
     token: state.adminUser.adminUser.token,
+    language: state.adminUser.adminUser.language,
     isLoading: state.adminUser.adminUser.loading,
     error: state.adminUser.adminUser.error,
   };
