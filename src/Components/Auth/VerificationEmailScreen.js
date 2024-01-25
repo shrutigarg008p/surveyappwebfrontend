@@ -1,24 +1,56 @@
 import React from "react";
 import { Assets } from 'enums';
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {authRegistration} from "./auth.actions";
+import Language from "../../Languages/Login/content.json"
 
-export class VerificationEmailScreens extends React.Component {
+
+class VerificationEmailScreens extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pageContent: this.props.language === 'hi' ? Language.VerifyEmailHindi : Language.VerifyEmailEnglish,
+        };
+    }
     onLogin() {
         return this.props.history.push('/auth/login')
     }
     render() {
+        const {pageContent} = this.state
         return (
             <div style={styles.container}>
                  <img src={Assets.Logo2}  style={{width:'100%'}}/>
-                <h2 style={styles.heading}>Please Verify Your Email</h2>
+                <h2 style={styles.heading}>{pageContent.title}</h2>
                 <p style={styles.message}>
-                    We have sent a verification link to your email address. Please click on
-                    the link to verify your email.
+                    {pageContent.description}
                 </p>
-                <button style={styles.loginButton} onClick={() => this.onLogin()}>Login</button>
+                <button style={styles.loginButton} onClick={() => this.onLogin()}>{pageContent.items[4].title}</button>
             </div>
         );
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.adminUser.adminUser.isAuthenticated,
+        token: state.adminUser.adminUser.token,
+        language: state.adminUser.adminUser.language,
+        isLoading: state.adminUser.adminUser.loading,
+        error: state.adminUser.adminUser.error,
+    };
+};
+
+const VerificationEmailScreensWithState = withRouter(connect(
+    mapStateToProps, { authRegistration },
+)(VerificationEmailScreens));
+
+export {
+    VerificationEmailScreens,
+    VerificationEmailScreensWithState,
+};
+
 
 const styles = {
     container: {

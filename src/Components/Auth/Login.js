@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Field, formValueSelector, reduxForm } from "redux-form";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Link, useHistory, useParams } from "react-router-dom";
 import {Alert, Button} from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { authLogin } from "./auth.actions";
-// import "./Login.scss";
+import {authLogin, languageChange, languageChangeOption} from "./auth.actions";
 import { Assets } from 'enums';
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
-import FacebookLogin from 'react-facebook-login';
 import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleSignIn from "./googleSignin";
 import {MobileLogin} from "./MobileLogin";
+import Language from "../../Languages/Login/content.json"
 
 function Login(props) {
+  const dispatch = useDispatch();
   const [state, setState] = useState({ isVisible: false });
   const [username, setUsername] = useState({ username: null });
   const [password, setPassword] = useState({ password: null });
@@ -28,6 +26,7 @@ function Login(props) {
   const [showGoogleSignIn, setShowGoogleSignIn] = useState(false);
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
+  const pageContents = props.language === 'hi' ? Language.LoginHindi : Language.LoginEnglish
 
   const handleContinueWithGoogleClick = () => {
     setShowGoogleSignIn(true);
@@ -45,6 +44,7 @@ function Login(props) {
       username.username,
       password.password,
       'password',
+      props.language,
       history
     );
 
@@ -67,6 +67,11 @@ function Login(props) {
     console.log('responseFacebook---->', info)
   }
 
+  const languageChangeOptions = (info) => {
+    dispatch(languageChange(info.target.value));
+  }
+
+
   return (
     <>
       <section className="formSec">
@@ -74,31 +79,31 @@ function Login(props) {
           <div className="row marginTop">
             <div className="col-md-6">
               <div className="logoDiv">
-                <img src={Assets.Logo} style={{width:'100%'}} className="img-fluid mobileNone" alt />
-                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>Sign in or create an account
+                <img src={Assets.Logo} style={{width:'100%'}} className="img-fluid mobileNone" alt="alt" />
+                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>{pageContents.items[10].title}
                 <br/>
-                
+
                 </p>
-                  
+
               </div>
             </div>
             <div className="col-md-5">
               <div>
                 <div className="formdesign">
-                  <i className="fa fa-info-circle" aria-hidden="true" /> For your protection, please verify your identity.
+                  <i className="fa fa-info-circle" aria-hidden="true" />{pageContents.title}
                 </div>
               </div>
               <div className="formdesign2">
-                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt />
-                <h2>Sign in</h2>
-                <p>New user? <Link to="#" onClick={handleClick}>Create an account</Link></p>
+                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt="" />
+                <h2>{pageContents.items[0].title}</h2>
+                <p>{pageContents.items[1].title}<Link to="#" onClick={handleClick}>{pageContents.items[2].title}</Link></p>
                 <div className="social-login">
                   {/* <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
                   {showGoogleSignIn && <GoogleSignIn />} */}
 
-                  <div className="RuleWithText">Or</div>
+                  <div className="RuleWithText">{pageContents.items[3].title}</div>
                   <Button onClick={() => setMobile(true)} className="mobile-otp-button mt-2 mb-2">
-                    Continue with mobile OTP
+                    {pageContents.items[9].title}
                   </Button>
 
                   <MobileLogin
@@ -121,30 +126,30 @@ function Login(props) {
                   {/*    textButton=""*/}
                   {/*/>*/}
                 </div>
-                <div className="RuleWithText">Or</div>
+                <div className="RuleWithText">{pageContents.items[3].title}</div>
                 <form onSubmit={props.handleSubmit(onSubmit)}>
                   <div className="mb-3 mt-3">
-                    <label htmlFor="email">Email address</label>
+                    <label htmlFor="email">{pageContents.items[4].title}</label>
                     <input type="email" className="form-control" name="email" onChange={(e) => setUsername({ username: e.target.value })} required />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="pwd">Password</label>
+                    <label htmlFor="pwd">{pageContents.items[5].title}</label>
                     <input type="password" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
                   </div>
                   <p>
                   <Show when={true}>
                   <a className='frgt_pass' onClick={(e)=>setResetPassword(true)}>
-                    Forgot Password?
+                    {pageContents.items[6].title}
                   </a>
                 </Show>
                 <LoadingSpinner show={props.isLoading} />
-                <span className="text-right"><button type="submit" style={{float:'right'}} className="btn btn-primary" disabled={submitting || invalid}>Login</button></span>
+                <span className="text-right"><button type="submit" style={{float:'right'}} className="btn btn-primary" disabled={submitting || invalid}>{pageContents.items[7].title}</button></span>
                   </p>
                 </form>
                   <div className="text-center">
-                    <select className="text-center">
-                    <option>English</option>
-                    <option>Hindi</option>
+                    <select className="text-center" onChange={languageChangeOptions} value={props.language}>
+                    <option value="en">English</option>
+                    <option value="hi">Hindi</option>
                     </select>
                   </div>
               </div>
@@ -182,6 +187,7 @@ const mapStateToProps = (state) => {
     isAuth: state.adminUser.adminUser.isAuthenticated,
     token: state.adminUser.adminUser.token,
     state: state,
+    language: state.adminUser.adminUser.language,
     isLoading: state.adminUser.adminUser.loading,
     authError: state.adminUser.adminUser.error,
     username,

@@ -2,12 +2,17 @@ import React, {Component} from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import { Assets } from 'enums';
+import {connect} from "react-redux";
+import {authRegistration} from "./auth.actions";
+import Language from "../../Languages/Login/content.json"
+
 
 class VerifyEmail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVerified: 'Your email has been not confirmed successfully!',
+      isVerified: this.props.language === 'hi' ? 'आपके ईमेल की सफलतापूर्वक पुष्टि नहीं की गई है!' : 'Your email has been not confirmed successfully!',
+      pageContent: this.props.language === 'hi' ? Language.VerifyEmailHindi : Language.VerifyEmailEnglish,
     };
   }
 
@@ -18,11 +23,10 @@ class VerifyEmail extends React.Component {
       const email = queryParams.get('email');
       const token = queryParams.get('token');
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL_API}/api/v1/auth/user/verify-email?email=${email}&token=${token}`);
-      console.log('response--->', response)
       if (response.data.status === 1) {
-        this.setState({isVerified: 'Your email has been confirmed successfully!'})
+        this.setState({isVerified: this.state.pageContent.items[2].title})
       } else {
-        this.setState({isVerified: 'Your email has been not confirmed successfully!'})
+        this.setState({isVerified: this.state.isVerified})
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -57,19 +61,36 @@ class VerifyEmail extends React.Component {
       fontSize: '16px',
       cursor: 'pointer',
     }
-
+const {pageContent} = this.state
     return (
         <div style={containerStyle}>
           <img src={Assets.Logo2}  style={{width:'100%'}}/>
           <div style={messageStyle}>
             <p>{this.state.isVerified}</p>
-            <p>Click the button below to log in:</p>
+            <p>{pageContent.items[3].title}</p>
           </div>
-          <button style={loginButton} onClick={() => this.onLogin()}>Login</button>
+          <button style={loginButton} onClick={() => this.onLogin()}>{pageContent.items[4].title}</button>
         </div>
     );
   }
 }
 
 
-export default withRouter(VerifyEmail);
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.adminUser.adminUser.isAuthenticated,
+    token: state.adminUser.adminUser.token,
+    language: state.adminUser.adminUser.language,
+    isLoading: state.adminUser.adminUser.loading,
+    error: state.adminUser.adminUser.error,
+  };
+};
+
+const VerifyEmailWithState = withRouter(connect(
+    mapStateToProps, { authRegistration },
+)(VerifyEmail));
+
+export {
+  VerifyEmail,
+  VerifyEmailWithState,
+};

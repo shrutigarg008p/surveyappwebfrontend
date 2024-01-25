@@ -16,9 +16,10 @@ export class AuthAPI {
     static async login(
         username: string,
         password: string,
-        registerType: string
+        registerType: string,
+        language: string
     ): Promise<any> {
-        return api.post(loginURL, {email: username, password, registerType})
+        return api.post(loginURL, {email: username, password, registerType, language})
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

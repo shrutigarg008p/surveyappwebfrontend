@@ -5,9 +5,9 @@ import { PageNotFound } from '../../Shared';
 import { LoginWithState } from './Login';
 import { DocumentTitle } from '../../Shared/';
 import { RegistrationWithState} from "./Registration";
-import VerifyEmail from "./VerifyEmail";
 import {BasicProfile} from "./BasicProfile";
-import VerifyOtp from "./VerifyOtp";
+import {VerifyOtpWithState} from "./VerifyOtp";
+import {VerifyEmailWithState} from "./VerifyEmail";
 
 export function AuthRouter() {
   const { path } = useRouteMatch();
@@ -25,7 +25,7 @@ export function AuthRouter() {
 
         <Route exact path={`${path}/confirmed-email`}>
             <DocumentTitle title="Login | Admin Panel" />
-            <VerifyEmail />
+            <VerifyEmailWithState />
         </Route>
 
         <Route exact path={`${path}/basic-profile`}>
@@ -35,7 +35,7 @@ export function AuthRouter() {
 
         <Route exact path={`${path}/verify-mobile`}>
             <DocumentTitle title="Verify | Admin Panel" />
-            <VerifyOtp />
+            <VerifyOtpWithState />
         </Route>
 
       <Route>

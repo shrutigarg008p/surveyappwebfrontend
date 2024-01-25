@@ -6,7 +6,8 @@ import {AuthAPI} from "../../API";
 import { Container } from '@material-ui/core';
 import {reduxForm} from "redux-form";
 import {withRouter} from "react-router";
-import {authSuccess, authSuccessLastStep} from "./auth.actions";
+import {authBasicProfile, authSuccess, authSuccessLastStep} from "./auth.actions";
+import {connect} from "react-redux";
 
 class MobileLogin extends React.Component<any, any> {
     constructor(props) {
@@ -28,7 +29,8 @@ class MobileLogin extends React.Component<any, any> {
             email: `${this.state.phoneNumber}@gmail.com`,
             registerType: 'mobile',
             role: 'panelist',
-            referralId: this.props.referralId
+            referralId: this.props.referralId,
+            language: this.props.language
         };
     }
 
@@ -182,6 +184,18 @@ const MobileLoginFormRedux = reduxForm<any, any>({
     form: 'labelsMobileLoginForm',
 })(MobileLogin);
 
-const MobileLoginFormWithRouter = withRouter(MobileLoginFormRedux);
+const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, language: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
+    return {
+        userId: state.adminUser.adminUser.userId,
+        role: state.adminUser.adminUser.role,
+        phoneNumber: state.adminUser.adminUser.phoneNumber,
+        language: state.adminUser.adminUser.language,
+        email: state.adminUser.adminUser.email,
+        isLoading: state.adminUser.adminUser.loading,
+        error: state.adminUser.adminUser.error,
+    };
+};
+
+const MobileLoginFormWithRouter = withRouter(connect(mapStateToProps) (MobileLoginFormRedux));
 
 export { MobileLoginFormWithRouter as MobileLogin };

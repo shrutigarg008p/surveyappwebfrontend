@@ -1,6 +1,6 @@
 import * as authActions from "./actions";
 import { AuthAPI } from "../../API";
-import {AUTH_SUCCESS_MOBILE_STEP} from "./actions";
+import {AUTH_SUCCESS_MOBILE_STEP, LANGUAGE_CHANGE} from "./actions";
 
 export const authStart = () => ({
   type: authActions.AUTH_START,
@@ -26,6 +26,11 @@ export const authRegisterSuccess = (user) => ({
     user,
 });
 
+export const languageChange = (user) => ({
+    type: authActions.LANGUAGE_CHANGE,
+    user,
+});
+
 export const basicProfileCompleted = (user) => ({
     type: authActions.AUTH_BASIC_PROFILE_SUCCESS,
     user,
@@ -40,10 +45,10 @@ export const authFail = (error) => (dispatch) => {
 
 
 export const authLogin =
-  (username, password, registerType, history) => async (dispatch) => {
+  (username, password, registerType, language, history) => async (dispatch) => {
     try {
       dispatch(authStart());
-      const user = await AuthAPI.login(username, password, registerType);
+      const user = await AuthAPI.login(username, password, registerType, language);
         if(user.phoneNumberConfirmed === false) {
             dispatch(authSuccessMobileStep(user))
             return history.push({
@@ -98,4 +103,12 @@ export const authRegistration =
       } catch (error) {
         dispatch(authFail(error.message));
       }
+    };
+
+
+export const languageChangeOption =
+    (language) => async (dispatch) => {
+        console.log('language--->>>>>', language)
+            dispatch(languageChange(language));
+
     };

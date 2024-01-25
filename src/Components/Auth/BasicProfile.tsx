@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
     Field,
@@ -15,6 +14,8 @@ import {authBasicProfile} from "./auth.actions";
 import { Grid, Typography, Container } from '@material-ui/core';
 import { Assets } from 'enums';
 import {CountriesAPI} from "../../API/CountriesAPI";
+import Language from "../../Languages/Login/content.json"
+
 
 export type FormValue = {
     "firstName":string,
@@ -73,6 +74,7 @@ class BasicProfile extends React.Component<any, any> {
             referralSource: '',
             countries: [],
             states: [],
+            pageContent: this.props.language === 'hi' ? Language.BasicProfileHindi : Language.BasicProfileEnglish,
             cities: []
         };
     }
@@ -152,7 +154,12 @@ class BasicProfile extends React.Component<any, any> {
     reset() {
         return this.setState({
             firstName: '',
-            lastName: '' ,
+            lastName: '',
+            dateOfBirth: '',
+            addressLine1: '',
+            addressLine2: '',
+            pinCode: '',
+            referralSource: ''
         });
     }
 
@@ -296,7 +303,7 @@ class BasicProfile extends React.Component<any, any> {
 
 
     render() {
-        const {selectedCountryOption, selectedStateOption, selectedCityOption}=this.state
+        const {selectedCountryOption, selectedStateOption, selectedCityOption, pageContent}=this.state
         return (
             <Container maxWidth="lg">
                 <Grid container justify="center" alignItems="center">
@@ -308,7 +315,7 @@ class BasicProfile extends React.Component<any, any> {
                         />
                     </Grid>
                 </Grid>
-                <div className='text-center mb-3'>Please provide following information to continue</div>
+                <div className='text-center mb-3'>{pageContent.title}</div>
                 <Show when={this.state.status === PageStatus.Loading}>
                     <div className="d-flex justify-content-center w-100 p-5">
                         <Spinner animation="border" variant="primary" />
@@ -325,39 +332,39 @@ class BasicProfile extends React.Component<any, any> {
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="title">First name*</label>
+                            <label htmlFor="title">{pageContent.items[2].title}</label>
                             <input
                                 className="form-control"
                                 name="firstName"
                                 onChange={(e) => this.setState({ firstName: e.target.value })}
                                 value={this.state.firstName}
-                                placeholder="Enter here"
+                                placeholder={pageContent.items[1].title}
                                 required
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="lastName">Last Name</label>
+                            <label htmlFor="lastName">{pageContent.items[3].title}</label>
                             <input
                                 className="form-control"
                                 id="lastName"
                                 name="lastName"
                                 onChange={(e) => this.setState({ lastName: e.target.value })}
                                 value={this.state.lastName}
-                                placeholder="Enter.."
+                                placeholder={pageContent.items[1].title}
                             />
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="Mobile Number">Mobile Number*</label>
+                            <label htmlFor="Mobile Number">{pageContent.items[4].title}</label>
                             <input
                                 className="form-control"
                                 id="mobile"
                                 name="mobile"
                                 onChange={(e) => this.setState({ mobile: e.target.value })}
                                 value={this.state.mobile}
-                                placeholder="Enter here.."
+                                placeholder={pageContent.items[1].title}
                                 required
                                 readOnly={this.state.mobile.length === 10 ? true : false}
                             />
@@ -366,7 +373,7 @@ class BasicProfile extends React.Component<any, any> {
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor='gender'>Gender*</label>
+                            <label htmlFor='gender'>{pageContent.items[5].title}</label>
                             <select
                                 style={{
                                     width: '100%',
@@ -395,7 +402,7 @@ class BasicProfile extends React.Component<any, any> {
                             </select>
                         </div>
                         <div className="col">
-                            <label htmlFor="description">Date Of Birth*</label>
+                            <label htmlFor="description">{pageContent.items[6].title}</label>
                             <input
                                 className="form-control"
                                 id="description"
@@ -409,47 +416,47 @@ class BasicProfile extends React.Component<any, any> {
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="description">Pincode*</label>
+                            <label htmlFor="description">{pageContent.items[7].title}</label>
                             <input
                                 className="form-control"
                                 id="pinCode"
                                 name="pinCode"
                                 value={this.state.pinCode}
                                 onChange={(e) => this.handleZipCodeChange(e)}
-                                placeholder="Enter here"
+                                placeholder={pageContent.items[1].title}
                             />
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="description">Address Line 1*</label>
+                            <label htmlFor="description">{pageContent.items[8].title}</label>
                             <input
                                 className="form-control"
                                 id="addressLine1"
                                 name="addressLine1"
                                 value={this.state.addressLine1}
                                 onChange={(e) => this.setState({ addressLine1: e.target.value })}
-                                placeholder="Enter here"
+                                placeholder={pageContent.items[1].title}
                                 required
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="description">Address Line 2</label>
+                            <label htmlFor="description">{pageContent.items[9].title}</label>
                             <input
                                 className="form-control"
                                 id="addressLine2"
                                 name="addressLine2"
                                 value={this.state.addressLine2}
                                 onChange={(e) => this.setState({ addressLine2: e.target.value })}
-                                placeholder="Enter here"
+                                placeholder={pageContent.items[1].title}
                             />
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor='country'>Country*</label>
+                            <label htmlFor='country'>{pageContent.items[10].title}</label>
                             <Select
                                 name='countryTitle'
                                 id='countryTitle'
@@ -460,7 +467,7 @@ class BasicProfile extends React.Component<any, any> {
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor='country'>State*</label>
+                            <label htmlFor='country'>{pageContent.items[11].title}</label>
                             <Select
                                 name='state'
                                 id='state'
@@ -471,7 +478,7 @@ class BasicProfile extends React.Component<any, any> {
                             />
                         </div>
                         <div className='col'>
-                            <label htmlFor='country'>City/Post Office*</label>
+                            <label htmlFor='country'>{pageContent.items[12].title}</label>
                             <Select
                                 name='city'
                                 id='city'
@@ -484,7 +491,7 @@ class BasicProfile extends React.Component<any, any> {
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='gender'>Referral Source*</label>
+                        <label htmlFor='gender'>{pageContent.items[13].title}</label>
                         <select
                             style={{
                                 width: '100%',
@@ -529,7 +536,7 @@ class BasicProfile extends React.Component<any, any> {
                             disabled={false}
                             className="btn btn-primary mr-3"
                         >
-                            Submit
+                            {pageContent.items[14].title}
                         </button>
 
                         <button
@@ -538,7 +545,7 @@ class BasicProfile extends React.Component<any, any> {
                             onClick={() => this.reset()}
                             className="btn btn-light mr-3"
                         >
-                            Reset
+                            {pageContent.items[15].title}
                         </button>
 
                         <Show when={this.state.status === PageStatus.Submitting}>
@@ -555,11 +562,12 @@ const basicProfileFormRedux = reduxForm<FormValue, any>({
     form: 'profileForm',
 })(BasicProfile);
 
-const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
+const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, language: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
     return {
         userId: state.adminUser.adminUser.userId,
         role: state.adminUser.adminUser.role,
         phoneNumber: state.adminUser.adminUser.phoneNumber,
+        language: state.adminUser.adminUser.language,
         email: state.adminUser.adminUser.email,
         isLoading: state.adminUser.adminUser.loading,
         error: state.adminUser.adminUser.error,
