@@ -38,7 +38,7 @@ function Privacy() {
     const classes = useStyles();
     const headingStyle = { color: '#5a5a5a', fontSize: '22.5pt' };
     const subHeadingStyle = { color: '#5a5a5a', fontSize: '13pt' };
-    const emphasizedStyle = { color: '#5a5a5a', backgroundColor: '#ffff00', fontSize: '13pt' };
+    const emphasizedStyle = {}; //{ color: '#5a5a5a', backgroundColor: '#ffff00', fontSize: '13pt' };
     const strongHeadingStyle = { color: '#5a5a5a', fontSize: '16.5pt' };
     const listStyle = { listStyleType: 'disc', color: '#5a5a5a', fontSize: '13pt' };
     return (
@@ -143,7 +143,7 @@ function Privacy() {
                             <span style={subHeadingStyle}>
                                 You have the right to ensure that your personal data is being processed lawfully (&ldquo;Subject Access Right&rdquo;). Your subject access right can be exercised in accordance with data protection laws and regulations. Any subject access request must be made in writing to&nbsp;
                             </span>
-                            <span style={emphasizedStyle}>panel@indiapolls.com</span>
+                            <span style={emphasizedStyle}><a href="mailto:panel@indiapolls.com">panel@indiapolls.com</a></span>
                             <span style={subHeadingStyle}>. We will provide your personal data to you within the statutory time frames. To enable us to trace any of your personal data that we may be holding, we may need to request further information from you. If you complain about how we have used your information, you have the right to complain to the Information Commissioner&rsquo;s Office (ICO).
                             </span>
                         </p>
@@ -159,7 +159,8 @@ function Privacy() {
                                 Questions, comments, and requests regarding this privacy policy are welcomed and should be addressed to&nbsp;
                             </span>
                             <em>
-                                <span style={emphasizedStyle}>India Polls & panel@indiapolls.com</span>
+                                <span style={emphasizedStyle}>India Polls & <a href="mailto:panel@indiapolls.com">panel@indiapolls.com</a>
+ </span>
                             </em>
                             <span style={subHeadingStyle}>.
                             </span>

@@ -164,8 +164,8 @@ class Registration extends Component {
                 <h2>{pageContent.items[0].title}</h2>
                 <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
                 <div className="social-login">
-                  <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
-                  {this.state.showGoogleSignIn && <GoogleSignIn />}
+                  {/* <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  {this.state.showGoogleSignIn && <GoogleSignIn />} */}
                   {/*<FacebookLogin*/}
                   {/*    appId="879890270328649"*/}
                   {/*    autoLoad={false}*/}
