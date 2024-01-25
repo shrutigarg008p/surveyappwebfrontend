@@ -398,8 +398,9 @@ class BasicProfile extends React.Component<any, any> {
                                 }
                             >
                                 <option value='' disabled>--Choose--</option>
-                                <option value='male'>{this.props.language ? 'पुरुष' : 'Male'}</option>
-                                <option value='female'>{this.props.language ? 'महिला' : 'Female'}</option>
+                                <option value='male'>{this.props.language === 'hi' ? 'पुरुष' : 'Male'}</option>
+                                <option value='female'>{this.props.language === 'hi' ? 'महिला' : 'Female'}</option>
+                                <option value='female'>{this.props.language === 'hi' ? 'अन्य' : 'Other'}</option>
                             </select>
                         </div>
                         <div className="col">

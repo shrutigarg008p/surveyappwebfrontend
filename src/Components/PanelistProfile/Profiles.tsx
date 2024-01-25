@@ -15,6 +15,7 @@ import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Language from "../../Languages/Login/content.json";
+import * as process from "process";
 
 export type FormValue = {
     "name": string,
@@ -189,11 +190,17 @@ class Profiles extends React.Component<any, any> {
                                                     }
                                                 />
                                                 <CardContent>
+                                                    {/*<img*/}
+                                                    {/*    src={"https://picsum.photos/400/"+Math.round((140+index))}*/}
+                                                    {/*    alt="Full Size Image"*/}
+                                                    {/*    style={{ width: '100%', height: 'auto' }}*/}
+                                                    {/*/>*/}
                                                     <img
-                                                        src={"https://picsum.photos/400/"+Math.round((140+index))}
+                                                        src={`${process.env.REACT_APP_BASE_URL_API}${data.image}`}
                                                         alt="Full Size Image"
-                                                        style={{ width: '100%', height: 'auto' }}
+                                                        style={{ width: '100%', height: '90' }}
                                                     />
+                                                    {console.log(process.env.REACT_APP_BASE_URL_API, data.image)}
                                                 </CardContent>
                                             </Card2>
                                         </Grid>

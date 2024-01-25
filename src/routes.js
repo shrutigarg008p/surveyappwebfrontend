@@ -63,7 +63,7 @@ const dashboardRoutes = [
   {
     path: "/dashboard-admin",
     name: "Admin Dashboard",
-    hindi: "एडमिन डैशबोर्ड",
+    hindi: "व्यवस्थापक डैशबोर्ड",
     icon: Dashboard,
     component: AdminDashboard,
     layout: "/admin",
@@ -176,7 +176,7 @@ const dashboardRoutes = [
   {
     path: "/bounces",
     name: "Bounces",
-    hindi: "उछलावर",
+    hindi: "बाउंस",
     icon: Block,
     component: Bounces,
     layout: "/admin",
@@ -184,7 +184,7 @@ const dashboardRoutes = [
   {
     path: "/samples",
     name: "Samples",
-    hindi: "नमूने",
+    hindi: "प्रतिरूप",
     icon: Category,
     component: Samples,
     layout: "/admin",
@@ -349,8 +349,8 @@ const dashboardRoutes = [
   },
   {
     path: "/settings",
-    name: "My Setting",
-    hindi: "मेरी सेटिंग",
+    name: "My Settings",
+    hindi: "मेरी सेटिंग्स",
     icon: Settings,
     component: MySettings,
     layout: "/panelist",
@@ -422,7 +422,7 @@ const dashboardRoutes = [
   {
     path: "/household",
     name: "House Hold",
-    hindi: "घरेलू",
+    hindi: "परिवार",
     icon: Home,
     component: HouseHold,
     layout: "/panelist",
@@ -492,6 +492,7 @@ const dashboardRoutes = [
     type: 'panelist'
   },
 ];
+
 
 
 export default dashboardRoutes;
