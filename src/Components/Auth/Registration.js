@@ -197,7 +197,7 @@ class Registration extends Component {
                      })
                     }}
                     onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
-                    placeholder='Phone'
+                    placeholder={pageContent.items[6].title}
                     required
                     />
                   </div>
@@ -213,7 +213,7 @@ class Registration extends Component {
                      })
                    }}
                    onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
-                   placeholder='Password'
+                   placeholder={pageContent.items[7].title}
                    required />
                   </div>
                   <div className="mb-3">
@@ -221,6 +221,7 @@ class Registration extends Component {
                     <input
                     className="form-control"
                     type='password'
+                    placeholder={pageContent.items[8].title}
                     onChange={(e) =>{
                       this.onChangePassword(e.target.value, 'confirmpassword');
                       this.setState({

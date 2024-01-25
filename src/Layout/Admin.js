@@ -98,6 +98,7 @@ function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
+        // language={rest.language}
         logoText={role === 'admin' ? "IndiaPolls Admin" : "IndiaPolls"}
         logo={logo}
         image=""
@@ -130,6 +131,7 @@ function mapStateToProps(state) {
   return {
     todos: state,
     role: state.adminUser.adminUser.role,
+    language: state.adminUser.adminUser.language,
   };
 }
 

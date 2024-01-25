@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { PageStatus,SeoPageTitle } from '../../enums';
 import {AuthAPI} from '../../API'
+import Language from "../../Languages/Login/content.json";
+import {withRouter} from "react-router";
+import {connect} from "react-redux";
+import {authRegistration} from "./auth.actions";
 
 
 
-export default class ResetPasswordForm extends Component {
+class ResetPasswordForm extends Component {
     constructor(props) {
         super(props);
         (this.state = {
@@ -16,8 +20,7 @@ export default class ResetPasswordForm extends Component {
             passwordactive: false,
             passwordconfirmactive:false,
             metaData: null,
-
-
+            pageContent: this.props.language === 'hi' ? Language.SignupHindi : Language.SignupEnglish,
         });
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -106,7 +109,7 @@ export default class ResetPasswordForm extends Component {
                             />
                         </div>
                         <div className='register_right'>
-                            <h2 className='register_heading'>Reset Password</h2>
+                            <h2 className='register_heading'> {this.props.language === 'hi' ? 'पासवर्ड रीसेट' : 'Reset Password'}</h2>
 
                             <div className='or_border'>
                                 <p className='or_text'></p>
@@ -114,7 +117,7 @@ export default class ResetPasswordForm extends Component {
                             <form onSubmit={this.handleSubmit} >
                                 <div className={ this.state.passwordactive == true || this.state.input.password!=='' ? 'input_group input_group_active': 'input_group'}>
                                     <label for='' className='custom_label'>
-                                        Password:
+                                        {this.props.language === 'hi' ? 'पासवर्ड' : 'Password'}:
                                     </label>
                                     <input
 
@@ -128,7 +131,7 @@ export default class ResetPasswordForm extends Component {
                                 </div>
                                 <div className={ this.state.passwordconfirmactive == true || this.state.input.confirm_password!==''? 'input_group input_group_active': 'input_group'}>
                                     <label for='' className='custom_label'  >
-                                        Confirm Password:
+                                        {this.props.language === 'hi' ? 'पासवर्ड की पुष्टि कीजिये' : 'Confirm Password'}:
                                     </label>
                                     <input
                                         type="password"
@@ -142,7 +145,7 @@ export default class ResetPasswordForm extends Component {
                                 </div>
 
                                 <button  type="submit" className='create_acc_btn rippleeffect-btn'  >
-                                    Submit
+                                    {this.props.language === 'hi' ? 'जमा करना' : 'Submit'}
                                 </button>
 
                             </form>
@@ -154,3 +157,24 @@ export default class ResetPasswordForm extends Component {
         )
     }
 }
+
+
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.adminUser.adminUser.isAuthenticated,
+        token: state.adminUser.adminUser.token,
+        language: state.adminUser.adminUser.language,
+        isLoading: state.adminUser.adminUser.loading,
+        error: state.adminUser.adminUser.error,
+    };
+};
+
+const ResetPasswordFormWithState = withRouter(connect(
+    mapStateToProps, { authRegistration },
+)(ResetPasswordForm));
+
+export {
+    ResetPasswordForm,
+    ResetPasswordFormWithState,
+};

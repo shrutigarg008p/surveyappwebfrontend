@@ -25,7 +25,7 @@ export default function Sidebar(props) {
   function activeRoute(routeName) {
     return location.pathname === routeName;
   }
-  const { color, logo, image, logoText, routes } = props;
+  const { color, logo, image, logoText, routes, language = 'en' } = props;
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
@@ -69,7 +69,7 @@ export default function Sidebar(props) {
                 />
               )}
               <ListItemText
-                primary={props.rtlActive ? prop.rtlName : prop.name}
+                primary={props.rtlActive ? prop.rtlName : language === 'hi' ? prop.hindi : prop.name}
                 className={classNames(classes.itemText, whiteFontClasses, {
                   [classes.itemTextRTL]: props.rtlActive,
                 })}

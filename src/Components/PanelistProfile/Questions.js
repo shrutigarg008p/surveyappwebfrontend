@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
+const Questions = ({ questions, onHandleQuestionResponse, userResponse, language = 'en' }) => {
     const [formData, setFormData] = useState(userResponse);
 
     const handleChange = (questionId, value) => {
@@ -22,7 +22,7 @@ const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
                 return (
                     <div className="jumbotron bg-white p-3 border shadow-sm" key={question.id}>
                     <div key={question.id}>
-                        <label>{question.text}</label>
+                        <label>{language === 'hi' ? question.hindi : question.text}</label>
                         <select
                             style={{
                                 width: '100%',
@@ -43,7 +43,7 @@ const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
                             value={formData[question.id] || ''}
                             onChange={(e) => handleChange(question.id, e.target.value)}
                         >
-                            <option value="">Select an option</option>
+                            <option value="">{language === 'hi' ? 'कोई विकल्प चुनें' : 'Select an option'}</option>
                             {renderOptions(question.options)}
                         </select>
                     </div>
@@ -55,7 +55,7 @@ const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
                 return (
                     <div className="jumbotron bg-white p-3 border shadow-sm" key={question.id}>
                     <div key={question.id}>
-                        <label>{question.text}</label>
+                        <label>{language === 'hi' ? question.hindi : question.text}</label>
                         <div className="custom-control custom-radio">
                         {question.options.map((option) => (
                             <div key={option.id}>
@@ -68,7 +68,7 @@ const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
                                     checked={formData[question.id] === option.id}
                                     onChange={() => handleChange(question.id, option.id)}
                                 />
-                                <label htmlFor={option.id} className="custom-control-label">{option.value}</label>
+                                <label htmlFor={option.id} className="custom-control-label">{language === 'hi' ? option.hindi : option.value}</label>
                             </div>
                         ))}
                         </div>
@@ -81,7 +81,7 @@ const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
                 return (
                     <div className="jumbotron bg-white p-3 border shadow-sm" key={question.id}>
                     <div key={question.id}>
-                        <label>{question.text}</label>
+                        <label>{language === 'hi' ? question.hindi : question.text}</label>
                         {question.options.map((option) => (
                             <div key={option.id} className="col ml-2">
                                 <input
@@ -92,7 +92,7 @@ const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
                                     checked={formData[question.id]?.includes(option.id) || false}
                                     onChange={() => handleCheckboxChange(question.id, option.id)}
                                 />
-                                <label className="custom-control-label" htmlFor={option.id}>{option.value}</label>
+                                <label className="custom-control-label" htmlFor={option.id}>{language === 'hi' ? option.hindi : option.value}</label>
                             </div>
                         ))}
                     </div>
@@ -109,7 +109,7 @@ const Questions = ({ questions, onHandleQuestionResponse, userResponse }) => {
     const renderOptions = (options) => {
         return options.map((option) => (
             <option key={option.id} value={option.id}>
-                {option.value}
+                {language === 'hi' ? option.hindi : option.value}
             </option>
         ));
     };
