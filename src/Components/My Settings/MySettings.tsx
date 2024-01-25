@@ -281,10 +281,6 @@ class MySettings extends React.Component<any, any> {
                             {this.state.data?.basicProfile?.dateOfBirth}
                         </div>
                         <div className="mb-3">
-                            <strong>Mobile: </strong>
-                            {this.state.data?.basicProfile?.mobile}
-                        </div>
-                        <div className="mb-3">
                             <strong>Address: </strong>
                             {this.state.data?.basicProfile?.addressLine1}
                         </div>
@@ -345,9 +341,9 @@ class MySettings extends React.Component<any, any> {
                                                 />
                                                 <CardContent>
                                                     <img
-                                                        src={"https://picsum.photos/400/"+Math.round((140+index))}
+                                                        src={`https://indiapolls.com:9000${data.image}`}
                                                         alt="Full Size Image"
-                                                        style={{ width: '100%', height: 'auto' }}
+                                                        style={{ width: '100%', height: '90' }}
                                                     />
                                                 </CardContent>
                                             </Card2>
