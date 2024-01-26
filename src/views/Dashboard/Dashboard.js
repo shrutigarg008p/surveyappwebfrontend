@@ -31,7 +31,7 @@ function Dashboard({...rest}) {
       try {
         Promise.resolve()
             .then(() => setStatus(PageStatus.Loading))
-            .then(() => SurveysAPI.userRespondentDashboardWeb(rest.userId))
+            .then(() => SurveysAPI.userRespondentDashboardWeb(rest.userId, rest.language))
             .then((response) => {
               console.log('response--->', response)
               if(response) {
@@ -87,7 +87,7 @@ function Dashboard({...rest}) {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <Update />
-                    Just Updated
+
                   </div>
                 </CardFooter>
               </Card>
@@ -106,7 +106,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -143,7 +143,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -162,7 +162,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -181,7 +181,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -200,7 +200,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -219,7 +219,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -238,7 +238,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -257,7 +257,7 @@ function Dashboard({...rest}) {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+
                 </div>
               </CardFooter>
             </Card>
@@ -272,6 +272,7 @@ function mapStateToProps(state) {
   return {
     userId: state.adminUser.adminUser.userId,
     role: state.adminUser.adminUser.role,
+    language: state.adminUser.adminUser.language,
   };
 }
 

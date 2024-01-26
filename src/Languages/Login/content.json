@@ -88,14 +88,14 @@
   "OTPVerifyEnglish": {
     "cTitle": "Continue with mobile",
     "cLabel": "Mobile Number",
-    "cPlaceholder": "Please enter ओटीपी",
+    "cPlaceholder": "Please enter OTP",
     "cMPlaceholder": "Enter here",
-    "cSendOtp": "Send ओटीपी",
+    "cSendOtp": "Send OTP",
     "title": "Please Verify Your Mobile.",
-    "description": "We have sent a verification code to your mobile number. Please enter ओटीपी to complete mobile verification.",
+    "description": "We have sent a verification code to your mobile number. Please enter OTP to complete mobile verification.",
     "items": [
-      {"title": "Please enter ओटीपी"},
-      {"title": "Verify ओटीपी"},
+      {"title": "Please enter OTP"},
+      {"title": "Verify OTP"},
       {"title": "Mobile verified successfully"}
     ]
   },

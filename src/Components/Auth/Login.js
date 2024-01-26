@@ -176,6 +176,7 @@ function Login(props) {
                 <div className="mt-2 mb-2">
                   <SimpleCaptcha
                   onValid={() => setCaptcha(true)}
+                  language={props.language}
                   />
                 </div>
                   <div className="text-center">

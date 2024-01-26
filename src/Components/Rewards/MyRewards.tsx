@@ -68,7 +68,7 @@ class MyRewards extends Component<any, any> {
             <Container>
                 <Card className="mainCard">
                     <CardHeader
-                        title="My Rewards"
+                        title={this.props.language === 'hi' ? 'अर्जित अंक' : "Points Earned"}
                     />
                 </Card>
                 <Card className="nestedCard">
@@ -78,23 +78,23 @@ class MyRewards extends Component<any, any> {
 
                             <Grid item xs={6} sm={3} className="gridItem">
                                 <Typography variant="h4">{this.state.total}</Typography>
-                                <Typography variant="body1">Total Points Earn</Typography>
+                                <Typography variant="body1">{this.props.language === 'hi' ? 'कुल प्राप्त किए गए अंक' : 'Total Points Earned'}</Typography>
                             </Grid>
 
 
                             <Grid item xs={6} sm={3} className="gridItem">
                                 <Typography variant="h4">{this.state.totalPartial.Survey}</Typography>
-                                <Typography variant="body1">Earned via Surveys</Typography>
+                                <Typography variant="body1">{this.props.language === 'hi' ? 'सर्वेक्षण के माध्यम से कमाए गए' : 'Earned via Surveys'}</Typography>
                             </Grid>
 
                             <Grid item xs={6} sm={3} className="gridItem">
                                 <Typography variant="h4">0</Typography>
-                                <Typography variant="body1">Earned via Sweepstakes</Typography>
+                                <Typography variant="body1">{this.props.language === 'hi' ? 'स्वीपस्टेक्स के माध्यम से कमाए गए' : 'Earned via Sweepstakes'}</Typography>
                             </Grid>
 
                             <Grid item xs={6} sm={3} className="gridItem">
                                 <Typography variant="h4">{this.state.totalPartial.Referral}</Typography>
-                                <Typography variant="body1">Earned via Referrals</Typography>
+                                <Typography variant="body1">{this.props.language === 'hi' ? 'रेफरल के माध्यम से कमाए गए' : 'Earned via Referrals'}</Typography>
                             </Grid>
                         </Grid>
                     </CardContent>
@@ -109,13 +109,13 @@ class MyRewards extends Component<any, any> {
 
                     <Show when={status === PageStatus.Loaded}>
                     <CardHeader
-                        title="Reward Summary"
+                        title={this.props.language === 'hi' ? 'पुरस्कार सारांश' : 'Reward Summary'}
                         className="cardHeader"
                     />
 
                    <Show when={!this.state.survey.length}>
                     <CardContent>
-                        <Typography variant="body1">No Reward Summary Available</Typography>
+                        <Typography variant="body1">{this.props.language === 'hi' ? 'कोई पुरस्कार सारांश उपलब्ध नहीं है' : 'No Reward Summary Available'}</Typography>
                     </CardContent>
                    </Show>
                     </Show>
@@ -126,13 +126,13 @@ class MyRewards extends Component<any, any> {
                             <Table responsive size="sm" bordered>
                                 <thead>
                                 <tr>
-                                    <th>S.No</th>
-                                    <th>Reward Date</th>
-                                    <th>Type</th>
-                                    <th>Points</th>
-                                    <th>User</th>
-                                    <th>Referred User</th>
-                                    <th>Survey</th>
+                                    <th>{this.props.language === 'hi' ? 'क्रमांक' : 'S.No'}</th>
+                                    <th>{this.props.language === 'hi' ? 'पुरस्कार तिथि' : 'Reward Date'}</th>
+                                    <th>{this.props.language === 'hi' ? 'प्रकार' : 'Type'}</th>
+                                    <th>{this.props.language === 'hi' ? 'अंक' : 'Points'}</th>
+                                    <th>{this.props.language === 'hi' ? 'उपयोगकर्ता' : 'User'}</th>
+                                    <th>{this.props.language === 'hi' ? 'संदर्भित उपयोगकर्ता' : 'Referred User'}</th>
+                                    <th>{this.props.language === 'hi' ? 'सर्वेक्षण' : 'Survey'}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -146,7 +146,14 @@ class MyRewards extends Component<any, any> {
                                                 )
                                                 : '-'}
                                         </td>
-                                        <td>{redemption.rewardType}</td>
+                                        <td>{this.props.language === 'hi' ? (
+                                            redemption.rewardType === 'Profile Completed' ? 'प्रोफाइल पूर्ण' :
+                                                redemption.rewardType === 'Referral' ? 'संदर्भ' :
+                                                    redemption.rewardType === 'Survey' ? 'सर्वेक्षण' :
+                                                        redemption.rewardType
+                                        ) : (
+                                            redemption.rewardType
+                                        )}</td>
                                         <td>{redemption.points}</td>
                                         <td>
                                             {redemption.user
@@ -185,6 +192,7 @@ const mapStateToProps = (state) => {
         phoneNumber: state.adminUser.adminUser.phoneNumber,
         email: state.adminUser.adminUser.email,
         isLoading: state.adminUser.adminUser.loading,
+        language: state.adminUser.adminUser.language,
         error: state.adminUser.adminUser.error,
     };
 };
