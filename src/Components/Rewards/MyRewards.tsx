@@ -111,7 +111,8 @@ class MyRewards extends Component<any, any> {
 
                     <Show when={status === PageStatus.Loaded}>
                         <Show when={!!survey.length}>
-                            <Table>
+                            <div className='table-responsive'>
+                            <Table responsive size="sm" bordered>
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
@@ -155,6 +156,7 @@ class MyRewards extends Component<any, any> {
                                 ))}
                                 </tbody>
                             </Table>
+                            </div>
                         </Show>
                     </Show>
 

@@ -11,7 +11,7 @@
       {"title": "पासवर्ड भूल गए?"},
       {"title": "लॉग इन करें"},
       {"title": "खाता बनाएं"},
-      {"title": "मोबाइल ओटीपी के साथ पंजीकरण / लॉगिन करें"},
+      {"title": "मोबाइल ओटीपी के साथ पंजीकरण / लॉग इन करें"},
       {"title": "लॉग इन करें या खाता बनाएं"}
     ]
   },
@@ -43,7 +43,7 @@
       {"title": "Phone"},
       {"title": "Password"},
       {"title": "Confirm Password"},
-      {"title": "By signing up, I accept"},
+      {"title": "By signing up, I agree to the <a href='/#/terms'>Terms of Use</a> and to receive marketing email messages from IndiaPolls, and I accept the <a href='/#/privacy-policy'>Privacy Policy</a>."},
       {"title": "Term & Condition"},
       {"title": "Signup"},
       {"title": "Participate in market research projects and reap instant rewards for sharing your valuable opinions"},
@@ -63,7 +63,7 @@
       {"title": "फ़ोन"},
       {"title": "पासवर्ड"},
       {"title": "पासवर्ड की पुष्टि कीजिये"},
-      {"title": "मैं सभी"},
+      {"title": "मै <a href='/#/terms-hi'>उपयोग की शर्तें और IndiaPolls से मार्केटिंग ईमेल संदेश प्राप्त करने के लिए सहमत हूं तथा मै <a href='/#/privacy-policy-hi'>गोपनीयता नीतिं </a> स्वीकार करता हू।"},
       {"title": "नियम एवं शर्तें स्वीकार करता हूं"},
       {"title": "पंजीकरण करें"},
       {"title": "मार्केट रिसर्च सर्वेक्षण में भाग लें और अपनी बहुमूल्य राय साझा करने के लिए तुरंत पुरस्कार प्राप्त करें"},

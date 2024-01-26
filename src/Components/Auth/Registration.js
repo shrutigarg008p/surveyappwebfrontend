@@ -6,11 +6,17 @@ import LoadingSpinner from "../../Layout/LoadingSpinner";
 import { authRegistration } from "./auth.actions";
 import FacebookLogin from 'react-facebook-login';
 import Language from "../../Languages/Login/content.json"
-
-
+import {Helmet} from "react-helmet";
 import { Assets } from 'enums';
 import { Link } from 'react-router-dom';
 import GoogleSignIn from "./googleSignin";
+import { languageChange } from './auth.actions';
+const languageDropdownStyle = {
+  position: 'fixed',
+  top: '20px',
+  right: '20px', 
+  zIndex: 3
+};
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +42,8 @@ class Registration extends Component {
       }
     };
   }
+
+ 
 
   componentDidMount() {
     const fullUrl = window.location.href;
@@ -125,6 +133,12 @@ class Registration extends Component {
     }
   }
 
+  
+  languageChangeOptions = (info) => {
+    this.props.languageChange(info.target.value);
+    window.location.reload();
+  }
+
   onLogin() {
     if(this.state.referralId) {
       const queryParams = {
@@ -141,16 +155,21 @@ class Registration extends Component {
   }
 
   render() {
+    console.log(this.props.language)
+    console.log(this.state.pageContent);
     const { isPasswordMatched, pageContent } = this.state;
     return (
     <>
+     <Helmet>
+      <title>Indiapolls - Sign up</title>
+     </Helmet>
      <section className="formSec">
-        <div className="container">
+        <div className="container zoom-70">
           <div className="row" style={{paddingTop: '2%'}}>
             <div className="col-md-6">
               <div className="logoDiv">
                 <img src={Assets.Logo2} className="img-fluid mobileNone" alt="IndiaPolls" style={{width:'100%'}}/>
-                <p className="text-center" style={{ display: 'block', fontSize: 18 }}>{pageContent.items[12].title}</p>
+                <p className="mobileNone text-center" style={{ fontSize: 18 }}>{pageContent.items[12].title}</p>
               </div>
             </div>
             <div className="col-md-5">
@@ -184,7 +203,7 @@ class Registration extends Component {
                     value={this.state.email}
                     onChange={(e) => this.setState({ email: e.target.value })}
                     onClick={() => this.setState({emailActive: !this.state.emailActive})}
-                    placeholder={pageContent.items[5].title}
+                    // placeholder={pageContent.items[5].title}
                     required />
                   </div>
                   <div className="mb-3 mt-3">
@@ -197,7 +216,7 @@ class Registration extends Component {
                      })
                     }}
                     onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
-                    placeholder={pageContent.items[6].title}
+                    // placeholder={pageContent.items[6].title}
                     required
                     />
                   </div>
@@ -213,7 +232,7 @@ class Registration extends Component {
                      })
                    }}
                    onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
-                   placeholder={pageContent.items[7].title}
+                  //  placeholder={pageContent.items[7].title}
                    required />
                   </div>
                   <div className="mb-3">
@@ -221,7 +240,7 @@ class Registration extends Component {
                     <input
                     className="form-control"
                     type='password'
-                    placeholder={pageContent.items[8].title}
+                    // placeholder={pageContent.items[8].title}
                     onChange={(e) =>{
                       this.onChangePassword(e.target.value, 'confirmpassword');
                       this.setState({
@@ -238,9 +257,13 @@ class Registration extends Component {
                   type='checkbox'
                   onChange={(e) => this.setState({ policy: e.target.checked })}
                   className="r_pp_checkbox login-checkbox-input" defaultValue />
-                  <span> {pageContent.items[9].title}</span>
+                  <div
+                    dangerouslySetInnerHTML={{__html: pageContent.items[9].title}}
+                  />
                 </label>
-                  <span><Link to="/terms">{pageContent.items[10].title}</Link></span>
+                  {/* <span><Link to="/terms">{pageContent.items[10].title}</Link></span>
+                  
+                  <span><Link to="/privacy-policy">Privacy Policy</Link></span> */}
               </div>
               <Show when={this.state.show===true}>
                 <small className="form-text text-danger privacy_error">
@@ -265,11 +288,15 @@ class Registration extends Component {
                 </span>
                   </p>
                 {/* </form> */}
-
+                <select className="text-center" onChange={(e)=>this.languageChangeOptions(e)} value={this.props.language}>
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        </select>
               </div>
             </div>
           </div>
         </div>
+       
       </section>
     </>
     );
@@ -287,7 +314,7 @@ const mapStateToProps = (state) => {
 };
 
 const RegistrationWithState = withRouter(connect(
-    mapStateToProps, { authRegistration },
+    mapStateToProps, { authRegistration, languageChange },
 )(Registration));
 
 export {

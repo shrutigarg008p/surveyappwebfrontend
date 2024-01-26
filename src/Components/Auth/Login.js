@@ -8,12 +8,12 @@ import {authLogin, languageChange, languageChangeOption} from "./auth.actions";
 import { Assets } from 'enums';
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
+import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleSignIn from "./googleSignin";
 import {MobileLogin} from "./MobileLogin";
 import Language from "../../Languages/Login/content.json"
-import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -31,7 +31,15 @@ function Login(props) {
   const handleContinueWithGoogleClick = () => {
     setShowGoogleSignIn(true);
   };
+ 
 
+  // useEffect(()=>{
+  //   const url = window.location.href;
+  //   let lang = url.split('='); 
+  //   if(lang !== undefined || lang !== null){
+  //     dispatch(languageChange(lang));
+  //   }
+  // }, [])
   useEffect(() => {
     const hash = window.location.hash;
     const referralIdMatch = hash.match(/referralId=([^&]*)/);
@@ -75,12 +83,12 @@ function Login(props) {
   return (
     <>
       <section className="formSec">
-        <div className="container">
+        <div className="container zoom-80">
           <div className="row marginTop">
             <div className="col-md-6">
               <div className="logoDiv">
                 <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid mobileNone" alt="alt" />
-                <p className="text-center" style={{ display: 'block', fontSize: 18 }}>{pageContents.items[10].title}
+                <p className="mobileNone text-center" style={{fontSize: 18 }}>{pageContents.items[10].title}
                 <br/>
 
                 </p>
@@ -157,7 +165,7 @@ function Login(props) {
           </div>
         </div>
       </section>
-      <ForgetPasswordEmailWithState
+      <ForgetPasswordEmail
             show={isPasswordReset}
             onHide={() => setResetPassword(false)}
             onClose={() => setResetPassword(false)}

@@ -343,7 +343,7 @@ class MySettings extends React.Component<any, any> {
                                                     <img
                                                         src={`https://indiapolls.com:9000${data.image}`}
                                                         alt="Full Size Image"
-                                                        style={{ width: '100%', height: '90' }}
+                                                        style={{ width: '100%', height: '300px' }}
                                                     />
                                                 </CardContent>
                                             </Card2>

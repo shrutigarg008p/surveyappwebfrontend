@@ -1,9 +1,16 @@
 body {
-    height: 100%;
-    overflow: hidden;
+    /* height: 100%; */
+    /* overflow: hidden; */
     padding: 0px;
     margin: 0px;
+}
 
+.zoom-80{
+    zoom:80%
+}
+
+.zoom-70{
+    zoom:70%
 }
 
 .formSec {
@@ -13,8 +20,6 @@ body {
     background-size: cover;
     height: 100vh;
     position: relative;
-
-
 }
 
 .marginTop {

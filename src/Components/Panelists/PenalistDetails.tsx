@@ -517,7 +517,7 @@ export default function PenalistDetails(props:any) {
                                                 <img
                                                     src={"https://picsum.photos/400/"+Math.round((140+key))}
                                                     alt="Full Size Image"
-                                                    style={{ width: '100%', height: 'auto' }}
+                                                    style={{ width: '100%', height: '300px' }}
                                                 />
                                             </CardContent>
                                         </Card2>
