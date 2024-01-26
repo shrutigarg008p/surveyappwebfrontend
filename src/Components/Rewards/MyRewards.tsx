@@ -24,6 +24,10 @@ class MyRewards extends Component<any, any> {
         this.state = {
             survey: [],
             total: 0,
+            totalPartial: {
+                "Referral": 0,
+                "Survey": 0
+            },
             status: PageStatus.None,
             error: null,
         };
@@ -41,7 +45,14 @@ class MyRewards extends Component<any, any> {
             .then(() => AuthAPI.getAllByUserId(10000, userId))
             .then((surveyData: any) => {
                 if (!!surveyData) {
-                    this.setState({ survey: surveyData.data, total: surveyData.totalPoints, status: PageStatus.Loaded });
+                    const data = surveyData.data
+                    const totalPointsByType = data.reduce((acc, reward) => {
+                        const { points, rewardType } = reward;
+                        acc[rewardType] = (acc[rewardType] || 0) + points;
+                        return acc;
+                    }, {});
+                    console.log('totalPointsByType--->', totalPointsByType)
+                    this.setState({ survey: surveyData.data, total: surveyData.totalPoints, totalPartial: totalPointsByType, status: PageStatus.Loaded });
                 }
             })
             .catch((err) => {
@@ -72,7 +83,7 @@ class MyRewards extends Component<any, any> {
 
 
                             <Grid item xs={6} sm={3} className="gridItem">
-                                <Typography variant="h4">{this.state.total}</Typography>
+                                <Typography variant="h4">{this.state.totalPartial.Survey}</Typography>
                                 <Typography variant="body1">Earned via Surveys</Typography>
                             </Grid>
 
@@ -82,7 +93,7 @@ class MyRewards extends Component<any, any> {
                             </Grid>
 
                             <Grid item xs={6} sm={3} className="gridItem">
-                                <Typography variant="h4">0</Typography>
+                                <Typography variant="h4">{this.state.totalPartial.Referral}</Typography>
                                 <Typography variant="body1">Earned via Referrals</Typography>
                             </Grid>
                         </Grid>

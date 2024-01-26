@@ -42,6 +42,7 @@ class ForgetPasswordEmail extends React.Component {
 }
 
     render() {
+        console.log('this.props.language--->', this.props.language)
         return (
        <>
               <Modal
