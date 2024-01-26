@@ -155,8 +155,6 @@ class Registration extends Component {
   }
 
   render() {
-    console.log(this.props.language)
-    console.log(this.state.pageContent);
     const { isPasswordMatched, pageContent } = this.state;
     return (
     <>
@@ -257,7 +255,8 @@ class Registration extends Component {
                   type='checkbox'
                   onChange={(e) => this.setState({ policy: e.target.checked })}
                   className="r_pp_checkbox login-checkbox-input" defaultValue />
-                  <div
+                  &nbsp;&nbsp;
+                  <span
                     dangerouslySetInnerHTML={{__html: pageContent.items[9].title}}
                   />
                 </label>

@@ -49,6 +49,11 @@ class MyRequests extends Component<any, any> {
         if (!!this.props.userId) {
             this.fetchSurvey();
         }
+        const body = document.querySelector('body');
+        if(body !== null){
+            body.removeAttribute('style');
+        }
+        
     }
 
     fetchSurvey = () => {
@@ -185,7 +190,7 @@ class MyRequests extends Component<any, any> {
 
                         <Show when={status === PageStatus.Loaded}>
                             <Show when={!!survey.length}>
-                                <Table>
+                                <Table responsive size="sm" bordered>
                                     <thead>
                                     <tr>
                                         <th>S.No</th>

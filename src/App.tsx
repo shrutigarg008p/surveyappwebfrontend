@@ -8,10 +8,14 @@ import {PrivateRouteWithRedux} from "./PrivateRoute";
 import { VerificationEmailScreensWithState} from "./Components/Auth/VerificationEmailScreen";
 import {AuthRouter} from "./Components/Auth/AuthRouter";
 import Terms from "./Components/Legal/Terms";
+import TermsHi from "./Components/Legal/TermsHi";
+import PrivacyPolicyHi from 'Components/Legal/PrivacyPolicyHi';
 import Privacy from "./Components/Legal/Privacy";
 import Faq from "./Components/Legal/Faq";
 import Support from "./Components/Legal/Support";
+import CookiePolicyHi from 'Components/Legal/CookiePolicyHi';
 import CookiePolicy from 'Components/Legal/CookiePolicy';
+import RewardsProgramTermsHi from 'Components/Legal/RewardsProgramTermsHi';
 import RewardsProgramTerms from 'Components/Legal/RewardsProgramTerms';
 import SurveyCompletedCallBackPage from "./Components/SurveyCallbackPages/SurveyCompletedCallBackPage";
 import SurveyOverQuotaCallbackPage from "./Components/SurveyCallbackPages/SurveyOverQuotaCallbackPage";
@@ -40,11 +44,15 @@ class App extends React.Component<any, any> {
             <Route path="/auth" component={AuthRouter} />
             <Route path="/verify-screen" component={VerificationEmailScreensWithState} />
             {/* <Route path='/privacy-policy' component={PrivacyPolicy} /> */}
+            <Route path='/terms-hi' component={TermsHi} />
             <Route path='/terms' component={Terms} />
+            <Route path='/privacy-policy-hi' component={PrivacyPolicyHi} />
             <Route path='/privacy-policy' component={Privacy} />
             <Route path='/faq' component={Faq} />
             <Route path='/support' component={Support} />
+            <Route path='/rewards-program-terms-hi' component={RewardsProgramTermsHi} />
             <Route path='/rewards-program-terms' component={RewardsProgramTerms} />
+            <Route path='/cookie-policy-hi' component={CookiePolicyHi} />
             <Route path='/cookie-policy' component={CookiePolicy} />
             <Route path='/reset-password/:token' component={ResetPasswordFormWithState} />
             <PrivateRouteWithRedux path="/admin" component={Admin} />

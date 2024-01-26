@@ -79,6 +79,8 @@ export default function Sidebar(props) {
           </NavLink>
         );
         }})}
+        <br/>
+        <br/>
     </List>
   );
   var brand = (

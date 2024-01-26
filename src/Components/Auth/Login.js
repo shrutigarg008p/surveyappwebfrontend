@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleSignIn from "./googleSignin";
 import {MobileLogin} from "./MobileLogin";
 import Language from "../../Languages/Login/content.json"
+import {Helmet} from "react-helmet";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -85,6 +86,9 @@ function Login(props) {
 
   return (
     <>
+     <Helmet>
+      <title>Indiapolls - Sign in</title>
+     </Helmet>
       <section className="formSec">
         <div className="container zoom-80">
           <div className="row marginTop">
