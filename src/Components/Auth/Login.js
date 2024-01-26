@@ -79,8 +79,8 @@ function Login(props) {
           <div className="row marginTop">
             <div className="col-md-6">
               <div className="logoDiv">
-                <img src={Assets.Logo} style={{width:'100%'}} className="img-fluid mobileNone" alt="alt" />
-                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>{pageContents.items[10].title}
+                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid mobileNone" alt="alt" />
+                <p className="text-center" style={{ display: 'block', fontSize: 18 }}>{pageContents.items[10].title}
                 <br/>
 
                 </p>
@@ -98,8 +98,8 @@ function Login(props) {
                 <h2>{pageContents.items[0].title}</h2>
                 <p>{pageContents.items[1].title}<Link to="#" onClick={handleClick}>{pageContents.items[2].title}</Link></p>
                 <div className="social-login">
-                  {/* <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
-                  {showGoogleSignIn && <GoogleSignIn />} */}
+                  <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  {showGoogleSignIn && <GoogleSignIn />}
 
                   <div className="RuleWithText">{pageContents.items[3].title}</div>
                   <Button onClick={() => setMobile(true)} className="mobile-otp-button mt-2 mb-2">

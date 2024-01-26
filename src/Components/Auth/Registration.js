@@ -149,8 +149,8 @@ class Registration extends Component {
           <div className="row" style={{paddingTop: '2%'}}>
             <div className="col-md-6">
               <div className="logoDiv">
-                <img src={Assets.Logo} className="img-fluid mobileNone" alt="IndiaPolls" style={{width:'100%'}}/>
-                <p className="text-center" style={{ display: 'block', fontSize: 18, color: '#fff' }}>{pageContent.items[12].title}</p>
+                <img src={Assets.Logo2} className="img-fluid mobileNone" alt="IndiaPolls" style={{width:'100%'}}/>
+                <p className="text-center" style={{ display: 'block', fontSize: 18 }}>{pageContent.items[12].title}</p>
               </div>
             </div>
             <div className="col-md-5">
@@ -164,8 +164,8 @@ class Registration extends Component {
                 <h2>{pageContent.items[0].title}</h2>
                 <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
                 <div className="social-login">
-                  {/* <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
-                  {this.state.showGoogleSignIn && <GoogleSignIn />} */}
+                  <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  {this.state.showGoogleSignIn && <GoogleSignIn />}
                   {/*<FacebookLogin*/}
                   {/*    appId="879890270328649"*/}
                   {/*    autoLoad={false}*/}
