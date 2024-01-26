@@ -33,13 +33,16 @@ function Login(props) {
   };
  
 
-  // useEffect(()=>{
-  //   const url = window.location.href;
-  //   let lang = url.split('='); 
-  //   if(lang !== undefined || lang !== null){
-  //     dispatch(languageChange(lang));
-  //   }
-  // }, [])
+  useEffect(()=>{
+    const url = window.location.href;
+    let lang = url.split('=')[1]; 
+    if(lang !== undefined){
+     setTimeout(()=>{
+      dispatch(languageChange('hi'))
+
+     }, 1000);
+    }
+  }, [])
   useEffect(() => {
     const hash = window.location.hash;
     const referralIdMatch = hash.match(/referralId=([^&]*)/);
@@ -155,7 +158,7 @@ function Login(props) {
                   </p>
                 </form>
                   <div className="text-center">
-                    <select className="text-center" onChange={languageChangeOptions} value={props.language}>
+                    <select id="language-dropdown" className="text-center" onChange={languageChangeOptions} value={props.language}>
                     <option value="en">English</option>
                     <option value="hi">Hindi</option>
                     </select>
