@@ -11,6 +11,7 @@ import CardHeader from "../Card/CardHeader";
 import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
 import Questions from "./Questions";
 import {connect} from "react-redux";
+import Language from "../../Languages/Login/content.json";
 
 export type FormValue = {
     "name": string,
@@ -31,6 +32,7 @@ class PersonalFinance extends React.Component<any, any> {
             error: null,
             data: null,
             userResponse: {},
+            pageContent: this.props.language === 'hi' ? Language.profilesHindi : Language.profilesEnglish,
         };
     }
 
@@ -111,14 +113,14 @@ class PersonalFinance extends React.Component<any, any> {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>Personal Finance</h4>
+                                <h4>{this.props.language === 'hi' ? 'व्यक्तिगत वित्त' : 'Personal Finance'}</h4>
                                 <div>
                                     <Button
                                         onClick={() => this.create()}
                                         variant="primary"
                                         size="sm"
                                     >
-                                        Save
+                                        {this.props.language === 'hi' ? 'सेव करे' : 'Save'}
                                     </Button>
                                     <Button
                                         onClick={() => this.props.history.push('/')}
@@ -126,7 +128,7 @@ class PersonalFinance extends React.Component<any, any> {
                                         size="sm"
                                         className="ml-2"
                                     >
-                                        Close
+                                        {this.props.language === 'hi' ? 'बंद करे' : 'Close'}
                                     </Button>
                                 </div>
                             </div>
@@ -146,12 +148,10 @@ class PersonalFinance extends React.Component<any, any> {
                 <Show when={this.state.status === PageStatus.Loaded || this.state.status === PageStatus.Submitted}>
                     <div className="jumbotron bg-white p-3 border shadow-sm">
                         <p>
-                            Make sure that you have completed your member profiles. Remember - the more information we have about you,
-                            the
-                            more paid surveys we can invite you to. Filling out information is simple and interactive at <a>
-                            <b>IndiaPolls.</b>
+                            {this.state.pageContent.message.title} <a>
+                            <b>{this.state.pageContent.message.link}.</b>
                         </a>
-                            <h4 className="text-center ng-binding" ng-hide="vm.profileCompleted==null">{this.calculatePercentage()}% Profile complete</h4>
+                            <h4 className="text-center ng-binding" ng-hide="vm.profileCompleted==null">{this.calculatePercentage()}% {this.state.pageContent.profileOverall.title}</h4>
                         </p>
                         <div className="progress">
                             <div className="progress-bar" role="progressbar" style={{width: `${this.calculatePercentage()}%`}} aria-valuenow={25} aria-valuemin={0} aria-valuemax={100}>
@@ -163,6 +163,7 @@ class PersonalFinance extends React.Component<any, any> {
                         questions={this.state.data ? this.state.data.questions : []}
                         onHandleQuestionResponse={(data) => this.handleQuestionResponse(data)}
                         userResponse={this.state.userResponse}
+                        language={this.props.language}
                     />
                 </Show>
             </>
@@ -174,13 +175,14 @@ const PersonalFinanceRedux = reduxForm<FormValue, any>({
     form: 'PersonalFinance',
 })(PersonalFinance);
 
-const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
+const mapStateToProps = (state: { adminUser: { adminUser: {language: any, phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
     return {
         userId: state.adminUser.adminUser.userId,
         role: state.adminUser.adminUser.role,
         phoneNumber: state.adminUser.adminUser.phoneNumber,
         email: state.adminUser.adminUser.email,
         isLoading: state.adminUser.adminUser.loading,
+        language: state.adminUser.adminUser.language,
         error: state.adminUser.adminUser.error,
     };
 };

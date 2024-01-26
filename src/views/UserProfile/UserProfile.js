@@ -6,19 +6,17 @@ import InputLabel from "@material-ui/core/InputLabel";
 import GridItem from "../../Components/Grid/GridItem.js";
 import GridContainer from "../../Components/Grid/GridContainer.js";
 import CustomInput from "../../Components/CustomInput/CustomInput.js";
-import Button from "../../Components/CustomButtons/Button.js";
 import Card from "../../Components/Card/Card.js";
 import CardHeader from "../../Components/Card/CardHeader.js";
 import CardAvatar from "../../Components/Card/CardAvatar.js";
 import CardBody from "../../Components/Card/CardBody.js";
-import CardFooter from "../../Components/Card/CardFooter.js";
-import avatar from "../../assets/img/faces/marc.jpg";
-import PropTypes from "prop-types";
-import jwt from "jsonwebtoken";
+import avatar from "../../assets/img/faces/marc.jpeg";
 import { useSelector } from "react-redux";
-import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import {AuthAPI, SurveysAPI} from "../../API";
 import {PageStatus} from "../../enums";
+import {BasicProfile} from "../../Components/My Settings/BasicProfile";
+import {Show} from "../../Layout";
+import {Button} from "react-bootstrap";
 
 const styles = {
   cardCategoryWhite: {
@@ -55,13 +53,17 @@ export default function UserProfile(props) {
   const { invalid, pristine, submitting } = props;
   const [status, setStatus] = useState(PageStatus.None);
   const [error, setError] = useState('');
+  const [showEditProfile, setShowEditProfile] = useState(false);
+
 
   const classes = useStyles();
-  const { userId } = useSelector((state) => state.adminUser.adminUser);
+  const { userId, role } = useSelector((state) => state.adminUser.adminUser);
 
   useEffect(() => {
     loadProfile();
   }, [status]);
+
+  console.log('role--->', role)
 
   const loadProfile = async () => {
       Promise.resolve()
@@ -73,7 +75,6 @@ export default function UserProfile(props) {
           return AuthAPI.profile(userId);
         })
         .then((user) => {
-          console.log('user---->', user)
           if (!!user) {
             setUsername(user.dataValues.email);
             setEmail(user.dataValues.email);
@@ -141,6 +142,20 @@ export default function UserProfile(props) {
 
   return (
     <div>
+
+      <Show when={showEditProfile} >
+        <BasicProfile
+            userId={userId}
+            show={showEditProfile}
+            onClose={() => setShowEditProfile(false)}
+            onSubmit={() =>{
+              setShowEditProfile(false)
+              loadProfile();
+            }}
+        />
+
+      </Show>
+
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
@@ -296,6 +311,8 @@ export default function UserProfile(props) {
             </CardBody>
           </Card>
         </GridItem>
+        <Button className="ml-3" onClick={() => setShowEditProfile(true)}>Edit</Button>
+
       </GridContainer>
     </div>
   );

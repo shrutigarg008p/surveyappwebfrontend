@@ -8,12 +8,12 @@ import {authLogin, languageChange, languageChangeOption} from "./auth.actions";
 import { Assets } from 'enums';
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
-import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleSignIn from "./googleSignin";
 import {MobileLogin} from "./MobileLogin";
 import Language from "../../Languages/Login/content.json"
+import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -157,7 +157,7 @@ function Login(props) {
           </div>
         </div>
       </section>
-      <ForgetPasswordEmail
+      <ForgetPasswordEmailWithState
             show={isPasswordReset}
             onHide={() => setResetPassword(false)}
             onClose={() => setResetPassword(false)}

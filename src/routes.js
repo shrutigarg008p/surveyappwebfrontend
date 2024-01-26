@@ -63,6 +63,7 @@ const dashboardRoutes = [
   {
     path: "/dashboard-admin",
     name: "Admin Dashboard",
+    hindi: "व्यवस्थापक डैशबोर्ड",
     icon: Dashboard,
     component: AdminDashboard,
     layout: "/admin",
@@ -70,6 +71,7 @@ const dashboardRoutes = [
   {
     path: "/dashboard",
     name: "Schedule Survey",
+    hindi: "सर्वेक्षण की योजना",
     icon: Dashboard,
     component: DashboardSurvey,
     layout: "/admin",
@@ -77,6 +79,7 @@ const dashboardRoutes = [
   {
     path: "/profile",
     name: "User Profile",
+    hindi: "उपयोगकर्ता प्रोफ़ाइल",
     icon: AccountCircle,
     component: UserProfile,
     layout: "/admin",
@@ -84,6 +87,7 @@ const dashboardRoutes = [
   {
     path: "/surveys",
     name: "Surveys",
+    hindi: "सर्वेक्षण",
     icon: ListAlt,
     component: Surveys,
     layout: "/admin",
@@ -91,6 +95,7 @@ const dashboardRoutes = [
   {
     path: "/redemption",
     name: "Redemption Request",
+    hindi: "रिडेम्प्शन अनुरोध",
     icon: Redeem,
     component: List,
     layout: "/admin",
@@ -98,6 +103,7 @@ const dashboardRoutes = [
   {
     path: "/rewards",
     name: "Rewards",
+    hindi: "पुरस्कार",
     icon: CardGiftcard,
     component: RewardsList,
     layout: "/admin",
@@ -105,6 +111,7 @@ const dashboardRoutes = [
   {
     path: "/referrals",
     name: "Referrals",
+    hindi: "संदर्भ",
     icon: Group,
     component: ReferralsList,
     layout: "/admin",
@@ -112,6 +119,7 @@ const dashboardRoutes = [
   {
     path: "/",
     name: "PANELISTS",
+    hindi: "पैनलिस्ट्स",
     icon: Group,
     component: '',
     layout: "",
@@ -119,6 +127,7 @@ const dashboardRoutes = [
   {
     path: "/panelistDashboard",
     name: "All",
+    hindi: "सभी",
     icon: Apps,
     component: AllPanelists,
     layout: "/admin",
@@ -126,14 +135,16 @@ const dashboardRoutes = [
   {
     path: "/panelistDetails/:userId",
     name: "Details",
+    hindi: "विवरण",
     icon: Description,
     component: PenalistDetails,
     layout: "/admin",
-    isVisible : false
+    isVisible: false
   },
   {
     path: "/registeredOnlyPanelists",
     name: "Registered Only",
+    hindi: "केवल पंजीकृत",
     icon: HowToReg,
     component: RegisteredOnly,
     layout: "/admin",
@@ -141,6 +152,7 @@ const dashboardRoutes = [
   {
     path: "/basicProfileOnly",
     name: "Basic Profile Only",
+    hindi: "केवल आधारभूत प्रोफ़ाइल",
     icon: Person,
     component: BasicProfileOnly,
     layout: "/admin",
@@ -148,6 +160,7 @@ const dashboardRoutes = [
   {
     path: "/unsubscribeRequests",
     name: "Unsubscribe Requests",
+    hindi: "सदस्यता रद्द अनुरोध",
     icon: Cancel,
     component: UnsubscribedPanelistOnly,
     layout: "/admin",
@@ -155,6 +168,7 @@ const dashboardRoutes = [
   {
     path: "/deleteRequests",
     name: "Delete Requests",
+    hindi: "हटाएँ अनुरोध",
     icon: DeleteForever,
     component: DeletedPanelistsOnly,
     layout: "/admin",
@@ -162,6 +176,7 @@ const dashboardRoutes = [
   {
     path: "/bounces",
     name: "Bounces",
+    hindi: "बाउंस",
     icon: Block,
     component: Bounces,
     layout: "/admin",
@@ -169,6 +184,7 @@ const dashboardRoutes = [
   {
     path: "/samples",
     name: "Samples",
+    hindi: "प्रतिरूप",
     icon: Category,
     component: Samples,
     layout: "/admin",
@@ -176,6 +192,7 @@ const dashboardRoutes = [
   {
     path: "/newsletters",
     name: "Newsletters",
+    hindi: "समाचार पत्रिकाएँ",
     icon: Email,
     component: NewsLetters,
     layout: "/admin",
@@ -183,6 +200,7 @@ const dashboardRoutes = [
   {
     path: "/messages",
     name: "Messages",
+    hindi: "संदेश",
     icon: Message,
     component: Messages,
     layout: "/admin",
@@ -190,6 +208,7 @@ const dashboardRoutes = [
   {
     path: "/help",
     name: "Help",
+    hindi: "सहायता",
     icon: HelpIcon,
     component: Help,
     layout: "/admin",
@@ -197,6 +216,7 @@ const dashboardRoutes = [
   {
     path: "/MASTER SETTINGS",
     name: "MASTER SETTINGS",
+    hindi: "मास्टर सेटिंग्स",
     icon: Settings,
     component: '',
     layout: "",
@@ -204,6 +224,7 @@ const dashboardRoutes = [
   {
     path: "/redemption-mode",
     name: "Redemption Mode",
+    hindi: "रिडेम्प्शन मोड",
     icon: LocalOffer,
     component: RedemptionMode,
     layout: "/master",
@@ -211,6 +232,7 @@ const dashboardRoutes = [
   {
     path: "/country",
     name: "Country",
+    hindi: "देश",
     icon: Public,
     component: Countries,
     layout: "/master",
@@ -218,6 +240,7 @@ const dashboardRoutes = [
   {
     path: "/states",
     name: "States",
+    hindi: "राज्य",
     icon: LocationCity,
     component: States,
     layout: "/master",
@@ -225,6 +248,7 @@ const dashboardRoutes = [
   {
     path: "/cities",
     name: "Cities",
+    hindi: "शहर",
     icon: LocationOn,
     component: City,
     layout: "/master",
@@ -232,6 +256,7 @@ const dashboardRoutes = [
   {
     path: "/partners",
     name: "Partners",
+    hindi: "साथी",
     icon: Business,
     component: PartnersList,
     layout: "/master",
@@ -239,6 +264,7 @@ const dashboardRoutes = [
   {
     path: "/profile-management",
     name: "Profiles",
+    hindi: "प्रोफ़ाइल्स",
     icon: AccountBox,
     component: ProfileManagement,
     layout: "/master",
@@ -246,6 +272,7 @@ const dashboardRoutes = [
   {
     path: "/labels",
     name: "Labels",
+    hindi: "लेबल",
     icon: Label,
     component: LabelsList,
     layout: "/master",
@@ -253,6 +280,7 @@ const dashboardRoutes = [
   {
     path: "/marketing-links",
     name: "Marketing Links",
+    hindi: "मार्केटिंग लिंक्स",
     icon: Link,
     component: MarketingLinksList,
     layout: "/admin",
@@ -260,6 +288,7 @@ const dashboardRoutes = [
   {
     path: "/SEC",
     name: "SEC",
+    hindi: "सुरक्षा",
     icon: Security,
     component: SecList,
     layout: "/admin",
@@ -267,6 +296,7 @@ const dashboardRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
+    hindi: "डैशबोर्ड",
     icon: Dashboard,
     component: DashboardPage,
     layout: "/panelist",
@@ -275,6 +305,7 @@ const dashboardRoutes = [
   {
     path: "/profile",
     name: "User Profile",
+    hindi: "उपयोगकर्ता प्रोफ़ाइल",
     icon: AccountBox,
     component: UserProfile,
     layout: "/panelist",
@@ -283,6 +314,7 @@ const dashboardRoutes = [
   {
     path: "/my-rewards",
     name: "My Rewards",
+    hindi: "मेरे पुरस्कार",
     icon: CardGiftcard,
     component: MyRewards,
     layout: "/panelist",
@@ -291,6 +323,7 @@ const dashboardRoutes = [
   {
     path: "/my-requests",
     name: "My Requests",
+    hindi: "मेरे अनुरोध",
     icon: Redeem,
     component: MyRequests,
     layout: "/panelist",
@@ -299,6 +332,7 @@ const dashboardRoutes = [
   {
     path: "/my-referrals",
     name: "My Referrals",
+    hindi: "मेरे संदर्भ",
     icon: Group,
     component: MyReferralsList,
     layout: "/panelist",
@@ -307,6 +341,7 @@ const dashboardRoutes = [
   {
     path: "/panelist-surveys",
     name: "My Surveys",
+    hindi: "मेरे सर्वेक्षण",
     icon: ListAlt,
     component: PanelistSurveys,
     layout: "/panelist",
@@ -314,7 +349,8 @@ const dashboardRoutes = [
   },
   {
     path: "/settings",
-    name: "My Setting",
+    name: "My Settings",
+    hindi: "मेरी सेटिंग्स",
     icon: Settings,
     component: MySettings,
     layout: "/panelist",
@@ -323,6 +359,7 @@ const dashboardRoutes = [
   {
     path: "/panelist-message",
     name: "Contact Us",
+    hindi: "हमसे संपर्क करें",
     icon: Message,
     component: MessageForm,
     layout: "/panelist",
@@ -331,6 +368,7 @@ const dashboardRoutes = [
   {
     path: "/profile-overview",
     name: "PROFILE",
+    hindi: "प्रोफ़ाइल",
     icon: AccountBox,
     component: Profiles,
     layout: "/panelist",
@@ -339,6 +377,7 @@ const dashboardRoutes = [
   {
     path: "/about",
     name: "About",
+    hindi: "बारे में",
     icon: Info,
     component: About,
     layout: "/panelist",
@@ -347,6 +386,7 @@ const dashboardRoutes = [
   {
     path: "/personal-finance",
     name: "Personal Finance",
+    hindi: "व्यक्तिगत वित्त",
     icon: AttachMoney,
     component: PersonalFinance,
     layout: "/panelist",
@@ -355,6 +395,7 @@ const dashboardRoutes = [
   {
     path: "/shopping",
     name: "Shopping",
+    hindi: "खरीदारी",
     icon: ShoppingCart,
     component: Shopping,
     layout: "/panelist",
@@ -363,6 +404,7 @@ const dashboardRoutes = [
   {
     path: "/travels",
     name: "Travel",
+    hindi: "यात्रा",
     icon: Flight,
     component: Travels,
     layout: "/panelist",
@@ -371,6 +413,7 @@ const dashboardRoutes = [
   {
     path: "/health-wellness",
     name: "Health And Wellness",
+    hindi: "स्वास्थ्य और बेहतरीनी",
     icon: Favorite,
     component: HealthAndWellness,
     layout: "/panelist",
@@ -379,6 +422,7 @@ const dashboardRoutes = [
   {
     path: "/household",
     name: "House Hold",
+    hindi: "परिवार",
     icon: Home,
     component: HouseHold,
     layout: "/panelist",
@@ -386,7 +430,8 @@ const dashboardRoutes = [
   },
   {
     path: "/Leisure-activity",
-    name: "Leisure And Activity",
+    name:  "Leisure And Activity",
+    hindi: "फुर्सत और गतिविधि",
     icon: SportsEsports,
     component: LeisureActivity,
     layout: "/panelist",
@@ -394,7 +439,8 @@ const dashboardRoutes = [
   },
   {
     path: "/media",
-    name: "Media",
+    name:  "Media",
+    hindi: "मीडिया",
     icon: Theaters,
     component: Medias,
     layout: "/panelist",
@@ -402,7 +448,8 @@ const dashboardRoutes = [
   },
   {
     path: "/professionals",
-    name: "Professional",
+    name:  "Professional",
+    hindi: "पेशेवर",
     icon: Work,
     component: Professional,
     layout: "/panelist",
@@ -411,6 +458,7 @@ const dashboardRoutes = [
   {
     path: "/electronics",
     name: "Electronics",
+    hindi: "इलेक्ट्रॉनिक्स",
     icon: Devices,
     component: Electronics,
     layout: "/panelist",
@@ -419,6 +467,7 @@ const dashboardRoutes = [
   {
     path: "/smokers",
     name: "Smokers",
+    hindi: "धूम्रपानकर्ता",
     icon: SmokingRooms,
     component: Smokers,
     layout: "/panelist",
@@ -426,7 +475,8 @@ const dashboardRoutes = [
   },
   {
     path: "/auto",
-    name: "Auto",
+    name:  "Auto",
+    hindi: "ऑटो",
     icon: DriveEta,
     component: Auto,
     layout: "/panelist",
@@ -435,12 +485,14 @@ const dashboardRoutes = [
   {
     path: "/food-beverage",
     name: "Food And Beverage",
+    hindi: "खाद्य और पेय",
     icon: Fastfood,
     component: FoodAndBeverage,
     layout: "/panelist",
     type: 'panelist'
   },
 ];
+
 
 
 export default dashboardRoutes;

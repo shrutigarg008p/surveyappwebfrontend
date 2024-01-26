@@ -132,7 +132,7 @@ class BasicProfile extends React.Component<any, any> {
             .then(() => MasterDataAPI.countryList('10'))
             .then((countries) => {
                 const options = countries.map(country => ({
-                    label: country.name,
+                    label: this.props.language === 'hi' ? country.hindi : country.name,
                     value: country.id
                 }));
                 options.sort((a, b) => {
@@ -227,7 +227,7 @@ class BasicProfile extends React.Component<any, any> {
             .then(() => CountriesAPI.getAllCitiesAndStateBasedOnZipCode(1000, code))
             .then((states: any) => {
                 const options = states.state.map(state => ({
-                    label: state.name,
+                    label: this.props.language === 'hi' ? state.hindi : state.name,
                     value: state.id
                 }));
                 options.sort((a, b) => {
@@ -236,7 +236,7 @@ class BasicProfile extends React.Component<any, any> {
                     return 0;
                 });
                 const optionsCities = states.cities.map(city => ({
-                    label: city.name,
+                    label: this.props.language === 'hi' ? city.hindi : city.name,
                     value: city.id
                 }));
                 options.sort((a, b) => {
@@ -282,7 +282,7 @@ class BasicProfile extends React.Component<any, any> {
         } else {
           e.target.value="";
           console.error("Invalid age range. Please enter a date of birth between 16 and 100 years.");
-          e.target.setCustomValidity("Invalid age range. Please enter a date of birth between 16 and 100 years.");
+          e.target.setCustomValidity(`${this.props.language === 'hi' ? 'अमान्य आयु सीमा. कृपया 16 से 100 वर्ष के बीच की जन्मतिथि दर्ज करें।' : 'Invalid age range. Please enter a date of birth between 16 and 100 years.'}`);
         }
 
         e.target.reportValidity();
@@ -304,6 +304,7 @@ class BasicProfile extends React.Component<any, any> {
 
     render() {
         const {selectedCountryOption, selectedStateOption, selectedCityOption, pageContent}=this.state
+        const referralsOptions = Language.Referrals
         return (
             <Container maxWidth="lg">
                 <Grid container justify="center" alignItems="center">
@@ -397,8 +398,9 @@ class BasicProfile extends React.Component<any, any> {
                                 }
                             >
                                 <option value='' disabled>--Choose--</option>
-                                <option value='male'>Male</option>
-                                <option value='female'>Female</option>
+                                <option value='male'>{this.props.language === 'hi' ? 'पुरुष' : 'Male'}</option>
+                                <option value='female'>{this.props.language === 'hi' ? 'महिला' : 'Female'}</option>
+                                <option value='female'>{this.props.language === 'hi' ? 'अन्य' : 'Other'}</option>
                             </select>
                         </div>
                         <div className="col">
@@ -463,6 +465,7 @@ class BasicProfile extends React.Component<any, any> {
                                 onChange={this.handleCountryChange}
                                 value={selectedCountryOption}
                                 required
+                                placeholder={pageContent.items[10].title}
                                 options={this.state.countries}
                             />
                         </div>
@@ -474,6 +477,7 @@ class BasicProfile extends React.Component<any, any> {
                                 onChange={this.handleStateChange}
                                 value={selectedStateOption}
                                 required
+                                placeholder={pageContent.items[11].title}
                                 options={this.state.states}
                             />
                         </div>
@@ -484,6 +488,7 @@ class BasicProfile extends React.Component<any, any> {
                                 id='city'
                                 onChange={this.handleCityChange}
                                 value={selectedCityOption}
+                                placeholder={pageContent.items[12].title}
                                 required
                                 options={this.state.cities}
                             />
@@ -514,19 +519,9 @@ class BasicProfile extends React.Component<any, any> {
                                 this.setState({ referralSource: e.target.value })
                             }
                         >
-                            <option value="" className="">Select Referral</option>
-                            <option value="adFlierNewspaper">Ad flier with newspaper</option>
-                            <option value="adFlierOther">Ad flier at market/outdoors</option>
-                            <option value="adOnWebsite">Saw an ad on a website</option>
-                            <option value="blogForum">Read about it on a blog/forum</option>
-                            <option value="cafeCoffeeDay">Ad at Café Coffee Day</option>
-                            <option value="emailFromFriend">Got an email from a friend/colleague</option>
-                            <option value="emailFromWebPortal">Email from a web portal/service/jobsite</option>
-                            <option value="googleSearch">Searched on google.com</option>
-                            <option value="other">Other</option>
-                            <option value="otherSearchEngine">Searched on another search engine</option>
-                            <option value="shopRestaurant">Ad at a shop/restaurant</option>
-                            <option value="wordOfMouth">Word of mouth from friend/colleague</option>
+                            {referralsOptions.map((referral) => (
+                                <option value={referral.value} className="">{this.props.language === 'hi' ? referral.label.hi : referral.label.en }</option>
+                            ))}
                         </select>
                     </div>
                     <hr />

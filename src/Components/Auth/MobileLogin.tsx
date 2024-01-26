@@ -8,6 +8,8 @@ import {reduxForm} from "redux-form";
 import {withRouter} from "react-router";
 import {authBasicProfile, authSuccess, authSuccessLastStep} from "./auth.actions";
 import {connect} from "react-redux";
+import Language from "../../Languages/Login/content.json"
+
 
 class MobileLogin extends React.Component<any, any> {
     constructor(props) {
@@ -18,6 +20,7 @@ class MobileLogin extends React.Component<any, any> {
             phoneNumber: '',
             otp: '',
             otpSend: false,
+            pageContent: this.props.language === 'hi' ? Language.OTPVerifyHindi : Language.OTPVerifyEnglish,
             user: null
         };
     }
@@ -90,6 +93,8 @@ class MobileLogin extends React.Component<any, any> {
     }
 
     render() {
+        let { pageContent } = this.state
+        pageContent = this.props.language === 'hi' ? Language.OTPVerifyHindi : Language.OTPVerifyEnglish
         return (
             <Modal
                 centered
@@ -101,7 +106,7 @@ class MobileLogin extends React.Component<any, any> {
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Continue With Mobile
+                        {pageContent.cTitle}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ maxHeight: '100vh', overflow: 'auto' }}>
@@ -118,14 +123,14 @@ class MobileLogin extends React.Component<any, any> {
 
 
                             <div className="row">
-                                    <label htmlFor="title">Mobile Number*</label>
+                                    <label htmlFor="title">{pageContent.cLabel}</label>
                                     <input
                                         className="form-control"
                                         type='number'
                                         name="phoneNumber"
                                         onChange={(e) => this.setState({ phoneNumber: e.target.value })}
                                         value={this.state.phoneNumber}
-                                        placeholder="Enter here"
+                                        placeholder={pageContent.cMPlaceholder}
                                         required
                                     />
                             </div>
@@ -138,21 +143,21 @@ class MobileLogin extends React.Component<any, any> {
                                     onClick={() => this.onSubmit()}
                                     className="btn btn-primary mr-3"
                                 >
-                                    Send OTP
+                                    {pageContent.cSendOtp}
                                 </button>
                             </div>
                         </Show>
 
                         <Show when={this.state.status === PageStatus.Submitted && this.state.otpSend === true}>
                                 <div className="row">
-                                    <label htmlFor="title">Please Enter OTP*</label>
+                                    <label htmlFor="title">{pageContent.cPlaceholder}</label>
                                     <input
                                         className="form-control"
                                         type='number'
                                         name="otp"
                                         onChange={(e) => this.setState({ otp: e.target.value })}
                                         value={this.state.otp}
-                                        placeholder="Enter here"
+                                        placeholder={pageContent.cMPlaceholder}
                                         required
                                     />
                                 </div>
@@ -164,7 +169,7 @@ class MobileLogin extends React.Component<any, any> {
                                         onClick={() => this.handleVerify()}
                                         className="btn btn-primary mr-3"
                                     >
-                                        Verify OTP
+                                        {pageContent.items[1].title}
                                     </button>
                                 </div>
                         </Show>

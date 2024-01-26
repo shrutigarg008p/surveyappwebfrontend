@@ -73,6 +73,11 @@
   },
   "OTPVerifyHindi": {
     "title": "कृपया अपनी मोबाइल संख्या को सत्यापित करें।",
+    "cTitle": "मोबाइल के साथ जारी रखें",
+    "cLabel": "मोबाइल नंबर",
+    "cPlaceholder": "कृपया OTP दर्ज करें",
+    "cMPlaceholder": "यहाँ दर्ज करें",
+    "cSendOtp": "OTP भेजें",
     "description": "हमने आपके मोबाइल नंबर पर एक सत्यापन कोड भेजा है। कृपया मोबाइल सत्यापन पूरा करने के लिए OTP दर्ज करें.",
     "items": [
       {"title": "कृपया OTP दर्ज करें"},
@@ -81,6 +86,11 @@
     ]
   },
   "OTPVerifyEnglish": {
+    "cTitle": "Continue with mobile",
+    "cLabel": "Mobile Number",
+    "cPlaceholder": "Please enter OTP",
+    "cMPlaceholder": "Enter here",
+    "cSendOtp": "Send OTP",
     "title": "Please Verify Your Mobile.",
     "description": "We have sent a verification code to your mobile number. Please enter OTP to complete mobile verification.",
     "items": [
@@ -152,5 +162,41 @@
       {"title": "Submit"},
       {"title": "Reset"}
     ]
+  },
+  "Referrals": [
+    {"value": "Referral Source", "label": {"en": "Referral Source", "hi": "रेफरल स्रोत"}},
+    {"value": "Ad flier with newspaper", "label": {"en": "Ad flier with newspaper", "hi": "विज्ञापन फ़्लायर अखबार में"}},
+    {"value": "Ad flier at market/outdoors", "label": {"en": "Ad flier at market/outdoors", "hi": "विज्ञापन फ़्लायर बाज़ार/बाहर में"}},
+    {"value": "Saw an ad on a website", "label": {"en": "Saw an ad on a website", "hi": "किसी वेबसाइट पर विज्ञापन देखा हो"}},
+    {"value": "Read about it on a blog/forum", "label": {"en": "Read about it on a blog/forum", "hi": "किसी ब्लॉग/फ़ोरम पर इसके बारे में पढ़ा है"}},
+    {"value": "Ad at Café Coffee Day", "label": {"en": "Ad at Café Coffee Day", "hi": "कैफ़े कॉफ़ी डे पर विज्ञापन"}},
+    {"value": "Got an email from a friend/colleague", "label": {"en": "Got an email from a friend/colleague", "hi": "किसी मित्र/सहकर्मी से ईमेल मिला"}},
+    {"value": "Email from a web portal/service/jobsite", "label": {"en": "Email from a web portal/service/jobsite", "hi": "वेब पोर्टल/सेवा/जॉबसाइट से ईमेल"}},
+    {"value": "Searched on google.com", "label": {"en": "Searched on google.com", "hi": "गूगल.कॉम पर खोजा गया"}},
+    {"value": "Other", "label": {"en": "Other", "hi": "अन्य"}},
+    {"value": "Searched on another search engine", "label": {"en": "Searched on another search engine", "hi": "किसी अन्य खोज इंजन पर खोजा गया"}},
+    {"value": "Ad at a shop/restaurant", "label": {"en": "Ad at a shop/restaurant", "hi": "दुकान/रेस्तरां में विज्ञापन"}},
+    {"value": "Word of mouth from friend/colleague", "label": {"en": "Word of mouth from friend/colleague", "hi": "मित्र/सहकर्मी से सुना"}}
+  ],
+
+  "profilesEnglish": {
+    "message": {
+      "title": "Make sure that you have completed your member profiles. Remember - the more information we have about you, the more paid surveys we can invite you to. Filling out information is simple and interactive at",
+      "link": "IndiaPolls"
+    },
+    "profileOverall": {
+      "title": "Profile complete"
+    }
+  },
+  "profilesHindi": {
+    "message": {
+      "title": "सुनिश्चित करें कि आपने अपनी सदस्य प्रोफ़ाइल पूरी कर ली है। याद रखें - हमारे पास आपके बारे में जितनी अधिक जानकारी होगी, उतने अधिक भुगतान वाले सर्वेक्षणों में हम आपको आमंत्रित कर सकते हैं। इंडियापोल्स में जानकारी भरना सरल और परस्पर संवादात्मक है।",
+      "link": "इंडिया पोल्स"
+    },
+    "profileOverall": {
+      "title": "प्रोफ़ाइल पूर्ण"
+    }
   }
+
+
 }

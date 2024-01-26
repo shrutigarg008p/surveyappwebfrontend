@@ -14,6 +14,8 @@ import GridContainer from "../Grid/GridContainer";
 import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import Language from "../../Languages/Login/content.json";
+import * as process from "process";
 
 export type FormValue = {
     "name": string,
@@ -34,6 +36,7 @@ class Profiles extends React.Component<any, any> {
             error: null,
             data: null,
             userResponse: {},
+            pageContent: this.props.language === 'hi' ? Language.profilesHindi : Language.profilesEnglish,
         };
     }
 
@@ -115,7 +118,7 @@ class Profiles extends React.Component<any, any> {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>My Profiles</h4>
+                                <h4>{this.props.language === 'hi' ? 'मेरी प्रोफाइल' : 'My Profiles'}</h4>
                             </div>
                         </CardHeader>
                     </Card>
@@ -133,14 +136,12 @@ class Profiles extends React.Component<any, any> {
                 <Show when={this.state.status === PageStatus.Loaded || this.state.status === PageStatus.Submitted}>
                     <div className="jumbotron bg-white p-3 border shadow-sm">
                         <p>
-                            Make sure that you have completed your member profiles. Remember - the more information we have about you,
-                            the
-                            more paid surveys we can invite you to. Filling out information is simple and interactive at <a>
-                            <b>IndiaPolls.</b>
+                            {this.state.pageContent.message.title} <a>
+                            <b>{this.state.pageContent.message.link}.</b>
                         </a>
                             <h4 className="text-center ng-binding" ng-hide="vm.profileCompleted==null">{this.state.data ?
                                 this.state.data.overallAttemptedPercentage : 0}%
-                                Profile complete
+                                {this.state.pageContent.profileOverall.title}
                             </h4>
                         </p>
                         <div className="progress">
@@ -167,9 +168,9 @@ class Profiles extends React.Component<any, any> {
                                             <Card2>
                                                 <CardHeader2
                                                     title={<>
-                                                        {data.name}
+                                                        {this.props.language === 'hi' ? data.hindi : data.name}
                                                         <Chip
-                                                            label={data.attemptedPercentage > 0 ? `${data.attemptedPercentage}% Completed` : 'Not Started'}
+                                                            label={data.attemptedPercentage > 0 ? `${data.attemptedPercentage}% ${this.props.language === 'hi' ? 'पूरा' : 'Completed'}` : this.props.language === 'hi' ? 'शुरू नहीं हुआ' : 'Not Started'}
                                                             style={{ marginLeft: '8px' }} // Adjust styling as needed
                                                         />
                                                     </>}
@@ -180,7 +181,7 @@ class Profiles extends React.Component<any, any> {
                                                             label={<>
                                                                 <a onClick={() => this.handleClick(data.name)}>
                                                                     <button className="btn-white">
-                                                                        <span>Update</span>
+                                                                        <span>{this.props.language === 'hi' ? 'अपडेट करें' : 'Update'}</span>
                                                                     </button>
                                                                 </a>
                                                             </>}
@@ -189,11 +190,17 @@ class Profiles extends React.Component<any, any> {
                                                     }
                                                 />
                                                 <CardContent>
+                                                    {/*<img*/}
+                                                    {/*    src={"https://picsum.photos/400/"+Math.round((140+index))}*/}
+                                                    {/*    alt="Full Size Image"*/}
+                                                    {/*    style={{ width: '100%', height: 'auto' }}*/}
+                                                    {/*/>*/}
                                                     <img
-                                                        src={"https://picsum.photos/400/"+Math.round((140+index))}
+                                                        src={`https://indiapolls.com:9000${data.image}`}
                                                         alt="Full Size Image"
-                                                        style={{ width: '100%', height: 'auto' }}
+                                                        style={{ width: '100%', height: '90' }}
                                                     />
+                                                    {console.log(process.env.REACT_APP_BASE_URL_API, data.image)}
                                                 </CardContent>
                                             </Card2>
                                         </Grid>
@@ -214,7 +221,7 @@ const ProfilesRedux = reduxForm<FormValue, any>({
     form: 'Profiles',
 })(Profiles);
 
-const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
+const mapStateToProps = (state: { adminUser: { adminUser: {language: any, phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
     return {
         userId: state.adminUser.adminUser.userId,
         role: state.adminUser.adminUser.role,
@@ -222,6 +229,7 @@ const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, em
         email: state.adminUser.adminUser.email,
         isLoading: state.adminUser.adminUser.loading,
         error: state.adminUser.adminUser.error,
+        language: state.adminUser.adminUser.language,
     };
 };
 

@@ -7,7 +7,6 @@ import Admin from "./Layout/Admin";
 import {PrivateRouteWithRedux} from "./PrivateRoute";
 import { VerificationEmailScreensWithState} from "./Components/Auth/VerificationEmailScreen";
 import {AuthRouter} from "./Components/Auth/AuthRouter";
-import ResetPasswordForm from "./Components/Auth/UpdateResetPasswordForm";
 import Terms from "./Components/Legal/Terms";
 import Privacy from "./Components/Legal/Privacy";
 import Faq from "./Components/Legal/Faq";
@@ -21,6 +20,7 @@ import SurveyQualityTerminatedCallbackPage from "./Components/SurveyCallbackPage
 import {LinkViewWithState} from "./Components/Referrals/LinkView";
 import { requestForToken, foreGroundMessage } from './firebase';
 import PartnerSurvey from "./Components/Partners/PartnerSurvey";
+import {ResetPasswordFormWithState} from "./Components/Auth/UpdateResetPasswordForm";
 
 requestForToken();
 foreGroundMessage();
@@ -46,7 +46,7 @@ class App extends React.Component<any, any> {
             <Route path='/support' component={Support} />
             <Route path='/rewards-program-terms' component={RewardsProgramTerms} />
             <Route path='/cookie-policy' component={CookiePolicy} />
-            <Route path='/reset-password/:token' component={ResetPasswordForm} />
+            <Route path='/reset-password/:token' component={ResetPasswordFormWithState} />
             <PrivateRouteWithRedux path="/admin" component={Admin} />
             <PrivateRouteWithRedux path="/" component={Admin} />
         </Switch>

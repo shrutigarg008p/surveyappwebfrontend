@@ -3,8 +3,8 @@ import { withRouter } from 'react-router';
 import { Alert, Modal, Spinner,Button } from 'react-bootstrap';
 import {PageStatus} from '../../enums';
 import { Show } from 'Layout';
-import * as _ from "lodash";
 import { AuthAPI } from '../../API';
+import {connect} from "react-redux";
 
 
 class ForgetPasswordEmail extends React.Component {
@@ -52,7 +52,7 @@ class ForgetPasswordEmail extends React.Component {
                     show={this.props.show}
                 >
               <Modal.Header closeButton>
-                    <h4>Forgot Password</h4>
+                    <h4>{this.props.language === 'hi' ? 'पासवर्ड भूल गए' : 'Forgot Password'}</h4>
                     </Modal.Header>
                     <Modal.Body>
                     <div className='my_pro_edit'>
@@ -60,7 +60,7 @@ class ForgetPasswordEmail extends React.Component {
                           <div className='col-md-6'>
                             <div className='my_pro_group'>
                               <label htmlFor='email' className='my_pro_label'>
-                                Email Address
+                                  {this.props.language === 'hi' ? 'ई-मेल एड्रेस' : 'Email Address'}
                               </label>
                               <input
                                 name='email'
@@ -70,14 +70,14 @@ class ForgetPasswordEmail extends React.Component {
                                   this.setState({ email: e.target.value })
                                 }
                                 className='my_pro_field'
-                                placeholder='Please enter registered email'
+                                placeholder={this.props.language === 'hi' ? 'कृपया पंजीकृत ईमेल दर्ज करें' : 'Please enter registered email'}
                                 required
                               />
                             <Show when={this.state.showError}>
-                              <p className="text-danger"> Please enter registered email </p>
+                              <p className="text-danger"> {this.props.language === 'hi' ? 'कृपया पंजीकृत ईमेल दर्ज करें' : 'Please enter registered email'} </p>
                             </Show>
                             <Show when={this.state.showSuccess}>
-                              <p className="text-success">Reset password link has been sent to your email </p>
+                              <p className="text-success">{this.props.language === 'hi' ? 'पासवर्ड रीसेट लिंक आपके ईमेल पर भेज दिया गया हैं' : 'Reset password link has been sent to your email'} </p>
                             </Show>
                             </div>
                           </div>
@@ -90,9 +90,9 @@ class ForgetPasswordEmail extends React.Component {
               </Modal.Body>
                <div className="modal-footer">
           <button type="button" disabled={!this.state.email} className="btn payment-btn-pay"  onClick={() => this.SendResetPasswordLink()}>
-                  Send Link </button>
+              {this.props.language === 'hi' ? 'लिंक भेजें' : "Send Link"} </button>
 
-                  <button onClick={this.props.onHide} className="btn payment-btn-cls ">Close</button>
+                  <button onClick={this.props.onHide} className="btn payment-btn-cls ">{this.props.language === 'hi' ? 'बंद करे' : 'Close'}</button>
         </div>
                 </Modal>
             </>
@@ -103,6 +103,26 @@ class ForgetPasswordEmail extends React.Component {
         )
     }
 }
-const ForgetPasswordEmailWithRouter = withRouter(ForgetPasswordEmail);
 
-export {ForgetPasswordEmailWithRouter as ForgetPasswordEmail };
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.adminUser.adminUser.isAuthenticated,
+        token: state.adminUser.adminUser.token,
+        language: state.adminUser.adminUser.language,
+        isLoading: state.adminUser.adminUser.loading,
+        error: state.adminUser.adminUser.error,
+    };
+};
+
+const ForgetPasswordEmailWithState = withRouter(connect(
+    mapStateToProps,
+)(ForgetPasswordEmail));
+
+export {
+    ForgetPasswordEmail,
+    ForgetPasswordEmailWithState,
+};
+
+
+

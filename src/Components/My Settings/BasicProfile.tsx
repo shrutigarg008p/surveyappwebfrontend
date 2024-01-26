@@ -38,7 +38,8 @@ class BasicProfile extends React.Component<any, any> {
             countries: [],
             states: [],
             cities: [],
-            profile: null
+            profile: null,
+            email: ''
         };
     }
 
@@ -54,6 +55,7 @@ class BasicProfile extends React.Component<any, any> {
             .then(() => AuthAPI.profile(this.props.userId))
             .then((profile) => {
                 this.initializeValues(profile.profile)
+                this.setState({ email: profile.dataValues.email ? profile.dataValues.email : '' })
                 if(profile.profile.pinCode) {
                     this.fetchStateAndCitiesByZipCode(profile.profile.pinCode)
                 }
@@ -98,8 +100,8 @@ class BasicProfile extends React.Component<any, any> {
             city: this.state.city,
             pinCode: this.state.pinCode,
             referralSource: this.state.referralSource,
-            acceptTerms: true
-
+            acceptTerms: true,
+            email: this.state.email
         };
     }
 
@@ -349,6 +351,17 @@ class BasicProfile extends React.Component<any, any> {
                                 name="lastName"
                                 onChange={(e) => this.setState({ lastName: e.target.value })}
                                 value={this.state.lastName}
+                                placeholder="Enter.."
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="lastName">Email</label>
+                            <input
+                                className="form-control"
+                                id="lastName"
+                                name="lastName"
+                                onChange={(e) => this.setState({ email: e.target.value })}
+                                value={this.state.email}
                                 placeholder="Enter.."
                             />
                         </div>
