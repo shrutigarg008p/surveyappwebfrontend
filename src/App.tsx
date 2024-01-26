@@ -12,6 +12,7 @@ import TermsHi from "./Components/Legal/TermsHi";
 import PrivacyPolicyHi from 'Components/Legal/PrivacyPolicyHi';
 import Privacy from "./Components/Legal/Privacy";
 import Faq from "./Components/Legal/Faq";
+import FaqHi from "./Components/Legal/FaqHi";
 import Support from "./Components/Legal/Support";
 import CookiePolicyHi from 'Components/Legal/CookiePolicyHi';
 import CookiePolicy from 'Components/Legal/CookiePolicy';
@@ -49,6 +50,7 @@ class App extends React.Component<any, any> {
             <Route path='/privacy-policy-hi' component={PrivacyPolicyHi} />
             <Route path='/privacy-policy' component={Privacy} />
             <Route path='/faq' component={Faq} />
+            <Route path='/faq-hi' component={FaqHi} />
             <Route path='/support' component={Support} />
             <Route path='/rewards-program-terms-hi' component={RewardsProgramTermsHi} />
             <Route path='/rewards-program-terms' component={RewardsProgramTerms} />

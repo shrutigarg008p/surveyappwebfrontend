@@ -17,11 +17,11 @@ const ResponsiveIframe = ({ url }) => {
 
   const getIframeStyle = () => {
     if (windowWidth >= 1024) { // Desktop
-      return { width: '1000px', height: '600px', border: '0' };
+      return { width: '1000px', height: '800px', border: '0' };
     } else if (windowWidth >= 768) { // Tablet
-      return { width: '768px', height: '432px', border: '0' };
+      return { width: '768px', height: '800px', border: '0' };
     } else { // Mobile
-      return { width: '100%', height: '300px', border: '0' };
+      return { width: '100%', height: '800px', border: '0' };
     }
   };
 
