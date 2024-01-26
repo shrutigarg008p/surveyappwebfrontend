@@ -1,0 +1,92 @@
+body {
+    font-family: Calibri;
+    font-size: 12pt
+}
+
+h3,
+h4,
+p {
+    margin: 0pt
+}
+
+li {
+    margin-top: 0pt;
+    margin-bottom: 0pt
+}
+
+h3 {
+    margin-top: 5pt;
+    margin-bottom: 5pt;
+    page-break-inside: auto;
+    page-break-after: auto;
+    font-family: 'Times New Roman';
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #000000
+}
+
+h4 {
+    margin-top: 5pt;
+    margin-bottom: 5pt;
+    page-break-inside: auto;
+    page-break-after: auto;
+    font-family: 'Times New Roman';
+    font-size: 12pt;
+    font-weight: bold;
+    font-style: normal;
+    color: #000000
+}
+
+.CommentSubject {
+    font-size: 10pt;
+    font-weight: bold
+}
+
+.CommentText {
+    font-size: 10pt
+}
+
+.ListParagraph {
+    margin-left: 36pt;
+    font-size: 12pt
+}
+
+.NormalWeb {
+    margin-top: 5pt;
+    margin-bottom: 5pt;
+    font-family: 'Times New Roman';
+    font-size: 12pt
+}
+
+span.CommentReference {
+    font-size: 8pt
+}
+
+span.CommentSubjectChar {
+    font-size: 10pt;
+    font-weight: bold
+}
+
+span.CommentTextChar {
+    font-size: 10pt
+}
+
+span.Heading3Char {
+    font-family: 'Times New Roman';
+    font-size: 13.5pt;
+    font-weight: bold
+}
+
+span.Heading4Char {
+    font-family: 'Times New Roman';
+    font-weight: bold
+}
+
+span.Hyperlink {
+    text-decoration: underline;
+    color: #0000ff
+}
+
+span.Strong {
+    font-weight: bold
+}
