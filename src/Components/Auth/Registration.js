@@ -41,7 +41,7 @@ class Registration extends Component {
         status : false,
         message : ''
       },
-      captcha : false
+      captcha : true
     };
   }
 
@@ -103,12 +103,10 @@ class Registration extends Component {
   }
 
   isSubmitButtonDisable() {
-    return  !!this.state.email &&
+    return !!this.state.email &&
         !!this.state.phoneNumber &&
         !!this.state.password &&
-        !!this.state.confirmPassword && 
-        !!this.state.captcha
-
+        !!this.state.confirmPassword
   }
 
   responseFacebook(response)  {
