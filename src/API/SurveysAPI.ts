@@ -180,8 +180,8 @@ export class SurveysAPI {
             });
     }
 
-    static userRespondentDashboardWeb(userId: any): Promise<any> {
-        return api.get(`${surveysURL}/userRespondentDashboardWeb/${userId}`)
+    static userRespondentDashboardWeb(userId: any, language = 'en'): Promise<any> {
+        return api.get(`${surveysURL}/userRespondentDashboardWeb/${userId}?language=${language}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

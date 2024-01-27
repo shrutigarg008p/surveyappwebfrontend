@@ -8,13 +8,14 @@ import {authLogin, languageChange, languageChangeOption} from "./auth.actions";
 import { Assets } from 'enums';
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
-import { ForgetPasswordEmail } from "./ForgetPasswordEmailForm";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleSignIn from "./googleSignin";
 import {MobileLogin} from "./MobileLogin";
 import Language from "../../Languages/Login/content.json"
 import {Helmet} from "react-helmet";
+import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
+import SimpleCaptcha from "./Capcha";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ function Login(props) {
   const [isMobile, setMobile] = useState(false);
   const [referralId, setReferralId] = useState('');
   const [showGoogleSignIn, setShowGoogleSignIn] = useState(false);
+  const [captcha, setCaptcha] = useState(false);
+
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
   const pageContents = props.language === 'hi' ? Language.LoginHindi : Language.LoginEnglish
@@ -32,11 +35,11 @@ function Login(props) {
   const handleContinueWithGoogleClick = () => {
     setShowGoogleSignIn(true);
   };
- 
+
 
   useEffect(()=>{
     const url = window.location.href;
-    let lang = url.split('=')[1]; 
+    let lang = url.split('=')[1];
     if(lang !== undefined){
      setTimeout(()=>{
       dispatch(languageChange('hi'))
@@ -158,9 +161,24 @@ function Login(props) {
                   </a>
                 </Show>
                 <LoadingSpinner show={props.isLoading} />
-                <span className="text-right"><button type="submit" style={{float:'right'}} className="btn btn-primary" disabled={submitting || invalid}>{pageContents.items[7].title}</button></span>
+                <span className="text-right">
+                  <button
+                      type="submit"
+                      style={{float:'right'}}
+                      className="btn btn-primary"
+                      disabled={submitting || invalid || captcha === false}
+                  >
+                    {pageContents.items[7].title}
+                  </button>
+                </span>
                   </p>
                 </form>
+                <div className="mt-2 mb-2">
+                  <SimpleCaptcha
+                  onValid={() => setCaptcha(true)}
+                  language={props.language}
+                  />
+                </div>
                   <div className="text-center">
                     <select id="language-dropdown" className="text-center" onChange={languageChangeOptions} value={props.language}>
                     <option value="en">English</option>
@@ -172,7 +190,7 @@ function Login(props) {
           </div>
         </div>
       </section>
-      <ForgetPasswordEmail
+      <ForgetPasswordEmailWithState
             show={isPasswordReset}
             onHide={() => setResetPassword(false)}
             onClose={() => setResetPassword(false)}

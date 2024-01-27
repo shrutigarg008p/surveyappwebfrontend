@@ -360,6 +360,7 @@ class Form extends React.Component<any, any> {
                     <option value='' disabled>--Choose--</option>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
+                    <option value='other'>Other</option>
                   </select>
                 </div>
                 <div className="col">
