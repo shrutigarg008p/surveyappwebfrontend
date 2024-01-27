@@ -43,7 +43,6 @@ export default function Footer(props) {
           <span>
             &copy; {1900 + new Date().getYear()}{" "}
               IndiaPolls
-            , web application admin panel
           </span>
         </p>
       </div>
