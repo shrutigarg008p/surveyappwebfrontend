@@ -46,21 +46,21 @@ function FaqHi() {
         <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
             <Toolbar>
-                <Typography variant="h6">FAQ</Typography>
+                <Typography variant="h6">अक्सर पूछे जाने वाले प्रश्न</Typography>
             </Toolbar>
         </AppBar>
         <Container maxWidth="lg" className={classes.content}>
             <Paper className={classes.paper}>
                 <img alt="Logo" src={Assets.Logo2} className={classes.logo} />
                 <Typography variant="h4" gutterBottom>
-                FAQ
+                    अक्सर पूछे जाने वाले प्रश्न
                 </Typography>
                 <ResponsiveIframe url="https://onedrive.live.com/embed?resid=CAE33E44DD3C57EE%2154087&authkey=!AF3BE5zPh9lRbrY&em=2"/>
             </Paper>
-           
+
         </Container>
     </div>
-    
+
     );
 }
 
