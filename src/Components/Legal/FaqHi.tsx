@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CookiePolicyHi() {
+function FaqHi() {
     const classes = useStyles();
     const headingStyle = { color: '#5a5a5a', fontSize: '22.5pt' };
     const subHeadingStyle = { color: '#5a5a5a', fontSize: '13pt' };
@@ -64,4 +64,4 @@ function CookiePolicyHi() {
     );
 }
 
-export default CookiePolicyHi;
+export default FaqHi;
