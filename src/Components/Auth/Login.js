@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect   } from "react";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
@@ -16,6 +16,7 @@ import Language from "../../Languages/Login/content.json"
 import {Helmet} from "react-helmet";
 import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
 import SimpleCaptcha from "./Capcha";
+import GoogleReCaptcha from "./GoogleRecaptcha";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -26,8 +27,7 @@ function Login(props) {
   const [isMobile, setMobile] = useState(false);
   const [referralId, setReferralId] = useState('');
   const [showGoogleSignIn, setShowGoogleSignIn] = useState(false);
-  const [captcha, setCaptcha] = useState(false);
-
+  const [captcha, setCaptcha] = useState(true);
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
   const pageContents = props.language === 'hi' ? Language.LoginHindi : Language.LoginEnglish
@@ -36,6 +36,7 @@ function Login(props) {
     setShowGoogleSignIn(true);
   };
 
+ 
 
   useEffect(()=>{
     const url = window.location.href;
@@ -43,10 +44,10 @@ function Login(props) {
     if(lang !== undefined){
      setTimeout(()=>{
       dispatch(languageChange('hi'))
-
      }, 1000);
     }
   }, [])
+  
   useEffect(() => {
     const hash = window.location.hash;
     const referralIdMatch = hash.match(/referralId=([^&]*)/);
@@ -61,7 +62,7 @@ function Login(props) {
       'password',
       props.language,
       history
-    );
+  );
 
   const handleClick = () => {
     if (referralId) {
@@ -86,6 +87,9 @@ function Login(props) {
     dispatch(languageChange(info.target.value));
   }
 
+  const handleCaptchaValidation = response => {
+    console.log(response)
+  }
 
   return (
     <>
@@ -154,6 +158,9 @@ function Login(props) {
                     <label htmlFor="pwd">{pageContents.items[5].title}</label>
                     <input type="password" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
                   </div>
+                  <GoogleReCaptcha
+                onCaptchaValidation={handleCaptchaValidation}
+                />
                   <p>
                   <Show when={true}>
                   <a className='frgt_pass' onClick={(e)=>setResetPassword(true)}>
@@ -173,12 +180,12 @@ function Login(props) {
                 </span>
                   </p>
                 </form>
-                <div className="mt-2 mb-2">
+                {/* <div className="mt-2 mb-2">
                   <SimpleCaptcha
                   onValid={() => setCaptcha(true)}
                   language={props.language}
                   />
-                </div>
+                </div> */}
                   <div className="text-center">
                     <select id="language-dropdown" className="text-center" onChange={languageChangeOptions} value={props.language}>
                     <option value="en">English</option>

@@ -1,5 +1,5 @@
 body {
-    font-family: Calibri;
+    font-family: 'Roboto';
     font-size: 12pt
 }
 
@@ -19,7 +19,7 @@ h3 {
     margin-bottom: 5pt;
     page-break-inside: auto;
     page-break-after: auto;
-    font-family: 'Times New Roman';
+    font-family: 'Roboto';
     font-size: 13.5pt;
     font-weight: bold;
     color: #000000
@@ -30,7 +30,7 @@ h4 {
     margin-bottom: 5pt;
     page-break-inside: auto;
     page-break-after: auto;
-    font-family: 'Times New Roman';
+    font-family: 'Roboto';
     font-size: 12pt;
     font-weight: bold;
     font-style: normal;
@@ -54,7 +54,7 @@ h4 {
 .NormalWeb {
     margin-top: 5pt;
     margin-bottom: 5pt;
-    font-family: 'Times New Roman';
+    font-family: 'Roboto';
     font-size: 12pt
 }
 
@@ -72,13 +72,13 @@ span.CommentTextChar {
 }
 
 span.Heading3Char {
-    font-family: 'Times New Roman';
+    font-family: 'Roboto';
     font-size: 13.5pt;
     font-weight: bold
 }
 
 span.Heading4Char {
-    font-family: 'Times New Roman';
+    font-family: 'Roboto';
     font-weight: bold
 }
 

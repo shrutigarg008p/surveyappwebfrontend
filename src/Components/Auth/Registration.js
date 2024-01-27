@@ -11,6 +11,7 @@ import { Assets } from 'enums';
 import { Link } from 'react-router-dom';
 import GoogleSignIn from "./googleSignin";
 import { languageChange } from './auth.actions';
+import GoogleReCaptcha from './GoogleRecaptcha';
 const languageDropdownStyle = {
   position: 'fixed',
   top: '20px',
@@ -39,7 +40,8 @@ class Registration extends Component {
       error : {
         status : false,
         message : ''
-      }
+      },
+      captcha : false
     };
   }
 
@@ -104,7 +106,8 @@ class Registration extends Component {
     return  !!this.state.email &&
         !!this.state.phoneNumber &&
         !!this.state.password &&
-        !!this.state.confirmPassword
+        !!this.state.confirmPassword && 
+        !!this.state.captcha
 
   }
 
@@ -153,7 +156,9 @@ class Registration extends Component {
       this.props.history.push('/login')
     }
   }
-
+   handleCaptchaValidation = response => {
+    console.log(response)
+  }
   render() {
     const { isPasswordMatched, pageContent } = this.state;
     return (
@@ -286,6 +291,9 @@ class Registration extends Component {
                 disabled={!this.isSubmitButtonDisable()}>{pageContent.items[11].title}</button>
                 </span>
                   </p>
+                  <GoogleReCaptcha
+                  onCaptchaValidation={(res)=>this.handleCaptchaValidation(res)}
+                  />
                 {/* </form> */}
                 <select className="text-center" onChange={(e)=>this.languageChangeOptions(e)} value={this.props.language}>
         <option value="en">English</option>
