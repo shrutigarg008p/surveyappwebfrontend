@@ -5,6 +5,7 @@ import Language from "../../Languages/Login/content.json";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import {authRegistration} from "./auth.actions";
+import { Assets } from 'enums';
 
 
 
@@ -103,7 +104,7 @@ class ResetPasswordForm extends Component {
                     <section className='register_page'>
                         <div className='register_left'>
                             <img
-                                src='/assets/img/logo.jpeg'
+                                src={Assets.Logo2}
                                 alt='register-left'
                                 className='img-fluid '
                             />
