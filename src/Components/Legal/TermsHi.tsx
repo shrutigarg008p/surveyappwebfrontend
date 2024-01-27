@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: '400px', // Adjust the maximum width as needed
     },
 }));
-import './Terms.css';
+
 import ResponsiveIframe from './ResponsiveIframe';
 function TermsHi() {
     const classes = useStyles();

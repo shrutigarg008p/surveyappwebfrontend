@@ -99,11 +99,8 @@ class MyRequests extends Component<any, any> {
                         </Alert>
                     </Show>
                     <Card className="mainCard">
-                        <CardHeader
-                            title=""
-                        />
                         <div className="d-flex align-items-center justify-content-between">
-                            <h4>My Requests</h4>
+                            <h4 className='text-white cardTitle' >My Requests</h4>
                             <div>
                             <Button
                                 onClick={() => {
@@ -179,6 +176,7 @@ class MyRequests extends Component<any, any> {
                             <CardHeader
                                 title="Redemptions Request Summary"
                                 className="cardHeader"
+                                titleTypographyProps={{ className: 'cardHeader' }}
                             />
 
                             <Show when={!this.state.survey.length}>

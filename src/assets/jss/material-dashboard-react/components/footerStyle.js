@@ -50,5 +50,14 @@ const footerStyle = {
     padding: "0px",
     width: "auto",
   },
+  stickyFooter : {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    backgroundColor: 'white',
+    padding: '10px 0',
+    borderTop: '1px solid #e7e7e7',
+    zIndex: 1000
+  }
 };
 export default footerStyle;
