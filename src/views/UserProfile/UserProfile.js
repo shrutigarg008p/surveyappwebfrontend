@@ -30,10 +30,11 @@ const styles = {
     color: "#FFFFFF",
     marginTop: "0px",
     minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    fontWeight: "bolder",
+    fontFamily: "Roboto",
     marginBottom: "3px",
     textDecoration: "none",
+    fontSize : '1.5rem'
   },
 };
 

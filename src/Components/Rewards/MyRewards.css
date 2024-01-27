@@ -9,15 +9,16 @@
 
 .nestedCard {
     background: #ffffff;
-    padding: 16px;
+    padding: 10px;
     border-radius: 8px;
     margin-bottom: 24px;
 }
 
 .cardHeader {
     background: linear-gradient(to right, #ff7e5f, #feb47b);
-    font-size: 1.1rem !important;
+    font-size: 1.3rem !important;
     color:white;
+    font-weight: 'bolder' !important;
 }
 
 .cardTitle{

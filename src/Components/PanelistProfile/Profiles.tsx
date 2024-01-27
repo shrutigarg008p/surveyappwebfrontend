@@ -28,6 +28,10 @@ type State = {
     name: string,
 };
 
+const headingStyle:any = {
+    fontWeight : 'bold', 
+    fontSize : '1.1rem'
+}
 class Profiles extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -118,9 +122,10 @@ class Profiles extends React.Component<any, any> {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>{this.props.language === 'hi' ? 'मेरी प्रोफाइल' : 'My Profiles'}</h4>
+                                <h4 style={headingStyle}>{this.props.language === 'hi' ? 'मेरी प्रोफाइल' : 'My Profiles'}</h4>
                             </div>
                         </CardHeader>
+                        
                     </Card>
                 </GridContainer>
                 <Show when={this.state.status === PageStatus.Loading}>
