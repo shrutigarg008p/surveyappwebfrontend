@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 function FaqHi() {
     const classes = useStyles();
     const headingStyle = { color: '#5a5a5a', fontSize: '22.5pt' };
