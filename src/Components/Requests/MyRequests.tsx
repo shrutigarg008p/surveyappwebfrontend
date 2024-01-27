@@ -53,7 +53,7 @@ class MyRequests extends Component<any, any> {
         if(body !== null){
             body.removeAttribute('style');
         }
-        
+
     }
 
     fetchSurvey = () => {
@@ -127,7 +127,7 @@ class MyRequests extends Component<any, any> {
 
                                 <Grid item xs={6} sm={3} className="gridItem">
                                     <Typography variant="h4">{this.state.totalEarned}</Typography>
-                                    <Typography variant="body1">Total Points Earn</Typography>
+                                    <Typography variant="body1">Total Points Earned</Typography>
                                 </Grid>
 
                                 <Grid item xs={6} sm={3} className="gridItem">
