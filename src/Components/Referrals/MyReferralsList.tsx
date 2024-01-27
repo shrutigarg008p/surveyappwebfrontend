@@ -64,7 +64,7 @@ class MyReferrals extends Component<any, any> {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>Referrals</h4>
+                                <h4 className="text-white cardTitle">Referrals</h4>
                                 <div>
                                     <Button
                                         onClick={() => {

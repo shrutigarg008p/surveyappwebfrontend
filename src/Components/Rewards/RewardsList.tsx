@@ -114,7 +114,7 @@ export class RewardsList extends Component<any, any> {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>Rewards</h4>
+                                <h4 className="text-white">Rewards</h4>
                             </div>
                         </CardHeader>
                     </Card>

@@ -15,7 +15,7 @@ import moment from 'moment/moment';
 import { AuthAPI } from '../../API';
 import { PageStatus, Assets } from 'enums';
 import { Show } from 'Layout';
-import './MyRewards.css'
+import './MyRewards.css';
 
 
 class MyRewards extends Component<any, any> {
@@ -69,6 +69,7 @@ class MyRewards extends Component<any, any> {
                 <Card className="mainCard">
                     <CardHeader
                         title={this.props.language === 'hi' ? 'अर्जित अंक' : "Points Earned"}
+                        titleTypographyProps={{ className: 'cardHeader' }}
                     />
                 </Card>
                 <Card className="nestedCard">
@@ -111,6 +112,7 @@ class MyRewards extends Component<any, any> {
                     <CardHeader
                         title={this.props.language === 'hi' ? 'पुरस्कार सारांश' : 'Reward Summary'}
                         className="cardHeader"
+                        titleTypographyProps={{ className: 'cardHeader' }}
                     />
 
                    <Show when={!this.state.survey.length}>
