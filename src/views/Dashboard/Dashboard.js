@@ -76,7 +76,7 @@ function Dashboard({...rest}) {
             <GridItem xs={12} sm={6} md={3}>
               <Card>
                 <CardHeader color="info" stats icon>
-                  <CardIcon color="warning">
+                  <CardIcon color="warning" >
                     <Icon>content_copy</Icon>
                   </CardIcon>
                   <p className={classes.cardCategory}>{data ? data.totalSurveys.name : ''}</p>

@@ -16,9 +16,10 @@ function Footer(props) {
   return (
     <footer className={`${classes.stickyFooter}`}>
     <div className={classes.container}>
-        <a href={link} className={classes.link}>
+        <strong><a href={link} className={classes.link}>
           { props.language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'FAQ' }
         </a>
+        </strong>
        {/* <span style={{'textAlign' : 'right'}}> &copy; {new Date().getFullYear()} IndiaPolls</span> */}
     </div>
   </footer>

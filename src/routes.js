@@ -25,7 +25,7 @@ import {RegisteredOnly} from "./Components/Panelists/RegisteredOnly";
 //   ArrowForward,
 //   ArrowLeft, ArrowRight
 // } from "@material-ui/icons";
-import { Dashboard, AccountCircle, ListAlt, Redeem, CardGiftcard, Group, Apps, Description, HowToReg, Person, Cancel, DeleteForever, Block, Category, Email, Message, Help as HelpIcon, Settings, LocalOffer, Public, LocationCity, LocationOn, Business, AccountBox, Label, Link, Security, Info, AttachMoney, ShoppingCart, Flight, Favorite, Home, SportsEsports, Theaters, Work, Devices, SmokingRooms, DriveEta, Fastfood } from "@material-ui/icons";
+import { Dashboard, AccountCircle, ListAlt, Redeem, CardGiftcard, Group, Apps, Description, HowToReg, Person, Cancel, DeleteForever, Block, Category, Email, Message, Help as HelpIcon, Settings, LocalOffer, Public, LocationCity, LocationOn, Business, AccountBox, Label, Link, Security, Info, CurrencyRupee, ShoppingCart, Flight, Favorite, Home, SportsEsports, Theaters, Work, Devices, SmokingRooms, DriveEta, Fastfood } from "@material-ui/icons";
 import {BasicProfileOnly} from "./Components/Panelists/BasicProfileOnly";
 import {UnsubscribedPanelistOnly} from "./Components/Panelists/UnsubscribedPanelistsOnly";
 import {DeletedPanelistsOnly} from "./Components/Panelists/DeletedPanelistsOnly";
@@ -387,7 +387,7 @@ const dashboardRoutes = [
     path: "/personal-finance",
     name: "Personal Finance",
     hindi: "व्यक्तिगत वित्त",
-    icon: AttachMoney,
+    icon: '₹',
     component: PersonalFinance,
     layout: "/panelist",
     type: 'panelist'
