@@ -53,6 +53,9 @@ function Dashboard({...rest}) {
     fetchData();
   }, []);
 
+  const cardHeight = {
+    height : '180px'
+  }
   return (
       <div>
         {/*<ReactStars count={5} value={5} size={24} activeColor="#ffd700"/>*/}
@@ -74,9 +77,9 @@ function Dashboard({...rest}) {
 
           <Show when={status === PageStatus.Loaded && !!data}>
             <GridItem xs={12} sm={6} md={3}>
-              <Card>
+              <Card style={cardHeight}>
                 <CardHeader color="info" stats icon>
-                  <CardIcon color="warning" >
+                  <CardIcon color="warning">
                     <Icon>content_copy</Icon>
                   </CardIcon>
                   <p className={classes.cardCategory}>{data ? data.totalSurveys.name : ''}</p>
@@ -93,7 +96,7 @@ function Dashboard({...rest}) {
               </Card>
             </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="warning" stats icon>
                 <CardIcon color="success">
                   <Store />
@@ -112,7 +115,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="success" stats icon>
                 <CardIcon color="danger">
                   <Icon>info_outline</Icon>
@@ -130,7 +133,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="danger" stats icon>
                 <CardIcon color="info">
                   <Accessibility />
@@ -149,7 +152,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="info" stats icon>
                 <CardIcon color="warning">
                   <Icon>content_copy</Icon>
@@ -168,7 +171,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="info" stats icon>
                 <CardIcon color="success">
                   <Store />
@@ -187,7 +190,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="info" stats icon>
                 <CardIcon color="danger">
                   <Icon>info_outline</Icon>
@@ -206,7 +209,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
                   <Accessibility />
@@ -225,7 +228,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="info" stats icon>
                 <CardIcon color="warning">
                   <Icon>content_copy</Icon>
@@ -244,7 +247,7 @@ function Dashboard({...rest}) {
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
+            <Card style={cardHeight}>
               <CardHeader color="info" stats icon>
                 <CardIcon color="success">
                   <Store />
