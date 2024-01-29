@@ -15,7 +15,7 @@ import GoogleReCaptcha from './GoogleRecaptcha';
 const languageDropdownStyle = {
   position: 'fixed',
   top: '20px',
-  right: '20px', 
+  right: '20px',
   zIndex: 3
 };
 class Registration extends Component {
@@ -45,7 +45,7 @@ class Registration extends Component {
     };
   }
 
- 
+
 
   componentDidMount() {
     const fullUrl = window.location.href;
@@ -65,7 +65,7 @@ class Registration extends Component {
     this.setState({ showGoogleSignIn: true });
   };
 
-    onSubmit() {
+  onSubmit() {
     if (this.state.policy === false) {
       this.setState({ show: true })
     } else if(!this.validate(this.state.password, this.state.confirmPassword)) {
@@ -134,7 +134,7 @@ class Registration extends Component {
     }
   }
 
-  
+
   languageChangeOptions = (info) => {
     this.props.languageChange(info.target.value);
     window.location.reload();
@@ -154,156 +154,160 @@ class Registration extends Component {
       this.props.history.push('/login')
     }
   }
-   handleCaptchaValidation = response => {
+  handleCaptchaValidation = response => {
     console.log(response)
   }
   render() {
     const { isPasswordMatched, pageContent } = this.state;
     return (
-    <>
-     <Helmet>
-      <title>Indiapolls - Sign up</title>
-     </Helmet>
-     <section className="formSec">
-        <div className="container zoom-70">
-          <div className="row" style={{paddingTop: '2%'}}>
-            <div className="col-md-6">
-              <div className="logoDiv">
-                <img src={Assets.Logo2} className="img-fluid mobileNone" alt="IndiaPolls" style={{width:'100%'}}/>
-                <p className="mobileNone text-center" style={{ fontSize: 18 }}>{pageContent.items[12].title}</p>
-              </div>
-            </div>
-            <div className="col-md-5">
-              <div>
-                <div className="formdesign">
-                  <i className="fa fa-info-circle" aria-hidden="true" /> {pageContent.title}
+        <>
+          <Helmet>
+            <title>Indiapolls - Sign up</title>
+          </Helmet>
+          <section className="formSec">
+            <div className="container zoom-70">
+              <div className="row" style={{paddingTop: '2%'}}>
+                <div className="col-md-6">
+                  <div className="logoDiv">
+                    <img src={Assets.Logo2} className="img-fluid mobileNone" alt="IndiaPolls" style={{width:'100%'}}/>
+                    <p className="mobileNone text-center" style={{ fontSize: 18 }}>{pageContent.items[12].title}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="formdesign2">
-                <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt="" />
-                <h2>{pageContent.items[0].title}</h2>
-                <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
-                <div className="social-login">
-                  <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
-                  {this.state.showGoogleSignIn && <GoogleSignIn />}
-                  {/*<FacebookLogin*/}
-                  {/*    appId="879890270328649"*/}
-                  {/*    autoLoad={false}*/}
-                  {/*    fields="name,email,picture"*/}
-                  {/*    callback={(e) => responseFacebook(e)}*/}
-                  {/*    icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}*/}
-                  {/*    cssClass="facebook-login-btn"*/}
-                  {/*    textButton=""*/}
-                  {/*/>*/}
-                </div>
-                <div className="RuleWithText">{pageContent.items[3].title}</div>
-                {/* <form onSubmit={props.handleSubmit(onSubmit)}> */}
-                  <div className="mb-3 mt-3">
-                    <label htmlFor="email">{pageContent.items[4].title}</label>
-                    <input type="email" className="form-control" name="email"
-                    value={this.state.email}
-                    onChange={(e) => this.setState({ email: e.target.value })}
-                    onClick={() => this.setState({emailActive: !this.state.emailActive})}
-                    // placeholder={pageContent.items[5].title}
-                    required />
+                <div className="col-md-5">
+                  <div>
+                    <div className="formdesign">
+                      <i className="fa fa-info-circle" aria-hidden="true" /> {pageContent.title}
+                    </div>
                   </div>
-                  <div className="mb-3 mt-3">
-                    <label htmlFor="phone">{pageContent.items[6].title}</label>
-                    <input type="text" className="form-control" name="phone"
-                    value={this.state.phoneNumber}
-                    onChange={(e) => {
-                    this.setState({
-                       phoneNumber: e.target.value,
-                     })
-                    }}
-                    onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
-                    // placeholder={pageContent.items[6].title}
-                    required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="pwd">{pageContent.items[7].title}  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
-                    <input
-                  className="form-control"
-                   type='password'
-                   onChange={(e) => {
-                     this.onChangePassword(e.target.value, 'password');
-                     this.setState({
-                       password: e.target.value,
-                     })
-                   }}
-                   onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
-                  //  placeholder={pageContent.items[7].title}
-                   required />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="pwd">{pageContent.items[8].title}  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
-                    <input
-                    className="form-control"
-                    type='password'
-                    // placeholder={pageContent.items[8].title}
-                    onChange={(e) =>{
-                      this.onChangePassword(e.target.value, 'confirmpassword');
-                      this.setState({
-                        confirmPassword: e.target.value,
-                      })
-                    }}
-                    onClick={() => this.setState({confirmPasswordActive: !this.state.confirmPasswordActive})}
-                    />
-                  </div>
+                  <div className="formdesign2">
+                    <img src={Assets.Logo2} style={{width:'100%'}} className="img-fluid desktopNone" alt="" />
+                    <h2>{pageContent.items[0].title}</h2>
+                    <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
+                    <div className="social-login">
+                      <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                      {this.state.showGoogleSignIn && <GoogleSignIn />}
+                      {/*<FacebookLogin*/}
+                      {/*    appId="879890270328649"*/}
+                      {/*    autoLoad={false}*/}
+                      {/*    fields="name,email,picture"*/}
+                      {/*    callback={(e) => responseFacebook(e)}*/}
+                      {/*    icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}*/}
+                      {/*    cssClass="facebook-login-btn"*/}
+                      {/*    textButton=""*/}
+                      {/*/>*/}
+                    </div>
+                    <div className="RuleWithText">{pageContent.items[3].title}</div>
+                    {/* <form onSubmit={props.handleSubmit(onSubmit)}> */}
+                    <div className="mb-3 mt-3">
+                      <label htmlFor="email">{pageContent.items[4].title}</label>
+                      <input type="email" className="form-control" name="email"
+                             value={this.state.email}
+                             title=""
+                             onChange={(e) => this.setState({ email: e.target.value })}
+                             onClick={() => this.setState({emailActive: !this.state.emailActive})}
+                          // placeholder={pageContent.items[5].title}
+                             required />
+                    </div>
+                    <div className="mb-3 mt-3">
+                      <label htmlFor="phone">{pageContent.items[6].title}</label>
+                      <input type="text" className="form-control" name="phone"
+                             title=""
+                             value={this.state.phoneNumber}
+                             onChange={(e) => {
+                               this.setState({
+                                 phoneNumber: e.target.value,
+                               })
+                             }}
+                             onClick={() => this.setState({phoneNumberActive: !this.state.phoneNumberActive})}
+                          // placeholder={pageContent.items[6].title}
+                             required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="pwd">{pageContent.items[7].title}  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
+                      <input
+                          className="form-control"
+                          type='password'
+                          title=""
+                          onChange={(e) => {
+                            this.onChangePassword(e.target.value, 'password');
+                            this.setState({
+                              password: e.target.value,
+                            })
+                          }}
+                          onClick={() => this.setState({ passwordActive: !this.state.passwordActive })}
+                          //  placeholder={pageContent.items[7].title}
+                          required />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="pwd">{pageContent.items[8].title}  { isPasswordMatched ? <i className="fa fa-check text-green"></i> : ''}</label>
+                      <input
+                          className="form-control"
+                          type='password'
+                          title=""
+                          // placeholder={pageContent.items[8].title}
+                          onChange={(e) =>{
+                            this.onChangePassword(e.target.value, 'confirmpassword');
+                            this.setState({
+                              confirmPassword: e.target.value,
+                            })
+                          }}
+                          onClick={() => this.setState({confirmPasswordActive: !this.state.confirmPasswordActive})}
+                      />
+                    </div>
 
-                   <div className="login-row login-form-item-control" style={{marginBottom : '-11px'}}>
-                <label>
-                  <input
-                  type='checkbox'
-                  onChange={(e) => this.setState({ policy: e.target.checked })}
-                  className="r_pp_checkbox login-checkbox-input" defaultValue />
-                  &nbsp;&nbsp;
-                  <span
-                    dangerouslySetInnerHTML={{__html: pageContent.items[9].title}}
-                  />
-                </label>
-                  {/* <span><Link to="/terms">{pageContent.items[10].title}</Link></span>
-                  
+                    <div className="login-row login-form-item-control" style={{marginBottom : '-11px'}}>
+                      <label>
+                        <input
+                            type='checkbox'
+                            onChange={(e) => this.setState({ policy: e.target.checked })}
+                            className="r_pp_checkbox login-checkbox-input" defaultValue />
+                        &nbsp;&nbsp;
+                        <span
+                            dangerouslySetInnerHTML={{__html: pageContent.items[9].title}}
+                        />
+                      </label>
+                      {/* <span><Link to="/terms">{pageContent.items[10].title}</Link></span>
+
                   <span><Link to="/privacy-policy">Privacy Policy</Link></span> */}
-              </div>
-              <Show when={this.state.show===true}>
-                <small className="form-text text-danger privacy_error">
-                  {pageContent.items[13].title}
-                </small>
-              </Show>
-              <Show when={this.state.showConfirmPassword === true}>
-                <small className="form-text text-danger privacy_error">
-                  {pageContent.items[14].title}
-                </small>
-              </Show>
-              <Show when={this.state.error.status === true}>
-                <small className="form-text text-danger privacy_error">
-                  {this.state.error.message}
-                </small>
-              </Show>
-                  <p>
-                <LoadingSpinner show={this.props.isLoading} />
-                <span className="text-right">
+                    </div>
+                    <Show when={this.state.show===true}>
+                      <small className="form-text text-danger privacy_error">
+                        {pageContent.items[13].title}
+                      </small>
+                    </Show>
+                    <Show when={this.state.showConfirmPassword === true}>
+                      <small className="form-text text-danger privacy_error">
+                        {pageContent.items[14].title}
+                      </small>
+                    </Show>
+                    <Show when={this.state.error.status === true}>
+                      <small className="form-text text-danger privacy_error">
+                        {this.state.error.message}
+                      </small>
+                    </Show>
+                    <p>
+                      <LoadingSpinner show={this.props.isLoading} />
+                      <span className="text-right">
                   <button type="submit" style={{float:'right'}} className="btn btn-primary" onClick={() => this.onSubmit()}
-                disabled={!this.isSubmitButtonDisable()}>{pageContent.items[11].title}</button>
+                          disabled={!this.isSubmitButtonDisable()}>{pageContent.items[11].title}</button>
                 </span>
-                  </p>
-                  <GoogleReCaptcha
-                  onCaptchaValidation={(res)=>this.handleCaptchaValidation(res)}
-                  />
-                {/* </form> */}
-                <select className="text-center" onChange={(e)=>this.languageChangeOptions(e)} value={this.props.language}>
-        <option value="en">English</option>
-        <option value="hi">Hindi</option>
-        </select>
+                    </p>
+                    <GoogleReCaptcha
+                        onCaptchaValidation={(res)=>this.handleCaptchaValidation(res)}
+                    />
+                    {/* </form> */}
+                    <select className="text-center" onChange={(e)=>this.languageChangeOptions(e)} value={this.props.language}>
+                      <option value="en">English</option>
+                      <option value="hi">Hindi</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-       
-      </section>
-    </>
+
+          </section>
+        </>
     );
   }
 }

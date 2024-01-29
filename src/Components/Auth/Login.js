@@ -36,7 +36,7 @@ function Login(props) {
     setShowGoogleSignIn(true);
   };
 
- 
+
 
   useEffect(()=>{
     const url = window.location.href;
@@ -47,7 +47,7 @@ function Login(props) {
      }, 1000);
     }
   }, [])
-  
+
   useEffect(() => {
     const hash = window.location.hash;
     const referralIdMatch = hash.match(/referralId=([^&]*)/);
@@ -152,11 +152,11 @@ function Login(props) {
                 <form onSubmit={props.handleSubmit(onSubmit)}>
                   <div className="mb-3 mt-3">
                     <label htmlFor="email">{pageContents.items[4].title}</label>
-                    <input type="email" className="form-control" name="email" onChange={(e) => setUsername({ username: e.target.value })} required />
+                    <input type="email" title="" className="form-control" name="email" onChange={(e) => setUsername({ username: e.target.value })} required />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="pwd">{pageContents.items[5].title}</label>
-                    <input type="password" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
+                    <input type="password" title="" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
                   </div>
                   <GoogleReCaptcha
                 onCaptchaValidation={handleCaptchaValidation}

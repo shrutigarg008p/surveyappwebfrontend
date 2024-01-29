@@ -340,6 +340,7 @@ class BasicProfile extends React.Component<any, any> {
                                 onChange={(e) => this.setState({ firstName: e.target.value })}
                                 value={this.state.firstName}
                                 placeholder="Enter here"
+                                disabled
                                 required
                             />
                         </div>
@@ -352,6 +353,7 @@ class BasicProfile extends React.Component<any, any> {
                                 onChange={(e) => this.setState({ lastName: e.target.value })}
                                 value={this.state.lastName}
                                 placeholder="Enter.."
+                                disabled
                             />
                         </div>
                         <div className="col">
@@ -403,6 +405,7 @@ class BasicProfile extends React.Component<any, any> {
                                 id='gender'
                                 value={this.state.gender}
                                 required
+                                disabled
                                 onChange={(e) =>
                                     this.setState({ gender: e.target.value })
                                 }
@@ -425,6 +428,7 @@ class BasicProfile extends React.Component<any, any> {
                                     e.preventDefault()
                                 }}
                                 value={this.state.dateOfBirth}
+                                disabled
                                 required
                             />
                         </div>
@@ -477,6 +481,7 @@ class BasicProfile extends React.Component<any, any> {
                                 value={selectedCountryOption}
                                 required
                                 options={this.state.countries}
+                                disabled
                             />
                         </div>
                         <div className="col">
@@ -523,6 +528,7 @@ class BasicProfile extends React.Component<any, any> {
                             id='gender'
                             value={this.state.referralSource}
                             required
+                            disabled
                             onChange={(e) =>
                                 this.setState({ referralSource: e.target.value })
                             }
