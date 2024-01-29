@@ -119,8 +119,11 @@ class BasicProfile extends React.Component<any, any> {
                 .then(() => this.setState({status: PageStatus.Submitting}))
                 .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId))
                 .then((profile) => {
+                    this.fetchUserProfile()
                     alert('Profile Successfully Updated.')
-                    this.setState({status: PageStatus.Submitted});
+                    this.setState({status: PageStatus.Submitted}, () => {
+                       this.props.onSubmit()
+                    });
                 })
                 .catch((error) => {
                     this.setState({status: PageStatus.Error, error: error.message});

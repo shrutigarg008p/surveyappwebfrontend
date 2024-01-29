@@ -180,7 +180,7 @@ class Form extends React.Component<any, any> {
                         <p>
                             You can earn points by referring your friends to IndiaSpeaks by sharing the given link to facebook,
                             twitter and other social media. Your unique referral link url is : <a>
-                            <b>{`https://test.indiapolls.com/#/referrals/view/${this.props.userId}`}.</b>
+                            <b>{`https://panel.indiapolls.com/#/referrals/view/${this.props.userId}`}.</b>
                         </a>
                         </p>
                     </div>

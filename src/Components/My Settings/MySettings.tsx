@@ -17,6 +17,7 @@ import {Confirmation} from "../../Shared/Confirmation";
 import {AuthAPI, NewsLetterAPI} from "../../API";
 import {ChangePasswordForm} from "./ChangePassword";
 import {BasicProfile} from "./BasicProfile";
+import VerifiedNumber from "./VerifiedNumber";
 
 export type FormValue = {
     "name": string,
@@ -47,6 +48,7 @@ class MySettings extends React.Component<any, any> {
             formType: MODAL_TYPES.NONE,
             error: null,
             data: null,
+            showMobileVerification: false,
             userResponse: {},
         };
     }
@@ -248,7 +250,24 @@ class MySettings extends React.Component<any, any> {
                                 formType: MODAL_TYPES.NONE,
                             })}
                             onSubmit={() =>{
+                                this.fetchDetails();
                                 this.setState({ formType: MODAL_TYPES.NONE })
+                            }}
+                        />
+
+                    </Show>
+
+                    <Show when={this.state.showMobileVerification} >
+                        <VerifiedNumber
+                            userId={this.state.data?.basicProfile?.userId}
+                            phoneNumber={this.state.data?.users?.phoneNumber}
+                            show={this.state.showMobileVerification}
+                            onClose={() => this.setState({
+                                showMobileVerification: false,
+                            })}
+                            onSubmit={() =>{
+                                this.fetchDetails();
+                                this.setState({ showMobileVerification: false })
                             }}
                         />
 
@@ -274,6 +293,25 @@ class MySettings extends React.Component<any, any> {
                         <div className="mb-3">
                             <strong>Mobile: </strong>
                             {this.state.data?.basicProfile?.mobile}
+                            {this.state.data?.users?.phoneNumberConfirmed === true ? (
+                                <span style={{ color: 'green', marginLeft: '5px' }}>✅ (Verified)</span>
+                            ) : (
+                                <span
+                                    onClick={() => this.setState({ showMobileVerification: true })}
+                                    style={{ color: 'red', marginLeft: '5px' }}>
+                                    ❌ (Not-Verified) <span className="font-weight-bold bg-info ql-color-green">Verify?</span>
+                                </span>
+                            )}
+                        </div>
+
+                        <div className="mb-3">
+                            <strong>Email: </strong>
+                            {this.state.data?.users?.email}
+                            {this.state.data?.users?.emailConfirmed === true ? (
+                                <span style={{ color: 'green', marginLeft: '5px' }}>✅ (Verified)</span>
+                            ) : (
+                                <span style={{ color: 'red', marginLeft: '5px' }}>❌ (Not-Verified)</span>
+                            )}
                         </div>
 
                         <div className="mb-3">

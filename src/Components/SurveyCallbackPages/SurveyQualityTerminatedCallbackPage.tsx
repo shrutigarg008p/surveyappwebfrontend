@@ -41,7 +41,7 @@ export default class SurveyQualityTerminatedCallbackPage extends React.Component
                     window.location.href = survey.url;
                 } else if (!!survey && survey.surveysDetails.survey.country.toLowerCase() === 'india') {
                     let currentUrl = window.location.href;
-                    const newHost = 'test.indiapolls.com';
+                    const newHost = 'panel.indiapolls.com';
                     if (new URL(currentUrl).host !== newHost) {
                         currentUrl = currentUrl.replace(window.location.host, newHost);
                         window.location.href = currentUrl;

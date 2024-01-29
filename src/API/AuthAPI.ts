@@ -82,7 +82,7 @@ export class AuthAPI {
                 return _.get(res, 'data.data', {});
             })
         .catch((error) => {
-                console.error('Error in verifyMobileOtp:', error);
+                console.error('Error in verify Mobile Otp:', error);
                 throw error;
         });
     }
@@ -143,8 +143,8 @@ export class AuthAPI {
         });
     }
 
-    static ResetPasswordLink(email): Promise<any> {
-        return api.post(`${userURL}/reset-password`, { email: email })
+    static ResetPasswordLink(email, language): Promise<any> {
+        return api.post(`${userURL}/reset-password?language=${language || 'en'}`, { email: email })
             .then((res) => {
                 return _.get(res, 'data.message', {});
             });
