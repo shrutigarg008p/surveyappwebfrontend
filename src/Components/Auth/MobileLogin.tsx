@@ -136,7 +136,7 @@ class MobileLogin extends React.Component<any, any> {
                         </Show>
 
                         <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-                            {this.state.error}
+                            {this.state.error === 'OTP must be valid!' ? (this.props.language === 'hi' ? 'वैध ओटीपी नहीं है' : 'Not a valid OTP') : this.state.error}
                         </Alert>
 
 

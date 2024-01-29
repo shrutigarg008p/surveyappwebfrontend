@@ -269,7 +269,7 @@ class MySettings extends React.Component<any, any> {
                         </h2>
                         <div className="mb-3">
                             <strong>Gender: </strong>
-                            {this.state.data?.basicProfile?.gender === 'male' ? 'Male' : this.state.data?.basicProfile?.gender === 'female' ? 'Female' : 'Other'}
+                            {this.state.data?.basicProfile?.gender}
                         </div>
                         <div className="mb-3">
                             <strong>Mobile: </strong>
