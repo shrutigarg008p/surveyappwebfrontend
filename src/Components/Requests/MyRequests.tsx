@@ -88,8 +88,7 @@ class MyRequests extends Component<any, any> {
     }
     render() {
         const { survey, status } = this.state;
-        console.log(survey)
-        const lang = this.props.language; 
+        const lang = this.props.language ?? 'en'; 
         console.log( this.props.language);
         return (
             <div>

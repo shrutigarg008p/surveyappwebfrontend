@@ -111,7 +111,7 @@ class ReferralsList extends Component<any, any> {
 
     render() {
         const { filteredData, filters } = this.state;
-        const lang = this.props.language;
+        const lang = this.props.language ?? 'en';
         return (
             <>
     <GridContainer>
@@ -122,6 +122,7 @@ class ReferralsList extends Component<any, any> {
                     <div>
                         <Button
                             onClick={() => {
+                                console.log('hello')
                                 return this.setState({
                                     formType: MODAL_TYPES.CREATE,
                                 });

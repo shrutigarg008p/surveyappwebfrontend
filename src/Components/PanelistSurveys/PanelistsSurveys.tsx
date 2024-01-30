@@ -173,7 +173,7 @@ class PanelistSurveys extends Component<any, any> {
   
   render() {
     const { filteredData, filters } = this.state;
-    const lang = this.props.language;
+    const lang = this.props.language ?? 'en';
     return (
       <>
     <GridContainer>

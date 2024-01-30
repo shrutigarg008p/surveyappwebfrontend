@@ -27,7 +27,8 @@ export const dict = {
       "User": "User",
       "Points Requested": "Points Requested",
       "Points Redeemed": "Points Redeemed",
-      "Phone No/Data Card No/DTH No": "Phone No/Data Card No/DTH No"
+      "Phone No/Data Card No/DTH No": "Phone No/Data Card No/DTH No",
+      "Redeem Points Warning" : "At the current moment you can not Redeem Points, Your points must be greater than 100."
     },
     hi: {
       "My Requests": "मेरा अनुभव",
@@ -57,6 +58,8 @@ export const dict = {
       "User": "उपयोगकर्ता",
       "Points Requested": "अनुरोधित अंक",
       "Points Redeemed": "भुनाए गए अंक",
-      "Phone No/Data Card No/DTH No": "फ़ोन नंबर/डेटा कार्ड नं/DTH NO"
+      "Phone No/Data Card No/DTH No": "फ़ोन नंबर/डेटा कार्ड नं/DTH NO",
+      "Redeem Points Warning" : "इस समय आप अंक भुना नहीं सकते, आपके अंक 100 से अधिक होने चाहिए।"
+
     }
 };

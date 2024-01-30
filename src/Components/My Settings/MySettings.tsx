@@ -163,7 +163,7 @@ class MySettings extends React.Component<any, any> {
 
     render() {
         // console.log('state---->', this.state.data)
-        const lang = this.props.language;
+        const lang = this.props.language ?? 'en';
         const notCompletedStyle = { backgroundColor: '#FFFFE0', color: 'black', fontSize: '12px', marginTop: '10px' }
         return (
             <>

@@ -91,7 +91,7 @@ class ChangePasswordForm extends React.Component<any, any> {
     }
 
     render() {
-        const lang = this.props.language;
+        const lang = this.props.language ?? 'en';
         return (
             <Modal
             centered

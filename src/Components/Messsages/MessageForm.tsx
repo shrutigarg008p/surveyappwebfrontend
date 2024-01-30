@@ -108,7 +108,7 @@ class MessageForm extends React.Component<any, any> {
         this.setState({ isMessageSuccess: false })
     }
     render() {
-        const lang = this.props.language; 
+        const lang = this.props.language ?? 'en'; 
         return (
             <div>
             <GridContainer>

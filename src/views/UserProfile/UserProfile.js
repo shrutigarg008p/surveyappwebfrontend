@@ -56,7 +56,7 @@ function UserProfile(props) {
   const [status, setStatus] = useState(PageStatus.None);
   const [error, setError] = useState('');
   const [showEditProfile, setShowEditProfile] = useState(false);
-  const lang = props.language;
+  const lang = props.language ?? 'en';
 
   const classes = useStyles();
   const { userId, role } = useSelector((state) => state.adminUser.adminUser);

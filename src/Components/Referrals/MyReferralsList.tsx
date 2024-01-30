@@ -58,7 +58,7 @@ class MyReferrals extends Component<any, any> {
     };
 
     render() {
-        const lang = this.props.language;
+        const lang = this.props.language ?? 'en';
         return (
             <>
     <GridContainer>
