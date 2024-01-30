@@ -10,7 +10,7 @@ import { Show } from 'Layout';
 import { PageStatus } from 'enums';
 import {AuthAPI, SecAPI} from "../../API";
 import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
-
+import { changePasswordDict } from 'Languages/ContactsTranslations';
 export type FormValue = {
     "name": string,
 };
@@ -91,102 +91,89 @@ class ChangePasswordForm extends React.Component<any, any> {
     }
 
     render() {
+        const lang = this.props.language;
         return (
             <Modal
-                centered
-                size="lg"
-                backdrop="static"
-                onHide={this.props.onClose}
-                show={this.props.show}
-                style={{ zIndex: 1201 }}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        Change Password
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
-                    <Show when={this.state.status === PageStatus.Loading}>
-                        <div className="d-flex justify-content-center w-100 p-5">
+            centered
+            size="lg"
+            backdrop="static"
+            onHide={this.props.onClose}
+            show={this.props.show}
+            style={{ zIndex: 1201 }}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    {changePasswordDict[lang]["Change Password"] || "Change Password"}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
+                <Show when={this.state.status === PageStatus.Loading}>
+                    <div className="d-flex justify-content-center w-100 p-5">
+                        <Spinner animation="border" variant="primary" />
+                    </div>
+                </Show>
+        
+                <form onSubmit={this.props.handleSubmit(() => this.onSubmit())}>
+                    <div className="form-group">
+                        <label htmlFor="titleEng">
+                            {changePasswordDict[lang]["Current Password"] || "Current Password"}*
+                        </label>
+                        <input
+                            type='password'
+                            className="form-control"
+                            onChange={(e) => this.setState({ currentPassword: e.target.value })}
+                            value={this.state.currentPassword}
+                            placeholder={changePasswordDict[lang]["Enter..."] || "Enter..."}
+                            required
+                        />
+                        <label htmlFor="titleEng">
+                            {changePasswordDict[lang]["New Password"] || "New Password"}*
+                        </label>
+                        <input
+                            className="form-control"
+                            type='password'
+                            onChange={(e) => this.onChangePassword(e.target.value, 'password')}
+                            value={this.state.newPassword}
+                            placeholder={changePasswordDict[lang]["Enter..."] || "Enter..."}
+                            required
+                        />
+        
+                        <label htmlFor="titleEng">
+                            {changePasswordDict[lang]["Confirm New Password"] || "Confirm New Password"}*
+                        </label>
+                        <input
+                            type='password'
+                            className="form-control"
+                            onChange={(e) => this.onChangePassword(e.target.value, 'confirmPassword')}
+                            value={this.state.confirmPassword}
+                            placeholder={changePasswordDict[lang]["Enter..."] || "Enter..."}
+                            required
+                        />
+                    </div>
+                    {this.state.isPasswordMatched === true ? 
+                        <div className="alert alert-success">{changePasswordDict[lang]["Passwords Matched"] || "Passwords matched!"}</div> : 
+                        changePasswordDict[lang]["Not Matched"] || "Not Matched"
+                    }
+                    <hr />
+                    <Alert variant="danger" show={!!this.state.error} className="mt-2">
+                        {this.state.error}
+                    </Alert>
+        
+                    <div className="d-flex align-items-center mt-2">
+                        <button
+                            type="submit"
+                            disabled={!this.state.newPassword || !this.state.currentPassword || this.state.newPassword !== this.state.confirmPassword}
+                            className="btn btn-primary mr-3"
+                        >
+                            {changePasswordDict[lang]["Change"] || "Change"}
+                        </button>
+                        <Show when={this.state.status === PageStatus.Submitting}>
                             <Spinner animation="border" variant="primary" />
-                        </div>
-                    </Show>
-
-                    <form onSubmit={this.props.handleSubmit(
-                        (event) => this.onSubmit(),
-                    )}
-                    >
-
-                        <div className="form-group">
-                            <label htmlFor="titleEng">
-                                Current Password*
-                            </label>
-                            <input
-                                type='password'
-                                className="form-control"
-                                onChange={(e) => this.setState({currentPassword: e.target.value})}
-                                value={this.state.currentPassword}
-                                placeholder="Enter..."
-                                required
-                            />
-                            <label htmlFor="titleEng">
-                                New Password*
-                            </label>
-                            <input
-                                className="form-control"
-                                type='password'
-                                onChange={(e) => {
-                                    this.onChangePassword(e.target.value, 'password');
-                                    this.setState({
-                                    newPassword: e.target.value,
-                                })
-                                }}
-                                value={this.state.newPassword}
-                                placeholder="Enter..."
-                                required
-                            />
-
-                            <label htmlFor="titleEng">
-                                Confirm New password*
-                            </label>
-                            <input
-                                type='password'
-                                className="form-control"
-                                onChange={(e) => {
-                                    this.onChangePassword(e.target.value, 'confirmPassword');
-                                    this.setState({
-                                        confirmPassword: e.target.value,
-                                    })
-                                }}
-                                value={this.state.confirmPassword}
-                                placeholder="Enter..."
-                                required
-                            />
-
-                        </div>
-                        {
-                            this.state.isPasswordMatched === true ?  <div className="alert alert-success">Passwords matched!</div> : 'Not Matched'
-                        }
-                        <hr />
-                        <Alert variant="danger" show={!!this.state.error} className="mt-2">
-                            {this.state.error}
-                        </Alert>
-
-                        <div className="d-flex align-items-center mt-2">
-                            <button
-                                type="submit"
-                                disabled={!this.state.newPassword || !this.state.currentPassword || this.state.newPassword !== this.state.confirmPassword }
-                                className="btn btn-primary mr-3"
-                            >
-                                Change
-                            </button>
-                            <Show when={this.state.status === PageStatus.Submitting}>
-                                <Spinner animation="border" variant="primary" />
-                            </Show>
-                        </div>
-                    </form>
-                </Modal.Body>
-            </Modal>
+                        </Show>
+                    </div>
+                </form>
+            </Modal.Body>
+        </Modal>        
         );
     }
 }

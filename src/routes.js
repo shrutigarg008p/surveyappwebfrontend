@@ -4,7 +4,7 @@ import {RedemptionRouter} from "./Components/Redemptions";
 import {List} from "./Components/Redemptions/List";
 import {RewardsList} from "./Components/Rewards/RewardsList";
 import UserProfile from "./views/UserProfile/UserProfile";
-import {ReferralsList} from "./Components/Referrals/RefferalsList";
+import ReferralsList from "./Components/Referrals/RefferalsList";
 import {Countries} from "./Components/Countries/Countries";
 import {States} from "./Components/States/States";
 import {City} from "./Components/Cities/City";

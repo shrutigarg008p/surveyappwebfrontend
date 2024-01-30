@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Alert, Spinner, Table,} from 'react-bootstrap';
-
+import {Alert, Spinner, Table, Button} from 'react-bootstrap';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {PageStatus} from 'enums';
 import {AuthAPI} from "../../API";
 import {Show} from "../../Layout";
@@ -9,7 +9,8 @@ import Card from "../Card/Card";
 import CardHeader from "../Card/CardHeader";
 import moment from 'moment'
 import {exportToExcel} from "../../Utils/ExportToExcel";
-
+import { referralDict } from "../../Languages/ReferralTranslations"
+import { connect } from 'react-redux';
 const MODAL_TYPES = {
     NONE: 'NONE',
     CREATE: 'CREATE',
@@ -19,7 +20,7 @@ const MODAL_TYPES = {
 };
 
 
-export class ReferralsList extends Component<any, any> {
+class ReferralsList extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -110,226 +111,112 @@ export class ReferralsList extends Component<any, any> {
 
     render() {
         const { filteredData, filters } = this.state;
+        const lang = this.props.language;
         return (
             <>
-                <GridContainer>
-                    <Card>
-                        <CardHeader color="primary">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <h4>Referrals</h4>
-                            </div>
-                        </CardHeader>
-                    </Card>
-                </GridContainer>
-                <div className="jumbotron bg-white p-3 border shadow-sm">
-                    <div className='mb-3'>Filter</div>
-
-                    <form>
-                        <div className="row">
-                            <div className="col">
-                                <label>Creation Date</label>
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    placeholder="select date"
-                                    name="createdAt"
-                                    // value={filters.createdAt}
-                                    onChange={this.handleFilterChange}
-
-                                />
-                            </div>
-                            <div className="col">
-                                <label>Referral Status</label>
-                                <select
-                                    style={{
-                                        width: '100%',
-                                        display: 'block',
-                                        height: '40px',
-                                        lineHeight: '1.5',
-                                        color: '#495057',
-                                        backgroundColor: '#fff',
-                                        backgroundClip: 'padding-box',
-                                        border: '1px solid #ced4da',
-                                        borderRadius: '5px',
-                                        transition:
-                                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-                                    }}
-                                    name='referralStatus'
-                                    id='type'
-                                    required
-                                    value={filters.referralStatus}
-                                    onChange={this.handleFilterChange}
-                                >
-                                    <option value=''>--Choose--</option>
-                                    <option value='Invited'>Invited</option>
-                                    <option value='Accepted'>Accepted</option>
-                                </select>
-                            </div>
-                            <div className="col">
-                                <label>Referral Method</label>
-                                <select
-                                    style={{
-                                        width: '100%',
-                                        display: 'block',
-                                        height: '40px',
-                                        lineHeight: '1.5',
-                                        color: '#495057',
-                                        backgroundColor: '#fff',
-                                        backgroundClip: 'padding-box',
-                                        border: '1px solid #ced4da',
-                                        borderRadius: '5px',
-                                        transition:
-                                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-                                    }}
-                                    name='referralMethod'
-                                    id='type'
-                                    required
-                                    value={filters.referralMethod}
-                                    onChange={this.handleFilterChange}
-                                >
-                                    <option value=''>--Choose--</option>
-                                    <option value='File'>File</option>
-                                    <option value='Manual'>Manual</option>
-                                    <option value='Link'>Direct Link</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <label>Referral Email</label>
-                                <input type="text"
-                                       className="form-control"
-                                       placeholder="Email..."
-                                       name="email"
-                                       value={filters.email}
-                                       onChange={this.handleFilterChange}
-                                />
-                            </div>
-                            <div className="col">
-                                <label>User Email</label>
-                                <input type="text" name="userEmail" className="form-control" placeholder="Email..." value={filters.userEmail}
-                                       onChange={this.handleFilterChange} />
-                            </div>
-                            <div className="col">
-                                <label>Phone Number Confirmed</label>
-                                <select
-                                    style={{
-                                        width: '100%',
-                                        display: 'block',
-                                        height: '40px',
-                                        lineHeight: '1.5',
-                                        color: '#495057',
-                                        backgroundColor: '#fff',
-                                        backgroundClip: 'padding-box',
-                                        border: '1px solid #ced4da',
-                                        borderRadius: '5px',
-                                        transition:
-                                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-                                    }}
-                                    name='phoneNumber'
-                                    id='type'
-                                    required
-                                    value={filters.phoneNumber}
-                                    onChange={this.handleFilterChange}
-                                >
-                                    <option value='' disabled>--Select phone number confirmed status--</option>
-                                    <option value='Pending'>Pending</option>
-                                    <option value='Confirmed'>Confirmed</option>
-                                    <option value='Others'>Others</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <label>Signup Ip</label>
-                                <input type="text" className="form-control" placeholder="IP..." value={filters.Ip}
-                                       onChange={this.handleFilterChange}/>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div className="jumbotron bg-white p-1 mt-2 shadow-sm">
-                    <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Referrals</button>
-                    <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export</button>
-                    <button type="button" className="btn btn-danger ml-1" onClick={() => this.clearFilter()}>Clear Filter</button>
-                   <button type="button" className="btn btn-warning ml-1">Approve Referrals</button>
+    <GridContainer>
+        <Card>
+            <CardHeader color="primary">
+                <div className="d-flex align-items-center justify-content-between">
+                    <h4 className="text-white cardTitle">{referralDict[lang]["Referrals"] || "Referrals"}</h4>
+                    <div>
+                        <Button
+                            onClick={() => {
+                                return this.setState({
+                                    formType: MODAL_TYPES.CREATE,
+                                });
+                            }}
+                            variant="primary"
+                            size="sm"
+                            className="mx-1"
+                        >
+                            <FontAwesomeIcon icon={['fas', 'plus']} className="mr-2" />
+                            {referralDict[lang]["Refer a friend"] || "Refer a friend"}
+                        </Button>
                     </div>
-
-
                 </div>
+            </CardHeader>
+        </Card>
+    </GridContainer>
 
-                <div className="jumbotron bg-white p-3 border shadow-sm">
-                    <div className='mb-3'>Rewards Details</div>
-                    <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-                        {this.state.error}
-                    </Alert>
-                    <Show when={this.state.status === PageStatus.Loading}>
-                        <div className="d-flex justify-content-center w-100 p-5">
-                            <Spinner animation="border" variant="primary" />
-                        </div>
-                    </Show>
+    <div className="jumbotron bg-white p-3 border shadow-sm">
+        <Alert variant="danger" show={this.state.status === PageStatus.Error}>
+            {this.state.error}
+        </Alert>
+        <Show when={this.state.status === PageStatus.Loading}>
+            <div className="d-flex justify-content-center w-100 p-5">
+                <Spinner animation="border" variant="primary" />
+            </div>
+        </Show>
 
-                    <Show when={this.state.status === PageStatus.Loaded}>
+        <Show when={this.state.status === PageStatus.Loaded}>
+            <Show when={!this.state.referrals.length}>
+                <Alert variant="info" show={!this.state.referrals.length}>
+                    {referralDict[lang]["No Data Available"] || "At the current moment data is not available."}
+                </Alert>
+            </Show>
 
+            {/* ... other components ... */}
 
-                        <Show when={!this.state.rewards.length}>
-                            <Alert variant="info" show={!this.state.rewards.length}>
-                                At the current moment data is not available.
-                            </Alert>
-                        </Show>
+            <Show when={!!this.state.referrals.length}>
+                <Table responsive size="sm" bordered>
+                    <thead>
+                    <tr>
+                        <th>{referralDict[lang]["S.No"] || "S.No"}</th>
+                        <th>{referralDict[lang]["Name"] || "Name"}</th>
+                        <th>{referralDict[lang]["Email"] || "Email"}</th>
+                        <th>{referralDict[lang]["Phone Number"] || "Phone Number"}</th>
+                        <th>{referralDict[lang]["Referral Status"] || "Referral Status"}</th>
+                        <th>{referralDict[lang]["Referral Method"] || "Referral Method"}</th>
+                        <th>{referralDict[lang]["Created At"] || "Created At"}</th>
+                        <th>{referralDict[lang]["Updated At"] || "Updated At"}</th>
+                    </tr>
+                    </thead>
 
+                    <tbody>
+                    {
+                        this.state.referrals.map((referral, index) => (
+                            <tr key={referral.id}>
+                                <td>{index + 1}</td>
+                                <td>
+                                    <span
+                                        aria-label="button"
+                                        role="button"
+                                        tabIndex={0}
+                                        className="text-primary"
+                                        onKeyPress={() => null}
+                                        onClick={() => {
+                                            this.setState({
+                                                formType: MODAL_TYPES.NONE,
+                                                queryId: referral.id,
+                                            });
+                                        }}
+                                    >{referral.name}</span>
+                                </td>
+                                <td>{referral.email}</td>
+                                <td>{referral.phoneNumber}</td>
+                                <td>{referral.referralStatus}</td>
+                                <td>{referral.referralMethod}</td>
+                                <td>{moment(referral.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                <td>{moment(referral.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </Table>
+            </Show>
+        </Show>
+    </div>
+</>
 
-                        <Show when={!!this.state.filteredData.length}>
-                            <Table responsive size="sm" bordered>
-                                <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>Referral Status</th>
-                                    <th>Referral Method</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                {
-                                    this.state.filteredData.map((redemption, index) => (
-                                        <tr key={redemption.id}>
-                                            <td>{index + 1}</td>
-                                            <td>
-                                          <span
-                                              aria-label="button"
-                                              role="button"
-                                              tabIndex={0}
-                                              className="text-primary"
-                                              onKeyPress={() => null}
-                                              onClick={() => {
-                                                  this.setState({
-                                                      formType: MODAL_TYPES.NONE,
-                                                      queryId: redemption.id,
-                                                  });
-                                              }}
-                                          >{redemption.name}</span>
-                                            </td>
-                                            <td>{redemption.email}</td>
-                                            <td>{redemption.phoneNumber}</td>
-                                            <td>{redemption.referralStatus}</td>
-                                            <td>{redemption.referralMethod}</td>
-                                            <td>{moment(redemption.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                                            <td>{moment(redemption.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
-                                        </tr>
-                                    ))
-                                }
-                                </tbody>
-
-                            </Table>
-                        </Show>
-                    </Show>
-                </div>
-            </>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.adminUser.adminUser.language
+    };
+};
+
+export default connect(mapStateToProps)(ReferralsList);

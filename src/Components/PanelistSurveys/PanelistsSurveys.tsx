@@ -14,7 +14,7 @@ import {exportToExcel} from "../../Utils/ExportToExcel";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import {PanelistDetails} from "./PanelistDetails";
-
+import { surveyDict } from 'Languages/SurveyTranslations';
 function filterByDaysRange(daysRange: any, currentDate: any, item: any){
   const itemDate: any = new Date(item.createdAt);
   const timeDifference = currentDate - itemDate;
@@ -170,127 +170,124 @@ class PanelistSurveys extends Component<any, any> {
     exportToExcel(this.state.filteredData, 'surveys');
   };
 
+  
   render() {
     const { filteredData, filters } = this.state;
+    const lang = this.props.language;
     return (
-        <>
-        <GridContainer>
-            <Card>
-              <CardHeader color="primary">
+      <>
+    <GridContainer>
+        <Card>
+            <CardHeader color="primary">
                 <div className="d-flex align-items-center justify-content-between">
-                <h4>Surveys</h4>
+                    <h4>{surveyDict[lang]["Surveys"] || "Surveys"}</h4>
                 </div>
-              </CardHeader>
-            </Card>
-        </GridContainer>
+            </CardHeader>
+        </Card>
+    </GridContainer>
 
-      <div className="jumbotron bg-white p-3 border shadow-sm">
+    <div className="jumbotron bg-white p-3 border shadow-sm">
         <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-          {this.state.error}
+            {this.state.error}
         </Alert>
 
         <Show when={this.state.status === PageStatus.Loading}>
-          <div className="d-flex justify-content-center w-100 p-5">
-            <Spinner animation="border" variant="primary" />
-          </div>
+            <div className="d-flex justify-content-center w-100 p-5">
+                <Spinner animation="border" variant="primary" />
+            </div>
         </Show>
 
         <Show when={this.state.status === PageStatus.Loaded}>
-          <Show when={!this.state.filteredData.length}>
-            <Alert variant="info" show={!this.state.filteredData.length}>
-              At the current moment data is not available, Click button for add.
-            </Alert>
-          </Show>
-
-          <Show when={!!this.state.filteredData.length}>
-            <Show when={this.isShowDetailModal()}>
-              <PanelistDetails
-                id={this.state.id}
-
-                onClose={() => this.setState({
-                  formType: MODAL_TYPES.NONE,
-                  id: null,
-                })}
-                onUpdate={() => {
-                  this.setState({
-                    formType: MODAL_TYPES.UPDATE,
-                  });
-                }}
-                onDelete={(id) => {
-                  this.fetchList();
-                  this.setState({
-                    formType: MODAL_TYPES.NONE,
-                    id: null,
-                  });
-                }}
-              />
+            <Show when={!this.state.filteredData.length}>
+                <Alert variant="info" show={!this.state.filteredData.length}>
+                    {surveyDict[lang]["No Data Available"] || "At the current moment data is not available, Click button for add."}
+                </Alert>
             </Show>
 
-
-          <Table responsive size="sm" bordered>
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Points</th>
-                <th>Expire Date</th>
-                <th>Starts</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {
-                this.state.filteredData.map((info, index) => (
-                  <tr key={info.id}>
-                    <td>{index + 1}</td>
-                    <td>
-                      <span
-                          aria-label="button"
-                          role="button"
-                          tabIndex={0}
-                          className="text-primary"
-                          onKeyPress={() => null}
-                          onClick={() => {
+            <Show when={!!this.state.filteredData.length}>
+                <Show when={this.isShowDetailModal()}>
+                    <PanelistDetails
+                        id={this.state.id}
+                        onClose={() => this.setState({
+                            formType: MODAL_TYPES.NONE,
+                            id: null,
+                        })}
+                        onUpdate={() => {
                             this.setState({
-                              formType: MODAL_TYPES.DETAILS,
-                              id: info.id,
+                                formType: MODAL_TYPES.UPDATE,
                             });
-                          }}
-                          dangerouslySetInnerHTML={{
-                            __html: info.survey.name || 'Title',
-                          }}
-                      />
-                    </td>
-                    {/*{ info.isCompleted === false ?*/}
-                    {/*    <td>{info.isStarted === true ? 'Started' : 'Not Started' }</td>*/}
-                    {/*    :*/}
-                    {/*    <td>{info.isCompleted === true ? 'Completed' : 'Not Completed' }</td>*/}
-                    {/*}*/}
-                    <td>{info.status}</td>
-                    <td>{info.survey.ceggPoints}</td>
-                    <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                    <td><a href={info?.temporarySurveyLink} target="_blank" rel="noopener noreferrer">
-                      Click here to start survey
-                    </a></td>
-                  </tr>
-                ))
-              }
-            </tbody>
+                        }}
+                        onDelete={(id) => {
+                            this.fetchList();
+                            this.setState({
+                                formType: MODAL_TYPES.NONE,
+                                id: null,
+                            });
+                        }}
+                    />
+                </Show>
 
-          </Table>
+                <Table responsive size="sm" bordered>
+                    <thead>
+                        <tr>
+                            <th>{surveyDict[lang]["S.No"] || "S.No"}</th>
+                            <th>{surveyDict[lang]["Name"] || "Name"}</th>
+                            <th>{surveyDict[lang]["Status"] || "Status"}</th>
+                            <th>{surveyDict[lang]["Points"] || "Points"}</th>
+                            <th>{surveyDict[lang]["Expire Date"] || "Expire Date"}</th>
+                            <th>{surveyDict[lang]["Starts"] || "Starts"}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.filteredData.map((info, index) => (
+                                <tr key={info.id}>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        <span
+                                            aria-label="button"
+                                            role="button"
+                                            tabIndex={0}
+                                            className="text-primary"
+                                            onKeyPress={() => null}
+                                            onClick={() => {
+                                                this.setState({
+                                                    formType: MODAL_TYPES.DETAILS,
+                                                    id: info.id,
+                                                });
+                                            }}
+                                            dangerouslySetInnerHTML={{
+                                                __html: info.survey.name || 'Title',
+                                            }}
+                                        />
+                                    </td>
+                                    <td>{info.status}</td>
+                                    <td>{info.survey.ceggPoints}</td>
+                                    <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                    <td>
+                                        <a href={info?.temporarySurveyLink} target="_blank" rel="noopener noreferrer">
+                                            {surveyDict[lang]["Click Here to start survey"] || "Click here to start survey"}
+                                        </a>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </Table>
+            </Show>
         </Show>
-        </Show>
-      </div>
-        </>
+    </div>
+</>
+
     );
   }
 }
 
 
-const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any }; }; }) => {
+const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any, language:any }; }; }) => {
   return {
     userId: state.adminUser.adminUser.userId,
+    language: state.adminUser.adminUser.language
   };
 };
 

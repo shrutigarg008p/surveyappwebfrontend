@@ -17,7 +17,8 @@ import {PageStatus} from "../../enums";
 import {BasicProfile} from "../../Components/My Settings/BasicProfile";
 import {Show} from "../../Layout";
 import {Button} from "react-bootstrap";
-
+import { profileDict } from "Languages/ProfileTranslations.js";
+import { connect } from "react-redux";
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -40,7 +41,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function UserProfile(props) {
+function UserProfile(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [firstname, setFirstName] = useState("");
@@ -55,7 +56,7 @@ export default function UserProfile(props) {
   const [status, setStatus] = useState(PageStatus.None);
   const [error, setError] = useState('');
   const [showEditProfile, setShowEditProfile] = useState(false);
-
+  const lang = props.language;
 
   const classes = useStyles();
   const { userId, role } = useSelector((state) => state.adminUser.adminUser);
@@ -143,178 +144,136 @@ export default function UserProfile(props) {
 
   return (
     <div>
-
-      <Show when={showEditProfile} >
+    <Show when={showEditProfile}>
         <BasicProfile
             userId={userId}
             show={showEditProfile}
             onClose={() => setShowEditProfile(false)}
-            onSubmit={() =>{
-              setShowEditProfile(false)
-              loadProfile();
+            onSubmit={() => {
+                setShowEditProfile(false)
+                loadProfile();
             }}
         />
+    </Show>
 
-      </Show>
-
-      <GridContainer>
+    <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
-          <Card>
-            <form onSubmit={handleSubmit}>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Profile</h4>
-                <p className={classes.cardCategoryWhite}>
-                  Your profile
-                </p>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Email address"
-                      id="email-address"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      value={email}
-                      disabled={disabled}
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="First Name"
-                      id="first-name"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      value={firstname}
-                      disabled={disabled}
-                      onChange={(e) => {
-                        setFirstName(e.target.value);
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Last Name"
-                      id="last-name"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      value={lastName}
-                      disabled={disabled}
-                      onChange={(e) => {
-                        setLastName(e.target.value);
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <label htmlFor="city">City</label>
-
-                    <select
-                      style={{
-                        width: "100%",
-                        display: "block",
-                        height: "40px",
-                        lineHeight: "1.5",
-                        color: "#495057",
-                        backgroundColor: "#fff",
-                        backgroundClip: "padding-box",
-                        border: "1px solid #ced4da",
-                        borderRadius: "5px",
-                        transition:
-                          "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
-                      }}
-                      id="city"
-                      value={city}
-                      disabled={disabled}
-                      onChange={(e) => {
-                        setCity(e.target.value);
-                      }}
-                    >
-                      <option value="" disabled>
-                        --Choose city--
-                      </option>
-                      <option>{city}</option>
-                    </select>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <label htmlFor="country">Country</label>
-                    <select
-                      style={{
-                        width: "100%",
-                        display: "block",
-                        height: "40px",
-                        lineHeight: "1.5",
-                        color: "#495057",
-                        backgroundColor: "#fff",
-                        backgroundClip: "padding-box",
-                        border: "1px solid #ced4da",
-                        borderRadius: "5px",
-                        transition:
-                          "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
-                      }}
-                      id="country"
-                      value={country}
-                      disabled={disabled}
-                      onChange={(e) => {
-                        setCountry(e.target.value);
-                      }}
-                    >
-                      <option value="" disabled>
-                        --Choose Country--
-                      </option>
-                      <option>{country}</option>
-                    </select>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Postal Code"
-                      id="postal-code"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      disabled={disabled}
-                      value={postalcode}
-                      onChange={(e) => {
-                        setPostalcode(e.target.value);
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
-            </form>
-          </Card>
+            <Card>
+                <form onSubmit={handleSubmit}>
+                    <CardHeader color="primary">
+                        <h4 className={classes.cardTitleWhite}>{profileDict[lang]["Profile"] || "Profile"}</h4>
+                        <p className={classes.cardCategoryWhite}>{profileDict[lang]["Your Profile"] || "Your Profile"}</p>
+                    </CardHeader>
+                    <CardBody>
+                        <GridContainer>
+                            <GridItem xs={12} sm={12} md={6}>
+                                <CustomInput
+                                    labelText={profileDict[lang]["Email Address"] || "Email Address"}
+                                    id="email-address"
+                                    formControlProps={{ fullWidth: true }}
+                                    value={email}
+                                    disabled={disabled}
+                                />
+                            </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                            <GridItem xs={12} sm={12} md={6}>
+                                <CustomInput
+                                    labelText={profileDict[lang]["First Name"] || "First Name"}
+                                    id="first-name"
+                                    formControlProps={{ fullWidth: true }}
+                                    value={firstname}
+                                    disabled={disabled}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                />
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={6}>
+                                <CustomInput
+                                    labelText={profileDict[lang]["Last Name"] || "Last Name"}
+                                    id="last-name"
+                                    formControlProps={{ fullWidth: true }}
+                                    value={lastName}
+                                    disabled={disabled}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                            <GridItem xs={12} sm={12} md={4}>
+                                <label htmlFor="city">{profileDict[lang]["City"] || "City"}</label>
+                                <select
+                                    id="city"
+                                    value={city}
+                                    disabled={disabled}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    style={{ /* styling */ }}
+                                >
+                                    <option value="" disabled>--{profileDict[lang]["Choose"] || "Choose"}--</option>
+                                    <option>{city}</option>
+                                </select>
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={4}>
+                                <label htmlFor="country">{profileDict[lang]["Country"] || "Country"}</label>
+                                <select
+                                    id="country"
+                                    value={country}
+                                    disabled={disabled}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                    style={{ /* styling */ }}
+                                >
+                                    <option value="" disabled>--{profileDict[lang]["Choose"] || "Choose"}--</option>
+                                    <option>{country}</option>
+                                </select>
+                            </GridItem>
+                            <GridItem xs={12} sm={12} md={4}>
+                                <CustomInput
+                                    labelText={profileDict[lang]["Postal Code"] || "Postal Code"}
+                                    id="postal-code"
+                                    formControlProps={{ fullWidth: true }}
+                                    value={postalcode}
+                                    disabled={disabled}
+                                    onChange={(e) => setPostalcode(e.target.value)}
+                                />
+                            </GridItem>
+                        </GridContainer>
+                    </CardBody>
+                </form>
+            </Card>
         </GridItem>
 
         <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <label htmlFor="profilePictureInput">
-                <input
-                    type="file"
-                    id="profilePictureInput"
-                    style={{ display: 'none' }}
-                    onChange={handleProfilePictureChange}
-                />
-                <img src={imagePath} alt="Profile" style={{ cursor: 'pointer' }} />
-              </label>
-            </CardAvatar>
+            <Card profile>
+                <CardAvatar profile>
+                    <label htmlFor="profilePictureInput">
+                        <input
+                            type="file"
+                            id="profilePictureInput"
+                            style={{ display: 'none' }}
+                            onChange={handleProfilePictureChange}
+                        />
+                        <img src={imagePath} alt="Profile" style={{ cursor: 'pointer' }} />
+                    </label>
+                </CardAvatar>
 
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>{email}</h6>
-              <h4 className={classes.cardTitle}>{firstname} {lastName}</h4>
-              <p className={classes.description}>{aboutme}</p>
-            </CardBody>
-          </Card>
+                <CardBody profile>
+                    <h6 className={classes.cardCategory}>{email}</h6>
+                    <h4 className={classes.cardTitle}>{firstname} {lastName}</h4>
+                    <p className={classes.description}>{aboutme}</p>
+                </CardBody>
+            </Card>
         </GridItem>
-        <Button className="ml-3" onClick={() => setShowEditProfile(true)}>Edit</Button>
 
-      </GridContainer>
-    </div>
+        <Button className="ml-3" onClick={() => setShowEditProfile(true)}>{profileDict[lang]["Edit"] || "Edit"}</Button>
+    </GridContainer>
+</div>
+
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+      language: state.adminUser.adminUser.language
+  };
+};
+
+export default connect(mapStateToProps)(UserProfile);

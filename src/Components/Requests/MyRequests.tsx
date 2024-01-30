@@ -18,7 +18,7 @@ import { Show } from 'Layout';
 import './MyRewards.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Form} from "./MyRequestForm";
-
+import { dict } from '../../Languages/MyRequestsTranslations';
 
 const MODAL_TYPES = {
     NONE: 'NONE',
@@ -89,135 +89,112 @@ class MyRequests extends Component<any, any> {
     render() {
         const { survey, status } = this.state;
         console.log(survey)
-
+        const lang = this.props.language; 
+        console.log( this.props.language);
         return (
             <div>
-                <Container>
-                    <Show when={this.state.showRequestWarning}>
-                        <Alert variant="danger" show={this.state.showRequestWarning}>
-                            At the current moment you can not Redeem Points, Your points must be greater than 100.
-                        </Alert>
-                    </Show>
-                    <Card className="mainCard">
-                        <div className="d-flex align-items-center justify-content-between">
-                            <h4 className='text-white cardTitle' >My Requests</h4>
-                            <div>
+            <Container>
+                <Show when={this.state.showRequestWarning}>
+                    <Alert variant="danger" show={this.state.showRequestWarning}>
+                        {dict[lang]["Redeem Points Warning"] || "At the current moment you can not Redeem Points, Your points must be greater than 100."}
+                    </Alert>
+                </Show>
+                <Card className="mainCard">
+                    <div className="d-flex align-items-center justify-content-between">
+                        <h4 className='text-white cardTitle' >{dict[lang]["My Requests"] || "My Requests"}</h4>
+                        <div>
                             <Button
                                 onClick={() => {
                                     return this.isAbleToCreateRequest()
                                 }}
                                 variant="warning"
                                 size="sm"
-                                // disabled={this.state.totalLeft <= 10}
-                                title={this.state.totalLeft <= 10 ? 'You can not Redeem Points, Your Points is less than 100': 'Create Request'}
+                                title={this.state.totalLeft <= 10 ? (dict[lang]["Redeem Points Disabled"] || 'You can not Redeem Points, Your Points is less than 100') : (dict[lang]["Create Request"] || 'Create Request')}
                                 className="mx-1"
                             >
-                                Click to Redeem Points
+                                {dict[lang]["Click to Redeem Points"] || "Click to Redeem Points"}
                             </Button>
                         </div>
-                        </div>
-                    </Card>
-                    <Card className="nestedCard">
-                        <CardContent>
-
-                            <Grid container spacing={2} className="gridContainer">
-
-                                <Grid item xs={6} sm={3} className="gridItem">
-                                    <Typography variant="h4">{this.state.totalEarned}</Typography>
-                                    <Typography variant="body1">Total Points Earned</Typography>
-                                </Grid>
-
-                                <Grid item xs={6} sm={3} className="gridItem">
-                                    <Typography variant="h4">{this.state.totalRedeemed}</Typography>
-                                    <Typography variant="body1">Points Redeemed</Typography>
-                                </Grid>
-
-                                <Grid item xs={6} sm={3} className="gridItem">
-                                    <Typography variant="h4">{this.state.totalPendingRedeemed}</Typography>
-                                    <Typography variant="body1">Pending Redemptions</Typography>
-                                </Grid>
-
-                                <Grid item xs={6} sm={3} className="gridItem">
-                                    <Typography variant="h4">{this.state.totalEarned - this.state.totalRedeemed}</Typography>
-                                    <Typography variant="body1">Points Left</Typography>
-                                </Grid>
+                    </div>
+                </Card>
+                <Card className="nestedCard">
+                    <CardContent>
+                        <Grid container spacing={2} className="gridContainer">
+                            <Grid item xs={6} sm={3} className="gridItem">
+                                <Typography variant="h4">{this.state.totalEarned}</Typography>
+                                <Typography variant="body1">{dict[lang]["Total Points Earned"] || "Total Points Earned"}</Typography>
                             </Grid>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="nestedCard">
-                        <Show when={status === PageStatus.Loading}>
-                            <div className="d-flex justify-content-center w-100 p-5">
-                                <Spinner animation="border" variant="primary" />
-                            </div>
-                        </Show>
-
-                        <Show when={status === PageStatus.Loaded}>
-
-                            <Show when={this.state.formType === MODAL_TYPES.CREATE}>
-                                <Form
-                                    show={this.state.formType === MODAL_TYPES.CREATE}
-                                    userId={this.props.userId}
-                                    totalLeft={this.state.totalLeft || 0}
-
-                                    onClose={() => this.setState({
-                                        formType: MODAL_TYPES.NONE,
-                                    })}
-                                    onSubmit={(id) => {
-                                        this.fetchSurvey();
-                                        this.setState({
-                                            formType: MODAL_TYPES.NONE, id: id,
-                                        });
-                                    }}
-                                />
-                            </Show>
-
-
-                            <CardHeader
-                                title="Redemptions Request Summary"
-                                className="cardHeader"
-                                titleTypographyProps={{ className: 'cardHeader' }}
+                            <Grid item xs={6} sm={3} className="gridItem">
+                                <Typography variant="h4">{this.state.totalRedeemed}</Typography>
+                                <Typography variant="body1">{dict[lang]["Points Redeemed"] || "Points Redeemed"}</Typography>
+                            </Grid>
+                            <Grid item xs={6} sm={3} className="gridItem">
+                                <Typography variant="h4">{this.state.totalPendingRedeemed}</Typography>
+                                <Typography variant="body1">{dict[lang]["Pending Redemptions"] || "Pending Redemptions"}</Typography>
+                            </Grid>
+                            <Grid item xs={6} sm={3} className="gridItem">
+                                <Typography variant="h4">{this.state.totalEarned - this.state.totalRedeemed}</Typography>
+                                <Typography variant="body1">{dict[lang]["Points Left"] || "Points Left"}</Typography>
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+                </Card>
+                <Card className="nestedCard">
+                    <Show when={status === PageStatus.Loading}>
+                        <div className="d-flex justify-content-center w-100 p-5">
+                            <Spinner animation="border" variant="primary" />
+                        </div>
+                    </Show>
+                    <Show when={status === PageStatus.Loaded}>
+                        <Show when={this.state.formType === MODAL_TYPES.CREATE}>
+                            <Form
+                                show={this.state.formType === MODAL_TYPES.CREATE}
+                                userId={this.props.userId}
+                                totalLeft={this.state.totalLeft || 0}
+                                onClose={() => this.setState({ formType: MODAL_TYPES.NONE })}
+                                onSubmit={(id) => {
+                                    this.fetchSurvey();
+                                    this.setState({ formType: MODAL_TYPES.NONE, id: id });
+                                }}
                             />
-
-                            <Show when={!this.state.survey.length}>
-                                <CardContent>
-                                    <Typography variant="body1">No Redemptions Request are available for you</Typography>
-                                </CardContent>
-                            </Show>
                         </Show>
-
-                        <Show when={status === PageStatus.Loaded}>
-                            <Show when={!!survey.length}>
-                                <Table responsive size="sm" bordered>
-                                    <thead>
+                        <CardHeader
+                            title={dict[lang]["Redemptions Request Summary"] || "Redemptions Request Summary"}
+                            className="cardHeader"
+                            titleTypographyProps={{ className: 'cardHeader' }}
+                        />
+                        <Show when={!this.state.survey.length}>
+                            <CardContent>
+                                <Typography variant="body1">{dict[lang]["No Redemptions"] || "No Redemptions Request are available for you"}</Typography>
+                            </CardContent>
+                        </Show>
+                    </Show>
+                    <Show when={status === PageStatus.Loaded}>
+                        <Show when={!!this.state.survey.length}>
+                            <Table responsive size="sm" bordered>
+                                <thead>
                                     <tr>
-                                        <th>S.No</th>
-                                        <th>Requested Date</th>
-                                        <th>Mode</th>
-                                        <th>Status</th>
-                                        <th>User</th>
-                                        <th>Points Requested</th>
-                                        <th>Points Redeemed</th>
-                                        <th>Phone No/Data Card No/DTH No</th>
+                                        <th>{dict[lang]["S.No"] || "S.No"}</th>
+                                        <th>{dict[lang]["Requested Date"] || "Requested Date"}</th>
+                                        <th>{dict[lang]["Mode"] || "Mode"}</th>
+                                        <th>{dict[lang]["Status"] || "Status"}</th>
+                                        <th>{dict[lang]["User"] || "User"}</th>
+                                        <th>{dict[lang]["Points Requested"] || "Points Requested"}</th>
+                                        <th>{dict[lang]["Points Redeemed"] || "Points Redeemed"}</th>
+                                        <th>{dict[lang]["Phone No/Data Card No/DTH No"] || "Phone No/Data Card No/DTH No"}</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    {survey.map((redemption, index) => (
+                                </thead>
+                                <tbody>
+                                    {this.state.survey.map((redemption, index) => (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>
-                                                {redemption
-                                                    ? moment(redemption.requestDate).format(
-                                                        'MM/DD/YYYY HH:mm A'
-                                                    )
-                                                    : '-'}
+                                                {redemption ? moment(redemption.requestDate).format('MM/DD/YYYY HH:mm A') : '-'}
                                             </td>
                                             <td>{redemption.redemptionModeTitle}</td>
                                             <td>{redemption.redemptionRequestStatus}</td>
                                             <td>
-                                                {redemption.user
-                                                    ? redemption.user.email
-                                                    : '-'}
+                                                {redemption.user ? redemption.user.email : '-'}
                                             </td>
                                             <td>
                                                 {redemption.pointsRequested}
@@ -226,20 +203,18 @@ class MyRequests extends Component<any, any> {
                                                 {redemption.pointsRedeemed}
                                             </td>
                                             <td>
-                                                {redemption.user
-                                                    ? redemption.user.phoneNumber
-                                                    : '-'}
+                                                {redemption.user ? redemption.user.phoneNumber : '-'}
                                             </td>
                                         </tr>
                                     ))}
-                                    </tbody>
-                                </Table>
-                            </Show>
+                                </tbody>
+                            </Table>
                         </Show>
-
-                    </Card>
-                </Container>
-            </div>
+                    </Show>
+                </Card>
+            </Container>
+        </div>
+        
         );
     }
 }
@@ -252,6 +227,7 @@ const mapStateToProps = (state) => {
         email: state.adminUser.adminUser.email,
         isLoading: state.adminUser.adminUser.loading,
         error: state.adminUser.adminUser.error,
+        language: state.adminUser.adminUser.language,
     };
 };
 
