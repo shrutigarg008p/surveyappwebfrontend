@@ -47,7 +47,7 @@ class Form extends React.Component<any, any> {
       data: '',
       name: "",
       description: "",
-      "gender": 'male',
+      "gender": 'Male',
       "isActive": true,
       "profileCount": 0,
       "fromAge": null,
@@ -358,9 +358,9 @@ class Form extends React.Component<any, any> {
                       }
                   >
                     <option value='' disabled>--Choose--</option>
-                    <option value='male'>Male</option>
-                    <option value='female'>Female</option>
-                    <option value='other'>Other</option>
+                    <option value='Male'>Male</option>
+                    <option value='Female'>Female</option>
+                    <option value='Other'>Other</option>
                   </select>
                 </div>
                 <div className="col">

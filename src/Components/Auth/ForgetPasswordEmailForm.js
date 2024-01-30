@@ -25,9 +25,9 @@ class ForgetPasswordEmail extends React.Component {
   SendResetPasswordLink(){
     return Promise.resolve()
       .then(() => this.setState({ status: PageStatus.Submitting }))
-      .then(() => AuthAPI.ResetPasswordLink(this.state.email))
+      .then(() => AuthAPI.ResetPasswordLink(this.state.email, this.props.language))
       .then((res) => {
-        if(res === "User with this email does not exists." ) {
+        if(res === "User with this email does not exists.") {
             alert('User with this email does not exists');
           this.setState({showError: true, showSuccess: false} )
         } else {

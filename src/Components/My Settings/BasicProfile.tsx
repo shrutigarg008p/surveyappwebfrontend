@@ -22,7 +22,7 @@ class BasicProfile extends React.Component<any, any> {
             firstName: '',
             lastName: '' ,
             mobile: this.props.phoneNumber || '',
-            gender: 'male',
+            gender: 'Male',
             dateOfBirth: '',
             selectedCountryOption: null,
             selectedStateOption: null,
@@ -119,8 +119,11 @@ class BasicProfile extends React.Component<any, any> {
                 .then(() => this.setState({status: PageStatus.Submitting}))
                 .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId))
                 .then((profile) => {
+                    this.fetchUserProfile()
                     alert('Profile Successfully Updated.')
-                    this.setState({status: PageStatus.Submitted});
+                    this.setState({status: PageStatus.Submitted}, () => {
+                       this.props.onSubmit()
+                    });
                 })
                 .catch((error) => {
                     this.setState({status: PageStatus.Error, error: error.message});
@@ -340,6 +343,7 @@ class BasicProfile extends React.Component<any, any> {
                                 onChange={(e) => this.setState({ firstName: e.target.value })}
                                 value={this.state.firstName}
                                 placeholder="Enter here"
+                                disabled
                                 required
                             />
                         </div>
@@ -352,6 +356,7 @@ class BasicProfile extends React.Component<any, any> {
                                 onChange={(e) => this.setState({ lastName: e.target.value })}
                                 value={this.state.lastName}
                                 placeholder="Enter.."
+                                disabled
                             />
                         </div>
                         <div className="col">
@@ -403,14 +408,15 @@ class BasicProfile extends React.Component<any, any> {
                                 id='gender'
                                 value={this.state.gender}
                                 required
+                                disabled
                                 onChange={(e) =>
                                     this.setState({ gender: e.target.value })
                                 }
                             >
                                 <option value='' disabled>--Choose--</option>
-                                <option value='male'>Male</option>
-                                <option value='female'>Female</option>
-                                <option value='other'>Other</option>
+                                <option value='Male'>Male</option>
+                                <option value='Female'>Female</option>
+                                <option value='Other'>Other</option>
                             </select>
                         </div>
                         <div className="col">
@@ -425,6 +431,7 @@ class BasicProfile extends React.Component<any, any> {
                                     e.preventDefault()
                                 }}
                                 value={this.state.dateOfBirth}
+                                disabled
                                 required
                             />
                         </div>
@@ -477,6 +484,7 @@ class BasicProfile extends React.Component<any, any> {
                                 value={selectedCountryOption}
                                 required
                                 options={this.state.countries}
+                                disabled
                             />
                         </div>
                         <div className="col">
@@ -523,6 +531,7 @@ class BasicProfile extends React.Component<any, any> {
                             id='gender'
                             value={this.state.referralSource}
                             required
+                            disabled
                             onChange={(e) =>
                                 this.setState({ referralSource: e.target.value })
                             }

@@ -92,6 +92,24 @@ class MobileLogin extends React.Component<any, any> {
         }
     }
 
+
+    resendOtp() {
+        if (this.state.phoneNumber) {
+            if (this.state.user && this.state.phoneNumber) {
+                let obj = {phoneNumber: this.state.phoneNumber, userId: this.state.user.userId}
+                return Promise.resolve()
+                    .then(() => this.setState({status: PageStatus.Submitting}))
+                    .then(() => AuthAPI.resendOtp(obj))
+                    .then((profile) => {
+                        this.setState({status: PageStatus.Submitted, otpSend: true });
+                    })
+                    .catch((error) => {
+                        this.setState({status: PageStatus.Error, error: error.message});
+                    });
+            }
+        }
+    }
+
     render() {
         let { pageContent } = this.state
         pageContent = this.props.language === 'hi' ? Language.OTPVerifyHindi : Language.OTPVerifyEnglish
@@ -118,7 +136,7 @@ class MobileLogin extends React.Component<any, any> {
                         </Show>
 
                         <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-                            {this.state.error}
+                            {this.state.error === 'OTP must be valid!' ? (this.props.language === 'hi' ? 'वैध ओटीपी नहीं है' : 'Not a valid OTP') : this.state.error}
                         </Alert>
 
 
@@ -128,6 +146,7 @@ class MobileLogin extends React.Component<any, any> {
                                         className="form-control"
                                         type='number'
                                         name="phoneNumber"
+                                        title=""
                                         onChange={(e) => this.setState({ phoneNumber: e.target.value })}
                                         value={this.state.phoneNumber}
                                         placeholder={pageContent.cMPlaceholder}
@@ -148,13 +167,14 @@ class MobileLogin extends React.Component<any, any> {
                             </div>
                         </Show>
 
-                        <Show when={this.state.status === PageStatus.Submitted && this.state.otpSend === true}>
+                        <Show when={this.state.otpSend === true}>
                                 <div className="row">
                                     <label htmlFor="title">{pageContent.cPlaceholder}</label>
                                     <input
                                         className="form-control"
                                         type='number'
                                         name="otp"
+                                        title=""
                                         onChange={(e) => this.setState({ otp: e.target.value })}
                                         value={this.state.otp}
                                         placeholder={pageContent.cMPlaceholder}
@@ -171,6 +191,20 @@ class MobileLogin extends React.Component<any, any> {
                                     >
                                         {pageContent.items[1].title}
                                     </button>
+
+                                    <Show when={this.state.otpSend === true}>
+                                        <div className="mt-2 d-flex justify-content-center">
+                                            <button
+                                                type="submit"
+                                                disabled={!this.state.phoneNumber}
+                                                onClick={() => this.resendOtp()}
+                                                className="btn btn-primary mr-3"
+                                            >
+                                                {pageContent.rSendOtp}
+                                            </button>
+                                        </div>
+                                    </Show>
+
                                 </div>
                         </Show>
 
