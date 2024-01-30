@@ -20,7 +20,7 @@ import {AuthAPI, SurveysAPI} from "../../API";
 import { menuDict } from "Languages/ProfileTranslations.js";
 const useStyles = makeStyles(styles);
 
-function AdminNavbarLinks({...rest}) {
+function AdminNavbarLinks(props) {
   const history = useHistory();
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
