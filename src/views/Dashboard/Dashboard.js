@@ -54,7 +54,7 @@ function Dashboard({...rest}) {
   }, []);
 
   const cardHeight = {
-    height : '180px'
+    height : '120px'
   }
   return (
       <div>
@@ -87,12 +87,12 @@ function Dashboard({...rest}) {
                     {data ? data.totalSurveys.points : 0}<small></small>
                   </h3>
                 </CardHeader>
-                <CardFooter stats>
-                  <div className={classes.stats}>
-                    <Update />
+                {/* <CardFooter stats/> */}
+                  {/*<div className={classes.stats}> */}
+                    {/*<Update /> */}
 
-                  </div>
-                </CardFooter>
+                  {/*</div> */}
+                {/*</CardFooter> */}
               </Card>
             </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -106,12 +106,12 @@ function Dashboard({...rest}) {
                   {data ? data.completeSurveys.points: 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -125,11 +125,11 @@ function Dashboard({...rest}) {
                   {data ? data.incompleteSurveys.points: 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange />
-                </div>
-              </CardFooter>
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/* <DateRange /> */}
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -143,12 +143,12 @@ function Dashboard({...rest}) {
                   {data ? data.notStartedSurveys.points : 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -162,12 +162,12 @@ function Dashboard({...rest}) {
                   {data ? data.overallAttemptedPercentage.points : 0}<small>%</small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -181,12 +181,12 @@ function Dashboard({...rest}) {
                   {data ? data.totalLeft.points : 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -200,12 +200,12 @@ function Dashboard({...rest}) {
                   {data ? data.totalReferralsApproved.points : 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -219,12 +219,12 @@ function Dashboard({...rest}) {
                   {data ? data.totalReferralsPoints.points : 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -238,12 +238,12 @@ function Dashboard({...rest}) {
                   {data ? data.totalReferralsStatistics.points : 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
@@ -257,12 +257,12 @@ function Dashboard({...rest}) {
                   {data ? data.totalRewardPoints.points : 0}<small></small>
                 </h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Update />
+              {/* <CardFooter stats/> */}
+                {/*<div className={classes.stats}> */}
+                  {/*<Update /> */}
 
-                </div>
-              </CardFooter>
+                {/*</div> */}
+              {/*</CardFooter> */}
             </Card>
           </GridItem>
           </Show>

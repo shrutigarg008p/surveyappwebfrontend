@@ -11,6 +11,7 @@ import "./Login.css";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoogleSignIn from "./googleSignin";
+import FacebookSignIn from "./facebookSignin";
 import {MobileLogin} from "./MobileLogin";
 import Language from "../../Languages/Login/content.json"
 import {Helmet} from "react-helmet";
@@ -27,6 +28,7 @@ function Login(props) {
   const [isMobile, setMobile] = useState(false);
   const [referralId, setReferralId] = useState('');
   const [showGoogleSignIn, setShowGoogleSignIn] = useState(false);
+  const [showFacebookSignIn, setShowFacebookSignIn] = useState(false);
   const [captcha, setCaptcha] = useState(true);
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
@@ -34,6 +36,10 @@ function Login(props) {
 
   const handleContinueWithGoogleClick = () => {
     setShowGoogleSignIn(true);
+  };
+
+  const handleContinueWithFacebookClick = () => {
+    setShowFacebookSignIn(true);
   };
 
  
@@ -120,8 +126,12 @@ function Login(props) {
                 <h2>{pageContents.items[0].title}</h2>
                 <p>{pageContents.items[1].title}<Link to="#" onClick={handleClick}>{pageContents.items[2].title}</Link></p>
                 <div className="social-login">
-                  <div onClick={handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                  <div>
+                    <img src="assets/img/google.svg" style={{width:'50px', height:'50px'}} alt="" onClick={handleContinueWithGoogleClick}/>
+                    <img src="assets/img/facebook.svg" style={{width:'50px', height:'50px'}} alt="" onClick={handleContinueWithFacebookClick}/>
+                  </div>
                   {showGoogleSignIn && <GoogleSignIn />}
+                  {showFacebookSignIn && <FacebookSignIn />}
 
                   <div className="RuleWithText">{pageContents.items[3].title}</div>
                   <Button onClick={() => setMobile(true)} className="mobile-otp-button mt-2 mb-2">
