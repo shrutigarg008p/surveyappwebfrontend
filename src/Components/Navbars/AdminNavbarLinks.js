@@ -17,7 +17,7 @@ import {Notifications} from "@material-ui/icons";
 import {connect} from "react-redux";
 import {PageStatus} from "../../enums";
 import {AuthAPI, SurveysAPI} from "../../API";
-
+import { menuDict } from "Languages/ProfileTranslations.js";
 const useStyles = makeStyles(styles);
 
 function AdminNavbarLinks({...rest}) {
@@ -28,7 +28,7 @@ function AdminNavbarLinks({...rest}) {
   const [data, setData] = useState([]);
   const [status, setStatus] = useState(PageStatus.None);
   const [error, setError] = useState('');
-
+  const lang = props.language;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -216,30 +216,31 @@ function AdminNavbarLinks({...rest}) {
               }}
             >
               <Paper>
-                <ClickAwayListener>
-                  <MenuList role="menu">
-                    <MenuItem
-                        onClick={() => handleClickProfiles()}
-                        className={classes.dropdownItem}
-                    >
-                      Profile
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => handleClickSettings()}
-                      className={classes.dropdownItem}
-                    >
-                      Settings
-                    </MenuItem>
-                    <Divider light />
-                    <MenuItem
-                      onClick={() => handleCloseProfile()}
-                      className={classes.dropdownItem}
-                    >
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
+    <ClickAwayListener>
+        <MenuList role="menu">
+            <MenuItem
+                onClick={() => handleClickProfiles()}
+                className={classes.dropdownItem}
+            >
+                {menuDict[lang]["Profile"] || "Profile"}
+            </MenuItem>
+            <MenuItem
+                onClick={() => handleClickSettings()}
+                className={classes.dropdownItem}
+            >
+                {menuDict[lang]["Settings"] || "Settings"}
+            </MenuItem>
+            <Divider light />
+            <MenuItem
+                onClick={() => handleCloseProfile()}
+                className={classes.dropdownItem}
+            >
+                {menuDict[lang]["Logout"] || "Logout"}
+            </MenuItem>
+        </MenuList>
+    </ClickAwayListener>
+</Paper>
+
             </Grow>
           )}
         </Poppers>
@@ -252,6 +253,7 @@ function mapStateToProps(state) {
   return {
     userId: state.adminUser.adminUser.userId,
     role: state.adminUser.adminUser.role,
+    language: state.adminUser.adminUser.language,
   };
 }
 

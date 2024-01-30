@@ -54,4 +54,18 @@ export const profileDict = {
       "Reset": "पुन्ह: सेट करे"
     }
   };
+
+  export const menuDict = {
+    en: {
+      "Profile": "Profile",
+      "Settings": "Settings",
+      "Logout": "Logout"
+    },
+    hi: {
+      "Profile": "प्रोफ़ाइल",
+      "Settings": "समायोजन",
+      "Logout": "लॉग आउट"
+    }
+  };
+  
   
