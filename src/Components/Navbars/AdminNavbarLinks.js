@@ -28,7 +28,7 @@ function AdminNavbarLinks(props) {
   const [data, setData] = useState([]);
   const [status, setStatus] = useState(PageStatus.None);
   const [error, setError] = useState('');
-  const lang = props.language;
+  const lang = props.language ?? 'en';
 
   useEffect(() => {
     const fetchData = async () => {
