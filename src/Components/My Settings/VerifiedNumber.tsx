@@ -3,7 +3,8 @@ import {PageStatus} from "../../enums";
 import {AuthAPI} from "../../API";
 import {Show} from "../../Layout";
 import {Alert, Modal, Spinner} from "react-bootstrap";
-
+import { mobileVerificationDict } from 'Languages/SettingTranslations';
+import { connect } from 'react-redux';
 class OTPVerification extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -57,60 +58,70 @@ class OTPVerification extends React.Component<any, any> {
     };
 
     render() {
+        const lang = this.props.language ?? 'en'; 
         return (
             <Modal
-                centered
-                size="sm"
-                backdrop="static"
-                onHide={this.props.onClose}
-                show={this.props.show}
-                style={{ zIndex: 1201 }}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        Mobile Verification
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
-            <div>
-
-                <div >
-                    <label htmlFor="title">Enter OTP</label>
-                    <input
-                        className="form-control"
-                        type='number'
-                        name="otp"
-                        title=""
-                        onChange={(e) => this.setState({ otp: e.target.value })}
-                        value={this.state.otp}
-                        required
-                    />
-                </div>
-
-                <div className="mt-2 d-flex justify-content-center">
-                    <button
-                        type="submit"
-                        disabled={!this.state.otp || !this.props.userId || this.state.status === PageStatus.Submitting}
-                        onClick={() => this.handleVerify()}
-                        className="btn btn-primary mr-3"
-                    >
-                        Verify Mobile
-                    </button>
-                </div>
-                <Show when={this.state.status === PageStatus.Submitting}>
-                    <div className="d-flex justify-content-center w-100 p-5">
-                        <Spinner animation="border" variant="primary" />
+            centered
+            size="sm"
+            backdrop="static"
+            onHide={this.props.onClose}
+            show={this.props.show}
+            style={{ zIndex: 1201 }}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    {mobileVerificationDict[lang]["Mobile Verification"] || "Mobile Verification"}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
+                <div>
+                    <div>
+                        <label htmlFor="title">{mobileVerificationDict[lang]["Enter OTP"] || "Enter OTP"}</label>
+                        <input
+                            className="form-control"
+                            type='number'
+                            name="otp"
+                            title=""
+                            onChange={(e) => this.setState({ otp: e.target.value })}
+                            value={this.state.otp}
+                            required
+                        />
                     </div>
-                </Show>
-
-                <Alert className="mt-3" variant="danger" show={this.state.status === PageStatus.Error}>
-                    {this.state.error}
-                </Alert>
-            </div>
-                </Modal.Body>
-            </Modal>
+        
+                    <div className="mt-2 d-flex justify-content-center">
+                        <button
+                            type="submit"
+                            disabled={!this.state.otp || !this.props.userId || this.state.status === PageStatus.Submitting}
+                            onClick={() => this.handleVerify()}
+                            className="btn btn-primary mr-3"
+                        >
+                            {mobileVerificationDict[lang]["Verify Mobile"] || "Verify Mobile"}
+                        </button>
+                    </div>
+        
+                    <Show when={this.state.status === PageStatus.Submitting}>
+                        <div className="d-flex justify-content-center w-100 p-5">
+                            <Spinner animation="border" variant="primary" />
+                        </div>
+                    </Show>
+        
+                    <Alert className="mt-3" variant="danger" show={this.state.status === PageStatus.Error}>
+                        {this.state.error}
+                    </Alert>
+                </div>
+            </Modal.Body>
+        </Modal>
+        
         );
     }
 }
 
-export default OTPVerification;
+
+const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any, language:any }; }; }) => {
+    return {
+      userId: state.adminUser.adminUser.userId,
+      language: state.adminUser.adminUser.language
+    };
+ };
+
+export default connect(mapStateToProps)(OTPVerification);

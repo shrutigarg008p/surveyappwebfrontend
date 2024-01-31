@@ -40,6 +40,7 @@ class ReferralsList extends Component<any, any> {
                 userEmail: '',
                 Ip: ''
             },
+            referrals : []
         };
     }
 
@@ -151,7 +152,7 @@ class ReferralsList extends Component<any, any> {
         </Show>
 
         <Show when={this.state.status === PageStatus.Loaded}>
-            <Show when={!this.state.referrals.length}>
+            <Show when={ this.state.referrals && this.state.referrals !== undefined && !this.state.referrals.length}>
                 <Alert variant="info" show={!this.state.referrals.length}>
                     {referralDict[lang]["No Data Available"] || "At the current moment data is not available."}
                 </Alert>

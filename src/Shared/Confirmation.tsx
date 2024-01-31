@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import React, { Component, ReactElement } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-
+import { connect } from 'react-redux';
 export class NestedButton extends Component<{
   onClick: () => void,
 }, any> {
@@ -38,6 +38,7 @@ class Confirmation extends Component<{
   body?: string,
   changeable?: boolean,
   children: ReactElement,
+  language : any,
 
   onAction?: () => void,
 }, {
@@ -48,12 +49,6 @@ class Confirmation extends Component<{
     onChange?: () => void,
   }>();
 
-  static defaultProps = {
-    title: 'Confirmation',
-    body: 'Are you sure?',
-    changeable: false,
-  };
-
   constructor(props) {
     super(props);
     this.state = { show: false };
@@ -62,6 +57,12 @@ class Confirmation extends Component<{
     this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+
+  static defaultProps = {
+    title: 'Confirmation',
+    body: 'Are you sure?',
+    changeable: false,
+  };
 
   close() {
     this.setState({ show: false });
@@ -90,12 +91,17 @@ class Confirmation extends Component<{
   }
 
   render() {
+    const lang = this.props.language ?? 'en';
+    const title = lang === 'hi' ? 'पुष्टिकरण' : 'Confirmation';
+    const ok = lang === 'hi' ? 'ठीक है' : 'OK';
+    const discard = lang === 'hi' ? 'रद्द करें' : 'Discard';
+
     return (
       <>
         {React.cloneElement(this.props.children, this.getNewProps())}
         <Modal centered show={this.state.show} onHide={this.close} style={{ zIndex: 1201 }}>
           <Modal.Header closeButton>
-            <Modal.Title>{this.props.title}</Modal.Title>
+            <Modal.Title>{title}</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
@@ -103,8 +109,8 @@ class Confirmation extends Component<{
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.close}>Discard</Button>
-            <Button variant="primary" onClick={this.action}>OK</Button>
+            <Button variant="secondary" onClick={this.close}>{discard}</Button>
+            <Button variant="primary" onClick={this.action}>{ok}</Button>
           </Modal.Footer>
         </Modal>
       </>
@@ -112,4 +118,12 @@ class Confirmation extends Component<{
   }
 }
 
-export { Confirmation };
+const mapStateToProps = (state) => {
+  return {
+    language: state.adminUser.adminUser.language
+  };
+};
+const ConnectedConfirmation = connect(mapStateToProps)(Confirmation);
+
+export { ConnectedConfirmation as Confirmation };
+

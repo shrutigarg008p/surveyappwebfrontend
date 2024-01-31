@@ -242,6 +242,7 @@ class MySettings extends React.Component<any, any> {
                 this.fetchDetails();
                 this.setState({ formType: MODAL_TYPES.NONE })
             }}
+            language={lang}
         />
     </Show>
 
