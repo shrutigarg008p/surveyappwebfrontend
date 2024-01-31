@@ -11,6 +11,11 @@ import { connect }  from "react-redux";
 const useStyles = makeStyles(styles);
 
 function Footer(props) {
+
+  const changeLanguageTo = (lang) =>{
+    console.log(lang);
+  }
+  
   const classes = useStyles();
   const link = props.language === 'hi' ? '/#/faq-hi' : '/#/faq' ;
   return (
@@ -20,6 +25,17 @@ function Footer(props) {
           { props.language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'FAQ' }
         </a>
         </strong>
+        {/* &nbsp; &nbsp;
+        View In: 
+        <strong>
+        <a href="#" onClick={changeLanguageTo('hi')} className={classes.link}>
+          English&nbsp;&nbsp;
+        </a>
+
+        <a href="#" onClick={changeLanguageTo('en')} className={classes.link}>
+          Hindi
+        </a>
+        </strong> */}
        {/* <span style={{'textAlign' : 'right'}}> &copy; {new Date().getFullYear()} IndiaPolls</span> */}
     </div>
   </footer>

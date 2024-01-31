@@ -9,7 +9,7 @@ import { withRouter } from 'react-router';
 import { Show } from 'Layout';
 import {Operands, PageStatus, VoucherType} from 'enums';
 import {RedemptionModeAPI, SecAPI} from "../../API";
-
+import { redeemPointsDict } from 'Languages/MyRequestsTranslations';
 export type FormValue = {
     "name": string,
 };
@@ -105,110 +105,102 @@ class Form extends React.Component<any, any> {
     }
     render() {
         console.log('---->', this.isValidPoints())
+        const lang = this.props.language ?? 'en';
         return (
             <Modal
-                centered
-                size="lg"
-                backdrop="static"
-                onHide={this.props.onClose}
-                show={this.props.show}
-                style={{ zIndex: 1201 }}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        Redeem Points
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
-                    <Show when={this.state.status === PageStatus.Loading}>
-                        <div className="d-flex justify-content-center w-100 p-5">
-                            <Spinner animation="border" variant="primary" />
-                        </div>
-                    </Show>
-
-                    <Alert variant="danger" show={this.state.status === PageStatus.Error}>
+            centered
+            size="lg"
+            backdrop="static"
+            onHide={this.props.onClose}
+            show={this.props.show}
+            style={{ zIndex: 1201 }}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    {redeemPointsDict[lang]["Redeem Points"] || "Redeem Points"}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
+                <Show when={this.state.status === PageStatus.Loading}>
+                    <div className="d-flex justify-content-center w-100 p-5">
+                        <Spinner animation="border" variant="primary" />
+                    </div>
+                </Show>
+        
+                <Alert variant="danger" show={this.state.status === PageStatus.Error}>
+                    {this.state.error}
+                </Alert>
+        
+                <form onSubmit={this.props.handleSubmit((event) => this.onSubmit())}>
+                    <div className="form-group">
+                        <label htmlFor="titleEng">
+                            {redeemPointsDict[lang]["Points"] || "Points"}*
+                        </label>
+                        <input
+                            className="form-control"
+                            onChange={(e) => this.setState({ points: e.target.value })}
+                            value={this.state.points}
+                            type="number"
+                            placeholder="Enter..."
+                            required
+                        />
+                        <label htmlFor="titleEng">
+                            {redeemPointsDict[lang]["Description"] || "Description"}*
+                        </label>
+                        <select
+                            name='mode'
+                            id='mode'
+                            value={this.state.mode}
+                            required
+                            onChange={(e) => this.setState({ mode: e.target.value })}
+                            style={{
+                                width: '100%',
+                                display: 'block',
+                                height: '40px',
+                                lineHeight: '1.5',
+                                color: '#495057',
+                                backgroundColor: '#fff',
+                                backgroundClip: 'padding-box',
+                                border: '1px solid #ced4da',
+                                borderRadius: '5px',
+                                transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out'
+                            }}
+                        >
+                            <option value=''>--Choose--</option>
+                            {this.state.modes.length > 0 ? this.state.modes.map((item) => (
+                                <option value={item.value}>{item.label}</option>
+                            )) : ''}
+                        </select>
+                    </div>
+                    <hr />
+                    <Alert variant="danger" show={!!this.state.error} className="mt-2">
                         {this.state.error}
                     </Alert>
-
-                    <form onSubmit={this.props.handleSubmit(
-                        (event) => this.onSubmit(),
-                    )}
-                    >
-
-                        <div className="form-group">
-                            <label htmlFor="titleEng">
-                                Points*
-                            </label>
-                            <input
-                                className="form-control"
-                                onChange={(e) => this.setState({points: e.target.value})}
-                                value={this.state.points}
-                                type="number"
-                                placeholder="Enter..."
-                                required
-                            />
-                            <label htmlFor="titleEng">
-                                Description*
-                            </label>
-                            <select
-                                style={{
-                                    width: '100%',
-                                    display: 'block',
-                                    height: '40px',
-                                    lineHeight: '1.5',
-                                    color: '#495057',
-                                    backgroundColor: '#fff',
-                                    backgroundClip: 'padding-box',
-                                    border: '1px solid #ced4da',
-                                    borderRadius: '5px',
-                                    transition:
-                                        'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-                                }}
-                                name='mode'
-                                id='mode'
-                                value={this.state.mode}
-                                required
-                                onChange={(e) =>
-                                    this.setState({ mode: e.target.value })
-                                }
-                            >
-                                <option value=''>--Choose--</option>
-                                { this.state.modes.length > 0 ? this.state.modes.map((item) => (
-                                    <option value={item.value}>{item.label}</option>
-                                    )) : ''}
-                            </select>
-
-                        </div>
-                        <hr />
-                        <Alert variant="danger" show={!!this.state.error} className="mt-2">
-                            {this.state.error}
-                        </Alert>
-
-                        <div className="d-flex align-items-center mt-2">
-                            <button
-                                type="submit"
-                                disabled={!this.state.points || !this.state.mode || !this.isValidPoints()}
-                                className="btn btn-primary mr-3"
-                            >
-                                Submit
-                            </button>
-
-                            <button
-                                type="button"
-                                disabled={false}
-                                onClick={() => this.reset()}
-                                className="btn btn-light mr-3"
-                            >
-                                Reset
-                            </button>
-
-                            <Show when={this.state.status === PageStatus.Submitting}>
-                                <Spinner animation="border" variant="primary" />
-                            </Show>
-                        </div>
-                    </form>
-                </Modal.Body>
-            </Modal>
+        
+                    <div className="d-flex align-items-center mt-2">
+                        <button
+                            type="submit"
+                            disabled={!this.state.points || !this.state.mode || !this.isValidPoints()}
+                            className="btn btn-primary mr-3"
+                        >
+                            {redeemPointsDict[lang]["Submit"] || "Submit"}
+                        </button>
+        
+                        <button
+                            type="button"
+                            onClick={() => this.reset()}
+                            className="btn btn-light mr-3"
+                        >
+                            {redeemPointsDict[lang]["Reset"] || "Reset"}
+                        </button>
+        
+                        <Show when={this.state.status === PageStatus.Submitting}>
+                            <Spinner animation="border" variant="primary" />
+                        </Show>
+                    </div>
+                </form>
+            </Modal.Body>
+        </Modal>        
         );
     }
 }

@@ -153,6 +153,7 @@ function UserProfile(props) {
                 setShowEditProfile(false)
                 loadProfile();
             }}
+            language={lang}
         />
     </Show>
 

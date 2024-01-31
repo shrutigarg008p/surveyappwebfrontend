@@ -137,7 +137,7 @@ function AdminNavbarLinks(props) {
           <span className={classes.notifications}>{data.length}</span>
           <Hidden mdUp implementation="css">
             <p onClick={handleCloseNotification} className={classes.linkText}>
-              Notification
+            {menuDict[lang]["Notification"] || "Notification"}
             </p>
           </Hidden>
         </Button>
@@ -192,7 +192,7 @@ function AdminNavbarLinks(props) {
         >
           <Person className={classes.icons} />
           <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Profile</p>
+            <p className={classes.linkText}>{menuDict[lang]["Profile"] || "Profile"}</p>
           </Hidden>
         </Button>
         <Poppers

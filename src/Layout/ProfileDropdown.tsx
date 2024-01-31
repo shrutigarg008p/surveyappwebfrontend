@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 
 import { OverlayMenu } from "../Shared";
 import {connect} from "react-redux";
-
+import { menuDict } from "Languages/ProfileTranslations.js";
 type State = {
   formType: string | null,
 };
@@ -16,6 +16,7 @@ type Props = {
   },
   fullName: string,
   id: string | null,
+  language : any,
 
   showForm?: () => void,
   authLogout?: () => void,
@@ -32,6 +33,7 @@ class ProfileDropdown extends React.Component<Props, State> {
   }
 
   render() {
+    const lang = this.props.language ?? 'en';
     const profileToggle = (
       <span className="btn btn-secondary text-white">
         <span className="d-none d-sm-none d-md-none d-lg-inline d-xl-inline">
@@ -53,19 +55,19 @@ class ProfileDropdown extends React.Component<Props, State> {
             <ListGroup.Item
               className="header-menu-item poppins"
             >
-             Edit
+             {menuDict[lang]["Edit"] || "Edit"}
             </ListGroup.Item>
             <ListGroup.Item
               className="header-menu-item poppins"
             >
-             Change Password
+             {menuDict[lang]["Change Password"] || "Change Password"}
             </ListGroup.Item>
             <ListGroup.Item
               className="header-menu-item poppins"
               onClick={this.props.authLogout}
               action
             >
-             Logout
+             {menuDict[lang]["Logout"] || "Logout"}
             </ListGroup.Item>
           </ListGroup>
         </OverlayMenu>
@@ -78,6 +80,7 @@ const mapStateToProps = (state) => ({
   // fullName: state.user.user.fullName,
   // pictureUrl: state.user.user.pictureUrl,
   // id: state.user.user.id,
+  language: state.adminUser.adminUser.language,
 });
 
 const ProfileDropdownWithState = withRouter<any, any>(connect(

@@ -189,7 +189,7 @@ class MySettings extends React.Component<any, any> {
                     >
                         {settingDict[lang]["Edit Account"] || "Edit Account"}
                     </Button>
-                    <Confirmation onAction={() => this.onSubscribe()} body={`${this.state.data?.users?.unsubscribeDate === null ? settingDict[lang]["Unsubscribe Confirmation"] || "Are you sure want to unsubscribe from IndiaPolls?" : settingDict[lang]["Subscribe Confirmation"] || 'Are you sure want to Subscribe IndiaPolls?'}`}>
+                    <Confirmation onAction={() => this.onSubscribe()} body={`${this.state.data?.users?.unsubscribeDate === null ? settingDict[lang]["Unsubscribe Confirmation"] || "Are you sure want to unsubscribe from IndiaPolls?" : settingDict[lang]["Subscribe Confirmation"] || 'Are you sure want to Subscribe IndiaPolls?'}`} >
                         <Button
                             variant="warning"
                             size="sm"

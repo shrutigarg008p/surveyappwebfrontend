@@ -155,6 +155,7 @@ class MyRequests extends Component<any, any> {
                                     this.fetchSurvey();
                                     this.setState({ formType: MODAL_TYPES.NONE, id: id });
                                 }}
+                                language={lang}
                             />
                         </Show>
                         <CardHeader

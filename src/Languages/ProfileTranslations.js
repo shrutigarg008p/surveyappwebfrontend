@@ -59,12 +59,18 @@ export const profileDict = {
     en: {
       "Profile": "Profile",
       "Settings": "Settings",
-      "Logout": "Logout"
+      "Logout": "Logout",
+      "Edit": "Edit",
+    "Change Password": "Change Password",
+    "Notification" : "Notification"
     },
     hi: {
       "Profile": "प्रोफ़ाइल",
       "Settings": "समायोजन",
-      "Logout": "लॉग आउट"
+      "Logout": "लॉग आउट",
+      "Edit": "संपादित करें",
+      "Change Password": "पासवर्ड बदलें",
+      "Notification" : "सूचना"
     }
   };
   

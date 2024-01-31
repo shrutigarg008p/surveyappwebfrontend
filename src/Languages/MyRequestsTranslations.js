@@ -63,3 +63,22 @@ export const dict = {
 
     }
 };
+
+export const redeemPointsDict = {
+  en: {
+    "Redeem Points": "Redeem Points",
+    "Points": "Points",
+    "Description": "Description",
+    "Choose": "--Choose--",
+    "Submit": "Submit",
+    "Reset": "Reset"
+  },
+  hi: {
+    "Redeem Points": "अंक भुनाएं",
+    "Points": "अंक",
+    "Description": "विवरण",
+    "Choose": "--चुनें--",
+    "Submit": "जमा करें",
+    "Reset": "रीसेट करें"
+  }
+};
