@@ -181,6 +181,10 @@ const faqData = [
     {
         question: "My Amazon voucher code is not working. What should I do?",
         answer: "<a href='/#/redemption' target='_blank'>Click here</a> to redeem your Amazon Gift Card. Amazon Customer Care: 180030002049. They are available 24 hours a day, 7 days a week to resolve your queries. <a href='https://www.amazon.in/gp/help/customer/display.html'>Click here</a> to contact Amazon Care."
+    },
+    {
+        question : "I made a redemption request but did not get my reward. When will I receive my E-Gift Card ?",
+        answer : "<p>You will receive your E-Gift card based on below timelines.</p><ul><li>AJIO e-Gift Card – Within 7 Working Days</li><li>Flipkart INR e-Gift Card – Within 7 Working Days</li><li>Google Play e-Gift Card – Within 7 Working Days</li> <li>Croma e-Gift Card – Within 15 <li>PhonePe e-Gift Card – Within 15 Working Days</li><li>Amazon e-Gift Card – Within 15-30 </ul>"
     }
 ];
   
