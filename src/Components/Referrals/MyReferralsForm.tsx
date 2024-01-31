@@ -9,7 +9,7 @@ import csvtojson from 'csvtojson';
 import { Show } from 'Layout';
 import {Operands, PageStatus, VoucherType} from 'enums';
 import {AuthAPI, RedemptionModeAPI, SecAPI} from "../../API";
-
+import { referralModalDict } from 'Languages/ReferralTranslations';
 export type FormValue = {
     "name": string,
 };
@@ -148,130 +148,124 @@ class Form extends React.Component<any, any> {
     }
 
     render() {
+        const lang = this.props.language ?? 'en';
         return (
             <Modal
-                centered
-                size="xl"
-                backdrop="static"
-                onHide={this.props.onClose}
-                show={this.props.show}
-                style={{ zIndex: 1201 }}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        Referral
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
-                    <Show when={this.state.status === PageStatus.Loading}>
-                        <div className="d-flex justify-content-center w-100 p-5">
-                            <Spinner animation="border" variant="primary" />
-                        </div>
-                    </Show>
-
-                    <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-                        {this.state.error}
-                    </Alert>
-
-                    <div className="jumbotron bg-white p-3 border shadow-sm">
-                        <div><b>Refer with link</b></div>
-                        <hr />
-                        <br />
-                        <p>
-                            You can earn points by referring your friends to IndiaSpeaks by sharing the given link to facebook,
-                            twitter and other social media. Your unique referral link url is : <a>
-                            <b>{`https://panel.indiapolls.com/#/referrals/view/${this.props.userId}`}.</b>
-                        </a>
-                        </p>
+            centered
+            size="xl"
+            backdrop="static"
+            onHide={this.props.onClose}
+            show={this.props.show}
+            style={{ zIndex: 1201 }}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    {referralModalDict[lang]["Referral"] || "Referral"}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
+                <Show when={this.state.status === PageStatus.Loading}>
+                    <div className="d-flex justify-content-center w-100 p-5">
+                        <Spinner animation="border" variant="primary" />
                     </div>
-
-                    <div className="jumbotron bg-white p-3 border shadow-sm">
-                        <div><b>Upload From a CSV list</b></div>
-                        <hr />
-                        <br />
+                </Show>
+        
+                <Alert variant="danger" show={this.state.status === PageStatus.Error}>
+                    {this.state.error}
+                </Alert>
+        
+                <div className="jumbotron bg-white p-3 border shadow-sm">
+                    <div><b>{referralModalDict[lang]["Refer with link"] || "Refer with link"}</b></div>
+                    <hr />
+                    <br />
+                    <p>
+                    {referralModalDict[lang]["Referral Link Description"] || "Referral Link Description"}: <a href={`https://panel.indiapolls.com/#/referrals/view/${this.props.userId}`}>
+                        <b>{`https://panel.indiapolls.com/#/referrals/view/${this.props.userId}`}</b>
+                        </a>.
+                    </p>
+                </div>
+        
+                <div className="jumbotron bg-white p-3 border shadow-sm">
+                    <div><b>{referralModalDict[lang]["Upload From a CSV list"] || "Upload From a CSV list"}</b></div>
+                    <hr />
+                    <br />
+                    <div>
+                    {referralModalDict[lang]["CSV Description"] || "CSV Description"}
+                <a onClick={this.downloadFile} className="link-display" style={{color: 'orange'}}> {referralModalDict[lang]["Download"] || "Download"} </a>
+               
                         <div>
-                            You can refer multiple friends from a csv file which contains your friends' information in order name,
-                            email, mobile.
-                            <a onClick={this.downloadFile} className="link-display" style={{color: 'orange'}}> Click here to refer a friend </a>
-                            to download sample file.
-                            <div>
-                                <input className="mt-1" type="file" accept=".csv" onChange={(e) => this.handleFileChange(e)} />
-                            </div>
-                            <div>
-                                <Button
-                                    onClick={() => this.createBulk()}
-                                    variant="primary"
-                                    disabled={this.state.importedData.users.length === 0}
-                                    className="mt-3"
-                                    size="sm"
-                                >
-                                    Import
-                                </Button>
-                            </div>
-
+                            <input className="mt-1" type="file" accept=".csv" onChange={(e) => this.handleFileChange(e)} />
                         </div>
-                    </div>
-
-
-                    <div className="jumbotron bg-white p-3 border shadow-sm">
-                        <div><b>Refer a friend</b></div>
-                        <hr />
-                        <br />
                         <div>
-                            <div>
-                                <div className="row">
-                                    <div className="col">
-                                        <label htmlFor="title">Name*</label>
-                                        <input
-                                            className="form-control"
-                                            name="name"
-                                            onChange={(e) => this.setState({ name: e.target.value })}
-                                            value={this.state.name}
-                                            placeholder="Enter here"
-                                            required
-                                        />
-                                    </div>
-                                    <div className="col">
-                                        <label htmlFor="email">Email*</label>
-                                        <input
-                                            className="form-control"
-                                            id="email"
-                                            name="email"
-                                            onChange={(e) => this.setState({ email: e.target.value })}
-                                            value={this.state.email}
-                                            placeholder="Enter.."
-                                        />
-                                    </div>
-                                    <div className="col">
-                                        <label htmlFor="Mobile">Mobile</label>
-                                        <input
-                                            className="form-control"
-                                            id="phoneNumber"
-                                            name="phoneNumber"
-                                            onChange={(e) => this.setState({ phoneNumber: e.target.value })}
-                                            value={this.state.phoneNumber}
-                                            placeholder="Enter.."
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <Button
-                                    onClick={() => this.create()}
-                                    variant="primary"
-                                    disabled={!this.state.name || !this.state.email}
-                                    className="mt-3"
-                                    size="sm"
-                                >
-                                    Refer
-                                </Button>
-                            </div>
-
+                            <Button
+                                onClick={() => this.createBulk()}
+                                variant="primary"
+                                disabled={this.state.importedData.users.length === 0}
+                                className="mt-3"
+                                size="sm"
+                            >
+                                {referralModalDict[lang]["Import"] || "Import"}
+                            </Button>
                         </div>
                     </div>
-
-                </Modal.Body>
-            </Modal>
+                </div>
+        
+                <div className="jumbotron bg-white p-3 border shadow-sm">
+                    <div><b>{referralModalDict[lang]["Refer a friend"] || "Refer a friend"}</b></div>
+                    <hr />
+                    <br />
+                    <div>
+                        <div className="row">
+                            <div className="col">
+                                <label htmlFor="title">{referralModalDict[lang]["Name"] || "Name"}*</label>
+                                <input
+                                    className="form-control"
+                                    name="name"
+                                    onChange={(e) => this.setState({ name: e.target.value })}
+                                    value={this.state.name}
+                                    placeholder={referralModalDict[lang]["Enter here"] || "Enter here"}
+                                    required
+                                />
+                            </div>
+                            <div className="col">
+                                <label htmlFor="email">{referralModalDict[lang]["Email"] || "Email"}*</label>
+                                <input
+                                    className="form-control"
+                                    id="email"
+                                    name="email"
+                                    onChange={(e) => this.setState({ email: e.target.value })}
+                                    value={this.state.email}
+                                    placeholder={referralModalDict[lang]["Enter.."] || "Enter.."}
+                                />
+                            </div>
+                            <div className="col">
+                                <label htmlFor="Mobile">{referralModalDict[lang]["Mobile"] || "Mobile"}</label>
+                                <input
+                                    className="form-control"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    onChange={(e) => this.setState({ phoneNumber: e.target.value })}
+                                    value={this.state.phoneNumber}
+                                    placeholder={referralModalDict[lang]["Enter.."] || "Enter.."}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <Button
+                                onClick={() => this.create()}
+                                variant="primary"
+                                disabled={!this.state.name || !this.state.email}
+                                className="mt-3"
+                                size="sm"
+                            >
+                                {referralModalDict[lang]["Refer"] || "Refer"}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal.Body>
+        </Modal>
+        
         );
     }
 }

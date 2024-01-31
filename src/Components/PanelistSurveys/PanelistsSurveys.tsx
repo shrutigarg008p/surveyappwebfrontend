@@ -207,6 +207,7 @@ class PanelistSurveys extends Component<any, any> {
             <Show when={!!this.state.filteredData.length}>
                 <Show when={this.isShowDetailModal()}>
                     <PanelistDetails
+                        language={lang}
                         id={this.state.id}
                         onClose={() => this.setState({
                             formType: MODAL_TYPES.NONE,

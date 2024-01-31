@@ -103,8 +103,22 @@ class MyReferrals extends Component<any, any> {
                 </Alert>
             </Show>
 
-            {/* ... Form component ... */}
-
+            <Show when={this.state.formType === MODAL_TYPES.CREATE}>
+                            <Form
+                                show={this.state.formType === MODAL_TYPES.CREATE}
+                                userId={this.props.userId}
+                                onClose={() => this.setState({
+                                    formType: MODAL_TYPES.NONE,
+                                })}
+                                onSubmit={(id) => {
+                                    this.fetch();
+                                    this.setState({
+                                        formType: MODAL_TYPES.NONE,
+                                    });
+                                }}
+                                language={lang}
+                            />
+                        </Show>
             <Show when={!!this.state.referrals.length}>
                 <Table responsive size="sm" bordered>
                     <thead>

@@ -9,7 +9,7 @@ import {SurveysAPI} from "../../API";
 import {Confirmation} from "../../Shared/Confirmation";
 import {ProfileManagementAPI} from "../../API/ProfileManagementAPI";
 import moment from "moment";
-
+import { panelistDetailsDict } from 'Languages/SurveyTranslations';
 type State = {
     survey: any | null,
     status: string,
@@ -80,82 +80,64 @@ class PanelistDetails extends React.Component<any, any> {
 
 
     render() {
+        const lang = this.props.language ?? 'en';
         return (
             <>
-                <Modal
-                    centered
-                    size="lg"
-                    backdrop="static"
-                    onHide={this.props.onClose}
-                    show
-                    style={{ zIndex: 1201 }}
-                >
-                    <Modal.Header closeButton>
-                        <h5 className="mb-0 mt-1">Panelist Details</h5>
-                    </Modal.Header>
-                    <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
-
-                        <Show when={this.state.status === PageStatus.Loading}>
-                            <div className="d-flex justify-content-center w-100 p-5">
-                                <Spinner animation="border" variant="primary" />
+            <Modal
+                centered
+                size="lg"
+                backdrop="static"
+                onHide={this.props.onClose}
+                show
+                style={{ zIndex: 1201 }}
+            >
+                <Modal.Header closeButton>
+                    <h5 className="mb-0 mt-1">{panelistDetailsDict[lang]["Panelist Details"] || "Panelist Details"}</h5>
+                </Modal.Header>
+                <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
+                    <Show when={this.state.status === PageStatus.Loading}>
+                        <div className="d-flex justify-content-center w-100 p-5">
+                            <Spinner animation="border" variant="primary" />
+                        </div>
+                    </Show>
+        
+                    <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey}>
+                        <div className="row mt-2">
+                            <div className="col">
+                                <strong>{panelistDetailsDict[lang]["Survey Name"] || "Survey Name"}: </strong>
+                                {this.state.survey?.survey.name}
                             </div>
-                        </Show>
-
-                        <Show when={this.state.status === PageStatus.Loaded && !!this.state.survey}>
-                            <div className="row mt-2">
-                                <div className="col">
-                                    <strong>Survey Name: </strong>
-                                    {this.state.survey?.survey.name}
-                                </div>
-                                <div className="col">
-                                    <strong>Expiry Date: </strong>
-                                    {moment(this.state.survey?.expiryDate).format('MM/DD/YYYY HH:mm A')}
-                                </div>
+                            <div className="col">
+                                <strong>{panelistDetailsDict[lang]["Expiry Date"] || "Expiry Date"}: </strong>
+                                {moment(this.state.survey?.expiryDate).format('MM/DD/YYYY HH:mm A')}
                             </div>
-
-                            {/*<div className="row mt-2">*/}
-                            {/*    <div className="col">*/}
-                            {/*        <strong>Points: </strong>*/}
-                            {/*        {this.state.survey?.survey.ceggPoints}*/}
-                            {/*    </div>*/}
-
-                            {/*    { this.state.survey?.isCompleted === false ?*/}
-                            {/*    <div className="col">*/}
-                            {/*        <strong>Attempt Status: </strong>*/}
-                            {/*        {this.state.survey?.isStarted === true ? 'Started' : 'Not Started'}*/}
-                            {/*    </div>*/}
-                            {/*        :*/}
-                            {/*        <div className="col">*/}
-                            {/*            <strong>Attempt Status: </strong>*/}
-                            {/*            {this.state.survey?.isCompleted === true ? 'Completed' : 'Not Completed'}*/}
-                            {/*        </div>*/}
-                            {/*    }*/}
-                            {/*</div>*/}
-
-                            <div className="row mt-2">
-                                <div className="col">
-                                    <strong>Status: </strong>
-                                    {this.state.survey?.status}
-                                </div>
+                        </div>
+                                    
+                        <div className="row mt-2">
+                            <div className="col">
+                                <strong>{panelistDetailsDict[lang]["Status"] || "Status"}: </strong>
+                                {this.state.survey?.status}
                             </div>
-
-                            <div className="row mt-2">
-                                <div className="col">
-                                    <strong>Description: </strong>
-                                    {this.state.survey?.survey.description}
-                                </div>
+                        </div>
+        
+                        <div className="row mt-2">
+                            <div className="col">
+                                <strong>{panelistDetailsDict[lang]["Description"] || "Description"}: </strong>
+                                {this.state.survey?.survey.description}
                             </div>
-
-                            <Alert
-                                variant="danger"
-                                show={this.state.status === PageStatus.Error}
-                            >
-                                {this.state.error}
-                            </Alert>
-                        </Show>
-                    </Modal.Body>
-                </Modal>
-            </>
+                        </div>
+        
+                        <Alert
+                            variant="danger"
+                            show={this.state.status === PageStatus.Error}
+                        >
+                            {this.state.error}
+                        </Alert>
+                    </Show>
+                </Modal.Body>
+            </Modal>
+        </>
+        
         );
     }
 }

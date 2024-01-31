@@ -30,4 +30,21 @@ export const surveyDict = {
       "Disqualified": "विच्छेदित"
     }
   };
+
+  export const panelistDetailsDict = {
+    en: {
+      "Panelist Details": "Panelist Details",
+      "Survey Name": "Survey Name",
+      "Expiry Date": "Expiry Date",
+      "Status": "Status",
+      "Description": "Description"
+    },
+    hi: {
+      "Panelist Details": "पैनलिस्ट विवरण",
+      "Survey Name": "सर्वेक्षण का नाम",
+      "Expiry Date": "समाप्ति तिथि",
+      "Status": "स्थिति",
+      "Description": "विवरण"
+    }
+  };
   
