@@ -69,6 +69,7 @@ class Form extends React.Component<any, any> {
             redemptionRequestStatus: 'New',
             notes: 'NA',
             pointsRedeemed: 0,
+            language: this.props.language
         };
     }
 

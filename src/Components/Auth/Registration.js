@@ -202,7 +202,7 @@ class Registration extends Component {
                       <label htmlFor="email">{pageContent.items[4].title}</label>
                       <input type="email" className="form-control" name="email"
                              value={this.state.email}
-                             title=""
+                             title={pageContent.items[5].title}
                              onChange={(e) => this.setState({ email: e.target.value })}
                              onClick={() => this.setState({emailActive: !this.state.emailActive})}
                           // placeholder={pageContent.items[5].title}
@@ -211,7 +211,7 @@ class Registration extends Component {
                     <div className="mb-3 mt-3">
                       <label htmlFor="phone">{pageContent.items[6].title}</label>
                       <input type="text" className="form-control" name="phone"
-                             title=""
+                             title={pageContent.items[6].title}
                              value={this.state.phoneNumber}
                              onChange={(e) => {
                                this.setState({
@@ -228,7 +228,7 @@ class Registration extends Component {
                       <input
                           className="form-control"
                           type='password'
-                          title=""
+                          title={pageContent.items[7].title}
                           onChange={(e) => {
                             this.onChangePassword(e.target.value, 'password');
                             this.setState({
@@ -244,7 +244,7 @@ class Registration extends Component {
                       <input
                           className="form-control"
                           type='password'
-                          title=""
+                          title={pageContent.items[8].title}
                           // placeholder={pageContent.items[8].title}
                           onChange={(e) =>{
                             this.onChangePassword(e.target.value, 'confirmpassword');

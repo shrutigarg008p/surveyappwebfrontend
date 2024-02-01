@@ -278,8 +278,8 @@ class MySettings extends React.Component<any, any> {
         <div className="mb-3">
             <strong>{settingDict[lang]["Mobile"] || "Mobile"}: </strong>
             {this.state.data?.basicProfile?.mobile}
-            {this.state.data?.users?.phoneNumberConfirmed === true ? 
-                (<span style={{ color: 'green', marginLeft: '5px' }}>✅ ({settingDict[lang]["Verified"] || "Verified"})</span>) : 
+            {this.state.data?.users?.phoneNumberConfirmed === true ?
+                (<span style={{ color: 'green', marginLeft: '5px' }}>✅ ({settingDict[lang]["Verified"] || "Verified"})</span>) :
                 (<span
                     onClick={() => this.setState({ showMobileVerification: true })}
                     style={{ color: 'red', marginLeft: '5px' }}>
@@ -290,8 +290,8 @@ class MySettings extends React.Component<any, any> {
         <div className="mb-3">
             <strong>{settingDict[lang]["Email"] || "Email"}: </strong>
             {this.state.data?.users?.email}
-            {this.state.data?.users?.emailConfirmed === true ? 
-                (<span style={{ color: 'green', marginLeft: '5px' }}>✅ ({settingDict[lang]["Verified"] || "Verified"})</span>) : 
+            {this.state.data?.users?.emailConfirmed === true ?
+                (<span style={{ color: 'green', marginLeft: '5px' }}>✅ ({settingDict[lang]["Verified"] || "Verified"})</span>) :
                 (<span style={{ color: 'red', marginLeft: '5px' }}>❌ ({settingDict[lang]["Not-Verified"] || "Not-Verified"})</span>)
             }
         </div>
@@ -328,49 +328,53 @@ class MySettings extends React.Component<any, any> {
                             </div>
                         </CardHeader>
                         <CardBody>
-            <Grid container spacing={5}>
-                {this.state.data && this.state.data.result.map((data, index) => (
-                    <Grid item xs={12} sm={6} key={index}>
-                        <Card2>
-                            <CardHeader2
-                                title={
-                                    <>
-                                        {data.name}
-                                        <Chip
-                                            label={data.attemptedPercentage > 0 ? `${data.attemptedPercentage}% Completed` : settingDict[lang]["Not Started"] || 'Not Started'}
-                                            style={{ marginLeft: '8px' }}
-                                        />
-                                    </>
+                            <Grid container spacing={5}>
+                                {
+                                    this.state.data &&
+                                    this.state.data.result.map((data, index) => (
+                                        <Grid item xs={12} sm={6} key={index}>
+                                            <Card2>
+                                                <CardHeader2
+                                                    title={<>
+                                                        {this.props.language === 'hi' ? data.hindi : data.name}
+                                                        <Chip
+                                                            label={data.attemptedPercentage > 0 ? `${data.attemptedPercentage}% ${this.props.language === 'hi' ? 'पूरा' : 'Completed'}` : this.props.language === 'hi' ? 'शुरू नहीं हुआ' : 'Not Started'}
+                                                            style={{ marginLeft: '8px' }} // Adjust styling as needed
+                                                        />
+                                                    </>}
+                                                    titleTypographyProps={{ style: { fontSize: '16px' } }}
+                                                    style={{ background: '#454545', color: 'white'}}
+                                                    action={
+                                                        <Chip
+                                                            label={<>
+                                                                <a onClick={() => this.handleClick(data.name)}>
+                                                                    <button className="btn-white">
+                                                                        <span>{this.props.language === 'hi' ? 'अपडेट करें' : 'Update'}</span>
+                                                                    </button>
+                                                                </a>
+                                                            </>}
+                                                            style={notCompletedStyle}
+                                                        />
+                                                    }
+                                                />
+                                                <CardContent>
+                                                    {/*<img*/}
+                                                    {/*    src={"https://picsum.photos/400/"+Math.round((140+index))}*/}
+                                                    {/*    alt="Full Size Image"*/}
+                                                    {/*    style={{ width: '100%', height: 'auto' }}*/}
+                                                    {/*/>*/}
+                                                    <img
+                                                        src={`https://indiapolls.com:9000${data.image}`}
+                                                        alt="Full Size Image"
+                                                        style={{ width: '100%', height: '300px' }}
+                                                    />
+                                                </CardContent>
+                                            </Card2>
+                                        </Grid>
+                                    ))
                                 }
-                                titleTypographyProps={{ style: { fontSize: '16px' } }}
-                                style={{ background: '#454545', color: 'white'}}
-                                action={
-                                    <Chip
-                                        label={
-                                            <>
-                                                <a onClick={() => this.handleClick(data.name)}>
-                                                    <button className="btn-white">
-                                                        <span>{settingDict[lang]["Update"] || "Update"}</span>
-                                                    </button>
-                                                </a>
-                                            </>
-                                        }
-                                        style={notCompletedStyle}
-                                    />
-                                }
-                            />
-                            <CardContent>
-                                <img
-                                    src={`https://indiapolls.com:9000${data.image}`}
-                                    alt="Full Size Image"
-                                    style={{ width: '100%', height: '300px' }}
-                                />
-                            </CardContent>
-                        </Card2>
-                    </Grid>
-                ))}
-            </Grid>
-        </CardBody>
+                            </Grid>
+                       </CardBody>
                     </Card>
 
 

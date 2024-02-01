@@ -77,23 +77,23 @@ class MyRewards extends Component<any, any> {
 
                         <Grid container spacing={2} className="gridContainer">
 
-                            <Grid item xs={6} sm={3} className="gridItem">
+                            <Grid item xs={6} sm={4} className="gridItem">
                                 <Typography variant="h4">{this.state.total}</Typography>
                                 <Typography variant="body1">{this.props.language === 'hi' ? 'कुल प्राप्त किए गए अंक' : 'Total Points Earned'}</Typography>
                             </Grid>
 
 
-                            <Grid item xs={6} sm={3} className="gridItem">
+                            <Grid item xs={6} sm={4} className="gridItem">
                                 <Typography variant="h4">{this.state.totalPartial.Survey}</Typography>
                                 <Typography variant="body1">{this.props.language === 'hi' ? 'सर्वेक्षण के माध्यम से कमाए गए' : 'Earned via Surveys'}</Typography>
                             </Grid>
 
-                            <Grid item xs={6} sm={3} className="gridItem">
-                                <Typography variant="h4">0</Typography>
-                                <Typography variant="body1">{this.props.language === 'hi' ? 'स्वीपस्टेक्स के माध्यम से कमाए गए' : 'Earned via Sweepstakes'}</Typography>
-                            </Grid>
+                            {/*<Grid item xs={6} sm={3} className="gridItem">*/}
+                            {/*    <Typography variant="h4">0</Typography>*/}
+                            {/*    <Typography variant="body1">{this.props.language === 'hi' ? 'स्वीपस्टेक्स के माध्यम से कमाए गए' : 'Earned via Sweepstakes'}</Typography>*/}
+                            {/*</Grid>*/}
 
-                            <Grid item xs={6} sm={3} className="gridItem">
+                            <Grid item xs={6} sm={4} className="gridItem">
                                 <Typography variant="h4">{this.state.totalPartial.Referral}</Typography>
                                 <Typography variant="body1">{this.props.language === 'hi' ? 'रेफरल के माध्यम से कमाए गए' : 'Earned via Referrals'}</Typography>
                             </Grid>
