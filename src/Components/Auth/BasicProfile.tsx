@@ -59,7 +59,7 @@ class BasicProfile extends React.Component<any, any> {
             firstName: '',
             lastName: '' ,
             mobile: this.props.phoneNumber || '',
-            gender: 'male',
+            gender: 'Male',
             dateOfBirth: '',
             selectedCountryOption: null,
             selectedStateOption: null,
@@ -114,7 +114,7 @@ class BasicProfile extends React.Component<any, any> {
             const valuesIn = this.formValues()
             return Promise.resolve()
                 .then(() => this.setState({status: PageStatus.Submitting}))
-                .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId))
+                .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId, this.props.language))
                 .then((profile) => {
                     this.setState({status: PageStatus.Submitted});
                         return this.props.authBasicProfile(this.props.history, this.props.userId, profile.role)

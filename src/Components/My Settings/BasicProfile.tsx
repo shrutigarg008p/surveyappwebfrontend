@@ -118,7 +118,7 @@ class BasicProfile extends React.Component<any, any> {
             const valuesIn = this.formValues()
             return Promise.resolve()
                 .then(() => this.setState({status: PageStatus.Submitting}))
-                .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId))
+                .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId, this.props.language || 'en'))
                 .then((profile) => {
                     this.fetchUserProfile()
                     alert('Profile Successfully Updated.')
@@ -448,7 +448,7 @@ class BasicProfile extends React.Component<any, any> {
     </div>
 </div>
 
-                   
+
 
 <div className="row">
     <div className="col">

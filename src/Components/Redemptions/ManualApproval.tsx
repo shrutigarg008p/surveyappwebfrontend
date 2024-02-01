@@ -22,7 +22,7 @@ class ManualApproval extends React.Component<any, any> {
             .then(() => this.setState({status: PageStatus.Submitting}))
             .then(() => RedemptionModeAPI.manualApproved(obj))
             .then((res) => {
-                alert('Number Verified')
+                alert('Request Approved')
                 this.setState({status: PageStatus.Submitted}, () => {
                     this.props.onSubmit()
                 })

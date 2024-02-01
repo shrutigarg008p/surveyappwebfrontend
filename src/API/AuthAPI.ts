@@ -90,8 +90,9 @@ export class AuthAPI {
     static async createBasicProfile(
         body: any,
         userId: any,
+        language: any,
     ): Promise<any> {
-        return api.put(`${createBasicProfileURL}/${userId}`, body)
+        return api.put(`${createBasicProfileURL}/${userId}?language=${language}`, body)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });
