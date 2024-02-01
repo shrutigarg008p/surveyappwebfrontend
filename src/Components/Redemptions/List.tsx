@@ -17,6 +17,7 @@ import {exportToExcel} from "../../Utils/ExportToExcel";
 import {Confirmation} from "../../Shared/Confirmation";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
+import ManualApproval from "./ManualApproval";
 
 const MODAL_TYPES = {
     NONE: 'NONE',
@@ -45,6 +46,8 @@ type State = {
             formType: MODAL_TYPES.NONE,
             redemptions: [],
             queryId: null,
+            showManual: false,
+            id: '',
             filteredData: [],
             filters: {
                 requestDate: '',
@@ -236,9 +239,22 @@ type State = {
                         </div>
                     </Show>
 
+                    <Show when={this.state.showManual} >
+                        <ManualApproval
+                            id={this.state.id}
+                            userId={this.props.userId}
+                            show={this.state.showManual}
+                            onClose={()=> this.setState({ showManual: false, id: '' })}
+                            onSubmit={() => {
+                                this.fetchList()
+                                this.setState({ showManual: false, id: '' })
+                            }
+                        }
+                        />
+
+                    </Show>
+
                     <Show when={this.state.status === PageStatus.Loaded}>
-
-
                         <Show when={!this.state.filteredData.length}>
                             <Alert variant="info" show={!this.state.redemptions.length}>
                                 At the current moment data is not available.
@@ -300,6 +316,7 @@ type State = {
                                             </td>
 
                                             <td>
+                                                {redemption.redemptionModeTitle !== 'Amazon e-Gift Card' ?
                                                 <Confirmation onAction={() => this.approvedActions(redemption.id)} body="Are you sure want to approve request ?">
                                                     <Button
                                                         variant="success"
@@ -310,6 +327,18 @@ type State = {
                                                         Approve
                                                     </Button>
                                                 </Confirmation>
+                                                    :
+                                                    <Button
+                                                        variant="success"
+                                                        size="sm"
+                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'}
+                                                        onClick={() => this.setState({ id: redemption.id, showManual: true })}
+                                                        className="mx-1"
+                                                    >
+                                                        Approve Manual
+                                                    </Button>
+                                                }
+
                                                 <Confirmation onAction={() => this.rejectActions(redemption.id)} body="Are you sure want to reject request ?">
                                                     <Button
                                                         variant="danger"

@@ -65,13 +65,13 @@ class ChangePasswordForm extends React.Component<any, any> {
     }
 
     onChangePassword(value, type){
-        let { password, confirmPassword } = this.state;
-        if(type === 'confirmpassword'){
-            confirmPassword = value;
+        let { newPassword, confirmPassword } = this.state;
+        if(type === 'confirmPassword'){
+            this.setState({ confirmPassword: value});
         }else{
-            password = value;
+            this.setState({ newPassword: value});
         }
-        if(password !== '' && confirmPassword !== '' && password === confirmPassword){
+        if(newPassword !== '' && confirmPassword !== '' && newPassword === confirmPassword){
             this.setState({
                 isPasswordMatched : true
             })
@@ -84,9 +84,9 @@ class ChangePasswordForm extends React.Component<any, any> {
 
     reset() {
         return this.setState({
-            name: '',
-            description: '',
-            displayOrder: 1
+            currentPassword: '',
+            newPassword: '',
+            confirmPassword: ''
         });
     }
 
@@ -112,7 +112,7 @@ class ChangePasswordForm extends React.Component<any, any> {
                         <Spinner animation="border" variant="primary" />
                     </div>
                 </Show>
-        
+
                 <form onSubmit={this.props.handleSubmit(() => this.onSubmit())}>
                     <div className="form-group">
                         <label htmlFor="titleEng">
@@ -132,12 +132,12 @@ class ChangePasswordForm extends React.Component<any, any> {
                         <input
                             className="form-control"
                             type='password'
-                            onChange={(e) => this.onChangePassword(e.target.value, 'password')}
+                            onChange={(e) => this.onChangePassword(e.target.value, 'newPassword')}
                             value={this.state.newPassword}
                             placeholder={changePasswordDict[lang]["Enter..."] || "Enter..."}
                             required
                         />
-        
+
                         <label htmlFor="titleEng">
                             {changePasswordDict[lang]["Confirm New Password"] || "Confirm New Password"}*
                         </label>
@@ -150,15 +150,15 @@ class ChangePasswordForm extends React.Component<any, any> {
                             required
                         />
                     </div>
-                    {this.state.isPasswordMatched === true ? 
-                        <div className="alert alert-success">{changePasswordDict[lang]["Passwords Matched"] || "Passwords matched!"}</div> : 
+                    {this.state.isPasswordMatched === true ?
+                        <div className="alert alert-success">{changePasswordDict[lang]["Passwords Matched"] || "Passwords matched!"}</div> :
                         changePasswordDict[lang]["Not Matched"] || "Not Matched"
                     }
                     <hr />
                     <Alert variant="danger" show={!!this.state.error} className="mt-2">
                         {this.state.error}
                     </Alert>
-        
+
                     <div className="d-flex align-items-center mt-2">
                         <button
                             type="submit"
@@ -173,7 +173,7 @@ class ChangePasswordForm extends React.Component<any, any> {
                     </div>
                 </form>
             </Modal.Body>
-        </Modal>        
+        </Modal>
         );
     }
 }

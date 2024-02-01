@@ -42,7 +42,7 @@ function Login(props) {
     setShowFacebookSignIn(true);
   };
 
- 
+
 
   useEffect(()=>{
     const url = window.location.href;

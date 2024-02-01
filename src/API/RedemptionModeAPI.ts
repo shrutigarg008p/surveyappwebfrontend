@@ -68,4 +68,13 @@ export class RedemptionModeAPI {
                 return _.get(res, 'data.data', []);
             });
     }
+
+    static async manualApproved(
+        body: any,
+    ): Promise<any> {
+        return api.post(`${redemptionRespondentRequestURL}/manualApprove`, body)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 }

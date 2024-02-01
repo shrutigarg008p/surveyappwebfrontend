@@ -88,7 +88,7 @@ class MyRequests extends Component<any, any> {
     }
     render() {
         const { survey, status } = this.state;
-        const lang = this.props.language ?? 'en'; 
+        const lang = this.props.language ?? 'en';
         console.log( this.props.language);
         return (
             <div>
@@ -214,7 +214,7 @@ class MyRequests extends Component<any, any> {
                 </Card>
             </Container>
         </div>
-        
+
         );
     }
 }
