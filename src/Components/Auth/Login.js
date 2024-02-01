@@ -33,7 +33,7 @@ function Login(props) {
   const history = useHistory();
   const { invalid, pristine, submitting } = props;
   const pageContents = props.language === 'hi' ? Language.LoginHindi : Language.LoginEnglish
-
+  const lang = props.language ?? 'en';
   const handleContinueWithGoogleClick = () => {
     setShowGoogleSignIn(true);
   };
@@ -162,11 +162,11 @@ function Login(props) {
                 <form onSubmit={props.handleSubmit(onSubmit)}>
                   <div className="mb-3 mt-3">
                     <label htmlFor="email">{pageContents.items[4].title}</label>
-                    <input type="email" title="" className="form-control" name="email" onChange={(e) => setUsername({ username: e.target.value })} required />
+                    <input data-lang={lang} maxLength={200} type="email" title="" className="form-control" name="email" onChange={(e) => setUsername({ username: e.target.value })} required />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="pwd">{pageContents.items[5].title}</label>
-                    <input type="password" title="" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
+                    <input data-lang={lang} type="password" title="" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
                   </div>
                   <GoogleReCaptcha
                 onCaptchaValidation={handleCaptchaValidation}
