@@ -54,6 +54,24 @@ class VerifyOtp extends Component {
             });
     }
 
+    resendOtp() {
+        if (this.props.phoneNumber) {
+            if (this.state.userId && this.props.phoneNumber) {
+                let obj = {phoneNumber: this.props.phoneNumber, userId: this.state.userId}
+                return Promise.resolve()
+                    .then(() => this.setState({status: PageStatus.Submitting}))
+                    .then(() => AuthAPI.resendOtp(obj))
+                    .then((profile) => {
+                        alert(this.props.language === 'hi' ? 'ओटीपी सफलतापूर्वक पुनः भेजें' : 'OTP Resend Successfully')
+                        this.setState({status: PageStatus.Submitted, otpSend: true });
+                    })
+                    .catch((error) => {
+                        this.setState({status: PageStatus.Error, error: error.message});
+                    });
+            }
+        }
+    }
+
     render() {
         const { otp, error, pageContent } = this.state;
         console.log('erre---->', error)
@@ -95,6 +113,18 @@ class VerifyOtp extends Component {
                     </p>
                         <input placeholder={pageContent.items[0].title} type="text" value={otp} onChange={this.handleChange} />
                     <button className="ml-3" onClick={this.handleVerify}>{pageContent.items[1].title}</button>
+
+                    <div className="mt-2 d-flex justify-content-center">
+                        <button
+                            type="submit"
+                            disabled={!this.props.phoneNumber || !this.state.userId}
+                            onClick={() => this.resendOtp()}
+                            className="btn btn-primary mr-3"
+                        >
+                            {this.props.language === 'hi' ? 'ओटीपी पुनः भेजें' : 'Resend OTP'}
+                        </button>
+                    </div>
+
                 </div>
                 <Alert variant="danger" show={!!this.state.error} className="mt-2">
                     {this.state.error}
@@ -109,6 +139,7 @@ const mapStateToProps = (state) => {
         isAuth: state.adminUser.adminUser.isAuthenticated,
         token: state.adminUser.adminUser.token,
         language: state.adminUser.adminUser.language,
+        phoneNumber: state.adminUser.adminUser.phoneNumber,
         isLoading: state.adminUser.adminUser.loading,
         error: state.adminUser.adminUser.error,
     };

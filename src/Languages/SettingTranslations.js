@@ -44,11 +44,13 @@ export const mobileVerificationDict = {
     "Mobile Verification": "Mobile Verification",
     "Enter OTP": "Enter OTP",
     "Verify Mobile": "Verify Mobile",
+    "Resend OTP": "Resend OTP",
   },
   hi: {
     "Mobile Verification": "मोबाइल सत्यापन",
     "Enter OTP": "ओटीपी दर्ज करें",
     "Verify Mobile": "मोबाइल सत्यापित करें",
+    "Resend OTP" : "ओटीपी पुनः भेजे"
   }
 };
 
@@ -67,7 +69,6 @@ export const formFieldDict = {
     "State": "State",
     "City": "City",
     "Referral Source": "Referral Source",
-    "Select Referral": "Select Referral",
     "Submit": "Submit",
     "Reset": "Reset",
     "Enter here": "Enter here",
@@ -75,7 +76,6 @@ export const formFieldDict = {
     "Choose": "--Choose--",
     "Male": "Male",
     "Female": "Female",
-    "Other": "Other",
     "Select Referral": "Select Referral",
     "Ad flier with newspaper": "Ad flier with newspaper",
     "Ad flier at market/outdoors": "Ad flier at market/outdoors",
@@ -104,7 +104,6 @@ export const formFieldDict = {
     "State": "राज्य",
     "City": "शहर",
     "Referral Source": "रेफरल स्रोत",
-    "Select Referral": "रेफरल का चयन करें",
     "Submit": "जमा करें",
     "Reset": "रीसेट करें",
     "Enter here": "यहाँ दर्ज करें",
@@ -112,7 +111,6 @@ export const formFieldDict = {
     "Choose": "--चुनें--",
     "Male": "पुरुष",
     "Female": "महिला",
-    "Other": "अन्य",
     "Select Referral": "रेफरल का चयन करें",
     "Ad flier with newspaper": "अखबार के साथ विज्ञापन पत्रक",
     "Ad flier at market/outdoors": "बाजार/बाहर में विज्ञापन पत्रक",

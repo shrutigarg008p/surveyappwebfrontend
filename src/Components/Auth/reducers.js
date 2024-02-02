@@ -59,11 +59,12 @@ export const authReducers = (state = initialState, action) => {
     }
 
     case authActions.AUTH_SUCCESS_MOBILE_STEP: {
-      console.log('state--->', state, initialState)
+      console.log('state--->><><>', state, initialState, action.user.phoneNumber)
       const adminUser = {
         isAuthenticated: false,
         loading: false,
         error: null,
+        phoneNumber: action.user.phoneNumber,
         language: state.adminUser.language
       };
       return { ...state, adminUser };
