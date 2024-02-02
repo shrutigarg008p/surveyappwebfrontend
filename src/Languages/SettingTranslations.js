@@ -18,7 +18,8 @@ export const settingDict = {
       "Subscribe Confirmation": "Are you sure want to Subscribe IndiaPolls?",
       "Deletion Confirmation" : "Are you sure want to create delete request?",
       "Verified" : "Verified",
-      "Not-Verified" : "Not-Verified"
+      "Not-Verified" : "Not-Verified", 
+      "Unsubscribe From Indiapolls" : "Unsubscribe From Indiapolls"
     },
     hi: {
       "Account": "खाता",
@@ -39,7 +40,8 @@ export const settingDict = {
       "Subscribe Confirmation": "क्या आप वाकई IndiaPolls को सब्सक्राइब करना चाहते हैं?",
       "Deletion Confirmation" : "क्या आप वाकई में हटाने का अनुरोध बनाना चाहते हैं?", 
       "Verified" : "सत्यापित",
-      "Not-Verified" : "सत्यापित नहीं है"
+      "Not-Verified" : "सत्यापित नहीं है",
+      "Unsubscribe From Indiapolls" : "IndiaPolls से सदस्यता हटाए "
     }
 };
 
