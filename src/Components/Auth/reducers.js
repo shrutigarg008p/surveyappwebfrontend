@@ -1,7 +1,13 @@
 import * as authActions from './actions';
 
-const initialState = {
-  adminUser: {
+let user = localStorage.getItem('persist:root');
+user = JSON.parse(user); 
+let adminUser; 
+if(user && user.hasOwnProperty('adminUser')){
+   adminUser = user.adminUser; 
+}
+else{
+  adminUser = {
     isAuthenticated: false,
     token: null,
     firstName: null,
@@ -11,10 +17,16 @@ const initialState = {
     loading: false,
     error: null,
     language: null
-  },
+  }
+}
+
+console.log(adminUser); 
+const initialState = {
+  adminUser: adminUser
 };
 
 export const authReducers = (state = initialState, action) => {
+  console.log(action.type);
   switch (action.type) {
     case authActions.AUTH_START: {
       return {
@@ -85,15 +97,8 @@ export const authReducers = (state = initialState, action) => {
 
     case authActions.LANGUAGE_CHANGE: {
       const adminUser = {
-       language: action.user,
-        isAuthenticated: false,
-        token: null,
-        firstName: null,
-        lastName: null,
-        roleName: null,
-        expiry: null,
-        loading: false,
-        error: null,
+        ...state.adminUser,
+       language: action.user
       };
       return { ...state, adminUser };
     }

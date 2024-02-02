@@ -130,6 +130,7 @@ function AdminNavbarLinks(props) {
           <select id="language-dropdown" className="text-center" defaultValue={lang}
           onChange={(e)=>{
             dispatch(languageChange(e.target.value));
+            window.location.reload();
           }}
           >
           <option value="en">English</option>
