@@ -271,7 +271,35 @@ class Form extends React.Component<any, any> {
 
   reset() {
     return this.setState({
-      name: ''
+      data: '',
+      name: "",
+      company: "",
+      description: "",
+      "userLimitCommitted": 0,
+      "userLimitCutoff": 0,
+      "client": "",
+      "ceggPoints": 0,
+      "surveyLength": 0,
+      "publishDate": "",
+      "expiryDate": "",
+      "outlierCutoffTime": '',
+      "costPerInterview": 0,
+      "isActive": true,
+      "companyLogo": "",
+      "useUniqueLinks": false,
+      "ipUnique": false,
+      "surveyUrlIdentifier": "id",
+      "url": "",
+      "surveyType": "Open",
+      "pointAllocationType": "Manual",
+      isPaused: false,
+      selectedCountryOption: null,
+      country: '',
+      description_one: '',
+      description_two: '',
+      description_three: '',
+      description_four: '',
+      colorCode: ''
     });
   }
 

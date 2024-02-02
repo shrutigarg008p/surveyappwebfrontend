@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Link, useHistory, useParams } from "react-router-dom";
 import {Alert, Button} from "react-bootstrap";
 import {authLogin, languageChange, languageChangeOption} from "./auth.actions";
-import { Assets } from 'enums';
+import {Assets, PageStatus} from 'enums';
 import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
 import { Show } from "../../Layout";
@@ -202,6 +202,12 @@ function Login(props) {
                   language={props.language}
                   />
                 </div> */}
+                <Alert
+                    variant="danger"
+                    show={props.authError}
+                >
+                  {props.language === 'hi' ? (props.authError === 'User Not found.' ? 'उपयोगकर्ता नहीं मिला।' : props.authError === 'Invalid Password!' ? 'गलत पासवर्ड।' : props.authError) : props.authError}
+                </Alert>
                   <div className="text-center">
                     <select id="language-dropdown" className="text-center" onChange={languageChangeOptions} value={props.language}>
                     <option value="en">English</option>
