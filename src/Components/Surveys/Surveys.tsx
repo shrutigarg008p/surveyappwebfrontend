@@ -212,7 +212,7 @@ export class Surveys extends Component<any, any> {
                       className="form-control"
                       placeholder="select date"
                       name="publishDate"
-                      // value={filters.createdAt}
+                      value={filters.publishDate}
                       onChange={this.handleFilterChange}
 
                   />
@@ -253,6 +253,7 @@ export class Surveys extends Component<any, any> {
                       className="form-control"
                       placeholder="select date"
                       name="expiryDate"
+                      value={filters.expiryDate}
                       onChange={this.handleFilterChange}
 
                   />

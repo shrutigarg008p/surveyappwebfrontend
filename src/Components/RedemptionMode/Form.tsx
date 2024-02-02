@@ -125,7 +125,12 @@ class Form extends React.Component<any, any> {
 
   reset() {
     return this.setState({
-      name: ''
+      name: '',
+      minimumPoints: 0,
+      description: "",
+      usePhone: false,
+      useAddress: false,
+      useName: false
     });
   }
 

@@ -78,7 +78,8 @@ export class RewardsList extends Component<any, any> {
     };
 
     clearFilter = () => {
-        this.setState({filters: {
+        this.setState({
+            filters: {
                 rewardDate: '',
                 rewardType: ''
             },
@@ -126,7 +127,14 @@ export class RewardsList extends Component<any, any> {
                         <div className="row">
                             <div className="col">
                                 <label>Reward Date</label>
-                                <input type="date" className="form-control" name="rewardDate" placeholder="select date" onChange={this.handleFilterChange}/>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    name="rewardDate"
+                                    placeholder="select date"
+                                    value={filters.rewardDate}
+                                    onChange={this.handleFilterChange}
+                                />
                             </div>
                             <div className="col">
                                 <label>Reward Type</label>
@@ -147,6 +155,7 @@ export class RewardsList extends Component<any, any> {
                                     name='rewardType'
                                     id='type'
                                     required
+                                    value={filters.rewardType}
                                     onChange={this.handleFilterChange}
                                 >
                                     <option value='' disabled>--Choose--</option>

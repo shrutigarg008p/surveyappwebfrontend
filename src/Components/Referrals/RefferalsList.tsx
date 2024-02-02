@@ -136,6 +136,7 @@ class ReferralsList extends Component<any, any> {
                     className="form-control"
                     placeholder={referralDict[lang]["select date"] || "select date"}
                     name="createdAt"
+                    value={filters.createdAt}
                     onChange={this.handleFilterChange}
                 />
             </div>
@@ -174,7 +175,7 @@ class ReferralsList extends Component<any, any> {
         <div className="row">
             <div className="col">
                 <label>{referralDict[lang]["Referral Email"] || "Referral Email"}</label>
-                <input 
+                <input
                     type="text"
                     className="form-control"
                     placeholder={referralDict[lang]["Email"] || "Email..."}
@@ -185,13 +186,13 @@ class ReferralsList extends Component<any, any> {
             </div>
             <div className="col">
                 <label>{referralDict[lang]["User Email"] || "User Email"}</label>
-                <input 
-                    type="text" 
-                    name="userEmail" 
-                    className="form-control" 
-                    placeholder={referralDict[lang]["Email"] || "Email..."} 
+                <input
+                    type="text"
+                    name="userEmail"
+                    className="form-control"
+                    placeholder={referralDict[lang]["Email"] || "Email..."}
                     value={filters.userEmail}
-                    onChange={this.handleFilterChange} 
+                    onChange={this.handleFilterChange}
                 />
             </div>
             <div className="col">
@@ -214,10 +215,10 @@ class ReferralsList extends Component<any, any> {
         <div className="row">
             <div className="col">
                 <label>{referralDict[lang]["Signup Ip"] || "Signup Ip"}</label>
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder={referralDict[lang]["IP"] || "IP..."} 
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder={referralDict[lang]["IP"] || "IP..."}
                     value={filters.Ip}
                     onChange={this.handleFilterChange}
                 />

@@ -232,7 +232,25 @@ class Form extends React.Component<any, any> {
 
   reset() {
     return this.setState({
-      name: null
+      name: "",
+      description: "",
+      "gender": 'Male',
+      "isActive": true,
+      "profileCount": 0,
+      "fromAge": '',
+      "toAge": '',
+      "fromRegistrationDate": '',
+      "toRegistrationDate": '',
+      "stateIds": [],
+      "cityIds": [],
+      "tierIds": [],
+      segmentsIds: [],
+      regionsIds: [],
+      selectedStatesOption: [],
+      selectedCitiesOption: [],
+      selectedTiersOption: [],
+      selectedSegmentsOption: [],
+      selectedRegionsOption: []
     });
   }
 

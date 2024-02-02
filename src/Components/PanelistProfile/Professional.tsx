@@ -122,7 +122,7 @@ class Professional extends React.Component<any, any> {
                                         {this.props.language === 'hi' ? 'सेव करे' : 'Save'}
                                     </Button>
                                     <Button
-                                        onClick={() => this.props.history.push('/')}
+                                        onClick={() => this.props.history.push('/panelist/profile-overview')}
                                         variant="danger"
                                         size="sm"
                                         className="ml-2"
