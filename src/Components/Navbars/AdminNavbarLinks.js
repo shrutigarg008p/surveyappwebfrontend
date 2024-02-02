@@ -14,15 +14,17 @@ import Button from "../../Components/CustomButtons/Button.js";
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 import { useHistory } from 'react-router-dom';
 import {Notifications} from "@material-ui/icons";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {PageStatus} from "../../enums";
 import {AuthAPI, SurveysAPI} from "../../API";
 import { menuDict } from "Languages/ProfileTranslations.js";
+import { languageChange } from "Components/Auth/auth.actions.js";
 const useStyles = makeStyles(styles);
 
 function AdminNavbarLinks(props) {
   const history = useHistory();
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
   const [data, setData] = useState([]);
@@ -123,6 +125,18 @@ function AdminNavbarLinks(props) {
       {/*    <p className={classes.linkText}>Dashboard</p>*/}
       {/*  </Hidden>*/}
       {/*</Button>*/}
+      <div className={classes.manager}>
+      <div className="text-center">
+          <select id="language-dropdown" className="text-center" defaultValue={lang}
+          onChange={(e)=>{
+            dispatch(languageChange(e.target.value));
+          }}
+          >
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+          </select>
+      </div>
+      </div>
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -257,4 +271,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AdminNavbarLinks);
+export default connect(mapStateToProps, {}) (AdminNavbarLinks);
