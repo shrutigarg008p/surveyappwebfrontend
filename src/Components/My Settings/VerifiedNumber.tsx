@@ -43,7 +43,7 @@ class OTPVerification extends React.Component<any, any> {
             .then(() => this.setState({status: PageStatus.Submitting}))
             .then(() => AuthAPI.verifyMobileOtp(obj))
             .then((res) => {
-                alert('Number Verified')
+                alert(this.props.language === 'hi' ? 'नंबर सत्यापित' : 'Number Verified')
                     this.setState({status: PageStatus.Submitted}, () => {
                         this.props.onSubmit()
                     })
@@ -58,7 +58,7 @@ class OTPVerification extends React.Component<any, any> {
     };
 
     render() {
-        const lang = this.props.language ?? 'en'; 
+        const lang = this.props.language ?? 'en';
         return (
             <Modal
             centered
@@ -87,7 +87,7 @@ class OTPVerification extends React.Component<any, any> {
                             required
                         />
                     </div>
-        
+
                     <div className="mt-2 d-flex justify-content-center">
                         <button
                             type="submit"
@@ -97,21 +97,30 @@ class OTPVerification extends React.Component<any, any> {
                         >
                             {mobileVerificationDict[lang]["Verify Mobile"] || "Verify Mobile"}
                         </button>
+
+                        <button
+                            type="submit"
+                            disabled={!this.props.phoneNumber || !this.props.userId}
+                            onClick={() => this.resendOtp()}
+                            className="btn btn-primary mr-3"
+                        >
+                            {mobileVerificationDict[lang]["Resend OTP"] || "Resend OTP"}
+                        </button>
                     </div>
-        
+
                     <Show when={this.state.status === PageStatus.Submitting}>
                         <div className="d-flex justify-content-center w-100 p-5">
                             <Spinner animation="border" variant="primary" />
                         </div>
                     </Show>
-        
+
                     <Alert className="mt-3" variant="danger" show={this.state.status === PageStatus.Error}>
                         {this.state.error}
                     </Alert>
                 </div>
             </Modal.Body>
         </Modal>
-        
+
         );
     }
 }
