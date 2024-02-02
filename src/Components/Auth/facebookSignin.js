@@ -19,6 +19,8 @@ class FacebookSignIn extends Component {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
+                const credential = FacebookAuthProvider.credentialFromResult(result);
+                const accessToken = credential.accessToken;
                 console.log(user)
                 let payload = {
                     email: user.email,
@@ -27,6 +29,7 @@ class FacebookSignIn extends Component {
                     phone: user.phoneNumber,
                     registerType: 'facebook',
                     role: 'panelist',
+                    facebookToken : accessToken
                 };
 
                 const url = process.env.REACT_APP_BASE_URL_API + '/api/v1/auth/user/login';

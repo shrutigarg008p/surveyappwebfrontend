@@ -130,8 +130,8 @@ function Login(props) {
                 <p>{pageContents.items[1].title}<Link to="#" onClick={handleClick}>{pageContents.items[2].title}</Link></p>
                 <div className="social-login">
                   <div>
-                    <img src="assets/img/google.svg" style={{width:'50px', height:'50px'}} alt="" onClick={handleContinueWithGoogleClick}/>
-                    <img src="assets/img/facebook.svg" style={{width:'50px', height:'50px'}} alt="" onClick={handleContinueWithFacebookClick}/>
+                    <img src={'assets/img/google.png'} style={{width:'40px', height:'40px'}} alt="" onClick={handleContinueWithGoogleClick}/>
+                    &nbsp; &nbsp; <img src="assets/img/facebook.png" style={{width:'40px', height:'40px'}} alt="" onClick={handleContinueWithFacebookClick}/>
                   </div>
                   {showGoogleSignIn && <GoogleSignIn />}
                   {showFacebookSignIn && <FacebookSignIn />}

@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet";
 import { Assets } from 'enums';
 import { Link } from 'react-router-dom';
 import GoogleSignIn from "./googleSignin";
+import FacebookSignIn from "./facebookSignin";
 import { languageChange } from './auth.actions';
 import GoogleReCaptcha from './GoogleRecaptcha';
 import { registerDict } from 'Languages/RegistrationTranslations';
@@ -37,6 +38,7 @@ class Registration extends Component {
       isPasswordMatched: false,
       referralId: '',
       showGoogleSignIn: false,
+      showFacebookSignIn: false,
       pageContent: this.props.language === 'hi' ? Language.SignupHindi : Language.SignupEnglish,
       error: {
         status: false,
@@ -65,6 +67,10 @@ class Registration extends Component {
 
   handleContinueWithGoogleClick = () => {
     this.setState({ showGoogleSignIn: true });
+  };
+
+  handleContinueWithFacebookClick = () => {
+    this.setState({ showFacebookSignIn: true });
   };
 
   onSubmit() {
@@ -188,17 +194,10 @@ class Registration extends Component {
                   <h2>{pageContent.items[0].title}</h2>
                   <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
                   <div className="social-login">
-                    <div onClick={this.handleContinueWithGoogleClick}><img src="assets/img/google.svg" alt="" /></div>
+                    <img src={'assets/img/google.png'} style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithGoogleClick()}/>
+                    &nbsp; &nbsp; <img src="assets/img/facebook.png" style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithFacebookClick()}/>
                     {this.state.showGoogleSignIn && <GoogleSignIn />}
-                    {/*<FacebookLogin*/}
-                    {/*    appId="879890270328649"*/}
-                    {/*    autoLoad={false}*/}
-                    {/*    fields="name,email,picture"*/}
-                    {/*    callback={(e) => responseFacebook(e)}*/}
-                    {/*    icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}*/}
-                    {/*    cssClass="facebook-login-btn"*/}
-                    {/*    textButton=""*/}
-                    {/*/>*/}
+                  {this.state.showFacebookSignIn && <FacebookSignIn />}
                   </div>
                   <div className="RuleWithText">{pageContent.items[3].title}</div>
                   {/* <form onSubmit={props.handleSubmit(onSubmit)}> */}
