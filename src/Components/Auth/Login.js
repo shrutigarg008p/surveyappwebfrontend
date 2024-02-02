@@ -16,7 +16,7 @@ import {MobileLogin} from "./MobileLogin";
 import Language from "../../Languages/Login/content.json"
 import {Helmet} from "react-helmet";
 import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
-import SimpleCaptcha from "./Capcha";
+// import SimpleCaptcha from "./Capcha";
 import GoogleReCaptcha from "./GoogleRecaptcha";
 
 function Login(props) {
@@ -34,6 +34,7 @@ function Login(props) {
   const { invalid, pristine, submitting } = props;
   const pageContents = props.language === 'hi' ? Language.LoginHindi : Language.LoginEnglish
   const lang = props.language ?? 'en';
+
   const handleContinueWithGoogleClick = () => {
     setShowGoogleSignIn(true);
   };
@@ -61,14 +62,16 @@ function Login(props) {
     setReferralId(referralId)
   }, []);
 
-  const onSubmit = () =>
-    props.authLogin(
+  const onSubmit = () =>{
+     props.authLogin(
       username.username,
       password.password,
       'password',
       props.language,
       history
-  );
+    );
+  }
+    
 
   const handleClick = () => {
     if (referralId) {
@@ -178,6 +181,9 @@ function Login(props) {
                   </a>
                 </Show>
                 <LoadingSpinner show={props.isLoading} />
+                <Show when={true}>
+                  {props?.error?.message ?? ''}
+                </Show>
                 <span className="text-right">
                   <button
                       type="submit"

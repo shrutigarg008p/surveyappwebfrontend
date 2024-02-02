@@ -26,10 +26,16 @@ export const authRegisterSuccess = (user) => ({
     user,
 });
 
-export const languageChange = (user) => ({
+export const languageChange = (user) => {
+  console.log([
+    authActions.LANGUAGE_CHANGE,
+    user
+  ]);
+  return {
     type: authActions.LANGUAGE_CHANGE,
     user,
-});
+  }
+};
 
 export const basicProfileCompleted = (user) => ({
     type: authActions.AUTH_BASIC_PROFILE_SUCCESS,
