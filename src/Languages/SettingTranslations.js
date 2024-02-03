@@ -19,7 +19,8 @@ export const settingDict = {
       "Deletion Confirmation" : "Are you sure want to create delete request?",
       "Verified" : "Verified",
       "Not-Verified" : "Not-Verified", 
-      "Unsubscribe From Indiapolls" : "Unsubscribe From Indiapolls"
+      "Unsubscribe From Indiapolls" : "Unsubscribe From Indiapolls",
+      "Verify" : "Verify"
     },
     hi: {
       "Account": "खाता",
@@ -41,7 +42,8 @@ export const settingDict = {
       "Deletion Confirmation" : "क्या आप वाकई में हटाने का अनुरोध बनाना चाहते हैं?", 
       "Verified" : "सत्यापित",
       "Not-Verified" : "सत्यापित नहीं है",
-      "Unsubscribe From Indiapolls" : "IndiaPolls से सदस्यता हटाए "
+      "Unsubscribe From Indiapolls" : "IndiaPolls से सदस्यता हटाए ",
+      "Verify" : "सत्यापित करें"
     }
 };
 

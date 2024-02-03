@@ -29,7 +29,7 @@ class FacebookSignIn extends Component {
                     phone: user.phoneNumber,
                     registerType: 'facebook',
                     role: 'panelist',
-                    facebookToken : accessToken
+                    facebooktoken : accessToken
                 };
 
                 const url = process.env.REACT_APP_BASE_URL_API + '/api/v1/auth/user/login';
