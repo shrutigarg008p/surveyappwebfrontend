@@ -18,6 +18,7 @@ import {Helmet} from "react-helmet";
 import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
 // import SimpleCaptcha from "./Capcha";
 import GoogleReCaptcha from "./GoogleRecaptcha";
+import { registerDict } from 'Languages/RegistrationTranslations';
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -165,11 +166,41 @@ function Login(props) {
                 <form onSubmit={props.handleSubmit(onSubmit)}>
                   <div className="mb-3 mt-3">
                     <label htmlFor="email">{pageContents.items[4].title}</label>
-                    <input data-lang={lang} maxLength={200} type="email" title="" className="form-control" name="email" onChange={(e) => setUsername({ username: e.target.value })} required />
+                    <input 
+                    data-lang={lang} 
+                    maxLength={200} 
+                    type="email" 
+                    className="form-control" 
+                    name="email" 
+                    onChange={(e) => {
+                      e.target.setCustomValidity("")
+                      setUsername({ username: e.target.value })} 
+                    }
+                    required
+                    title={registerDict[lang]['correct_email_format']}
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                    onInput={(e)=>e.target.setCustomValidity("")}
+                    onInvalid={(e)=>{
+                      let msg = registerDict[lang]['correct_email_format'];
+                      e.target.setCustomValidity(msg)
+                    }}
+                    
+                    />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="pwd">{pageContents.items[5].title}</label>
-                    <input data-lang={lang} type="password" title="" className="form-control" name="pswd" onChange={(e) => setPassword({ password: e.target.value })} required />
+                    <input data-lang={lang} type="password" className="form-control" name="pswd" onChange={(e) => {
+                      e.target.setCustomValidity("")
+                      setPassword({ password: e.target.value })}
+                    } 
+                    title={registerDict[lang]['password_required']}
+                    onInput={(e)=>e.target.setCustomValidity("")}
+                    onInvalid={(e)=>{
+                      let msg = registerDict[lang]['validationMessage'] + ': '+ registerDict[lang]['password_required']
+                      e.target.setCustomValidity(msg)
+                    }}
+                    
+                    required />
                   </div>
                   <GoogleReCaptcha
                 onCaptchaValidation={handleCaptchaValidation}
