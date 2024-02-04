@@ -282,7 +282,7 @@ class MySettings extends React.Component<any, any> {
                 (<span style={{ color: 'green', marginLeft: '5px' }}>✅ ({settingDict[lang]["Verified"] || "Verified"})</span>) :
                 (<span
                     style={{ color: 'red', marginLeft: '5px' }}>
-                    ❌ ({settingDict[lang]["Not-Verified"] || "Not-Verified"}) <a href="#" onClick={() => this.setState({ showMobileVerification: true })} className="font-weight-bold ql-color-green">{settingDict[lang]["Verify?"] || "Verify?"}</a>
+                    ❌ ({settingDict[lang]["Not-Verified"] || "Not-Verified"}) <a onClick={() => this.setState({ showMobileVerification: true })} className="font-weight-bold ql-color-green">{settingDict[lang]["Verify?"] || "Verify?"}</a>
                 </span>)
             }
         </div>
