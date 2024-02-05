@@ -148,7 +148,7 @@ class DashboardDetails extends React.Component<any, any> {
                 this.setState({ status: PageStatus.Error, error: error.message });
             });
     }
-
+ 
 
     formValues() {
         if(this.state.selectedPartnerOption) {
