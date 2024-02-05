@@ -35,7 +35,14 @@ class GoogleSignIn extends Component {
                                 if (responseData.data.role === 'panelist') {
                                     dispatch(authSuccess(responseData.data));
                                     history.push('/panelist/dashboard');
+                                } else if (responseData.role === 'pm') {
+                                    dispatch(authSuccess(responseData.data));
+                                    history.push("/pm/dashboard");
+                                } else if (responseData.role === 'sub-admin') {
+                                    dispatch(authSuccess(responseData.data));
+                                    history.push("/sub-admin/redemption");
                                 } else {
+                                    dispatch(authSuccess(responseData.data));
                                     history.push('/admin/dashboard-admin');
                                 }
                             } else if (responseData.data.basicProfile === null) {

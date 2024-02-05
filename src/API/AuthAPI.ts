@@ -116,6 +116,15 @@ export class AuthAPI {
             });
     }
 
+    static async manualApprovedBulk(
+        data: any,
+    ): Promise<any> {
+        return api.post(`${redemptionRespondentRequestURL}/manualBulkApprove`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
     static async rejectRedemptionRequest(
         data: any,
     ): Promise<any> {

@@ -2,16 +2,12 @@ import React, {useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import Store from "@material-ui/icons/Store";
-import DateRange from "@material-ui/icons/DateRange";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-import Update from "@material-ui/icons/Update";
 import Accessibility from "@material-ui/icons/Accessibility";
 import GridItem from "../../Components/Grid/GridItem";
 import GridContainer from "../../Components/Grid/GridContainer.js";
 import Card from "../../Components/Card/Card.js";
 import CardHeader from "../../Components/Card/CardHeader.js";
 import CardIcon from "../../Components/Card/CardIcon.js";
-import CardFooter from "../../Components/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import {PageStatus} from "../../enums";
 import {SurveysAPI} from "../../API";
@@ -51,7 +47,7 @@ function Dashboard({...rest}) {
     };
 
     fetchData();
-  }, []);
+  }, [rest.language]);
 
   const cardHeight = {
     height : '120px'

@@ -29,7 +29,7 @@ type State = {
 };
 
 const headingStyle:any = {
-    fontWeight : 'bold', 
+    fontWeight : 'bold',
     fontSize : '1.1rem'
 }
 class Profiles extends React.Component<any, any> {
@@ -47,6 +47,14 @@ class Profiles extends React.Component<any, any> {
     componentDidMount() {
         if(this.props.userId) {
             this.fetchDetails();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.language !== this.props.language) {
+            this.setState({
+                pageContent: this.props.language === 'hi' ? Language.profilesHindi : Language.profilesEnglish,
+            })
         }
     }
 
@@ -125,7 +133,7 @@ class Profiles extends React.Component<any, any> {
                                 <h4 style={headingStyle}>{this.props.language === 'hi' ? 'मेरी प्रोफाइल' : 'My Profiles'}</h4>
                             </div>
                         </CardHeader>
-                        
+
                     </Card>
                 </GridContainer>
                 <Show when={this.state.status === PageStatus.Loading}>

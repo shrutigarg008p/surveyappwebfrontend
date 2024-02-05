@@ -42,6 +42,22 @@ const switchRoutes = (role, routesIn) => (
                 key={key}
             />
         )
+      } else if(prop.layout === "/pm" && role === 'pm') {
+        return (
+            <Route
+                path={prop.layout + prop.path}
+                component={prop.component}
+                key={key}
+            />
+        )
+      } else if(prop.layout === "/sub-admin" && role === 'sub-admin') {
+        return (
+            <Route
+                path={prop.layout + prop.path}
+                component={prop.component}
+                key={key}
+            />
+        )
       }
     })}
     <Redirect from="/" to="/admin/dashboard" />
@@ -57,7 +73,13 @@ function Admin({ ...rest }) {
     routes = routesIn.filter((item) => item.layout === '/panelist' || item.type === 'panelist');
   }
   if (role === 'admin') {
-    routes = routesIn.filter((item) => item.layout !== '/panelist' && item.type !== 'panelist');
+    routes = routesIn.filter((item) => item.layout === '/admin' && item.type === 'admin');
+  }
+  if (role === 'pm') {
+    routes = routesIn.filter((item) => item.layout === '/pm' && item.type === 'pm');
+  }
+  if (role === 'sub-admin') {
+    routes = routesIn.filter((item) => item.layout === '/sub-admin' && item.type === 'sub-admin');
   }
 
   const classes = useStyles();

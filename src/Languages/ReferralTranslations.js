@@ -158,4 +158,3 @@ export const referralDict = {
       "Download" : "डाउनलोड"
     }
   };
-  

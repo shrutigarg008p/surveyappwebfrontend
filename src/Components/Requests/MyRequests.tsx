@@ -182,6 +182,7 @@ class MyRequests extends Component<any, any> {
                                         <th>{dict[lang]["Points Requested"] || "Points Requested"}</th>
                                         <th>{dict[lang]["Points Redeemed"] || "Points Redeemed"}</th>
                                         <th>{dict[lang]["Phone No/Data Card No/DTH No"] || "Phone No/Data Card No/DTH No"}</th>
+                                        <th>{dict[lang]["Coupon Code"] || "Coupon Code"}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -204,6 +205,9 @@ class MyRequests extends Component<any, any> {
                                             </td>
                                             <td>
                                                 {redemption.user ? redemption.user.phoneNumber : '-'}
+                                            </td>
+                                            <td>
+                                                {redemption.coupon ? redemption.coupon : redemption.redemptionRequestStatus === 'Redeemed' ? 'Delivered' : '-'}
                                             </td>
                                         </tr>
                                     ))}
