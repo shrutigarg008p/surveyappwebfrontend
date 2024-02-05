@@ -56,7 +56,7 @@ class Form extends React.Component<any, any> {
         const valuesIn = this.formValues()
         return Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Submitting }))
-            .then(() => AuthAPI.createReferralRequest(valuesIn))
+            .then(() => AuthAPI.createReferralRequest(valuesIn, this.props.language))
             .then((country) => {
                 this.props.onSubmit(this.props.userId);
                 return this.setState({ status: PageStatus.Submitted });
@@ -70,7 +70,7 @@ class Form extends React.Component<any, any> {
     createBulk() {
         return Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Submitting }))
-            .then(() => AuthAPI.createBulkReferralRequest(this.state.importedData))
+            .then(() => AuthAPI.createBulkReferralRequest(this.state.importedData, this.props.language))
             .then((country) => {
                 this.props.onSubmit(this.props.userId);
                 return this.setState({ status: PageStatus.Submitted });
@@ -169,11 +169,11 @@ class Form extends React.Component<any, any> {
                         <Spinner animation="border" variant="primary" />
                     </div>
                 </Show>
-        
+
                 <Alert variant="danger" show={this.state.status === PageStatus.Error}>
                     {this.state.error}
                 </Alert>
-        
+
                 <div className="jumbotron bg-white p-3 border shadow-sm">
                     <div><b>{referralModalDict[lang]["Refer with link"] || "Refer with link"}</b></div>
                     <hr />
@@ -184,7 +184,7 @@ class Form extends React.Component<any, any> {
                         </a>.
                     </p>
                 </div>
-        
+
                 <div className="jumbotron bg-white p-3 border shadow-sm">
                     <div><b>{referralModalDict[lang]["Upload From a CSV list"] || "Upload From a CSV list"}</b></div>
                     <hr />
@@ -192,7 +192,7 @@ class Form extends React.Component<any, any> {
                     <div>
                     {referralModalDict[lang]["CSV Description"] || "CSV Description"}
                 <a onClick={this.downloadFile} className="link-display" style={{color: 'orange'}}> {referralModalDict[lang]["Download"] || "Download"} </a>
-               
+
                         <div>
                             <input className="mt-1" type="file" accept=".csv" onChange={(e) => this.handleFileChange(e)} />
                         </div>
@@ -209,7 +209,7 @@ class Form extends React.Component<any, any> {
                         </div>
                     </div>
                 </div>
-        
+
                 <div className="jumbotron bg-white p-3 border shadow-sm">
                     <div><b>{referralModalDict[lang]["Refer a friend"] || "Refer a friend"}</b></div>
                     <hr />
@@ -265,7 +265,7 @@ class Form extends React.Component<any, any> {
                 </div>
             </Modal.Body>
         </Modal>
-        
+
         );
     }
 }
