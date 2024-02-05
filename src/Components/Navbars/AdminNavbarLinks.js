@@ -18,7 +18,7 @@ import {connect, useDispatch} from "react-redux";
 import {PageStatus} from "../../enums";
 import {AuthAPI, SurveysAPI} from "../../API";
 import { menuDict } from "Languages/ProfileTranslations.js";
-import { languageChange } from "Components/Auth/auth.actions.js";
+import {languageChange, languageChangeNavbar} from "Components/Auth/auth.actions.js";
 const useStyles = makeStyles(styles);
 
 function AdminNavbarLinks(props) {
@@ -129,8 +129,7 @@ function AdminNavbarLinks(props) {
       <div className="text-center">
           <select id="language-dropdown" className="text-center" defaultValue={lang}
           onChange={(e)=>{
-            dispatch(languageChange(e.target.value));
-            window.location.reload();
+            dispatch(languageChangeNavbar(e.target.value));
           }}
           >
           <option value="en">English</option>

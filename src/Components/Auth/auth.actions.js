@@ -37,6 +37,13 @@ export const languageChange = (user) => {
   }
 };
 
+export const languageChangeNavbar = (user) => {
+    return {
+        type: authActions.LANGUAGE_CHANGE_NAVBAR,
+        user,
+    }
+};
+
 export const basicProfileCompleted = (user) => ({
     type: authActions.AUTH_BASIC_PROFILE_SUCCESS,
     user,
@@ -65,6 +72,10 @@ export const authLogin =
           dispatch(authSuccess(user));
           if (user.role === 'panelist') {
               history.push("/panelist/dashboard");
+          } else if (user.role === 'pm') {
+              history.push("/pm/dashboard");
+          } else if (user.role === 'sub-admin') {
+              history.push("/sub-admin/redemption");
           } else {
               history.push("/admin/dashboard-admin");
           }
@@ -88,7 +99,11 @@ export const authBasicProfile =
             dispatch(basicProfileCompleted(obj));
             if (obj.role === 'panelist') {
                 history.push("/panelist/dashboard");
-            } else {
+            } else if (obj.role === 'pm') {
+                history.push("/pm/dashboard");
+            } else if (obj.role === 'sub-admin') {
+               history.push("/sub-admin/redemption");
+           } else {
                 history.push("/admin/dashboard-admin");
             }
         } catch (error) {

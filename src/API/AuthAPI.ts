@@ -116,6 +116,15 @@ export class AuthAPI {
             });
     }
 
+    static async manualApprovedBulk(
+        data: any,
+    ): Promise<any> {
+        return api.post(`${redemptionRespondentRequestURL}/manualBulkApprove`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
     static async rejectRedemptionRequest(
         data: any,
     ): Promise<any> {
@@ -227,8 +236,9 @@ export class AuthAPI {
 
     static async createReferralRequest(
         body: any,
+        language: any,
     ): Promise<any> {
-        return api.post(`${referralsUrl}/create`, body)
+        return api.post(`${referralsUrl}/create?language=${language}`, body)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });
@@ -237,8 +247,9 @@ export class AuthAPI {
 
     static async createBulkReferralRequest(
         body: any,
+        language: any,
     ): Promise<any> {
-        return api.post(`${referralsUrl}/bulkCreateReferrals`, body)
+        return api.post(`${referralsUrl}/bulkCreateReferrals?language=${language}`, body)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

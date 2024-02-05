@@ -73,7 +73,14 @@ class MobileLogin extends React.Component<any, any> {
                             if (responseData.role === 'panelist') {
                                 dispatch(authSuccess(responseData));
                                 history.push('/panelist/dashboard');
+                            } else if (responseData.role === 'pm') {
+                                dispatch(authSuccess(responseData));
+                                history.push("/pm/dashboard");
+                            } else if (responseData.role === 'sub-admin') {
+                                dispatch(authSuccess(responseData));
+                                history.push("/sub-admin/redemption");
                             } else {
+                                dispatch(authSuccess(responseData));
                                 history.push('/admin/dashboard-admin');
                             }
                         } else if (responseData.basicProfile === null) {

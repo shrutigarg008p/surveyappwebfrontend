@@ -29,19 +29,25 @@ class FacebookSignIn extends Component {
                     phone: user.phoneNumber,
                     registerType: 'facebook',
                     role: 'panelist',
-                    facebooktoken : accessToken
+                    facebooktoken : user.uid
                 };
 
                 const url = process.env.REACT_APP_BASE_URL_API + '/api/v1/auth/user/login';
                 this.sendPostRequest(url, payload)
                     .then((responseData) => {
-                        console.log('res-->', responseData)
                         if (responseData.status === 1) {
                             if (responseData.data.basicProfile) {
                                 if (responseData.data.role === 'panelist') {
                                     dispatch(authSuccess(responseData.data));
                                     history.push('/panelist/dashboard');
+                                } else if (responseData.role === 'pm') {
+                                    dispatch(authSuccess(responseData.data));
+                                    history.push("/pm/dashboard");
+                                } else if (responseData.role === 'sub-admin') {
+                                    dispatch(authSuccess(responseData.data));
+                                    history.push("/sub-admin/redemption");
                                 } else {
+                                    dispatch(authSuccess(responseData.data));
                                     history.push('/admin/dashboard-admin');
                                 }
                             } else if (responseData.data.basicProfile === null) {

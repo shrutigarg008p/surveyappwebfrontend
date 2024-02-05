@@ -10,14 +10,13 @@ import GridContainer from "../Grid/GridContainer";
 import Card from "../Card/Card";
 import CardHeader from "../Card/CardHeader";
 import moment from 'moment'
-import GridItem from "../Grid/GridItem";
-import CardBody from "../Card/CardBody";
-import CustomInput from "../CustomInput/CustomInput";
-import {exportToExcel} from "../../Utils/ExportToExcel";
+import {exportToCSV, exportToExcel} from "../../Utils/ExportToExcel";
 import {Confirmation} from "../../Shared/Confirmation";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import ManualApproval from "./ManualApproval";
+import csvtojson from "csvtojson";
+import {dict} from "../../Languages/MyRequestsTranslations";
 
 const MODAL_TYPES = {
     NONE: 'NONE',
@@ -49,6 +48,7 @@ type State = {
             showManual: false,
             id: '',
             filteredData: [],
+            bulkImportData: [],
             filters: {
                 requestDate: '',
                 redemptionModeTitle: '',
@@ -89,9 +89,12 @@ type State = {
     };
 
     clearFilter = () => {
-        this.setState({filters: {
-                rewardDate: '',
-                rewardType: ''
+        this.setState({
+            filters: {
+                requestDate: '',
+                redemptionModeTitle: '',
+                redemptionRequestStatus: '',
+                email: ''
             },
         })
         this.fetchList()
@@ -115,7 +118,13 @@ type State = {
     }
 
     handleExport(){
-        exportToExcel(this.state.filteredData, 'output'); // 'output' is the filename without extension
+        let obj = this.state.filteredData.map((user) => {
+            return {
+                ...user,
+                'coupon_code': ''
+            }
+        })
+        exportToCSV(obj, 'redemptions');
     };
 
 
@@ -152,6 +161,69 @@ type State = {
     }
 
 
+     approvedActionsBulkManual(): Promise<void> {
+          return Promise.resolve()
+              .then(() => this.setState({status: PageStatus.Loading}))
+              .then(() => AuthAPI.manualApprovedBulk({bulkImportData: this.state.bulkImportData}))
+              .then((users) => {
+                  this.fetchList()
+                  alert('Manual Redemptions Approval Successfully Uploaded')
+                  return this.setState({ status: PageStatus.Loaded});
+              })
+              .catch((error) => {
+                  this.setState({error: error.message, status: PageStatus.Error});
+              });
+     }
+
+
+     handleFileChange = async (event) => {
+         const file = event.target.files[0];
+         if (file) {
+             try {
+                 const jsonData = await this.convertCsvToJson(file);
+                 const transformedData = jsonData.map(this.modifiedConvertedJson);
+                 this.setState({ bulkImportData:  transformedData  })
+                 console.log(transformedData);
+             } catch (error) {
+                 console.error('Error converting CSV to JSON:', error);
+             }
+         }
+     };
+
+     convertCsvToJson = (file: File): Promise<any[]> => {
+         return new Promise((resolve, reject) => {
+             const reader = new FileReader();
+
+             reader.onload = () => {
+                 const csvContent: any = reader.result
+
+                 if (!csvContent.trim()) {
+                     reject(new Error('CSV content is empty.'));
+                     return;
+                 }
+
+                 csvtojson()
+                     .fromString(csvContent)
+                     .then(jsonData => resolve(jsonData))
+             };
+
+             reader.onerror = (error) => {
+                 reject(error);
+             };
+
+             reader.readAsText(file);
+         });
+     };
+
+     modifiedConvertedJson = (obj) => {
+         return {
+             id: obj.id,
+             userId: this.props.userId,
+             coupon: obj.coupon_code,
+             approvedById: this.props.userId
+         };
+     }
+
     render() {
         const { filteredData, filters } = this.state;
 
@@ -173,11 +245,11 @@ type State = {
                         <div className="row">
                             <div className="col">
                                 <label>Request Date</label>
-                                <input type="date" name="requestDate" onChange={this.handleFilterChange} className="form-control" placeholder="select date" />
+                                <input value={filters.requestDate} type="date" name="requestDate" onChange={this.handleFilterChange} className="form-control" placeholder="select date" />
                             </div>
                             <div className="col">
                                 <label>Redemption Mode</label>
-                                <input type="text" className="form-control" placeholder="Redemption mode" name="redemptionModeTitle" onChange={this.handleFilterChange}/>
+                                <input value={filters.redemptionModeTitle} type="text" className="form-control" placeholder="Redemption mode" name="redemptionModeTitle" onChange={this.handleFilterChange}/>
                             </div>
                         </div>
                         <div className="row">
@@ -200,6 +272,7 @@ type State = {
                                     id='gender'
                                     required
                                     name="redemptionRequestStatus"
+                                    value={filters.redemptionRequestStatus}
                                     onChange={this.handleFilterChange}
                                 >
                                     <option value=''>--Choose--</option>
@@ -212,6 +285,7 @@ type State = {
                                 <label>User Email</label>
                                 <input type="text" className="form-control" placeholder="User Email"
                                        name="email"
+                                       value={filters.email}
                                        onChange={this.handleFilterChange}
                                 />
                             </div>
@@ -222,6 +296,21 @@ type State = {
                         <button type="button" className="btn btn-success" onClick={() => this.applyFilters()}>Filter Redemptions</button>
                         <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export</button>
                         <button type="button" className="btn btn-danger ml-1" onClick={() => this.clearFilter()}>Clear Filter</button>
+
+                        <div>
+                            <input className="mt-2" type="file" accept=".csv" onChange={(e) => this.handleFileChange(e)} />
+                        </div>
+                        <div>
+                            <Button
+                                onClick={() => this.approvedActionsBulkManual()}
+                                variant="primary"
+                                disabled={this.state.bulkImportData.length === 0}
+                                className="mt-3"
+                                size="sm"
+                            >
+                                Manual Approve
+                            </Button>
+                        </div>
                     {/*<button type="button" className="btn btn-warning ml-1">Approve Redemption</button>*/}
                     </div>
 
@@ -275,6 +364,7 @@ type State = {
                                     <th>Request Date</th>
                                     <th>User</th>
                                     <th>Phone No/Data Card No/DTH No</th>
+                                    <th>Coupon Code</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -314,7 +404,9 @@ type State = {
                                                     ? redemption.requestedUser.phoneNumber
                                                     : '-'}
                                             </td>
-
+                                            <td>
+                                                {redemption.coupon ? redemption.coupon : redemption.redemptionRequestStatus === 'Redeemed' ? 'Delivered' : '-'}
+                                            </td>
                                             <td>
                                                 {redemption.redemptionModeTitle !== 'Amazon e-Gift Card' ?
                                                 <Confirmation onAction={() => this.approvedActions(redemption.id)} body="Are you sure want to approve request ?">

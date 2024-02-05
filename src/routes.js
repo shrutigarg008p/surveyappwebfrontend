@@ -67,6 +67,7 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: AdminDashboard,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/dashboard",
@@ -75,6 +76,7 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: DashboardSurvey,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/profile",
@@ -83,6 +85,7 @@ const dashboardRoutes = [
     icon: AccountCircle,
     component: UserProfile,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/surveys",
@@ -91,6 +94,7 @@ const dashboardRoutes = [
     icon: ListAlt,
     component: Surveys,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/redemption",
@@ -99,6 +103,7 @@ const dashboardRoutes = [
     icon: Redeem,
     component: List,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/rewards",
@@ -107,6 +112,7 @@ const dashboardRoutes = [
     icon: CardGiftcard,
     component: RewardsList,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/referrals",
@@ -115,6 +121,7 @@ const dashboardRoutes = [
     icon: Group,
     component: ReferralsList,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/",
@@ -131,6 +138,7 @@ const dashboardRoutes = [
     icon: Apps,
     component: AllPanelists,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/panelistDetails/:userId",
@@ -139,6 +147,7 @@ const dashboardRoutes = [
     icon: Description,
     component: PenalistDetails,
     layout: "/admin",
+    type: 'admin',
     isVisible: false
   },
   {
@@ -148,6 +157,7 @@ const dashboardRoutes = [
     icon: HowToReg,
     component: RegisteredOnly,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/basicProfileOnly",
@@ -156,6 +166,7 @@ const dashboardRoutes = [
     icon: Person,
     component: BasicProfileOnly,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/unsubscribeRequests",
@@ -164,6 +175,7 @@ const dashboardRoutes = [
     icon: Cancel,
     component: UnsubscribedPanelistOnly,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/deleteRequests",
@@ -172,6 +184,7 @@ const dashboardRoutes = [
     icon: DeleteForever,
     component: DeletedPanelistsOnly,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/bounces",
@@ -180,6 +193,7 @@ const dashboardRoutes = [
     icon: Block,
     component: Bounces,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/samples",
@@ -188,6 +202,7 @@ const dashboardRoutes = [
     icon: Category,
     component: Samples,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/newsletters",
@@ -196,6 +211,7 @@ const dashboardRoutes = [
     icon: Email,
     component: NewsLetters,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/messages",
@@ -204,6 +220,7 @@ const dashboardRoutes = [
     icon: Message,
     component: Messages,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/help",
@@ -212,6 +229,7 @@ const dashboardRoutes = [
     icon: HelpIcon,
     component: Help,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/MASTER SETTINGS",
@@ -227,7 +245,8 @@ const dashboardRoutes = [
     hindi: "रिडेम्प्शन मोड",
     icon: LocalOffer,
     component: RedemptionMode,
-    layout: "/master",
+    layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/country",
@@ -235,7 +254,8 @@ const dashboardRoutes = [
     hindi: "देश",
     icon: Public,
     component: Countries,
-    layout: "/master",
+    layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/states",
@@ -243,7 +263,8 @@ const dashboardRoutes = [
     hindi: "राज्य",
     icon: LocationCity,
     component: States,
-    layout: "/master",
+    layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/cities",
@@ -251,7 +272,8 @@ const dashboardRoutes = [
     hindi: "शहर",
     icon: LocationOn,
     component: City,
-    layout: "/master",
+    layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/partners",
@@ -259,7 +281,8 @@ const dashboardRoutes = [
     hindi: "साथी",
     icon: Business,
     component: PartnersList,
-    layout: "/master",
+    layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/profile-management",
@@ -267,7 +290,8 @@ const dashboardRoutes = [
     hindi: "प्रोफ़ाइल्स",
     icon: AccountBox,
     component: ProfileManagement,
-    layout: "/master",
+    layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/labels",
@@ -275,7 +299,8 @@ const dashboardRoutes = [
     hindi: "लेबल",
     icon: Label,
     component: LabelsList,
-    layout: "/master",
+    layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/marketing-links",
@@ -284,6 +309,7 @@ const dashboardRoutes = [
     icon: Link,
     component: MarketingLinksList,
     layout: "/admin",
+    type: 'admin'
   },
   {
     path: "/SEC",
@@ -292,7 +318,10 @@ const dashboardRoutes = [
     icon: Security,
     component: SecList,
     layout: "/admin",
+    type: 'admin'
   },
+
+
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -490,6 +519,73 @@ const dashboardRoutes = [
     component: FoodAndBeverage,
     layout: "/panelist",
     type: 'panelist'
+  },
+
+
+  {
+    path: "/dashboard",
+    name: "Schedule Survey",
+    hindi: "सर्वेक्षण की योजना",
+    icon: Dashboard,
+    component: DashboardSurvey,
+    layout: "/pm",
+    type: 'pm'
+  },
+  {
+    path: "/profile",
+    name: "User Profile",
+    hindi: "उपयोगकर्ता प्रोफ़ाइल",
+    icon: AccountCircle,
+    component: UserProfile,
+    layout: "/pm",
+    type: 'pm'
+  },
+  {
+    path: "/surveys",
+    name: "Surveys",
+    hindi: "सर्वेक्षण",
+    icon: ListAlt,
+    component: Surveys,
+    layout: "/pm",
+    type: 'pm'
+  },
+  {
+    path: "/samples",
+    name: "Samples",
+    hindi: "प्रतिरूप",
+    icon: Category,
+    component: Samples,
+    layout: "/pm",
+    type: 'pm'
+  },
+  {
+    path: "/partners",
+    name: "Partners",
+    hindi: "साथी",
+    icon: Business,
+    component: PartnersList,
+    layout: "/pm",
+    type: 'pm'
+  },
+
+
+  {
+    path: "/redemption",
+    name: "Redemption Request",
+    hindi: "रिडेम्प्शन अनुरोध",
+    icon: Redeem,
+    component: List,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
+  {
+    path: "/rewards",
+    name: "Rewards",
+    hindi: "पुरस्कार",
+    icon: CardGiftcard,
+    component: RewardsList,
+    layout: "/sub-admin",
+    type: 'sub-admin'
   },
 ];
 

@@ -1,13 +1,7 @@
 import * as authActions from './actions';
 
-let user = localStorage.getItem('persist:root');
-user = JSON.parse(user); 
-let adminUser; 
-if(user && user.hasOwnProperty('adminUser')){
-   adminUser = user.adminUser; 
-}
-else{
-  adminUser = {
+const initialState = {
+  adminUser: {
     isAuthenticated: false,
     token: null,
     firstName: null,
@@ -17,12 +11,7 @@ else{
     loading: false,
     error: null,
     language: null
-  }
-}
-
-console.log(adminUser); 
-const initialState = {
-  adminUser: adminUser
+  },
 };
 
 export const authReducers = (state = initialState, action) => {
@@ -71,7 +60,6 @@ export const authReducers = (state = initialState, action) => {
     }
 
     case authActions.AUTH_SUCCESS_MOBILE_STEP: {
-      console.log('state--->><><>', state, initialState, action.user.phoneNumber)
       const adminUser = {
         isAuthenticated: false,
         loading: false,
@@ -101,6 +89,15 @@ export const authReducers = (state = initialState, action) => {
        language: action.user
       };
       return { ...state, adminUser };
+    }
+
+    case authActions.LANGUAGE_CHANGE_NAVBAR: {
+      return {
+        adminUser: {
+          ...state.adminUser,
+          language: action.user,
+        },
+      };
     }
 
     case authActions.AUTH_REGISTRATION_SUCCESS: {

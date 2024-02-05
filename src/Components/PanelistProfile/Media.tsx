@@ -43,6 +43,16 @@ class Medias extends React.Component<any, any> {
         }
     }
 
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.language !== this.props.language) {
+            this.setState({
+                pageContent: this.props.language === 'hi' ? Language.profilesHindi : Language.profilesEnglish,
+            })
+        }
+    }
+
+
     fetchDetails() {
         Promise.resolve()
             .then(() => this.setState({ status: PageStatus.Loading }))

@@ -428,7 +428,7 @@ class DashboardDetails extends React.Component<any, any> {
                                     <th>S.No</th>
                                     <th>Name</th>
                                     <th>Gender</th>
-                                    <th>Email</th>
+                                    {/*<th>Email</th>*/}
                                     <th>Status</th>
                                     <th>CreatedAt</th>
                                     {/*<th>UpdatedAt</th>*/}
@@ -443,7 +443,7 @@ class DashboardDetails extends React.Component<any, any> {
                                             <td>{index + 1}</td>
                                             <td>{info.firstName} {info.lastName}</td>
                                             <td>{info.gender}</td>
-                                            <td>{info.user ? info.user.email : '-'}</td>
+                                            {/*<td>{info.user ? info.user.email : '-'}</td>*/}
                                             <td>{info.assignUser ? info.assignUser.status : '-' }</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                             {/*<td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
