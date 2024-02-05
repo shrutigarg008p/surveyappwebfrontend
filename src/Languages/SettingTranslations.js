@@ -51,14 +51,14 @@ export const mobileVerificationDict = {
   en: {
     "Mobile Verification": "Mobile Verification",
     "Enter OTP": "Enter OTP",
-    "Verify Mobile": "Verify Mobile",
-    "Resend OTP": "Resend OTP",
+    "Verify Mobile": "Verify",
+    "Resend OTP": "Resend",
   },
   hi: {
     "Mobile Verification": "मोबाइल सत्यापन",
     "Enter OTP": "ओटीपी दर्ज करें",
-    "Verify Mobile": "मोबाइल सत्यापित करें",
-    "Resend OTP" : "ओटीपी पुनः भेजे"
+    "Verify Mobile": "सत्यापित करें",
+    "Resend OTP" : "पुनः भेजे"
   }
 };
 
@@ -96,7 +96,8 @@ export const formFieldDict = {
     "Other": "Other",
     "Searched on another search engine": "Searched on another search engine",
     "Ad at a shop/restaurant": "Ad at a shop/restaurant",
-    "Word of mouth from friend/colleague": "Word of mouth from friend/colleague"
+    "Word of mouth from friend/colleague": "Word of mouth from friend/colleague",
+    "Update Profile" : "Update Profile"
   },
   hi: {
     "First name": "पहला नाम",
@@ -131,7 +132,8 @@ export const formFieldDict = {
     "Other": "अन्य",
     "Searched on another search engine": "दूसरे खोज इंजन पर खोजा गया",
     "Ad at a shop/restaurant": "दुकान/रेस्तरां में विज्ञापन",
-    "Word of mouth from friend/colleague": "दोस्त/सहकर्मी से मुख से जानकारी"
+    "Word of mouth from friend/colleague": "दोस्त/सहकर्मी से मुख से जानकारी",
+    "Update Profile" : "प्रोफ़ाइल संपादित करें"
   }
 };
 

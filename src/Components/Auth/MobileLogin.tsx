@@ -190,27 +190,29 @@ class MobileLogin extends React.Component<any, any> {
                                 </div>
                                 <hr />
                                 <div className="mt-2 d-flex justify-content-center">
-                                    <button
-                                        type="submit"
-                                        disabled={!this.state.otp || !this.state.user}
-                                        onClick={() => this.handleVerify()}
-                                        className="btn btn-primary mr-3"
-                                    >
-                                        {pageContent.items[1].title}
-                                    </button>
-
-                                    <Show when={this.state.otpSend === true}>
-                                        <div className="mt-2 d-flex justify-content-center">
-                                            <button
+                                <Show when={this.state.otpSend === true}>
+                                <button
                                                 type="submit"
                                                 disabled={!this.state.phoneNumber}
                                                 onClick={() => this.resendOtp()}
                                                 className="btn btn-primary mr-3"
+                                                style={{fontSize: '0.8rem'}}
                                             >
-                                                {pageContent.rSendOtp}
+                                                <i className='fa fa-refresh'></i> &nbsp;{pageContent.rSendOtp}
                                             </button>
-                                        </div>
                                     </Show>
+
+                                    <button
+                                        type="submit"
+                                        disabled={!this.state.otp || !this.state.user}
+                                        onClick={() => this.handleVerify()}
+                                        className="btn btn-success mr-3"
+                                        style={{fontSize: '0.8rem'}}
+                                    >
+                                   {pageContent.items[1].title}
+                                    </button>
+
+                                    
 
                                 </div>
                         </Show>

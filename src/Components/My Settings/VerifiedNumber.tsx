@@ -89,16 +89,8 @@ class OTPVerification extends React.Component<any, any> {
                     </div>
 
                     <div className="mt-2 d-flex justify-content-center">
-                        <button
-                            type="submit"
-                            disabled={!this.state.otp || !this.props.userId || this.state.status === PageStatus.Submitting}
-                            onClick={() => this.handleVerify()}
-                            className="btn btn-primary mr-3"
-                        >
-                            {mobileVerificationDict[lang]["Verify Mobile"] || "Verify Mobile"}
-                        </button>
 
-                        <button
+                    <button
                             type="submit"
                             disabled={!this.props.phoneNumber || !this.props.userId}
                             onClick={() => this.resendOtp()}
@@ -106,6 +98,17 @@ class OTPVerification extends React.Component<any, any> {
                         >
                             {mobileVerificationDict[lang]["Resend OTP"] || "Resend OTP"}
                         </button>
+
+                        <button
+                            type="submit"
+                            disabled={!this.state.otp || !this.props.userId || this.state.status === PageStatus.Submitting}
+                            onClick={() => this.handleVerify()}
+                            className="btn btn-success mr-3"
+                        >
+                            {mobileVerificationDict[lang]["Verify Mobile"] || "Verify Mobile"}
+                        </button>
+
+                        
                     </div>
 
                     <Show when={this.state.status === PageStatus.Submitting}>

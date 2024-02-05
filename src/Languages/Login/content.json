@@ -78,11 +78,11 @@
     "cPlaceholder": "कृपया ओटीपी दर्ज करें",
     "cMPlaceholder": "यहाँ दर्ज करें",
     "cSendOtp": "ओटीपी भेजें",
-    "rSendOtp": "ओटीपी पुनः भेजें",
+    "rSendOtp": "पुनः भेजें",
     "description": "हमने आपके मोबाइल नंबर पर एक सत्यापन कोड भेजा है। कृपया मोबाइल सत्यापन पूरा करने के लिए ओटीपी दर्ज करें.",
     "items": [
       {"title": "कृपया ओटीपी दर्ज करें"},
-      {"title": "ओटीपी को सत्यापित करें"},
+      {"title": "सत्यापित करें"},
       {"title": "मोबाइल संख्या सफलतापूर्वक सत्यापित हो गई है"}
     ]
   },
@@ -92,12 +92,12 @@
     "cPlaceholder": "Please enter OTP",
     "cMPlaceholder": "Enter here",
     "cSendOtp": "Send OTP",
-    "rSendOtp": "Resend OTP",
+    "rSendOtp": "Resend",
     "title": "Please Verify Your Mobile.",
     "description": "We have sent a verification code to your mobile number. Please enter OTP to complete mobile verification.",
     "items": [
       {"title": "Please enter OTP"},
-      {"title": "Verify OTP"},
+      {"title": "Verify"},
       {"title": "Mobile verified successfully"}
     ]
   },

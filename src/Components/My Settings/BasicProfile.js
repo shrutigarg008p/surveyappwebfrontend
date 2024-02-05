@@ -13,7 +13,7 @@ import {withRouter} from "react-router";
 import {FormValue} from "./ChangePassword";
 import moment from "moment/moment";
 import { formFieldDict } from 'Languages/SettingTranslations';
-
+import { registerDict } from 'Languages/RegistrationTranslations';
 class BasicProfile extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -406,9 +406,20 @@ class BasicProfile extends React.Component<any, any> {
                                         className="form-control"
                                         id="email"
                                         name="email"
+                                        type="email"
                                         onChange={(e) => this.setState({ email: e.target.value })}
                                         value={this.state.email}
                                         placeholder={formFieldDict[lang]["Enter.."] || "Enter.."}
+                                        maxLength={200}
+                                        onInvalid={(event)=>{
+                                        const e = event.target ;
+                                          let msg = registerDict[lang]['email_required'];
+                                          e.setCustomValidity(msg)
+                                        }}
+                                        onInput={(event)=>{
+                                            const e = event.target ;
+                                            e.setCustomValidity("")}}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -425,6 +436,17 @@ class BasicProfile extends React.Component<any, any> {
                                         value={this.state.mobile}
                                         placeholder={formFieldDict[lang]["Enter here.."] || "Enter here.."}
                                         required
+                                        title={registerDict[lang]['phoneTitle']}
+                                        pattern="[6-9]\d{9}"
+                                        onInvalid={(e)=>{
+                                          const evt = e.target ;
+                                          let msg = registerDict[lang]['validationMessage'] + ': '+ registerDict[lang]['phoneTitle']
+                                          evt.setCustomValidity(msg)
+                                        }}
+                                        onInput={(e)=>{
+                                            const evt = e.target ;
+                                            evt.setCustomValidity("")}
+                                        }
                                     />
                                 </div>
                             </div>
@@ -624,7 +646,7 @@ class BasicProfile extends React.Component<any, any> {
 }
 
 
-const BasicProfileFormRedux = reduxForm<FormValue, any>({
+const BasicProfileFormRedux = reduxForm({
     form: 'labelsBasicProfileForm',
 })(BasicProfile);
 

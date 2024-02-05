@@ -283,7 +283,7 @@ class DashboardDetails extends React.Component<any, any> {
                                 </div>
                                 <div className="col">
                                     <strong>Company Logo: </strong>
-                                    {this.state.survey?.companyLogo}
+                                    <img src={this.state.survey?.companyLogo} style={{width:'50px', height:'40px'}}/>
                                 </div>
                             </div>
                             <div className="row mt-2">
