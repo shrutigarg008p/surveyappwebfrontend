@@ -206,7 +206,7 @@ class Details extends React.Component<any, State> {
                 </div>
                 <div className="col">
                   <strong>Company Logo: </strong>
-                  {this.state.survey?.companyLogo}
+                  <img src={this.state.survey?.companyLogo} style={{width:'60px', height:'40px'}}/>
                 </div>
               </div>
               <div className="row mt-2">
