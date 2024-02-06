@@ -212,18 +212,18 @@ class ReferralsList extends Component<any, any> {
                 </select>
             </div>
         </div>
-        <div className="row">
-            <div className="col">
-                <label>{referralDict[lang]["Signup Ip"] || "Signup Ip"}</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder={referralDict[lang]["IP"] || "IP..."}
-                    value={filters.Ip}
-                    onChange={this.handleFilterChange}
-                />
-            </div>
-        </div>
+        {/*<div className="row">*/}
+        {/*    <div className="col">*/}
+        {/*        <label>{referralDict[lang]["Signup Ip"] || "Signup Ip"}</label>*/}
+        {/*        <input*/}
+        {/*            type="text"*/}
+        {/*            className="form-control"*/}
+        {/*            placeholder={referralDict[lang]["IP"] || "IP..."}*/}
+        {/*            value={filters.Ip}*/}
+        {/*            onChange={this.handleFilterChange}*/}
+        {/*        />*/}
+        {/*    </div>*/}
+        {/*</div>*/}
     </form>
 
     <div className="jumbotron bg-white p-1 mt-2 shadow-sm">

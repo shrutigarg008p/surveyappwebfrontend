@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap';
 
 import { PageStatus } from 'enums';
-import {AuthAPI} from "../../API";
+import {AuthAPI, RedemptionModeAPI} from "../../API";
 import {Show} from "../../Layout";
 import GridContainer from "../Grid/GridContainer";
 import Card from "../Card/Card";
@@ -17,6 +17,7 @@ import {connect} from "react-redux";
 import ManualApproval from "./ManualApproval";
 import csvtojson from "csvtojson";
 import {dict} from "../../Languages/MyRequestsTranslations";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const MODAL_TYPES = {
     NONE: 'NONE',
@@ -49,6 +50,7 @@ type State = {
             id: '',
             filteredData: [],
             bulkImportData: [],
+            modes: [],
             filters: {
                 requestDate: '',
                 redemptionModeTitle: '',
@@ -103,6 +105,7 @@ type State = {
 
     componentDidMount() {
         this.fetchList()
+        this.fetchModes()
     }
 
     fetchList(): Promise<void> {
@@ -116,6 +119,27 @@ type State = {
                 this.setState({ error: error.message, status: PageStatus.Error });
             });
     }
+
+     fetchModes = () => {
+         Promise.resolve()
+             .then(() => this.setState({ status: PageStatus.Loading }))
+             .then(() => RedemptionModeAPI.redemptionList(10000))
+             .then((surveyData: any) => {
+                 if (!!surveyData) {
+                     const options = surveyData.map((item) => ({
+                         label: item.name,
+                         value: item.name,
+                     }));
+                     this.setState({
+                         modes: options,
+                         status: PageStatus.Loaded
+                     });
+                 }
+             })
+             .catch((err) => {
+                 this.setState({ error: err.message, status: PageStatus.Error });
+             });
+     };
 
     handleExport(){
         let obj = this.state.filteredData.map((user) => {
@@ -176,6 +200,20 @@ type State = {
      }
 
 
+     approvedActionsBulkXoxo(): Promise<void> {
+         return Promise.resolve()
+             .then(() => this.setState({status: PageStatus.Loading}))
+             .then(() => AuthAPI.xoxoApprovedBulk({bulkImportData: this.state.bulkImportData}))
+             .then((users) => {
+                 this.fetchList()
+                 alert('Manual Redemptions Approval Successfully Uploaded')
+                 return this.setState({ status: PageStatus.Loaded});
+             })
+             .catch((error) => {
+                 this.setState({error: error.message, status: PageStatus.Error});
+             });
+     }
+
      handleFileChange = async (event) => {
          const file = event.target.files[0];
          if (file) {
@@ -220,13 +258,13 @@ type State = {
              id: obj.id,
              userId: this.props.userId,
              coupon: obj.coupon_code,
-             approvedById: this.props.userId
+             approvedById: this.props.userId,
+             bulkImportData: []
          };
      }
 
     render() {
         const { filteredData, filters } = this.state;
-
         return (
             <>
                 <GridContainer>
@@ -249,7 +287,30 @@ type State = {
                             </div>
                             <div className="col">
                                 <label>Redemption Mode</label>
-                                <input value={filters.redemptionModeTitle} type="text" className="form-control" placeholder="Redemption mode" name="redemptionModeTitle" onChange={this.handleFilterChange}/>
+                                <select
+                                    name='mode'
+                                    id='mode'
+                                    value={filters.redemptionModeTitle}
+                                    required
+                                    onChange={(e) => this.setState({ filters: { redemptionModeTitle: e.target.value }})}
+                                    style={{
+                                        width: '100%',
+                                        display: 'block',
+                                        height: '40px',
+                                        lineHeight: '1.5',
+                                        color: '#495057',
+                                        backgroundColor: '#fff',
+                                        backgroundClip: 'padding-box',
+                                        border: '1px solid #ced4da',
+                                        borderRadius: '5px',
+                                        transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out'
+                                    }}
+                                >
+                                    <option value=''>--Choose--</option>
+                                    {this.state.modes.length > 0 ? this.state.modes.map((item) => (
+                                        <option value={item.label}>{item.label}</option>
+                                    )) : ''}
+                                </select>
                             </div>
                         </div>
                         <div className="row">
@@ -301,15 +362,28 @@ type State = {
                             <input className="mt-2" type="file" accept=".csv" onChange={(e) => this.handleFileChange(e)} />
                         </div>
                         <div>
-                            <Button
-                                onClick={() => this.approvedActionsBulkManual()}
-                                variant="primary"
-                                disabled={this.state.bulkImportData.length === 0}
-                                className="mt-3"
-                                size="sm"
-                            >
-                                Manual Approve
-                            </Button>
+                            <Confirmation onAction={() => this.approvedActionsBulkXoxo()} body="Are you sure want to approve manual ?">
+                                <Button
+                                    variant="primary"
+                                    disabled={this.state.bulkImportData.length === 0}
+                                    className="mt-3"
+                                    size="sm"
+                                >
+                                    Manual Approve
+                                </Button>
+                            </Confirmation>
+                        </div>
+                        <div>
+                            <Confirmation onAction={() => this.approvedActionsBulkXoxo()} body="Are you sure want to approve by xoxo ?">
+                                <Button
+                                    variant="primary"
+                                    disabled={this.state.bulkImportData.length === 0}
+                                    className="mt-3"
+                                    size="sm"
+                                >
+                                    XoXo Approve
+                                </Button>
+                            </Confirmation>
                         </div>
                     {/*<button type="button" className="btn btn-warning ml-1">Approve Redemption</button>*/}
                     </div>

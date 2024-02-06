@@ -125,6 +125,15 @@ export class AuthAPI {
             });
     }
 
+    static async xoxoApprovedBulk(
+        data: any,
+    ): Promise<any> {
+        return api.post(`${redemptionRespondentRequestURL}/xoxoBulkApprove`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
     static async rejectRedemptionRequest(
         data: any,
     ): Promise<any> {
