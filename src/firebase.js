@@ -6,7 +6,6 @@ import { Assets } from 'enums';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5nevbSl0zW3PjFS1F_mxWdlNkth7lMBk",
-  // authDomain: "indiapolls-a9288.firebaseapp.com",
   authDomain: "auth.indiapolls.com",
   projectId: "indiapolls-a9288",
   storageBucket: "indiapolls-a9288.appspot.com",

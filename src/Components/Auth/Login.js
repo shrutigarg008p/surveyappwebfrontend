@@ -10,7 +10,15 @@ import { LoadingSpinner } from "../../Layout/LoadingSpinner";
 import "./Login.css";
 import { Show } from "../../Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { signInWithGoogle } from "./signInWithGoogle";
+import GoogleSignIn from "./googleSignin";
+import FacebookSignIn from "./facebookSignin";
+import {MobileLogin} from "./MobileLogin";
+import Language from "../../Languages/Login/content.json"
+import {Helmet} from "react-helmet";
+import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
+// import SimpleCaptcha from "./Capcha";
+import GoogleReCaptcha from "./GoogleRecaptcha";
+import { registerDict } from 'Languages/RegistrationTranslations'; 
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -122,16 +130,37 @@ function Login(props) {
                 <h2>{pageContents.items[0].title}</h2>
                 <p>{pageContents.items[1].title}<Link to="#" onClick={handleClick}>{pageContents.items[2].title}</Link></p>
                 <div className="social-login">
-                  <a href="#" onClick={signInWithGoogle}><img src="assets/img/google.svg" alt /></a>
-                  <FacebookLogin
-                      appId="879890270328649"
-                      autoLoad={false}
-                      fields="name,email,picture"
-                      callback={(e) => responseFacebook(e)}
-                      icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}
-                      cssClass="facebook-login-btn"
-                      textButton=""
+                  <div>
+                    <img src={'assets/img/google.png'} style={{width:'40px', height:'40px'}} alt="" onClick={handleContinueWithGoogleClick}/>
+                    &nbsp; &nbsp; <img src="assets/img/facebook.png" style={{width:'40px', height:'40px'}} alt="" onClick={handleContinueWithFacebookClick}/>
+                  </div>
+                  {showGoogleSignIn && <GoogleSignIn />}
+                  {showFacebookSignIn && <FacebookSignIn />}
+
+                  <div className="RuleWithText">{pageContents.items[3].title}</div>
+                  <Button onClick={() => setMobile(true)} className="mobile-otp-button mt-2 mb-2">
+                    {pageContents.items[9].title}
+                  </Button>
+
+                  <MobileLogin
+                      referralId={referralId}
+                      show={isMobile}
+                      onClose={() => setMobile(false)}
+                      onSubmit={() =>{
+                        setMobile(false)}
+                      }
                   />
+
+                  {/*<a href="#" onClick={GoogleSignIn}><img src="assets/img/google.svg" alt="" /></a>*/}
+                  {/*<FacebookLogin*/}
+                  {/*    appId="879890270328649"*/}
+                  {/*    autoLoad={false}*/}
+                  {/*    fields="name,email,picture"*/}
+                  {/*    callback={(e) => responseFacebook(e)}*/}
+                  {/*    icon={<img src="/assets/img/facebook.svg" alt="Facebook" />}*/}
+                  {/*    cssClass="facebook-login-btn"*/}
+                  {/*    textButton=""*/}
+                  {/*/>*/}
                 </div>
                 <div className="RuleWithText">{pageContents.items[3].title}</div>
                 <form onSubmit={props.handleSubmit(onSubmit)}>
