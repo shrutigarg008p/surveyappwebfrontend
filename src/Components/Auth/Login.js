@@ -18,7 +18,7 @@ import {Helmet} from "react-helmet";
 import {ForgetPasswordEmailWithState} from "./ForgetPasswordEmailForm";
 // import SimpleCaptcha from "./Capcha";
 import GoogleReCaptcha from "./GoogleRecaptcha";
-import { registerDict } from 'Languages/RegistrationTranslations';
+import { registerDict } from 'Languages/RegistrationTranslations'; 
 
 function Login(props) {
   const dispatch = useDispatch();
