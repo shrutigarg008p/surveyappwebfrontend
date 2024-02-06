@@ -133,7 +133,7 @@ class BasicProfile extends React.Component<any, any> {
             .then((countries) => {
                 const options = countries.map(country => ({
                     label: this.props.language === 'hi' ? country.hindi : country.name,
-                    value: country.id
+                    value: country.name
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -228,7 +228,7 @@ class BasicProfile extends React.Component<any, any> {
             .then((states: any) => {
                 const options = states.state.map(state => ({
                     label: this.props.language === 'hi' ? state.hindi : state.name,
-                    value: state.id
+                    value: state.name
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -237,7 +237,7 @@ class BasicProfile extends React.Component<any, any> {
                 });
                 const optionsCities = states.cities.map(city => ({
                     label: this.props.language === 'hi' ? city.hindi : city.name,
-                    value: city.id
+                    value: city.name
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }

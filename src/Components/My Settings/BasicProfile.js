@@ -140,7 +140,7 @@ class BasicProfile extends React.Component<any, any> {
             .then(() => MasterDataAPI.countryList('10'))
             .then((countries) => {
                 const options = countries.map(country => ({
-                    label: country.name,
+                    label: this.props.language === 'hi' ? country.hindi : country.name,
                     value: country.name
                 }));
                 options.sort((a, b) => {
@@ -228,7 +228,7 @@ class BasicProfile extends React.Component<any, any> {
             .then(() => CountriesAPI.getAllCitiesAndStateBasedOnZipCode(1000, code))
             .then((states: any) => {
                 const options = states.state.map(state => ({
-                    label: state.name,
+                    label: this.props.language === 'hi' ? state.hindi : state.name,
                     value: state.name
                 }));
                 options.sort((a, b) => {
@@ -237,7 +237,7 @@ class BasicProfile extends React.Component<any, any> {
                     return 0;
                 });
                 const optionsCities = states.cities.map(city => ({
-                    label: city.name,
+                    label: this.props.language === 'hi' ? city.hindi :  city.name,
                     value: city.name
                 }));
                 options.sort((a, b) => {
@@ -267,7 +267,7 @@ class BasicProfile extends React.Component<any, any> {
             .then(() => CountriesAPI.getAllCitiesAndStateBasedOnZipCode(1000, code))
             .then((states: any) => {
                 const options = states.state.map(state => ({
-                    label: state.name,
+                    label: this.props.language === 'hi' ? state.hindi :  state.name,
                     value: state.name
                 }));
                 options.sort((a, b) => {
@@ -276,7 +276,7 @@ class BasicProfile extends React.Component<any, any> {
                     return 0;
                 });
                 const optionsCities = states.cities.map(city => ({
-                    label: city.name,
+                    label: this.props.language === 'hi' ? city.hindi :  city.name,
                     value: city.name
                 }));
                 options.sort((a, b) => {
