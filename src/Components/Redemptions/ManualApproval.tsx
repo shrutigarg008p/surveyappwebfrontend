@@ -11,13 +11,21 @@ class ManualApproval extends React.Component<any, any> {
             status: PageStatus.None,
             error: null,
             coupon: '',
+            pin: '',
+            validity: '',
             errorMessage: '',
             successMessage: '',
         };
     }
 
     handleManualApprove = () => {
-        let obj = { id: this.props.id, coupon: this.state.coupon, approvedById: this.props.userId }
+        let obj = {
+            id: this.props.id,
+            coupon: this.state.coupon,
+            approvedById: this.props.userId,
+            pin: this.state.pin,
+            validity: this.state.validity,
+        }
         return Promise.resolve()
             .then(() => this.setState({status: PageStatus.Submitting}))
             .then(() => RedemptionModeAPI.manualApproved(obj))
@@ -67,11 +75,35 @@ class ManualApproval extends React.Component<any, any> {
                                 required
                             />
                         </div>
+                        <div >
+                            <label htmlFor="title">Pin</label>
+                            <input
+                                className="form-control"
+                                type='text'
+                                name="pin"
+                                title=""
+                                onChange={(e) => this.setState({ pin: e.target.value })}
+                                value={this.state.pin}
+                                required
+                            />
+                        </div>
+                        <div >
+                            <label htmlFor="title">Validity</label>
+                            <input
+                                className="form-control"
+                                type='text'
+                                name="validity"
+                                title=""
+                                onChange={(e) => this.setState({ validity: e.target.value })}
+                                value={this.state.validity}
+                                required
+                            />
+                        </div>
 
                         <div className="mt-2 d-flex justify-content-center">
                             <button
                                 type="submit"
-                                disabled={!this.state.coupon}
+                                disabled={!this.state.coupon || !this.state.pin || !this.state.validity}
                                 onClick={() => this.handleManualApprove()}
                                 className="btn btn-primary mr-3"
                             >

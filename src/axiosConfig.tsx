@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as _ from 'lodash';
-
+import { store } from './reducers';
 import {baseApiURL} from "./Utils/urls";
 
 
@@ -10,7 +10,18 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  return {...config};
+  const state = store.getState();
+
+  const language = _.get(state, 'adminUser.adminUser.language', null);
+  const configCopy = { ...config };
+
+  if (!!language) {
+    configCopy.headers['language'] = `${language}`;
+  } else {
+    configCopy.headers['language'] = 'en';
+  }
+
+  return configCopy;
 });
 
 api.interceptors.request.use((config) => {

@@ -16,8 +16,6 @@ import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import ManualApproval from "./ManualApproval";
 import csvtojson from "csvtojson";
-import {dict} from "../../Languages/MyRequestsTranslations";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const MODAL_TYPES = {
     NONE: 'NONE',
@@ -145,7 +143,9 @@ type State = {
         let obj = this.state.filteredData.map((user) => {
             return {
                 ...user,
-                'coupon_code': ''
+                'coupon_code': '',
+                'pin': '',
+                'validity': ''
             }
         })
         exportToCSV(obj, 'redemptions');
@@ -258,6 +258,8 @@ type State = {
              id: obj.id,
              userId: this.props.userId,
              coupon: obj.coupon_code,
+             pin: obj.pin,
+             validity: obj.validity,
              approvedById: this.props.userId,
              bulkImportData: []
          };
@@ -439,6 +441,8 @@ type State = {
                                     <th>User</th>
                                     <th>Phone No/Data Card No/DTH No</th>
                                     <th>Coupon Code</th>
+                                    <th>Pin</th>
+                                    <th>Validity</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -482,6 +486,12 @@ type State = {
                                                 {redemption.coupon ? redemption.coupon : redemption.redemptionRequestStatus === 'Redeemed' ? 'Delivered' : '-'}
                                             </td>
                                             <td>
+                                                {redemption.pin ? redemption.pin : redemption.redemptionRequestStatus === 'Redeemed' ? 'Delivered' : '-'}
+                                            </td>
+                                            <td>
+                                                {redemption.validity ? redemption.validity : redemption.redemptionRequestStatus === 'Redeemed' ? 'Delivered' : '-'}
+                                            </td>
+                                            <td>
                                                 {redemption.redemptionModeTitle !== 'Amazon e-Gift Card' ?
                                                 <Confirmation onAction={() => this.approvedActions(redemption.id)} body="Are you sure want to approve request ?">
                                                     <Button
@@ -497,7 +507,7 @@ type State = {
                                                     <Button
                                                         variant="success"
                                                         size="sm"
-                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'}
+                                                        // disabled={redemption.redemptionRequestStatus === 'Redeemed'}
                                                         onClick={() => this.setState({ id: redemption.id, showManual: true })}
                                                         className="mx-1"
                                                     >
