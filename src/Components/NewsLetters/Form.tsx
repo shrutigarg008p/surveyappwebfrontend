@@ -61,7 +61,7 @@ class Form extends React.Component<any, any> {
           '\twebkit-box-shadow:0px 2px 2px 2px #F3F3F3; min-height:100%; overflow:hidden;  border-left:1px solid #ddd !important; border-right:1px solid #ddd !important; max-width:600px; margin:0 auto; padding:0px !important;">\n' +
           '\n' +
           '                    <div class="" style="padding-left:0px !important; padding-right:0px !important;">\n' +
-          '                        <img src="https://indiapolls.com:9000/Images/logo.jpeg" class="img-responsive center-block">\n' +
+          '                        <img src="https://panel.indiapolls.com/assets/img/logo-black.png" class="img-responsive center-block">\n' +
           '                    </div>\n' +
           '\n' +
           '\n' +
@@ -96,7 +96,7 @@ class Form extends React.Component<any, any> {
           '\n' +
           '                            <div class="panel-footer" style="font-family: \'Open Sans\', sans-serif; margin-left:10px;">\n' +
           '                                <div class="col-md-6" style="width:280px; float:left;">\n' +
-          '                                    <img src="https://indiapolls.com:9000/Images/logo.jpeg" class="img-responsive" style="margin-top:90px !important;">\n' +
+          '                                    <img src="https://panel.indiapolls.com/assets/img/logo-black.png" class="img-responsive" style="margin-top:90px !important;">\n' +
           '                                </div>\n' +
           '\n' +
           '                                <div class="col-md-6" style="width:280px; float: right; margin-right:10px; margin-top: -130px;">\n' +

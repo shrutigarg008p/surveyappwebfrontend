@@ -587,6 +587,43 @@ const dashboardRoutes = [
     layout: "/sub-admin",
     type: 'sub-admin'
   },
+  {
+    path: "/panelistDashboard",
+    name: "All",
+    hindi: "सभी",
+    icon: Apps,
+    component: AllPanelists,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
+  {
+    path: "/panelistDetails/:userId",
+    name: "Details",
+    hindi: "विवरण",
+    icon: Description,
+    component: PenalistDetails,
+    layout: "/sub-admin",
+    type: 'sub-admin',
+    isVisible: false
+  },
+  {
+    path: "/newsletters",
+    name: "Newsletters",
+    hindi: "समाचार पत्रिकाएँ",
+    icon: Email,
+    component: NewsLetters,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
+  {
+    path: "/messages",
+    name: "Messages",
+    hindi: "संदेश",
+    icon: Message,
+    component: Messages,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
 ];
 
 

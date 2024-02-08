@@ -15,6 +15,10 @@ import Select from 'react-select';
 import {Form} from "../Samples/Form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
+import {reduxForm} from "redux-form";
+import {withRouter} from "react-router";
+import {connect} from "react-redux";
+import {FormValue} from "../My Settings/MySettings";
 
 function removeDuplicates(arr, property) {
     const uniqueMap = {};
@@ -80,7 +84,7 @@ type State = {
     },
 };
 
-export class AllPanelists extends Component<any, any> {
+class AllPanelists extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -637,26 +641,23 @@ export class AllPanelists extends Component<any, any> {
                                     this.state.filteredData.map((info, index) => (
                                         <tr key={info.userId}>
                                             <td>{index + 1}</td>
-                                            <td>
-                                              {/* <span
-                                                  aria-label="button"
-                                                  role="button"
-                                                  tabIndex={0}
-                                                  className="text-primary"
-                                                  onKeyPress={() => null}
-                                                  onClick={() => {
-                                                      this.setState({
-                                                          formType: MODAL_TYPES.NONE,
-                                                          id: info.id,
-                                                      });
-                                                  }}
-                                                  dangerouslySetInnerHTML={{
-                                                      __html: info.basic_profile ? `${info.basic_profile.firstName} ${info.basic_profile.lastName}` : '-',
-                                                  }}
-                                              /> */}
-                                              <Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.firstName} {info.lastName} </Link>
-                                            </td>
-                                            <td><Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>
+                                            {
+                                                this.props.role === 'sub-admin' ?
+                                                <td>
+                                                    <Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.firstName} {info.lastName} </Link>
+                                                </td>
+                                            :
+                                                <td>
+                                                    <Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.firstName} {info.lastName} </Link>
+                                                </td>
+                                            }
+                                            {
+                                                this.props.role === 'sub-admin' ?
+                                                    <td><Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>
+                                                    :
+                                                    <td><Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>
+
+                                            }
                                             <td>{info.phoneNumber}</td>
                                             <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
                                             <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY HH:mm A') : 'NA'}</td>
@@ -673,3 +674,24 @@ export class AllPanelists extends Component<any, any> {
         );
     }
 }
+
+
+const AllPanelistsRedux = reduxForm<FormValue, any>({
+    form: 'AllPanelists',
+})(AllPanelists);
+
+const mapStateToProps = (state: { adminUser: { adminUser: { phoneNumber: any, email: any, userId: any; token: any; loading: any; error: any; role: any, language:any }; }; }) => {
+    return {
+        userId: state.adminUser.adminUser.userId,
+        role: state.adminUser.adminUser.role,
+        phoneNumber: state.adminUser.adminUser.phoneNumber,
+        email: state.adminUser.adminUser.email,
+        isLoading: state.adminUser.adminUser.loading,
+        error: state.adminUser.adminUser.error,
+        language: state.adminUser.adminUser.language,
+    };
+};
+
+const AllPanelistsWithRouter = withRouter(connect(mapStateToProps)(AllPanelistsRedux));
+
+export { AllPanelistsWithRouter as AllPanelists };
