@@ -371,7 +371,7 @@ type State = {
                                     className="mt-3"
                                     size="sm"
                                 >
-                                    Manual Approve
+                                    Amazon Approve
                                 </Button>
                             </Confirmation>
                         </div>
@@ -507,11 +507,11 @@ type State = {
                                                     <Button
                                                         variant="success"
                                                         size="sm"
-                                                        // disabled={redemption.redemptionRequestStatus === 'Redeemed'}
+                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'}
                                                         onClick={() => this.setState({ id: redemption.id, showManual: true })}
                                                         className="mx-1"
                                                     >
-                                                        Approve Manual
+                                                        Amazon Approve
                                                     </Button>
                                                 }
 
