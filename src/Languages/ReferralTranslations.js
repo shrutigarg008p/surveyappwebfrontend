@@ -57,7 +57,8 @@ export const referralDict = {
     "Referral Status": "Referral Status",
     "Referral Method": "Referral Method",
     "Created At": "Created At",
-    "Updated At": "Updated At"
+    "Updated At": "Updated At",
+      'No Data Available': 'At the current moment data is not available'
     },
     hi: {
       "Referrals": "रेफरल",
@@ -69,20 +70,6 @@ export const referralDict = {
       "Referral Method": "रेफरल पद्धति",
       "Created At": "पर बनाया गया",
       "Updated At": "पर अद्यतन किया गया",
-      "Referral": "रेफ़रल",
-      "Refer with link": "लिंक के साथ देखें",
-      "Referral Info": "आप फेसबुक, ट्विटर और अन्य सोशल मीडिया के दिए गए लिंक को साझा करके अपने दोस्तों को इंडियापोल में संदर्भित करके अंक अर्जित कर सकते हैं। आपका अद्वितीय रेफरल लिंक URL है: https://panel.indiapolls.com/#/referrals/view/d8010ed8-fc05-4ea8-a505-7cf7692d21c8।",
-      "Upload From a CSV list": "CSV सूची से अपलोड करें",
-      "CSV Info": "आप एक .CSV फ़ाइल से कई दोस्तों को संदर्भित कर सकते हैं जिसमें आपके दोस्तों की जानकारी क्रम, ईमेल, मोबाइल में होती है। नमूना फ़ाइल डाउनलोड करने के लिए एक मित्र को संदर्भित करने के लिए यहां क्लिक करें।",
-      "Choose File": "फ़ाइल चुनें",
-      "No File Chosen": "कोई फ़ाइल नहीं चुनी गई",
-      "Import": "आयात",
-      "Refer a friend": "एक मित्र को संदर्भित करें",
-      "Name*": "नाम*",
-      "Email*": "ईमेल*",
-      "Mobile": "मोबाइल",
-      "Enter Here": "यहाँ से प्रवेश करें",
-      "Refer": "संदर्भ देना",
       "Manual": "नियमावली",
       "Invited": "आमंत्रित",
       "Filter": "फ़िल्टर",
@@ -117,11 +104,12 @@ export const referralDict = {
       "Referral Status": "रेफरल स्थिति",
       "Referral Method": "रेफरल विधि",
       "Created At": "निर्माण तिथि",
-      "Updated At": "अद्यतन तिथि"
+      "Updated At": "अद्यतन तिथि",
+      'No Data Available': 'फिलहाल डेटा उपलब्ध नहीं है.'
 
     }
   };
-  
+
   export const referralModalDict = {
     en: {
       "Referral": "Referral",

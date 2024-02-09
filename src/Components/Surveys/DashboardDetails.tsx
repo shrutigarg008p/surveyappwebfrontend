@@ -148,7 +148,7 @@ class DashboardDetails extends React.Component<any, any> {
                 this.setState({ status: PageStatus.Error, error: error.message });
             });
     }
- 
+
 
     formValues() {
         if(this.state.selectedPartnerOption) {
@@ -211,7 +211,8 @@ class DashboardDetails extends React.Component<any, any> {
                                 </div>
                                 <div className="col">
                                     <strong>Survey Unique Id: </strong>
-                                    {this.state.users.length > 0 ? this.state.users[0].assignUser.temporarySurveyLinkId : 'NA'}
+                                    {this.state.users.length > 0 && this.state.users[0].assignUser ?
+                                        this.state.users[0].assignUser.temporarySurveyLinkId : 'NA'}
                                 </div>
                             </div>
                             <div className="row mt-2">

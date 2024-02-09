@@ -170,7 +170,7 @@ class PanelistSurveys extends Component<any, any> {
     exportToExcel(this.state.filteredData, 'surveys');
   };
 
-  
+
   render() {
     const { filteredData, filters } = this.state;
     const lang = this.props.language ?? 'en';
@@ -200,7 +200,7 @@ class PanelistSurveys extends Component<any, any> {
         <Show when={this.state.status === PageStatus.Loaded}>
             <Show when={!this.state.filteredData.length}>
                 <Alert variant="info" show={!this.state.filteredData.length}>
-                    {surveyDict[lang]["No Data Available"] || "At the current moment data is not available, Click button for add."}
+                    {surveyDict[lang]["No Data Available"] || "At the current moment data is not available."}
                 </Alert>
             </Show>
 

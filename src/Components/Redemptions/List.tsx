@@ -143,7 +143,6 @@ type State = {
         let obj = this.state.filteredData.map((user) => {
             return {
                 ...user,
-                'coupon_code': '',
                 'pin': '',
                 'validity': ''
             }
@@ -257,7 +256,7 @@ type State = {
          return {
              id: obj.id,
              userId: this.props.userId,
-             coupon: obj.coupon_code,
+             coupon: obj.coupon,
              pin: obj.pin,
              validity: obj.validity,
              approvedById: this.props.userId,
@@ -364,7 +363,7 @@ type State = {
                             <input className="mt-2" type="file" accept=".csv" onChange={(e) => this.handleFileChange(e)} />
                         </div>
                         <div>
-                            <Confirmation onAction={() => this.approvedActionsBulkXoxo()} body="Are you sure want to approve manual ?">
+                            <Confirmation onAction={() => this.approvedActionsBulkManual()} body="Are you sure want to approve manual ?">
                                 <Button
                                     variant="primary"
                                     disabled={this.state.bulkImportData.length === 0}

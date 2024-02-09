@@ -28,7 +28,8 @@ export const dict = {
       "Points Redeemed": "Points Redeemed",
       "Phone No/Data Card No/DTH No": "Phone No/Data Card No/DTH No",
       "Redeem Points Warning" : "At the current moment you can not Redeem Points, Your points must be greater than 100.",
-      "Coupon Code": "Coupon Code"
+      "Coupon Code": "Coupon Code",
+      'No Redemptions': 'No Redemptions Request are available for you'
     },
     hi: {
       "My Requests": "मेरा अनुभव",
@@ -59,7 +60,8 @@ export const dict = {
       "Points Redeemed": "भुनाए गए अंक",
       "Phone No/Data Card No/DTH No": "फ़ोन नंबर/डेटा कार्ड नं/DTH NO",
       "Redeem Points Warning" : "इस समय आप अंक भुना नहीं सकते, आपके अंक 100 से अधिक होने चाहिए।",
-      "Coupon Code": "कूपन कोड"
+      "Coupon Code": "कूपन कोड",
+      "No Redemptions": "फिलहाल डेटा उपलब्ध नहीं है."
 
     }
 };

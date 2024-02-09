@@ -121,7 +121,7 @@ class BasicProfile extends React.Component<any, any> {
                 .then(() => AuthAPI.createBasicProfile(valuesIn, this.props.userId, this.props.language || 'en'))
                 .then((profile) => {
                     this.fetchUserProfile()
-                    alert('Profile Successfully Updated.')
+                    alert(this.props.language === 'hi' ? 'प्रोफ़ाइल सफलतापूर्वक अपडेट की गई।' : 'Profile Successfully Updated.')
                     this.setState({status: PageStatus.Submitted}, () => {
                         this.props.onSubmit()
                     });
@@ -141,7 +141,7 @@ class BasicProfile extends React.Component<any, any> {
             .then((countries) => {
                 const options = countries.map(country => ({
                     label: this.props.language === 'hi' ? country.hindi : country.name,
-                    value: country.name
+                    value: country.title
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -168,15 +168,15 @@ class BasicProfile extends React.Component<any, any> {
     }
 
     handleCountryChange = async (selectedCountryOption) => {
-        this.setState({country: selectedCountryOption.label, selectedCountryOption});
+        this.setState({country: selectedCountryOption.value, selectedCountryOption});
     };
 
     handleStateChange = async (selectedStateOption) => {
-        this.setState({state: selectedStateOption.label, selectedStateOption});
+        this.setState({state: selectedStateOption.value, selectedStateOption});
     };
 
     handleCityChange = async (selectedCityOption) => {
-        this.setState({city: selectedCityOption.label, selectedCityOption});
+        this.setState({city: selectedCityOption.value, selectedCityOption});
     };
 
     fetchStatesList(countryId): Promise<void> {
@@ -186,7 +186,7 @@ class BasicProfile extends React.Component<any, any> {
             .then((states) => {
                 const options = states.map(state => ({
                     label: state.name,
-                    value: state.id
+                    value: state.title
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -207,7 +207,7 @@ class BasicProfile extends React.Component<any, any> {
             .then((cities) => {
                 const options = cities.map(city => ({
                     label: city.name,
-                    value: city.id
+                    value: city.title
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -229,7 +229,7 @@ class BasicProfile extends React.Component<any, any> {
             .then((states: any) => {
                 const options = states.state.map(state => ({
                     label: this.props.language === 'hi' ? state.hindi : state.name,
-                    value: state.name
+                    value: state.title
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -238,7 +238,7 @@ class BasicProfile extends React.Component<any, any> {
                 });
                 const optionsCities = states.cities.map(city => ({
                     label: this.props.language === 'hi' ? city.hindi :  city.name,
-                    value: city.name
+                    value: city.title
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -268,7 +268,7 @@ class BasicProfile extends React.Component<any, any> {
             .then((states: any) => {
                 const options = states.state.map(state => ({
                     label: this.props.language === 'hi' ? state.hindi :  state.name,
-                    value: state.name
+                    value: state.title
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }
@@ -277,7 +277,7 @@ class BasicProfile extends React.Component<any, any> {
                 });
                 const optionsCities = states.cities.map(city => ({
                     label: this.props.language === 'hi' ? city.hindi :  city.name,
-                    value: city.name
+                    value: city.title
                 }));
                 options.sort((a, b) => {
                     if(a.label < b.label) { return -1; }

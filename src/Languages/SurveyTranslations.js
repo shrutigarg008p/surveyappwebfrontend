@@ -12,7 +12,8 @@ export const surveyDict = {
       "Terminated": "Terminated",
       "Quality Terminate": "Quality Terminate",
       "Completed": "Completed",
-      "Disqualified": "Disqualified"
+      "Disqualified": "Disqualified",
+      "No Data Available": "At the current moment data is not available."
     },
     hi: {
       "Surveys": "सर्वेक्षण",
@@ -27,7 +28,8 @@ export const surveyDict = {
       "Terminated": "समाप्त",
       "Quality Terminate": "गुणवत्ता समाप्ति",
       "Completed": "पुरा होना।",
-      "Disqualified": "विच्छेदित"
+      "Disqualified": "विच्छेदित",
+      "No Data Available": "फिलहाल डेटा उपलब्ध नहीं है."
     }
   };
 
@@ -47,4 +49,3 @@ export const surveyDict = {
       "Description": "विवरण"
     }
   };
-  
