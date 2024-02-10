@@ -19,6 +19,8 @@ import {Show} from "../../Layout";
 import {Button} from "react-bootstrap";
 import { profileDict } from "Languages/ProfileTranslations.js";
 import { connect } from "react-redux";
+import { Grid, FormControl, Select, MenuItem, TextField } from '@material-ui/core';
+
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -199,44 +201,53 @@ function UserProfile(props) {
                                 />
                             </GridItem>
                         </GridContainer>
-                        <GridContainer>
-                            <GridItem xs={12} sm={12} md={4}>
-                                <label htmlFor="city">{profileDict[lang]["City"] || "City"}</label>
-                                <select
-                                    id="city"
-                                    value={city}
-                                    disabled={disabled}
-                                    onChange={(e) => setCity(e.target.value)}
-                                    style={{ /* styling */ }}
-                                >
-                                    <option value="" disabled>--{profileDict[lang]["Choose"] || "Choose"}--</option>
-                                    <option>{city}</option>
-                                </select>
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={4}>
-                                <label htmlFor="country">{profileDict[lang]["Country"] || "Country"}</label>
-                                <select
-                                    id="country"
-                                    value={country}
-                                    disabled={disabled}
-                                    onChange={(e) => setCountry(e.target.value)}
-                                    style={{ /* styling */ }}
-                                >
-                                    <option value="" disabled>--{profileDict[lang]["Choose"] || "Choose"}--</option>
-                                    <option>{country}</option>
-                                </select>
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={4}>
-                                <CustomInput
-                                    labelText={profileDict[lang]["Postal Code"] || "Postal Code"}
-                                    id="postal-code"
-                                    formControlProps={{ fullWidth: true }}
-                                    value={postalcode}
-                                    disabled={disabled}
-                                    onChange={(e) => setPostalcode(e.target.value)}
-                                />
-                            </GridItem>
-                        </GridContainer>
+                        <br/>
+                        <Grid container spacing={3}>
+      <Grid item xs={12} sm={12} md={4}>
+        <TextField
+          select
+          label={profileDict[lang]["City"] || "City"}
+          id="city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          variant="outlined"
+          fullWidth
+          disabled={disabled}
+          className={classes.formControl}
+        >
+          <MenuItem value="" disabled>--{profileDict[lang]["Choose"] || "Choose"}--</MenuItem>
+          <MenuItem value={city}>{city}</MenuItem>
+        </TextField>
+      </Grid>
+      <Grid item xs={12} sm={12} md={4}>
+        <TextField
+          select
+          label={profileDict[lang]["Country"] || "Country"}
+          id="country"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          variant="outlined"
+          fullWidth
+          disabled={disabled}
+          className={classes.formControl}
+        >
+          <MenuItem value="" disabled>--{profileDict[lang]["Choose"] || "Choose"}--</MenuItem>
+          <MenuItem value={country}>{country}</MenuItem>
+        </TextField>
+      </Grid>
+      <Grid item xs={12} sm={12} md={4}>
+        <TextField
+          id="postal-code"
+          label={profileDict[lang]["Postal Code"] || "Postal Code"}
+          variant="outlined"
+          fullWidth
+          value={postalcode}
+          onChange={(e) => setPostalcode(e.target.value)}
+          disabled={disabled}
+          className={classes.formControl}
+        />
+      </Grid>
+    </Grid>
                     </CardBody>
                 </form>
             </Card>
