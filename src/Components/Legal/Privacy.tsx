@@ -63,7 +63,7 @@ function Privacy() {
           <Typography variant="body1" style={{ color: '#001627' }}>
           This Privacy Policy sets out the commitment of DataXing Digital India Pvt. Ltd. and its
           affiliates including (DataXing Digital Inc. USA and DataXing Digital, London) (All Together
-          “DataXing”), To the privacy of its panel members (“Panelists”, “Panellist”), and governs
+          “DataXing”), To the privacy of its panel members (“Panellists”, “Panellist”), and governs
           Panellists’ rights regarding privacy and data protection.
           </Typography>
           <Typography variant="body1" style={{ color: '#001627' }}>
