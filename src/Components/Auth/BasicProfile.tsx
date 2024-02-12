@@ -135,11 +135,11 @@ class BasicProfile extends React.Component<any, any> {
                     label: this.props.language === 'hi' ? country.hindi : country.name,
                     value: country.title
                 }));
-                options.sort((a, b) => {
-                    if(a.label < b.label) { return -1; }
-                    if(a.label > b.label) { return 1; }
-                    return 0;
-                  });
+                // options.sort((a, b) => {
+                //     if(a.label < b.label) { return -1; }
+                //     if(a.label > b.label) { return 1; }
+                //     return 0;
+                //   });
                 this.setState({ countries: options, status: PageStatus.Loaded });
                 if(options.length > 0) {
                     this.setState({country: options[0].label, selectedCountryOption: options[0]});
