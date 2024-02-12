@@ -50,8 +50,7 @@ function PrivacyPolicyHi() {
                     <Typography variant="h4" gutterBottom>
                         गोपनीयता नीति
                     </Typography>
-                  
-
+                    <Divider />
                     <ResponsiveIframe url="https://onedrive.live.com/embed?resid=CAE33E44DD3C57EE%2153598&authkey=!ABLr7KO9zDbsdRs&em=2" />
                 </Paper>
             </Container>
