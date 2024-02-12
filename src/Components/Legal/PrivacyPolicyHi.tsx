@@ -51,7 +51,7 @@ function PrivacyPolicyHi() {
                         गोपनीयता नीति
                     </Typography>
                     <Divider />
-                    <ResponsiveIframe url="https://onedrive.live.com/embed?resid=CAE33E44DD3C57EE%2153598&authkey=!ABLr7KO9zDbsdRs&em=2" />
+                    <ResponsiveIframe url="https://onedrive.live.com/embed?resid=D3E7C876FD6A52A1%21130&authkey=!AL_Gm2IqaEvvHpg&em=2" />
                 </Paper>
             </Container>
         </div>

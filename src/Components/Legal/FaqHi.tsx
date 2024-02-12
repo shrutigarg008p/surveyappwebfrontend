@@ -56,7 +56,7 @@ function FaqHi() {
                 <Typography variant="h4" gutterBottom>
                     अक्सर पूछे जाने वाले प्रश्न
                 </Typography>
-                <ResponsiveIframe url="https://onedrive.live.com/embed?resid=CAE33E44DD3C57EE%2154087&authkey=!AF3BE5zPh9lRbrY&em=2"/>
+                <ResponsiveIframe url="https://onedrive.live.com/embed?resid=D3E7C876FD6A52A1%21126&authkey=!AP6AT9Uy4UNyZ8s&em=2"/>
             </Paper>
 
         </Container>

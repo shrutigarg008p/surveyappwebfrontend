@@ -50,7 +50,7 @@ function TermsHi() {
                     <Typography variant="h4" gutterBottom>
                         नियम और शर्तें
                     </Typography>
-                    <ResponsiveIframe url="https://onedrive.live.com/embed?resid=CAE33E44DD3C57EE%2154084&authkey=!AF3BE5zPh9lRbrY&em=2"/>
+                    <ResponsiveIframe url="https://onedrive.live.com/embed?resid=D3E7C876FD6A52A1%21134&authkey=!AKJn-XZDwpgSuPY&em=2"/>
                 </Paper>
             </Container>
         </div>
