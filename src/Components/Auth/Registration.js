@@ -194,9 +194,10 @@ class Registration extends Component {
                   <h2>{pageContent.items[0].title}</h2>
                   <p>{pageContent.items[1].title}<Link to="#" onClick={() => this.onLogin()}>{pageContent.items[2].title}</Link></p>
                   <div className="social-login">
-                    <img src={'assets/img/google.png'} style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithGoogleClick()}/>
-                    &nbsp; &nbsp; <img src="assets/img/facebook.png" style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithFacebookClick()}/>
-                    {this.state.showGoogleSignIn && <GoogleSignIn />}
+                    {/* <img src={'assets/img/google.png'} style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithGoogleClick()}/>
+                    &nbsp; &nbsp;  */}
+                    <img src="assets/img/facebook.png" style={{width:'40px', height:'40px'}} alt="" onClick={()=>this.handleContinueWithFacebookClick()}/>
+                    {/* {this.state.showGoogleSignIn && <GoogleSignIn />} */}
                   {this.state.showFacebookSignIn && <FacebookSignIn />}
                   </div>
                   <div className="RuleWithText">{pageContent.items[3].title}</div>

@@ -6,6 +6,7 @@ import {
     Typography,
     Container,
     Paper,
+    Divider
 } from '@material-ui/core';
 import { Assets } from 'enums';
 import ResponsiveIframe from './ResponsiveIframe';
@@ -47,10 +48,11 @@ function PrivacyPolicyHi() {
                 <Paper className={classes.paper}>
                     <img alt="Logo" src={Assets.Logo2} className={classes.logo} />
                     <Typography variant="h4" gutterBottom>
-                    गोपनीयता नीति
+                        गोपनीयता नीति
                     </Typography>
-                
-                <ResponsiveIframe url="https://onedrive.live.com/embed?resid=CAE33E44DD3C57EE%2153598&authkey=!ABLr7KO9zDbsdRs&em=2"/>
+                  
+
+                    <ResponsiveIframe url="https://onedrive.live.com/embed?resid=CAE33E44DD3C57EE%2153598&authkey=!ABLr7KO9zDbsdRs&em=2" />
                 </Paper>
             </Container>
         </div>
