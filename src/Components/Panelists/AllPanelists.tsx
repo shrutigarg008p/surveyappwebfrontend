@@ -628,6 +628,7 @@ class AllPanelists extends Component<any, any> {
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
+                                    <th>User Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
@@ -641,14 +642,15 @@ class AllPanelists extends Component<any, any> {
                                     this.state.filteredData.map((info, index) => (
                                         <tr key={info.userId}>
                                             <td>{index + 1}</td>
+                                            <td>{info.id}</td>
                                             {
                                                 this.props.role === 'sub-admin' ?
                                                 <td>
-                                                    <Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.firstName} {info.lastName} </Link>
+                                                    <Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.basic_profile ? info.basic_profile.firstName+" "+ info.basic_profile.lastName : '-'} </Link>
                                                 </td>
                                             :
                                                 <td>
-                                                    <Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.firstName} {info.lastName} </Link>
+                                                    <Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.basic_profile ? info.basic_profile.firstName+" "+ info.basic_profile.lastName : '-'} </Link>
                                                 </td>
                                             }
                                             {

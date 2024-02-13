@@ -193,6 +193,7 @@ export class RegisteredOnly extends Component<any, State> {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th>User Id</th>
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>CreatedAt</th>
@@ -204,6 +205,7 @@ export class RegisteredOnly extends Component<any, State> {
                 this.state.filteredData.map((info, index) => (
                   <tr key={info.id}>
                     <td>{index + 1}</td>
+                    <td>{info.id}</td>
                     <td>
                       <span
                         aria-label="button"

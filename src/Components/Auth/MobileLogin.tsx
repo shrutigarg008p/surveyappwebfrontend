@@ -29,7 +29,7 @@ class MobileLogin extends React.Component<any, any> {
     formValues() {
         return {
             phoneNumber: this.state.phoneNumber,
-            email: `${this.state.phoneNumber}@gmail.com`,
+            email: ``,
             registerType: 'mobile',
             role: 'panelist',
             referralId: this.props.referralId,
@@ -212,7 +212,7 @@ class MobileLogin extends React.Component<any, any> {
                                    {pageContent.items[1].title}
                                     </button>
 
-                                    
+
 
                                 </div>
                         </Show>

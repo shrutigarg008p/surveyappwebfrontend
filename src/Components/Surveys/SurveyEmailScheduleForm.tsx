@@ -304,6 +304,7 @@ class SurveyEmailScheduleForm extends React.Component<any, any> {
                                     onChange={this.handleSampleChange}
                                     value={this.state.selectedSampleOption}
                                     options={this.state.samples}
+                                    required
                                 />
                             </div>
 

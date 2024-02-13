@@ -427,6 +427,7 @@ class DashboardDetails extends React.Component<any, any> {
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
+                                    <th>User Id</th>
                                     <th>Name</th>
                                     <th>Gender</th>
                                     {/*<th>Email</th>*/}
@@ -442,6 +443,7 @@ class DashboardDetails extends React.Component<any, any> {
                                     this.state.users.map((info, index) => (
                                         <tr key={info.id}>
                                             <td>{index + 1}</td>
+                                            <td>{info.userId ? info.userId : '-'}</td>
                                             <td>{info.firstName} {info.lastName}</td>
                                             <td>{info.gender}</td>
                                             {/*<td>{info.user ? info.user.email : '-'}</td>*/}

@@ -342,6 +342,7 @@ class BasicProfile extends React.Component<any, any> {
 
 
     render() {
+        console.log('state--->', this.state)
         const {selectedCountryOption, selectedStateOption, selectedCityOption}=this.state
         const lang = this.props.language ?? 'en';
         return (
@@ -598,18 +599,18 @@ class BasicProfile extends React.Component<any, any> {
                                     onChange={(e) => this.setState({ referralSource: e.target.value })}
                                 >
                                     <option value="" className="">{formFieldDict[lang]["Select Referral"] || "Select Referral"}</option>
-                                    <option value="adFlierNewspaper">{formFieldDict[lang]["Ad flier with newspaper"] || "Ad flier with newspaper"}</option>
-                                    <option value="adFlierOther">{formFieldDict[lang]["Ad flier at market/outdoors"] || "Ad flier at market/outdoors"}</option>
-                                    <option value="adOnWebsite">{formFieldDict[lang]["Saw an ad on a website"] || "Saw an ad on a website"}</option>
-                                    <option value="blogForum">{formFieldDict[lang]["Read about it on a blog/forum"] || "Read about it on a blog/forum"}</option>
-                                    <option value="cafeCoffeeDay">{formFieldDict[lang]["Ad at Café Coffee Day"] || "Ad at Café Coffee Day"}</option>
-                                    <option value="emailFromFriend">{formFieldDict[lang]["Got an email from a friend/colleague"] || "Got an email from a friend/colleague"}</option>
-                                    <option value="emailFromWebPortal">{formFieldDict[lang]["Email from a web portal/service/jobsite"] || "Email from a web portal/service/jobsite"}</option>
-                                    <option value="googleSearch">{formFieldDict[lang]["Searched on google.com"] || "Searched on google.com"}</option>
-                                    <option value="other">{formFieldDict[lang]["Other"] || "Other"}</option>
-                                    <option value="otherSearchEngine">{formFieldDict[lang]["Searched on another search engine"] || "Searched on another search engine"}</option>
-                                    <option value="shopRestaurant">{formFieldDict[lang]["Ad at a shop/restaurant"] || "Ad at a shop/restaurant"}</option>
-                                    <option value="wordOfMouth">{formFieldDict[lang]["Word of mouth from friend/colleague"] || "Word of mouth from friend/colleague"}</option>
+                                    <option value="Ad flier with newspaper">{formFieldDict[lang]["Ad flier with newspaper"] || "Ad flier with newspaper"}</option>
+                                    <option value="Ad flier at market/outdoors">{formFieldDict[lang]["Ad flier at market/outdoors"] || "Ad flier at market/outdoors"}</option>
+                                    <option value="Saw an ad on a website">{formFieldDict[lang]["Saw an ad on a website"] || "Saw an ad on a website"}</option>
+                                    <option value="Read about it on a blog/forum">{formFieldDict[lang]["Read about it on a blog/forum"] || "Read about it on a blog/forum"}</option>
+                                    <option value="Ad at Café Coffee Day">{formFieldDict[lang]["Ad at Café Coffee Day"] || "Ad at Café Coffee Day"}</option>
+                                    <option value="Got an email from a friend/colleague">{formFieldDict[lang]["Got an email from a friend/colleague"] || "Got an email from a friend/colleague"}</option>
+                                    <option value="Email from a web portal/service/jobsite">{formFieldDict[lang]["Email from a web portal/service/jobsite"] || "Email from a web portal/service/jobsite"}</option>
+                                    <option value="Searched on google.com">{formFieldDict[lang]["Searched on google.com"] || "Searched on google.com"}</option>
+                                    <option value="Other">{formFieldDict[lang]["Other"] || "Other"}</option>
+                                    <option value="Searched on another search engine">{formFieldDict[lang]["Searched on another search engine"] || "Searched on another search engine"}</option>
+                                    <option value="Ad at a shop/restaurant">{formFieldDict[lang]["Ad at a shop/restaurant"] || "Ad at a shop/restaurant"}</option>
+                                    <option value="Word of mouth from friend/colleague">{formFieldDict[lang]["Word of mouth from friend/colleague"] || "Word of mouth from friend/colleague"}</option>
                                 </select>
                             </div>
 
