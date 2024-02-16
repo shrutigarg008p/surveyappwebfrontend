@@ -51,7 +51,7 @@ function Terms() {
                     </Typography>
 
                    <div>
-  <p><strong><span style={{color: '#455a64', fontSize: '19pt'}}>INDIAPOLLS MEMBERSHIP TERMS AND CONDITIONS</span></strong></p>
+ 
   <p><span style={{color: '#001627', fontSize: '11.5pt'}}>These Terms of Use (this "Agreement") describe the terms and conditions applicable to your use of DataXing Digital Services. You should read it, understand it, and review it periodically for updates. If you have any questions that our&nbsp;</span><a href="/#/faq"><strong><span style={{color: '#3f51b5', fontSize: '11.5pt'}}>Frequently Asked Questions</span></strong></a><strong><span style={{color: '#001627', fontSize: '11.5pt'}}>&nbsp;</span></strong><span style={{color: '#001627', fontSize: '11.5pt'}}>&nbsp;cannot answer, please contact&nbsp;</span><a href="/#/support"><strong><span style={{color: '#3f51b5', fontSize: '11.5pt'}}>Support Team</span></strong></a><span style={{color: '#001627', fontSize: '11.5pt'}}>. If you do not agree to this Agreement, do not use our web site or services. We reserve the right to change, modify, add or remove portions of this Agreement at any time, at our sole discretion. Your continued use of our site will always indicate your acceptance of this Agreement and any changes to it.</span></p>
   
   <p><strong><span style={{fontSize: '15pt'}}>1. User Agreement Acceptance</span></strong></p>
