@@ -46,8 +46,8 @@ function Terms() {
             <Container maxWidth="lg" className={classes.content}>
                 <Paper className={classes.paper}>
                     <img alt="Logo" src={Assets.Logo2} className={classes.logo} />
-                    <Typography variant="h4" gutterBottom>
-                        Terms and Conditions
+                    <Typography variant="h5" gutterBottom>
+                        Terms & Conditions
                     </Typography>
 
                    <div>
