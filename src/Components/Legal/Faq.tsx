@@ -187,10 +187,7 @@ const faqData = [
 
 function FAQ() {
     const classes = useStyles();
-
-    
     return (
-
         <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
             <Toolbar>
@@ -201,7 +198,7 @@ function FAQ() {
             <Paper className={classes.paper}>
                 <img alt="Logo" src={Assets.Logo2} className={classes.logo} />
                 <Typography variant="h4" gutterBottom>
-                    Frequently Asked Question
+                    Frequently Asked Questions
                 </Typography>
                 <div>
         {faqData.map((faq, index) => (

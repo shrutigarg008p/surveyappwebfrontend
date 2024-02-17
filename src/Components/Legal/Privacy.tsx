@@ -56,8 +56,8 @@ function Privacy() {
           <Typography variant="h4" style={{textAlign : "center"}} gutterBottom>
             Privacy Policy
           </Typography><br/>
-          <Typography variant="h5" style={{ color: '#455a64', textAlign : "center" }}>INDIAPOLLS PANEL PRIVACY POLICY</Typography><br/>
-          <Typography variant="h6">DataXing Digital Privacy Policy</Typography><br/>
+          {/* <Typography variant="h5" style={{ color: '#455a64', textAlign : "center" }}>INDIAPOLLS PANEL PRIVACY POLICY</Typography><br/>
+          <Typography variant="h6">DataXing Digital Privacy Policy</Typography><br/> */}
 
           <Typography variant="h6">1. Introduction</Typography><br/>
           <Typography variant="body1" style={{ color: '#001627' }}>
