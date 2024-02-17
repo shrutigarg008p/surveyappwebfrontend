@@ -398,8 +398,8 @@ export class Surveys extends Component<any, any> {
                 <th>Company</th>
                 <th>Active</th>
                 <th>CEGG Points</th>
-                <th>PublishedAt</th>
-                <th>ExpireAt</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
               </tr>
