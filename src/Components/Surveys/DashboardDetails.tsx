@@ -10,6 +10,8 @@ import Select from 'react-select';
 import {DashboardTemplates} from "./DashboardTemplates";
 import {SurveyEmailSchedule} from "./SurveyEmailSchedule";
 import moment from "moment";
+import UsersPaginations from "./UsersPaginations";
+import {exportToExcel} from "../../Utils/ExportToExcel";
 
 
 type State = {
@@ -163,6 +165,10 @@ class DashboardDetails extends React.Component<any, any> {
     handlePartnersChange = async (selectedPartnerOption) => {
         const partners = selectedPartnerOption.map(option => option.value);
         this.setState({partnersSelected: partners, selectedPartnerOption});
+    };
+
+    handleExport(){
+        exportToExcel(this.state.users, 'surveysUsers');
     };
 
     render() {
@@ -423,42 +429,40 @@ class DashboardDetails extends React.Component<any, any> {
                         </div>
                         <Show when={this.state.users.length !== 0} >
                         <div className="mt-5">
-                            <Table responsive size="sm" bordered>
-                                <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>User Id</th>
-                                    <th>Name</th>
-                                    <th>Gender</th>
-                                    {/*<th>Email</th>*/}
-                                    <th>Status</th>
-                                    <th>CreatedAt</th>
-                                    {/*<th>UpdatedAt</th>*/}
-                                    <th>Link</th>
-                                </tr>
-                                </thead>
+                                <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export Users</button>
+                            <UsersPaginations users={this.state.users}/>
+                            {/*<Table responsive size="sm" bordered>*/}
+                            {/*    <thead>*/}
+                            {/*    <tr>*/}
+                            {/*        <th>S.No</th>*/}
+                            {/*        <th>User Id</th>*/}
+                            {/*        <th>Name</th>*/}
+                            {/*        <th>Gender</th>*/}
+                            {/*        <th>Status</th>*/}
+                            {/*        <th>CreatedAt</th>*/}
+                            {/*        <th>Link</th>*/}
+                            {/*    </tr>*/}
+                            {/*    </thead>*/}
 
-                                <tbody>
-                                {
-                                    this.state.users.map((info, index) => (
-                                        <tr key={info.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{info.userId ? info.userId : '-'}</td>
-                                            <td>{info.firstName} {info.lastName}</td>
-                                            <td>{info.gender}</td>
-                                            {/*<td>{info.user ? info.user.email : '-'}</td>*/}
-                                            <td>{info.assignUser ? info.assignUser.status : '-' }</td>
-                                            <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                                            {/*<td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
-                                            <td>{info.assignUser ? <a href={info.assignUser.temporarySurveyLink} target="_blank" rel="noopener noreferrer">
-                                                Click here to start survey
-                                            </a> : 'NA' }</td>
-                                        </tr>
-                                    ))
-                                }
-                                </tbody>
+                            {/*    <tbody>*/}
+                            {/*    {*/}
+                            {/*        this.state.users.map((info, index) => (*/}
+                            {/*            <tr key={info.id}>*/}
+                            {/*                <td>{index + 1}</td>*/}
+                            {/*                <td>{info.userId ? info.userId : '-'}</td>*/}
+                            {/*                <td>{info.firstName} {info.lastName}</td>*/}
+                            {/*                <td>{info.gender}</td>*/}
+                            {/*                <td>{info.assignUser ? info.assignUser.status : '-' }</td>*/}
+                            {/*                <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
+                            {/*                <td>{info.assignUser ? <a href={info.assignUser.temporarySurveyLink} target="_blank" rel="noopener noreferrer">*/}
+                            {/*                    Click here to start survey*/}
+                            {/*                </a> : 'NA' }</td>*/}
+                            {/*            </tr>*/}
+                            {/*        ))*/}
+                            {/*    }*/}
+                            {/*    </tbody>*/}
 
-                            </Table>
+                            {/*</Table>*/}
                         </div>
                         </Show>
 

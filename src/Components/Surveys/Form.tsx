@@ -84,7 +84,6 @@ class Form extends React.Component<any, any> {
     } else {
       this.fetchList()
     }
-    this.fetchCountryList()
   }
 
   fetchDetails() {
@@ -104,6 +103,7 @@ class Form extends React.Component<any, any> {
             status: PageStatus.Loaded,
           }, () => {
             this.fetchList()
+            this.fetchCountryList()
           });
         })
         .catch((error) => {
@@ -119,7 +119,7 @@ class Form extends React.Component<any, any> {
         .then((countries) => {
           const options = countries.map(country => ({
             label: country.name,
-            value: country.id
+            value: country.name
           }));
           options.sort((a, b) => {
             if(a.label < b.label) { return -1; }
@@ -127,7 +127,10 @@ class Form extends React.Component<any, any> {
             return 0;
           });
           this.setState({ countries: options, status: PageStatus.Loaded });
-          if(options.length > 0) {
+          if(this.state.country) {
+            const option = options.find(item => item.value === this.state.country);
+            this.setState({ selectedCountryOption: option });
+          } else {
             this.setState({country: options[0].label, selectedCountryOption: options[0]});
           }
         })
@@ -147,6 +150,7 @@ class Form extends React.Component<any, any> {
             value: item.id
           }));
           this.setState({ options, status: PageStatus.Loaded });
+          this.fetchCountryList()
           if(this.state.data.surveyblacklistentity) {
             const existing = options.find((item: any) => item.value === this.state.data.surveyblacklistentity.blacklistSurveyId);
             console.log('this.state.data---->', existing)
@@ -492,14 +496,13 @@ class Form extends React.Component<any, any> {
               </div>
               <div className="row mt-2">
                 <div className="col">
-                  <label htmlFor="companyLogo">Logo*</label>
+                  <label htmlFor="companyLogo">Logo</label>
                   <input
                       className="form-control"
                       name="companyLogo"
                       onChange={(e) => this.setState({ companyLogo: e.target.value })}
                       value={this.state.companyLogo}
                       placeholder="Enter here"
-                      required
                   />
                 </div>
                 <div className="col">
