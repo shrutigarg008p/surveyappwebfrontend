@@ -11,7 +11,7 @@ import Select from 'react-select';
 import {AuthAPI, MasterDataAPI} from "../../API";
 import {connect} from "react-redux";
 import {authBasicProfile} from "./auth.actions";
-import { Grid, Typography, Container, TextField, MenuItem, Select as Select2, InputLabel , FormControl   } from '@material-ui/core';
+import { Grid, Typography, Container, TextField  } from '@material-ui/core';
 import { Assets } from 'enums';
 import {CountriesAPI} from "../../API/CountriesAPI";
 import Language from "../../Languages/Login/content.json"
@@ -331,11 +331,10 @@ class BasicProfile extends React.Component<any, any> {
                     className="mt-4"
                 >
 
-                    <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="title"
-                                label={pageContent.items[2].title}
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="title">{pageContent.items[2].title}</label>
+                            <input
                                 className="form-control"
                                 name="firstName"
                                 onChange={(e) => this.setState({ firstName: e.target.value })}
@@ -343,112 +342,137 @@ class BasicProfile extends React.Component<any, any> {
                                 placeholder={pageContent.items[1].title}
                                 required
                             />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="lastName"
-                                label={pageContent.items[3].title}
+                        </div>
+                        <div className="col">
+                            <label htmlFor="lastName">{pageContent.items[3].title}</label>
+                            <input
                                 className="form-control"
+                                id="lastName"
                                 name="lastName"
                                 onChange={(e) => this.setState({ lastName: e.target.value })}
                                 value={this.state.lastName}
                                 placeholder={pageContent.items[1].title}
                             />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="mobile"
-                                label={pageContent.items[4].title}
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="Mobile Number">{pageContent.items[4].title}</label>
+                            <input
                                 className="form-control"
+                                id="mobile"
                                 name="mobile"
-                                onChange={(e) => false }//this.setState({ mobile: e.target.value })}
+                                onChange={(e) => this.setState({ mobile: e.target.value })}
                                 value={this.state.mobile}
                                 placeholder={pageContent.items[1].title}
                                 required
-                                // readOnly={this.state.mobile.length === 10 ? true : false}
+                                readOnly={this.state.mobile.length === 10 ? true : false}
                             />
-                        </Grid>
-                    </Grid>
-                    <br/>
+                        </div>
+                    </div>
 
-                    <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                            <FormControl style={{ width: '100%' }}>
-                                <InputLabel htmlFor="gender">{pageContent.items[5].title}</InputLabel>
-                                <Select2
-                                    value={this.state.gender}
-                                    onChange={(e) => this.setState({ gender: e.target.value })}
-                                    inputProps={{
-                                        name: 'gender',
-                                        id: 'gender',
-                                    }}
-                                    required
-                                >
-                                    <MenuItem value="" disabled>--Choose--</MenuItem>
-                                    <MenuItem value="Male">{this.props.language === 'hi' ? 'पुरुष' : 'Male'}</MenuItem>
-                                    <MenuItem value="Female">{this.props.language === 'hi' ? 'महिला' : 'Female'}</MenuItem>
-                                    <MenuItem value="Other">{this.props.language === 'hi' ? 'अन्य' : 'Other'}</MenuItem>
-                                </Select2>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={4}>
-                        <TextField
-                            id="description"
-                            label={pageContent.items[6].title}
-                            type="date"
-                            defaultValue="1990-01-01"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={(e) => this.handleDateOfBirthChange(e)}
-                            onKeyDown={(e) => {
-                                e.preventDefault();
-                            }}
-                            required
-                            fullWidth 
-                        />
-                        </Grid>
-                        <Grid item xs={4}>
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor='gender'>{pageContent.items[5].title}</label>
+                            <select
+                                style={{
+                                    width: '100%',
+                                    display: 'block',
+                                    height: '40px',
+                                    lineHeight: '1.5',
+                                    color: '#495057',
+                                    backgroundColor: '#fff',
+                                    backgroundClip: 'padding-box',
+                                    border: '1px solid #ced4da',
+                                    borderRadius: '5px',
+                                    transition:
+                                        'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+                                }}
+                                name='gender'
+                                id='gender'
+                                value={this.state.gender}
+                                required
+                                onChange={(e) =>
+                                    this.setState({ gender: e.target.value })
+                                }
+                            >
+                                <option value='' disabled>--Choose--</option>
+                                <option value='Male'>{this.props.language === 'hi' ? 'पुरुष' : 'Male'}</option>
+                                <option value='Female'>{this.props.language === 'hi' ? 'महिला' : 'Female'}</option>
+                                <option value='Other'>{this.props.language === 'hi' ? 'अन्य' : 'Other'}</option>
+                            </select>
+                        </div>
+                        <div className="col">
+                            {/* <label htmlFor="description">{pageContent.items[6].title}</label>
+                            <input
+                                className="form-control"
+                                id="description"
+                                type="date"
+                                name="description"
+                                onChange={(e) => this.handleDateOfBirthChange(e)}
+                                onKeyDown={(e) =>{
+                                    e.preventDefault()
+                                }}
+                                required
+                            /> */}
                             <TextField
+                id="description"
+                label={pageContent.items[6].title}
+                type="date"
+                defaultValue=""
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                onChange={(e) => this.handleDateOfBirthChange(e)}
+                onKeyDown={(e) => {
+                    e.preventDefault();
+                }}
+                required
+            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="description">{pageContent.items[7].title}</label>
+                            <input
+                                className="form-control"
                                 id="pinCode"
-                                label={pageContent.items[7].title}
+                                name="pinCode"
                                 value={this.state.pinCode}
                                 onChange={(e) => this.handleZipCodeChange(e)}
                                 placeholder={pageContent.items[1].title}
                             />
-                        </Grid>
-                    </Grid>
-                    <br/>
+                        </div>
+                    </div>
 
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                        <TextField
-                            id="addressLine1"
-                            label={pageContent.items[8].title}
-                            className="form-control"
-                            name="addressLine1"
-                            value={this.state.addressLine1}
-                            onChange={(e) => this.setState({ addressLine1: e.target.value })}
-                            placeholder={pageContent.items[1].title}
-                            required
-                        />
-                        </Grid>
-                        <Grid item xs={6}>
-                        <TextField
-                            id="addressLine2"
-                            label={pageContent.items[9].title}
-                            className="form-control"
-                            name="addressLine2"
-                            value={this.state.addressLine2}
-                            onChange={(e) => this.setState({ addressLine2: e.target.value })}
-                            placeholder={pageContent.items[1].title}
-                        />
-                        </Grid>
-                    </Grid>
-                    <br/>
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="description">{pageContent.items[8].title}</label>
+                            <input
+                                className="form-control"
+                                id="addressLine1"
+                                name="addressLine1"
+                                value={this.state.addressLine1}
+                                onChange={(e) => this.setState({ addressLine1: e.target.value })}
+                                placeholder={pageContent.items[1].title}
+                                required
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="description">{pageContent.items[9].title}</label>
+                            <input
+                                className="form-control"
+                                id="addressLine2"
+                                name="addressLine2"
+                                value={this.state.addressLine2}
+                                onChange={(e) => this.setState({ addressLine2: e.target.value })}
+                                placeholder={pageContent.items[1].title}
+                            />
+                        </div>
+                    </div>
 
-                    <Grid container spacing={2}>
-                        <Grid item xs={4}>
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor='country'>{pageContent.items[10].title}</label>
                             <Select
                                 name='countryTitle'
                                 id='countryTitle'
@@ -458,8 +482,9 @@ class BasicProfile extends React.Component<any, any> {
                                 placeholder={pageContent.items[10].title}
                                 options={this.state.countries}
                             />
-                        </Grid>
-                        <Grid item xs={4}>
+                        </div>
+                        <div className="col">
+                            <label htmlFor='country'>{pageContent.items[11].title}</label>
                             <Select
                                 name='state'
                                 id='state'
@@ -469,8 +494,9 @@ class BasicProfile extends React.Component<any, any> {
                                 placeholder={pageContent.items[11].title}
                                 options={this.state.states}
                             />
-                        </Grid>
-                        <Grid item xs={4}>
+                        </div>
+                        <div className='col'>
+                            <label htmlFor='country'>{pageContent.items[12].title}</label>
                             <Select
                                 name='city'
                                 id='city'
@@ -480,10 +506,10 @@ class BasicProfile extends React.Component<any, any> {
                                 required
                                 options={this.state.cities}
                             />
-                        </Grid>
-                    </Grid>
+                        </div>
+                    </div>
 
-                    <Grid container spacing={2}>
+                    <div className='form-group'>
                         <label htmlFor='gender'>{pageContent.items[13].title}</label>
                         <select
                             style={{
@@ -511,7 +537,7 @@ class BasicProfile extends React.Component<any, any> {
                                 <option value={referral.value} className="">{this.props.language === 'hi' ? referral.label.hi : referral.label.en }</option>
                             ))}
                         </select>
-                    </Grid>
+                    </div>
                     <hr />
                     <div className="mt-2 d-flex justify-content-center">
                         <button
