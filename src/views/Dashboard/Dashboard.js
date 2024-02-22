@@ -55,6 +55,56 @@ function Dashboard({...rest}) {
   return (
       <div>
         {/*<ReactStars count={5} value={5} size={24} activeColor="#ffd700"/>*/}
+
+
+        <Show when={status === PageStatus.Loaded}>
+          <div className="jumbotron bg-white p-3 border shadow-sm">
+            {data ? data.overallAttemptedPercentage.points > 0 ?
+                    rest.language === 'hi' ?
+                        <p style={{color: 'red'}}>
+                          आपकी प्रोफ़ाइल लंबित है, कृपया 50 आई-प्वाइंट प्राप्त करने के लिए इसे पूरा करें। प्रोफ़ाइल भरना शुरू करने के लिए
+                          <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/profile-overview')}
+                                     style={{fontWeight: 'bold', color: 'red'}}>यहां क्लिक करें</a></strong>
+                        </p>
+                        :
+                        <p style={{color: 'red'}}>
+                          Your profile is pending, please complete it to get 50 I-Points.
+                          <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/profile-overview')}
+                                     style={{fontWeight: 'bold', color: 'red'}}>Click Here</a></strong>
+                          to start filling profile.
+                        </p>
+                    :
+                    rest.language === 'hi' ?
+                        <p style={{color: 'green'}}>
+                          Your profile is completed,
+                          <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/my-rewards')}
+                                     style={{fontWeight: 'bold', color: 'green'}}>click here</a></strong>
+                          to view your reward.
+                        </p>
+                        :
+                        <p style={{color: 'green'}}>
+                          आपकी प्रोफ़ाइल पूरी हो गई है, अपना इनाम देखने के लिए
+                          <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/my-rewards')}
+                                     style={{fontWeight: 'bold', color: 'green'}}>यहां क्लिक करें</a></strong>
+                        </p>
+                :
+                rest.language === 'hi' ?
+                    <p style={{color: 'red'}}>
+                      आपकी प्रोफ़ाइल लंबित है, कृपया 50 आई-प्वाइंट प्राप्त करने के लिए इसे पूरा करें। प्रोफ़ाइल भरना शुरू करने के लिए
+                      <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/profile-overview')}
+                                 style={{fontWeight: 'bold', color: 'red'}}>यहां क्लिक करें</a></strong>
+                    </p>
+                    :
+                    <p style={{color: 'red'}}>
+                      Your profile is pending, please complete it to get 50 I-Points.
+                      <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/profile-overview')}
+                                 style={{fontWeight: 'bold', color: 'red'}}>Click Here</a></strong>
+                      to start filling profile.
+                    </p>
+            }
+          </div>
+        </Show>
+
         <GridContainer>
 
           <Show when={status === PageStatus.Loading}>
@@ -69,7 +119,6 @@ function Dashboard({...rest}) {
           >
             {error}
           </Alert>
-
 
           <Show when={status === PageStatus.Loaded && !!data}>
             <GridItem xs={12} sm={6} md={3}>
