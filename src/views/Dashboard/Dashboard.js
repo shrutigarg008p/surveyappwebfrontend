@@ -76,17 +76,18 @@ function Dashboard({...rest}) {
                     :
                     rest.language === 'hi' ?
                         <p style={{color: 'green'}}>
+                          आपकी प्रोफ़ाइल पूरी हो गई है, अपना इनाम देखने के लिए
+                          <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/my-rewards')}
+                                     style={{fontWeight: 'bold', color: 'green'}}>यहां क्लिक करें</a></strong>
+                        </p>
+                        :
+                        <p style={{color: 'green'}}>
                           Your profile is completed,
                           <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/my-rewards')}
                                      style={{fontWeight: 'bold', color: 'green'}}>click here</a></strong>
                           to view your reward.
                         </p>
-                        :
-                        <p style={{color: 'green'}}>
-                          आपकी प्रोफ़ाइल पूरी हो गई है, अपना इनाम देखने के लिए
-                          <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/my-rewards')}
-                                     style={{fontWeight: 'bold', color: 'green'}}>यहां क्लिक करें</a></strong>
-                        </p>
+
                 :
                 rest.language === 'hi' ?
                     <p style={{color: 'red'}}>
