@@ -579,6 +579,24 @@ const dashboardRoutes = [
     type: 'sub-admin'
   },
   {
+    path: "/dashboard",
+    name: "Schedule Survey",
+    hindi: "सर्वेक्षण की योजना",
+    icon: Dashboard,
+    component: DashboardSurvey,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
+  {
+    path: "/surveys",
+    name: "Surveys",
+    hindi: "सर्वेक्षण",
+    icon: ListAlt,
+    component: Surveys,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
+  {
     path: "/rewards",
     name: "Rewards",
     hindi: "पुरस्कार",
@@ -605,6 +623,15 @@ const dashboardRoutes = [
     layout: "/sub-admin",
     type: 'sub-admin',
     isVisible: false
+  },
+  {
+    path: "/partners",
+    name: "Partners",
+    hindi: "साथी",
+    icon: Business,
+    component: PartnersList,
+    layout: "/sub-admin",
+    type: 'sub-admin',
   },
   {
     path: "/newsletters",

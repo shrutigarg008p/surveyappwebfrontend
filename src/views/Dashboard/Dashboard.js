@@ -62,16 +62,16 @@ function Dashboard({...rest}) {
             {data ? data.overallAttemptedPercentage.points > 0 ?
                     rest.language === 'hi' ?
                         <p style={{color: 'red'}}>
-                          आपकी प्रोफ़ाइल लंबित है, कृपया 50 आई-प्वाइंट प्राप्त करने के लिए इसे पूरा करें। प्रोफ़ाइल भरना शुरू करने के लिए
+                          आपकी प्रोफ़ाइल लंबित है, कृपया 50 i-प्वाइंट प्राप्त करने के लिए इसे पूरा करें। प्रोफ़ाइल भरना शुरू करने के लिए
                           <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/profile-overview')}
                                      style={{fontWeight: 'bold', color: 'red'}}>यहां क्लिक करें</a></strong>
                         </p>
                         :
                         <p style={{color: 'red'}}>
-                          Your profile is pending, please complete it to get 50 I-Points.
+                          Your profile is pending, please complete it to get 50 i-Points.
                           <strong><a className="mr-1 ml-1" onClick={() => rest.history.push('/panelist/profile-overview')}
                                      style={{fontWeight: 'bold', color: 'red'}}>Click Here</a></strong>
-                          to start filling profile.
+                          to start filling profile
                         </p>
                     :
                     rest.language === 'hi' ?
