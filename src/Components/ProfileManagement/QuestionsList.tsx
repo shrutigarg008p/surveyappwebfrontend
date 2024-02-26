@@ -210,6 +210,7 @@ export class QuestionsList extends Component<any, State> {
                                 <tr>
                                     <th>S.No</th>
                                     <th>Question Text</th>
+                                    <th>Question Hindi Text</th>
                                     <th>Display Order</th>
                                     <th>CreatedAt</th>
                                     <th>UpdatedAt</th>
@@ -239,6 +240,7 @@ export class QuestionsList extends Component<any, State> {
                                                   }}
                                               />
                                             </td>
+                                            <td>{data.hindi}</td>
                                             <td>{data.displayOrder}</td>
                                             <td>{moment(data.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>{moment(data.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>

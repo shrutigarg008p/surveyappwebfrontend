@@ -207,6 +207,7 @@ export class ProfileManagement extends Component<any, State> {
               <tr>
                 <th>S.No</th>
                 <th>Name</th>
+                <th>Hindi</th>
                 <th>Description</th>
                 <th>Display Order</th>
                 <th>CreatedAt</th>
@@ -238,6 +239,7 @@ export class ProfileManagement extends Component<any, State> {
                         }}
                       />
                     </td>
+                    <td>{data.hindi}</td>
                     <td>{data.description}</td>
                     <td>{data.displayOrder}</td>
                     <td>{moment(data.createdAt).format('MM/DD/YYYY HH:mm A')}</td>

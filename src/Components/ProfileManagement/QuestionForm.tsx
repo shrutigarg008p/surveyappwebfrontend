@@ -29,12 +29,14 @@ class QuestionForm extends React.Component<any, any> {
             status: PageStatus.None,
             error: null,
             text: '',
+            hindi: '',
             hint: "",
             displayOrder: '',
             displayType: '',
             isActive: true,
             dynamicFields: [{
                 value: '',
+                hindi: '',
                 hint: '',
                 displayOrder: '',
                 isActive: true
@@ -73,6 +75,7 @@ class QuestionForm extends React.Component<any, any> {
     formValues() {
         return {
             text: this.state.text,
+            hindi: this.state.hindi,
             hint: this.state.hint,
             displayOrder: parseInt(this.state.displayOrder, 10),
             displayType: parseInt(this.state.displayType, 10),
@@ -86,6 +89,7 @@ class QuestionForm extends React.Component<any, any> {
     initializeValues(data) {
         return this.setState({
             text: data.dataValues.text,
+            hindi: data.dataValues.hindi,
             hint: data.dataValues.hint,
             displayOrder: data.dataValues.displayOrder,
             displayType: data.dataValues.displayType,
@@ -131,6 +135,7 @@ class QuestionForm extends React.Component<any, any> {
     reset() {
         return this.setState({
             text: '',
+            hindi: '',
             hint: '',
             displayOrder: 1
         });
@@ -153,8 +158,8 @@ class QuestionForm extends React.Component<any, any> {
     };
 
     handleAddMore = () => {
-        const { value, hint, displayOrder, isActive } = this.state.dynamicFields;
-        const newField = { value, hint, displayOrder, isActive: true };
+        const { value, hindi, hint, displayOrder, isActive } = this.state.dynamicFields;
+        const newField = { value, hindi, hint, displayOrder, isActive: true };
         this.setState((prevState) => ({
             dynamicFields: [...prevState.dynamicFields, newField],
         }));
@@ -210,6 +215,19 @@ class QuestionForm extends React.Component<any, any> {
                                     required
                                 />
                             </div>
+
+                            <div className="col">
+                                <label htmlFor="text">Hindi</label>
+                                <input
+                                    className="form-control"
+                                    name="text"
+                                    onChange={(e) => this.setState({ hindi: e.target.value })}
+                                    value={this.state.hindi}
+                                    placeholder="Enter here"
+                                    required
+                                />
+                            </div>
+
                             <div className="col">
                                 <label htmlFor="hint">Hint*</label>
                                 <input
@@ -297,6 +315,16 @@ class QuestionForm extends React.Component<any, any> {
                                             name={`text_${index}`}
                                             value={field.value}
                                             onChange={(e) => this.handleDynamicFieldChange(e, index, 'value')}
+
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        <label htmlFor={`text_${index}`}>Hindi*</label>
+                                        <input
+                                            className="form-control"
+                                            name={`text_${index}`}
+                                            value={field.hindi}
+                                            onChange={(e) => this.handleDynamicFieldChange(e, index, 'hindi')}
 
                                         />
                                     </div>

@@ -29,6 +29,7 @@ class Form extends React.Component<any, any> {
       status: PageStatus.None,
       error: null,
       name: '',
+      hindi: '',
       description: "",
       displayOrder: ''
     };
@@ -65,6 +66,7 @@ class Form extends React.Component<any, any> {
   formValues() {
     return {
       name: this.state.name,
+      hindi: this.state.hindi,
       description: this.state.description,
       displayOrder: this.state.displayOrder,
     };
@@ -73,6 +75,7 @@ class Form extends React.Component<any, any> {
   initializeValues(data) {
     return this.setState({
       name: data.name,
+      hindi: data.hindi,
       description: data.description,
       displayOrder: data.displayOrder,
     });
@@ -115,6 +118,7 @@ class Form extends React.Component<any, any> {
   reset() {
     return this.setState({
       name: '',
+      hindi: '',
       description: '',
       displayOrder: 1
     });
@@ -159,6 +163,16 @@ class Form extends React.Component<any, any> {
                   className="form-control"
                   onChange={(e) => this.setState({name: e.target.value})}
                   value={this.state.name}
+                  placeholder="Enter..."
+                  required
+              />
+              <label htmlFor="titleEng">
+                Hindi*
+              </label>
+              <input
+                  className="form-control"
+                  onChange={(e) => this.setState({hindi: e.target.value})}
+                  value={this.state.hindi}
                   placeholder="Enter..."
                   required
               />

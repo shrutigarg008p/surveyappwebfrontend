@@ -134,6 +134,10 @@ class Details extends React.Component<any, State> {
                 {this.state.data?.name}
               </div>
               <div className="mb-3">
+                <strong>Hindi: </strong>
+                {this.state.data?.hindi}
+              </div>
+              <div className="mb-3">
                 <strong>Description: </strong>
                 {this.state.data?.description}
               </div>

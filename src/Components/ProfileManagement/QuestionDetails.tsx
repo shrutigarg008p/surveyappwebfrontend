@@ -153,6 +153,10 @@ class QuestionDetails extends React.Component<any, State> {
                                 {this.state.data?.dataValues?.text}
                             </div>
                             <div className="mb-3">
+                                <strong>Hindi: </strong>
+                                {this.state.data?.dataValues?.hindi}
+                            </div>
+                            <div className="mb-3">
                                 <strong>Hint: </strong>
                                 {this.state.data?.dataValues?.hint}
                             </div>
@@ -179,6 +183,7 @@ class QuestionDetails extends React.Component<any, State> {
                             <tr>
                                 <th>S.No</th>
                                 <th>Options</th>
+                                <th>Hindi</th>
                                 <th>Hint</th>
                                 <th>Display Order</th>
                                 <th>Active</th>
@@ -204,6 +209,7 @@ class QuestionDetails extends React.Component<any, State> {
                                                   }}
                                               />
                                         </td>
+                                        <td>{data.hindi}</td>
                                         <td>{data.hint}</td>
                                         <td>{data.displayOrder}</td>
                                         <td>{data.isActive === true ? 'YES' : 'NO'}</td>
