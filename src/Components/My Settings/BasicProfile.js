@@ -321,7 +321,7 @@ class BasicProfile extends React.Component<any, any> {
         } else {
             e.target.value="";
             console.error("Invalid age range. Please enter a date of birth between 16 and 100 years.");
-            e.target.setCustomValidity("Invalid age range. Please enter a date of birth between 16 and 100 years.");
+            e.target.setCustomValidity(`${this.props.language === 'hi' ? 'कृपया कोई मान्य जन्मतिथि दर्ज करें । पैनलिस्ट के रूप में पंजीकरण करने के लिए आपकी आयु 16 वर्ष से अधिक होनी चाहिए ।' : 'Please enter a valid Date of Birth. You must be above 16 years of Age to register as a panelist.'}`);
         }
 
         e.target.reportValidity();
