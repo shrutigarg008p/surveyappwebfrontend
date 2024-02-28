@@ -310,7 +310,7 @@ export default function PenalistDetails(props:any) {
                         <div className="col s4 center-align">
                             <div style={{ textAlign: 'center' }}>
                                 <img
-                                    src={profile?.imagePath ? `${process.env.REACT_APP_BASE_URL_API}${profile?.imagePath}` : "https://placekitten.com/200/200"}
+                                    src={profile?.imagePath ? `${process.env.REACT_APP_BASE_URL_API}${profile?.imagePath}` : "https://e7.pngegg.com/pngimages/507/702/png-clipart-profile-icon-simple-user-icon-icons-logos-emojis-users-thumbnail.png"}
                                     alt="Profile"
                                     className="circle responsive-img"
                                 />

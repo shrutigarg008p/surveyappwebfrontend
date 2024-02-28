@@ -662,7 +662,7 @@ class AllPanelists extends Component<any, any> {
                                             }
                                             <td>{info.phoneNumber}</td>
                                             <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
-                                            <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY HH:mm A') : 'NA'}</td>
+                                            <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY') : 'NA'}</td>
                                         </tr>
                                     ))
                                 }

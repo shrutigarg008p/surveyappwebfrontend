@@ -248,7 +248,7 @@ export class UnsubscribedPanelistOnly extends Component<any, State> {
                                             <td>{info.email}</td>
                                             <td>{info.phoneNumber}</td>
                                             <td>{info.basic_profile.city}</td>
-                                            <td>{moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY HH:mm A')}</td>
+                                            <td>{moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY')}</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                         </tr>
                                     ))
