@@ -204,6 +204,8 @@ export class RewardsList extends Component<any, any> {
                                     <th>S.No</th>
                                     <th>Points</th>
                                     <th>Reward type</th>
+                                    <th>Name</th>
+                                    <th>UserId</th>
                                     <th>Reward Date</th>
                                     <th>Reward Status</th>
                                     <th>Created At</th>
@@ -232,6 +234,8 @@ export class RewardsList extends Component<any, any> {
                                           >{redemption.points}</span>
                                             </td>
                                             <td>{redemption.rewardType}</td>
+                                            <td>{redemption.basic_profile ? `${redemption.basic_profile.firstName} ${redemption.basic_profile.lastName}` : 'NA'}</td>
+                                            <td>{redemption.userId}</td>
                                             <td>{moment(redemption.rewardDate).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>{redemption.rewardStatus}</td>
                                             <td>{moment(redemption.createdAt).format('MM/DD/YYYY HH:mm A')}</td>

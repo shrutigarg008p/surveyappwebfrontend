@@ -99,23 +99,6 @@ class Form extends React.Component<any, any> {
           '                                    <img src="https://panel.indiapolls.com/assets/img/logo-black.png" class="img-responsive" style="margin-top:90px !important;">\n' +
           '                                </div>\n' +
           '\n' +
-          '                                <div class="col-md-6" style="width:280px; float: right; margin-right:10px; margin-top: -130px;">\n' +
-          '                                    <div class="right-footer" style="border-left:2px solid #ddd;\n' +
-          '\tpadding-left:20px; ">\n' +
-          '\n' +
-          '<!--                                        <h4 style="border-bottom:3px solid #f47a20;-->\n' +
-          '                                        <!-- font-weight:700; font-size:18px; padding-bottom:4px; padding-top:0px !important; font-family: \'Open Sans\', sans-serif;">-->\n' +
-          '                                        <h4 style="color: #000000;border-bottom:2px solid orange">\n' +
-          '                                            www.IndiaPolls.net\n' +
-          '                                        </h4>\n' +
-          '\n' +
-          '                                        <h5 style="font-weight: 800; font-size: 12px; font-style: italic; font-family: \'Open Sans\', sans-serif;"><b>Keep voicing your valuable opinions and earn more rewards!</b></h5>\n' +
-          '\n' +
-          '                                        <b><p style="font-weight: 600; font-size: 12px; font-family: \'Open Sans\', sans-serif;">AbsolutData Research &amp; Analytics</p></b>\n' +
-          '                                        <b><p style="font-weight: 600; font-size: 12px; font-family: \'Open Sans\', sans-serif;">Building 14 A, 4th Floor, DLF Cyber City SEZ, DLF Phase-III, Gurgaon-122002</p></b>\n' +
-          '                                        <b><p style="font-weight: 600; font-size: 12px; font-family: \'Open Sans\', sans-serif;">Phone: +91.124.495.3400; Fax: 91.124.495.3430</p></b>\n' +
-          '                                        <b><p style="font-weight:600; font-size:12px; font-family: \'Open Sans\', sans-serif; text-decoration: underline"><a href="#" style="color: blue">Email: feedback@IndiaPolls.net</a></p></b>\n' +
-          '\n' +
           '\n' +
           '                                    </div>\n' +
           '\n' +
@@ -330,7 +313,7 @@ class Form extends React.Component<any, any> {
                 <div className="col">
                   <label htmlFor="sendDate">Date</label>
                   <input
-                      type="date"
+                      type="datetime-local"
                       className="form-control"
                       id="sendDate"
                       name="sendDate"

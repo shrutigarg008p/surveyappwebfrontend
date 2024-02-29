@@ -127,11 +127,7 @@ class Form extends React.Component<any, any> {
                         <Spinner animation="border" variant="primary" />
                     </div>
                 </Show>
-        
-                <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-                    {this.state.error}
-                </Alert>
-        
+
                 <form onSubmit={this.props.handleSubmit((event) => this.onSubmit())}>
                     <div className="form-group">
                         <label htmlFor="titleEng">
@@ -177,7 +173,7 @@ class Form extends React.Component<any, any> {
                     <Alert variant="danger" show={!!this.state.error} className="mt-2">
                         {this.state.error}
                     </Alert>
-        
+
                     <div className="d-flex align-items-center mt-2">
                         <button
                             type="submit"
@@ -186,7 +182,7 @@ class Form extends React.Component<any, any> {
                         >
                             {redeemPointsDict[lang]["Submit"] || "Submit"}
                         </button>
-        
+
                         <button
                             type="button"
                             onClick={() => this.reset()}
@@ -194,14 +190,14 @@ class Form extends React.Component<any, any> {
                         >
                             {redeemPointsDict[lang]["Reset"] || "Reset"}
                         </button>
-        
+
                         <Show when={this.state.status === PageStatus.Submitting}>
                             <Spinner animation="border" variant="primary" />
                         </Show>
                     </div>
                 </form>
             </Modal.Body>
-        </Modal>        
+        </Modal>
         );
     }
 }

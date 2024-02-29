@@ -26,9 +26,9 @@ export default function PenalistDetails(props:any) {
 
     const [penalistData, setPenalistData] = useState<any>([]);
     const [profileData, setProfileData] = useState<any>([]);
+    const [profileOverviewData, setProfileOverviewData] = useState<any>(null);
     const [error, setError] = useState<any>(false);
     const [userID, setUserID] = useState<String>('');
-
 
     useEffect(()=>{
         const { userId } = props.match.params;
@@ -44,6 +44,7 @@ export default function PenalistDetails(props:any) {
                 setError(true);
                 console.log(err)
             });
+
         const url2 = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/get-user/'+userId;
         fetch(url2)
             .then(res=>res.json())
@@ -54,7 +55,21 @@ export default function PenalistDetails(props:any) {
                 setError(true);
                 console.log(err)
             });
+
+        const url3 = process.env.REACT_APP_BASE_URL_API+'/api/v1/auth/user/respondentProfileOverview/'+userId;
+        fetch(url3)
+            .then(res=>res.json())
+            .then(data=>{
+                setProfileOverviewData(data.data);
+            })
+            .catch((err)=>{
+                setError(true);
+                console.log(err)
+            });
+
     }, []);
+
+    console.log('profileOverviewData--->', profileOverviewData)
 
     function TopHeading() {
         const unSubscriptionService = (dialoge, type) =>{
@@ -272,7 +287,7 @@ export default function PenalistDetails(props:any) {
             <>
                 <CardHeader color="primary">
                     <div className="d-flex align-items-center justify-content-between">
-                        <h4>Penalist Details</h4>
+                        <h4>Panelist Details</h4>
                         <span className="align-items-right">
                 {profileData.length !== 0 && profileData?.data.dataValues.unsubscribeDate === null ?
                     <button type="button" className="btn btn-info" onClick={() => unsubscribe('unsubscribe')}>Unubscribe </button>
@@ -282,7 +297,7 @@ export default function PenalistDetails(props:any) {
                             <button type="button" className="btn btn-blue ml-1" onClick={changePassword}>Change Password</button>
 
                             {profileData.length !== 0 && profileData?.data.dataValues.deletedAt === null ?
-                                <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('temporary delete')}>Temporary Delete </button>
+                                <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('temporary delete')}>Temporary Deleted </button>
                                 :
                                 <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('re-active')}>Re-Enable</button>
                             }
@@ -313,6 +328,7 @@ export default function PenalistDetails(props:any) {
                                     src={profile?.imagePath ? `${process.env.REACT_APP_BASE_URL_API}${profile?.imagePath}` : "https://e7.pngegg.com/pngimages/507/702/png-clipart-profile-icon-simple-user-icon-icons-logos-emojis-users-thumbnail.png"}
                                     alt="Profile"
                                     className="circle responsive-img"
+                                    style={{ height: '250px', width: '250px' }}
                                 />
                                 <p className="flow-text">{profile?.firstName} {profile?.lastName}</p>
                             </div>
@@ -487,7 +503,7 @@ export default function PenalistDetails(props:any) {
                         <div className="d-flex align-items-center justify-content-between">
                             <h4 className="text-center">Profiles &nbsp;
                                 <Chip
-                                    label={profilesTotalPercentage+" Completed"}
+                                    label={profileOverviewData.overallAttemptedPercentage+"% Completed"}
                                     color="default"
                                     variant="outlined"
                                 />
@@ -495,27 +511,26 @@ export default function PenalistDetails(props:any) {
                         </div>
                     </CardHeader>
                     <CardBody>
-                        <Grid container spacing={4}>
+                        <Grid container spacing={5}>
                             {
-                                profile &&
-                                Object.keys(profile).length > 0 &&
-                                Object.keys(profile).map((value, key) => (
-                                    <Grid item xs={12} sm={4} key={key}>
+                                profileOverviewData &&
+                                profileOverviewData.result.map((data, index) => (
+                                    <Grid item xs={12} sm={6} key={index}>
                                         <Card2>
                                             <CardHeader2
-                                                title={value.toUpperCase()}
+                                                title={<>
+                                                    {data.name}
+                                                    <Chip
+                                                        label={parseInt(data.attemptedPercentage, 10) > 0 ? `${parseInt(data.attemptedPercentage, 10)}% Completed` : 'Not Started'}
+                                                        style={{ marginLeft: '8px' }} // Adjust styling as needed
+                                                    />
+                                                </>}
                                                 titleTypographyProps={{ style: { fontSize: '16px' } }}
                                                 style={{ background: '#454545', color: 'white'}}
-                                                action={
-                                                    <Chip
-                                                        label={profile[value]}
-                                                        style={notCompletedStyle}
-                                                    />
-                                                }
                                             />
                                             <CardContent>
                                                 <img
-                                                    src={"https://picsum.photos/400/"+Math.round((140+key))}
+                                                    src={`https://indiapolls.com:9000${data.image}`}
                                                     alt="Full Size Image"
                                                     style={{ width: '100%', height: '300px' }}
                                                 />
@@ -580,18 +595,18 @@ export default function PenalistDetails(props:any) {
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Incomplete Surveys: {surveys.totalCount}
+                                    Incomplete Surveys: {surveys.inCompletedCount}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Surveys Not Started : {surveys.totalCount}
+                                    Surveys Not Started : {surveys.notStartedCount}
                                 </Paper>
                             </Grid>
                         </Grid>
-                        {
-                            surveys.list && surveys.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
-                        }
+                        {/*{*/}
+                        {/*    surveys.list && surveys.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''*/}
+                        {/*}*/}
                     </CardBody>
                 </Card>
             </>
@@ -612,31 +627,26 @@ export default function PenalistDetails(props:any) {
                         </div>
                     </CardHeader>
                     <CardBody>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={3}>
+                        <Grid container spacing={4}>
+                            <Grid item xs={12} sm={4}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Total Rewards : {rewards.totalCount}
+                                    Earned By Survey : {rewards.earnedBySurvey}
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} sm={3}>
+                            <Grid item xs={12} sm={4}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Completed Rewards : {rewards.completedCount}
+                                    Earned By Referrals : {rewards.earnedByReferrals}
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} sm={3}>
+                            <Grid item xs={12} sm={4}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Incomplete Rewards: {rewards.inCompletedCount}
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={12} sm={3}>
-                                <Paper className={classes.paper} elevation={3}>
-                                    Incomplete Rewards: {rewards.notStartedCount}
+                                    Total Points: {rewards.totalLeftPoints}
                                 </Paper>
                             </Grid>
                         </Grid>
-                        {
-                            rewards.list && rewards.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
-                        }
+                        {/*{*/}
+                        {/*    rewards.list && rewards.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''*/}
+                        {/*}*/}
                     </CardBody>
                 </Card>
             </>
@@ -664,13 +674,13 @@ export default function PenalistDetails(props:any) {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Completed Referrals : {referrals.completedCount}
+                                    Completed Referrals : {referrals.approvedCount}
                                 </Paper>
                             </Grid>
                         </Grid>
-                        {
-                            referrals.list && referrals.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
-                        }
+                        {/*{*/}
+                        {/*    referrals.list && referrals.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''*/}
+                        {/*}*/}
                     </CardBody>
                 </Card>
             </>
@@ -693,28 +703,28 @@ export default function PenalistDetails(props:any) {
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Total Redemptions :  {redemption.completedCount}
+                                    Total Earned : {redemption.totalEarned}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Completed Redemptions :  {redemption.completedCount}
+                                    Completed Redeemed :  {redemption.totalRedeemed}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Incomplete Redemptions:  {redemption.completedCount}
+                                    Pending Redemptions:  {redemption.totalPendingRedeemed}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Redemptions Not Started : {redemption.completedCount}
+                                    Total Points : {redemption.totalLeft}
                                 </Paper>
                             </Grid>
                         </Grid>
-                        {
-                            redemption.list && redemption.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''
-                        }
+                        {/*{*/}
+                        {/*    redemption.list && redemption.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''*/}
+                        {/*}*/}
 
                     </CardBody>
                 </Card>
@@ -747,7 +757,8 @@ export default function PenalistDetails(props:any) {
                         <React.Fragment>
                             <BasicProfile/>
                             <Label />
-                            <Profiles />
+                            {profileOverviewData ?
+                            <Profiles />: ''}
                             <Surveys/>
                             <Rewards/>
                             <Referrals/>
