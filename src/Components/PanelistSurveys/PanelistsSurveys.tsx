@@ -242,6 +242,7 @@ class PanelistSurveys extends Component<any, any> {
                     <tbody>
                         {
                             this.state.filteredData.map((info, index) => (
+                                <Show when={info.survey}>
                                 <tr key={info.id}>
                                     <td>{index + 1}</td>
                                     <td>
@@ -258,12 +259,12 @@ class PanelistSurveys extends Component<any, any> {
                                                 });
                                             }}
                                             dangerouslySetInnerHTML={{
-                                                __html: info.survey.name || 'Title',
+                                                __html: info.survey ? info.survey.name : '' || 'Title',
                                             }}
                                         />
                                     </td>
                                     <td>{info.status}</td>
-                                    <td>{info.survey.ceggPoints}</td>
+                                    <td>{info.survey ? info.survey.ceggPoints : ''}</td>
                                     <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                     <td>
                                         <a href={info?.temporarySurveyLink} target="_blank" rel="noopener noreferrer">
@@ -271,6 +272,7 @@ class PanelistSurveys extends Component<any, any> {
                                         </a>
                                     </td>
                                 </tr>
+                                </Show>
                             ))
                         }
                     </tbody>

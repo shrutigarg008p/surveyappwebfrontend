@@ -13,6 +13,10 @@ import $ from 'jquery';
 import 'jquery-confirm';
 import {log} from "fabric/fabric-impl";
 import avatar from "../../assets/img/faces/marc1.jpg";
+import {surveyDict} from "../../Languages/SurveyTranslations";
+import {Show} from "../../Layout";
+import moment from "moment";
+import {Table} from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -297,7 +301,7 @@ export default function PenalistDetails(props:any) {
                             <button type="button" className="btn btn-blue ml-1" onClick={changePassword}>Change Password</button>
 
                             {profileData.length !== 0 && profileData?.data.dataValues.deletedAt === null ?
-                                <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('temporary delete')}>Temporary Deleted </button>
+                                <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('temporary delete')}>Temporary Delete </button>
                                 :
                                 <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('re-active')}>Re-Enable</button>
                             }
@@ -608,6 +612,37 @@ export default function PenalistDetails(props:any) {
                         {/*    surveys.list && surveys.list.length === 0 ?  <Typography style={{marginTop:'20px'}}>No Rewards are available for this panalist right now</Typography> : ''*/}
                         {/*}*/}
                     </CardBody>
+
+
+                    <div className="jumbotron bg-white p-3 border shadow-sm">
+                    <Table responsive size="sm" bordered>
+                        <thead>
+                        <tr>
+                            <th>{"S.No"}</th>
+                            <th>{"Name"}</th>
+                            <th>{"Status"}</th>
+                            <th>{"Points"}</th>
+                            <th>{"Expire Date"}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            surveys.list.map((info, index) => (
+                                <Show when={info.survey}>
+                                    <tr key={info.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{info.survey ? info.survey.name : 'NA'}</td>
+                                        <td>{info.status}</td>
+                                        <td>{info.survey ? info.survey.ceggPoints : ''}</td>
+                                        <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                    </tr>
+                                </Show>
+                            ))
+                        }
+                        </tbody>
+                    </Table>
+                    </div>
+
                 </Card>
             </>
         )

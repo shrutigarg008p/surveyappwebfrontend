@@ -6,18 +6,40 @@ class UsersPaginations extends React.Component {
         super(props);
         this.state = {
             currentPage: 1,
-            itemsPerPage: 10, // Number of items per page
+            itemsPerPage: 10,
+            selectedSample: null,
+            filterUsers: []
         };
     }
 
+    componentDidMount() {
+        this.setState({ filterUsers: this.props.users })
+    }
+
     render() {
-        const { currentPage, itemsPerPage } = this.state;
+        const { currentPage, itemsPerPage, selectedSample } = this.state;
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        const currentItems = this.props.users.slice(indexOfFirstItem, indexOfLastItem);
+        const currentItems = this.filterUsersBySample().slice(indexOfFirstItem, indexOfLastItem);
+
 
         return (
             <div className="mt-5">
+                <div className="mb-3">
+                    <label htmlFor="sampleSelect" className="form-label">Filter By Sample :</label>
+                    <select
+                        id="sampleSelect"
+                        className="form-select"
+                        value={selectedSample || ''}
+                        onChange={this.handleSampleChange}
+                    >
+                        <option value="">All Samples</option>
+                        {this.props.samples.map(sample => (
+                            <option key={sample.name} value={sample.name}>{sample.label}</option>
+                        ))}
+                    </select>
+                </div>
+
                 <table className="table table-bordered">
                     <thead>
                     <tr>
@@ -26,6 +48,7 @@ class UsersPaginations extends React.Component {
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Status</th>
+                        <th>Sample</th>
                         <th>CreatedAt</th>
                         <th>Link</th>
                     </tr>
@@ -38,6 +61,7 @@ class UsersPaginations extends React.Component {
                             <td>{info.firstName} {info.lastName}</td>
                             <td>{info.gender}</td>
                             <td>{info.assignUser ? info.assignUser.status : '-' }</td>
+                            <td>{info.sampleName}</td>
                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                             <td>
                                 {info.assignUser ? (
@@ -50,13 +74,26 @@ class UsersPaginations extends React.Component {
                     ))}
                     </tbody>
                 </table>
-                {this.renderPagination()}
+                {this.renderPagination(this.state.filterUsers)}
             </div>
         );
     }
 
-    renderPagination() {
-        const { currentPage, itemsPerPage } = this.state;
+    filterUsersBySample() {
+        let { selectedSample, filterUsers } = this.state;
+        let { users } = this.props;
+        if (selectedSample) {
+            filterUsers =  users.filter(user => user.sampleName === selectedSample);
+            return filterUsers
+        }
+        return users;
+    }
+
+    handleSampleChange = (e) => {
+        this.setState({ selectedSample: e.target.value });
+    };
+    renderPagination(Users) {
+        const { currentPage, itemsPerPage, filterUsers } = this.state;
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(this.props.users.length / itemsPerPage); i++) {
             pageNumbers.push(i);
@@ -65,13 +102,19 @@ class UsersPaginations extends React.Component {
         return (
             <nav aria-label="Page navigation">
                 <ul className="pagination justify-content-center">
-                    {pageNumbers.map(number => (
-                        <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
-                            <button className="page-link" onClick={() => this.handleClick(number)}>
-                                {number}
-                            </button>
-                        </li>
-                    ))}
+                    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => this.handleClick(currentPage - 1)}>
+                            Previous
+                        </button>
+                    </li>
+                    <li className={`page-item ${currentPage === pageNumbers.length ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => this.handleClick(currentPage + 1)}>
+                            Next
+                        </button>
+                    </li>
+                    <li className="page-item disabled">
+                        <span className="page-link">Page {currentPage} of {pageNumbers.length}</span>
+                    </li>
                 </ul>
             </nav>
         );

@@ -61,6 +61,7 @@ class DashboardDetails extends React.Component<any, any> {
             error: null,
             partners: [],
             users: [],
+            samples: [],
             partnersSelected: null,
             selectedPartnerOption: null,
             checkboxChecked: false,
@@ -93,7 +94,7 @@ class DashboardDetails extends React.Component<any, any> {
                         ...user,
                         assignUser: survey.assignUsers.find(assignUser => assignUser.userId === user.userId)
                     }));
-                    this.setState({ survey: survey.data, users: user, status: PageStatus.Loaded }, () => {
+                    this.setState({ survey: survey.data, samples: survey.samples, users: user, status: PageStatus.Loaded }, () => {
                         this.fetchPartners()
                     });
                 }
@@ -430,7 +431,7 @@ class DashboardDetails extends React.Component<any, any> {
                         <Show when={this.state.users.length !== 0} >
                         <div className="mt-5">
                                 <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export Users</button>
-                            <UsersPaginations users={this.state.users}/>
+                            <UsersPaginations users={this.state.users} samples={this.state.samples}/>
                             {/*<Table responsive size="sm" bordered>*/}
                             {/*    <thead>*/}
                             {/*    <tr>*/}
