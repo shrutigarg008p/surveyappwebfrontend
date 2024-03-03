@@ -29,6 +29,7 @@ const MODAL_TYPES = {
     BODY: 'BODY'
 };
 
+
 function appendParamsToUrl(baseUrl, partnerId, surveyId) {
     if (baseUrl && partnerId) {
         try {
