@@ -357,7 +357,7 @@ class DashboardDetails extends React.Component<any, any> {
                                 <div className="col">
                                     <strong>Over Quota URL: </strong>
                                     <a href={'https://polls.dataxing.com/#/surveys/overquota?surveyid={surveyid}&userid={userid}'} target="_blank" rel="noopener noreferrer">
-                                        {'https://polls.dataxing.com/#/surveys//overquota?surveyid={surveyid}&userid={userid}'}
+                                        {'https://polls.dataxing.com/#/surveys/overquota?surveyid={surveyid}&userid={userid}'}
                                     </a>
                                 </div>
                             </div>
