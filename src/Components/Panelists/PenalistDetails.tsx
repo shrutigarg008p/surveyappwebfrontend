@@ -589,22 +589,22 @@ export default function PenalistDetails(props:any) {
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Total Surveys : {surveys.totalCount}
+                                    Total Surveys : <br/>{surveys.totalCount}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Completed Surveys : {surveys.completedCount}
+                                    Completed Surveys : <br/>{surveys.completedCount}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Incomplete Surveys: {surveys.inCompletedCount}
+                                    Incomplete Surveys: <br/>{surveys.inCompletedCount}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Surveys Not Started : {surveys.notStartedCount}
+                                    Surveys Not Started : <br/>{surveys.notStartedCount}
                                 </Paper>
                             </Grid>
                         </Grid>
@@ -665,17 +665,17 @@ export default function PenalistDetails(props:any) {
                         <Grid container spacing={4}>
                             <Grid item xs={12} sm={4}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Earned By Survey : {rewards.earnedBySurvey}
+                                    Earned By Survey : <br/>{rewards.earnedBySurvey}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Earned By Referrals : {rewards.earnedByReferrals}
+                                    Earned By Referrals : <br/>{rewards.earnedByReferrals}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Total Points: {rewards.totalLeftPoints}
+                                    Total Points: <br/>{rewards.totalLeftPoints}
                                 </Paper>
                             </Grid>
                         </Grid>
@@ -704,12 +704,12 @@ export default function PenalistDetails(props:any) {
                         <Grid container spacing={6}>
                             <Grid item xs={12} sm={6}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Total Referrals : {referrals.totalCount}
+                                    Total Referrals : <br/>{referrals.totalCount}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Completed Referrals : {referrals.approvedCount}
+                                    Completed Referrals : <br/>{referrals.approvedCount}
                                 </Paper>
                             </Grid>
                         </Grid>
@@ -738,22 +738,22 @@ export default function PenalistDetails(props:any) {
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Total Earned : {redemption.totalEarned}
+                                    Total Earned : <br/>{redemption.totalEarned}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Completed Redeemed :  {redemption.totalRedeemed}
+                                    Completed Redeemed :  <br/>{redemption.totalRedeemed}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Pending Redemptions:  {redemption.totalPendingRedeemed}
+                                    Pending Redemptions:  <br/>{redemption.totalPendingRedeemed}
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <Paper className={classes.paper} elevation={3}>
-                                    Total Points : {redemption.totalLeft}
+                                    Total Points : <br/>{redemption.totalLeft}
                                 </Paper>
                             </Grid>
                         </Grid>
