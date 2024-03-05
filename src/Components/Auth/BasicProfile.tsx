@@ -300,6 +300,12 @@ class BasicProfile extends React.Component<any, any> {
         }
     };
 
+    handleInputChange = (e, regex) => {
+        const { value } = e.target;
+        if (regex.test(value) || value === '') {
+            this.setState({ [e.target.name]: value });
+        }
+    };
 
 
     render() {
@@ -338,7 +344,8 @@ class BasicProfile extends React.Component<any, any> {
                                 label={pageContent.items[2].title}
                                 className="form-control"
                                 name="firstName"
-                                onChange={(e) => this.setState({ firstName: e.target.value })}
+                                onChange={(e) => this.handleInputChange(e, /^[a-zA-Z]*$/)}
+                                // onChange={(e) => this.setState({ firstName: e.target.value })}
                                 value={this.state.firstName}
                                 placeholder={pageContent.items[1].title}
                                 required
@@ -350,7 +357,8 @@ class BasicProfile extends React.Component<any, any> {
                                 label={pageContent.items[3].title}
                                 className="form-control"
                                 name="lastName"
-                                onChange={(e) => this.setState({ lastName: e.target.value })}
+                                onChange={(e) => this.handleInputChange(e, /^[a-zA-Z]*$/)}
+                                // onChange={(e) => this.setState({ lastName: e.target.value })}
                                 value={this.state.lastName}
                                 placeholder={pageContent.items[1].title}
                             />

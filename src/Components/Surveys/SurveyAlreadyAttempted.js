@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import {Assets} from "../../enums"; // Import your logo image file
+import {Assets} from "../../enums";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {authRegistration} from "../Auth/auth.actions"; // Import your logo image file
 
 class SurveyAttemptMessage extends Component {
     render()
@@ -31,7 +34,7 @@ class SurveyAttemptMessage extends Component {
             <div style={containerStyle}>
                 <img src={Assets.Logo2}  style={{width:'100%'}}/>
                 <div style={messageStyle}>
-                    <p>You have already attempted this survey</p>
+                    <p>{this.props.language === 'hi' ? 'आप पहले ही इस सर्वेक्षण का प्रयास कर चुके हैं' : 'You have already attempted this survey'}</p>
                 </div>
             </div>
         );
@@ -39,3 +42,22 @@ class SurveyAttemptMessage extends Component {
 }
 
 export default SurveyAttemptMessage;
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.adminUser.adminUser.isAuthenticated,
+        token: state.adminUser.adminUser.token,
+        language: state.adminUser.adminUser.language,
+        isLoading: state.adminUser.adminUser.loading,
+        error: state.adminUser.adminUser.error,
+    };
+};
+
+const SurveyAttemptMessageWithState = withRouter(connect(
+    mapStateToProps, { authRegistration },
+)(SurveyAttemptMessage));
+
+export {
+    SurveyAttemptMessage,
+    SurveyAttemptMessageWithState,
+};

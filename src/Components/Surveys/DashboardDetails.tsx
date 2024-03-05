@@ -220,7 +220,7 @@ class DashboardDetails extends React.Component<any, any> {
                                 <div className="col">
                                     <strong>Survey Unique Id: </strong>
                                     {this.state.users.length > 0 && this.state.users[0].assignUser ?
-                                        this.state.users[0].assignUser.temporarySurveyLinkId : 'NA'}
+                                        this.state.users[0].assignUser.temporarySurveyLinkId : this.state.survey?.uniqueid}
                                 </div>
                             </div>
                             <div className="row mt-2">

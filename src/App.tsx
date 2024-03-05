@@ -26,7 +26,8 @@ import {LinkViewWithState} from "./Components/Referrals/LinkView";
 import { requestForToken, foreGroundMessage } from './firebase';
 import PartnerSurvey from "./Components/Partners/PartnerSurvey";
 import {ResetPasswordFormWithState} from "./Components/Auth/UpdateResetPasswordForm";
-import SurveyAttemptMessage from "./Components/Surveys/SurveyAlreadyAttempted";
+import SurveyAttemptMessage, {SurveyAttemptMessageWithState} from "./Components/Surveys/SurveyAlreadyAttempted";
+import {SurveyUnavailableMessageWithState} from "./Components/Surveys/SurveyUnavailable";
 
 requestForToken();
 foreGroundMessage();
@@ -44,7 +45,8 @@ class App extends React.Component<any, any> {
             <Route path='/partner' component={PartnerSurvey} />
             <Route path='/referrals/view/:userId' component={LinkViewWithState} />
             <Route path="/auth" component={AuthRouter} />
-            <Route path="/survey-attempted-message" component={SurveyAttemptMessage} />
+            <Route path="/survey-attempted-message" component={SurveyAttemptMessageWithState} />
+            <Route path="/survey-unavailable-message" component={SurveyUnavailableMessageWithState} />
             <Route path="/verify-screen" component={VerificationEmailScreensWithState} />
             {/* <Route path='/privacy-policy' component={PrivacyPolicy} /> */}
             <Route path='/terms-hi' component={TermsHi} />
