@@ -101,8 +101,9 @@ class Form extends React.Component<any, any> {
     }
 
     isValidPoints() {
-        const remaining = this.props.totalLeft - this.state.points
-        return remaining >= 100
+        // const remaining = this.props.totalLeft - this.state.points
+        // return remaining >= 100
+        return true
     }
     render() {
         console.log('---->', this.isValidPoints())

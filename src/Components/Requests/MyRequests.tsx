@@ -132,7 +132,7 @@ class MyRequests extends Component<any, any> {
                                 <Typography variant="body1">{dict[lang]["Pending Redemptions"] || "Pending Redemptions"}</Typography>
                             </Grid>
                             <Grid item xs={6} sm={3} className="gridItem">
-                                <Typography variant="h4">{this.state.totalEarned - this.state.totalRedeemed}</Typography>
+                                <Typography variant="h4">{this.state.totalLeft}</Typography>
                                 <Typography variant="body1">{dict[lang]["Points Left"] || "Points Left"}</Typography>
                             </Grid>
                         </Grid>
