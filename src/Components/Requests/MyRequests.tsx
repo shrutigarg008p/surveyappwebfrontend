@@ -78,7 +78,8 @@ class MyRequests extends Component<any, any> {
     };
 
     isAbleToCreateRequest() {
-        if(this.state.totalLeft <= 100) {
+        console.log()
+        if(this.state.totalLeft < 100) {
             return this.setState({ showRequestWarning: true })
         } else {
             return this.setState({
