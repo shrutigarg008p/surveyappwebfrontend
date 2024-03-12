@@ -630,7 +630,7 @@ export default function PenalistDetails(props:any) {
                             surveys.list.map((info, index) => (
                                 <Show when={info.survey}>
                                     <tr key={info.id}>
-                                        <td>{index + 1}</td>
+                                        <td>{this.state.filteredData.length - index}</td>
                                         <td>{info.survey ? info.survey.name : 'NA'}</td>
                                         <td>{info.status}</td>
                                         <td>{info.survey ? info.survey.ceggPoints : ''}</td>

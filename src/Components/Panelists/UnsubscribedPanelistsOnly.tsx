@@ -226,7 +226,7 @@ export class UnsubscribedPanelistOnly extends Component<any, State> {
                                 {
                                     this.state.filteredData.map((info, index) => (
                                         <tr key={info.id}>
-                                            <td>{index + 1}</td>
+                                            <td>{this.state.filteredData.length - index}</td>
                                             <td>
                                               <span
                                                   aria-label="button"

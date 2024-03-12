@@ -641,7 +641,7 @@ class AllPanelists extends Component<any, any> {
                                 {
                                     this.state.filteredData.map((info, index) => (
                                         <tr key={info.userId}>
-                                            <td>{index + 1}</td>
+                                            <td>{this.state.filteredData.length - index}</td>
                                             <td>{info.id}</td>
                                             {
                                                 this.props.role === 'sub-admin' ?
