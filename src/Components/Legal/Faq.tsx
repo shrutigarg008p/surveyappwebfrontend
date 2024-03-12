@@ -162,9 +162,10 @@ const faqData = [
         question: "How can I invite friends to join IndiaPolls?",
         answer: "To invite your friends to IndiaPolls, you can copy and share your personalised referral link on whatever platform you like. The 'Invite a friend' link can be found in the 'Refer a Friend' tab in your account page."
     },
+
     {
         question: "How many I-Points will I earn for inviting a friend?",
-        answer: "Each time you invite a friend, your account will be credited with 50 I-Points once your friend completes their registration to join the IndiaPolls community. To make sure that all new friends are real people, please note that you can only earn I-Points for a maximum of 10 new friends per month."
+        answer: "Each time you invite a friend, your account will be credited with 25 I-Points once your friend completes their registration to join the IndiaPolls community. To make sure that all new friends are real people, please note that you can only earn I-Points for a maximum of 10 new friends per month."
     },
     {
         question: "How many I-Points are required to exchange for rewards?",
@@ -183,7 +184,7 @@ const faqData = [
         answer: "<a href='/#/redemption' target='_blank'>Click here</a> to redeem your Amazon Gift Card. Amazon Customer Care: 180030002049. They are available 24 hours a day, 7 days a week to resolve your queries. <a href='https://www.amazon.in/gp/help/customer/display.html'>Click here</a> to contact Amazon Care."
     }
 ];
-  
+
 
 function FAQ() {
     const classes = useStyles();
@@ -220,5 +221,5 @@ function FAQ() {
 
     );
   }
-  
+
   export default FAQ;
