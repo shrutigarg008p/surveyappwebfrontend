@@ -170,7 +170,11 @@ class DashboardDetails extends React.Component<any, any> {
     };
 
     handleExport(){
-        exportToExcel(this.state.users, 'surveysUsers');
+        const modifiedData = this.state.users.map(user => ({
+            ...user,
+            status: user.assignUser ? user.assignUser.status : '-'
+        }));
+        exportToExcel(modifiedData, 'surveysUsers');
     };
 
     render() {

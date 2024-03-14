@@ -472,13 +472,11 @@ type State = {
                                             <td>{redemption.approvedById || redemption.cancelledById ? 'Admin' : 'Not Approved'}</td>
                                             <td>{moment(redemption.requestDate).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>
-                                                {redemption.requestedUser
-                                                    ? redemption.requestedUser.email
-                                                    : '-'}
+                                                {redemption.userId}
                                             </td>
                                             <td>
-                                                {redemption.requestedUser
-                                                    ? redemption.requestedUser.phoneNumber
+                                                {redemption.user
+                                                    ? redemption.user.phoneNumber
                                                     : '-'}
                                             </td>
                                             <td>

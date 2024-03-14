@@ -19,6 +19,7 @@ import {reduxForm} from "redux-form";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import {FormValue} from "../My Settings/MySettings";
+import PanelistTable from "./PanelistTable";
 
 function removeDuplicates(arr, property) {
     const uniqueMap = {};
@@ -624,51 +625,52 @@ class AllPanelists extends Component<any, any> {
                         </Show>
 
                         <Show when={!!this.state.filteredData.length}>
-                            <Table responsive size="sm" bordered>
-                                <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>User Id</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>City</th>
-                                    <th>Date Of Birth</th>
-                                </tr>
-                                </thead>
+                            <PanelistTable filteredData={this.state.filteredData} />
+                            {/*<Table responsive size="sm" bordered>*/}
+                            {/*    <thead>*/}
+                            {/*    <tr>*/}
+                            {/*        <th>S.No</th>*/}
+                            {/*        <th>User Id</th>*/}
+                            {/*        <th>Name</th>*/}
+                            {/*        <th>Email</th>*/}
+                            {/*        <th>Phone Number</th>*/}
+                            {/*        <th>City</th>*/}
+                            {/*        <th>Date Of Birth</th>*/}
+                            {/*    </tr>*/}
+                            {/*    </thead>*/}
 
-                                <tbody>
-                                {
-                                    this.state.filteredData.map((info, index) => (
-                                        <tr key={info.userId}>
-                                            <td>{this.state.filteredData.length - index}</td>
-                                            <td>{info.id}</td>
-                                            {
-                                                this.props.role === 'sub-admin' ?
-                                                <td>
-                                                    <Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.basic_profile ? info.basic_profile.firstName+" "+ info.basic_profile.lastName : '-'} </Link>
-                                                </td>
-                                            :
-                                                <td>
-                                                    <Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.basic_profile ? info.basic_profile.firstName+" "+ info.basic_profile.lastName : '-'} </Link>
-                                                </td>
-                                            }
-                                            {
-                                                this.props.role === 'sub-admin' ?
-                                                    <td><Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>
-                                                    :
-                                                    <td><Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>
+                            {/*    <tbody>*/}
+                            {/*    {*/}
+                            {/*        this.state.filteredData.map((info, index) => (*/}
+                            {/*            <tr key={info.userId}>*/}
+                            {/*                <td>{this.state.filteredData.length - index}</td>*/}
+                            {/*                <td>{info.id}</td>*/}
+                            {/*                {*/}
+                            {/*                    this.props.role === 'sub-admin' ?*/}
+                            {/*                    <td>*/}
+                            {/*                        <Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.basic_profile ? info.basic_profile.firstName+" "+ info.basic_profile.lastName : '-'} </Link>*/}
+                            {/*                    </td>*/}
+                            {/*                :*/}
+                            {/*                    <td>*/}
+                            {/*                        <Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.basic_profile ? info.basic_profile.firstName+" "+ info.basic_profile.lastName : '-'} </Link>*/}
+                            {/*                    </td>*/}
+                            {/*                }*/}
+                            {/*                {*/}
+                            {/*                    this.props.role === 'sub-admin' ?*/}
+                            {/*                        <td><Link to={"/sub-admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>*/}
+                            {/*                        :*/}
+                            {/*                        <td><Link to={"/admin/panelistDetails/"+info.id} target='_blank'> {info.email}</Link></td>*/}
 
-                                            }
-                                            <td>{info.phoneNumber}</td>
-                                            <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
-                                            <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY') : 'NA'}</td>
-                                        </tr>
-                                    ))
-                                }
-                                </tbody>
+                            {/*                }*/}
+                            {/*                <td>{info.phoneNumber}</td>*/}
+                            {/*                <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>*/}
+                            {/*                <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY') : 'NA'}</td>*/}
+                            {/*            </tr>*/}
+                            {/*        ))*/}
+                            {/*    }*/}
+                            {/*    </tbody>*/}
 
-                            </Table>
+                            {/*</Table>*/}
                         </Show>
                     </Show>
                 </div>

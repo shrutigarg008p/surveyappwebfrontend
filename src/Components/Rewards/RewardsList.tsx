@@ -159,9 +159,9 @@ export class RewardsList extends Component<any, any> {
                                     onChange={this.handleFilterChange}
                                 >
                                     <option value='' disabled>--Choose--</option>
-                                    <option value='Questions'>Questions</option>
-                                    <option value='recharge'>Recharge</option>
-                                    <option value='Others'>Others</option>
+                                    <option value='Survey'>Survey</option>
+                                    <option value='Profile Completed'>Profile Completed</option>
+                                    <option value='Referral'>Referral</option>
                                 </select>
                             </div>
                         </div>
