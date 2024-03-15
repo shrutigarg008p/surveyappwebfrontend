@@ -8,7 +8,7 @@ class PanelistTable extends Component {
         super(props);
         this.state = {
             currentPage: 1,
-            itemsPerPage: 10
+            itemsPerPage: 100
         };
     }
 

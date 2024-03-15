@@ -625,7 +625,7 @@ class AllPanelists extends Component<any, any> {
                         </Show>
 
                         <Show when={!!this.state.filteredData.length}>
-                            <PanelistTable filteredData={this.state.filteredData} />
+                            <PanelistTable filteredData={this.state.filteredData} role={this.props.role}/>
                             {/*<Table responsive size="sm" bordered>*/}
                             {/*    <thead>*/}
                             {/*    <tr>*/}
