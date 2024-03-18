@@ -142,7 +142,7 @@ export const referralModalDict = {
     "Enter..": "Enter..",
     "Import": "Import",
     "Refer": "Refer",
-    "Referral Link Description": "You can earn points by referring your friends to IndiaSpeaks by sharing the given link to Facebook, Twitter, and other social media. Your unique referral link URL is:",
+    "Referral Link Description": "You can earn points by referring your friends to IndiaPolls by sharing the given link to Facebook, Twitter, and other social media. Your unique referral link URL is:",
     "CSV Description": "You can refer multiple friends from a CSV file that contains your friends' information in order name, email, mobile. Click here to refer a friend to download a sample file.",
     "No File Chosen": "No file chosen",
     "Download": "Download"
@@ -159,7 +159,7 @@ export const referralModalDict = {
     "Enter..": "दर्ज करें..",
     "Import": "आयात",
     "Refer": "संदर्भ देना",
-    "Referral Link Description": "आप Facebook, Twitter, और अन्य सोशल मीडिया पर दिए गए लिंक को साझा करके अपने दोस्तों को IndiaSpeaks में संदर्भित करके अंक अर्जित कर सकते हैं। आपका अद्वितीय रेफरल लिंक URL है:",
+    "Referral Link Description": "आप Facebook, Twitter, और अन्य सोशल मीडिया पर दिए गए लिंक को साझा करके अपने दोस्तों को IndiaPolls में संदर्भित करके अंक अर्जित कर सकते हैं। आपका अद्वितीय रेफरल लिंक URL है:",
     "CSV Description": "आप अपने दोस्तों की जानकारी क्रम, ईमेल, मोबाइल के साथ एक CSV फाइल से कई दोस्तों को संदर्भित कर सकते हैं। एक नमूना फाइल डाउनलोड करने के लिए मित्र को संदर्भित करने के लिए यहां क्लिक करें।",
     "No File Chosen": "कोई फाइल नहीं चुनी गई",
     "Download": "डाउनलोड"
