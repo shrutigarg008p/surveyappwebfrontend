@@ -97,6 +97,18 @@ class Form extends React.Component<any, any> {
             status: PageStatus.Loaded,
           }, () => {
             this.fetchList()
+            if(data.sample.regions.length > 0) {
+              this.handleRegionChange(data.sample.regions)
+            }
+            if(data.sample.tierIds.length > 0) {
+              this.handleTierChange(data.sample.tierIds)
+            }
+            if(data.sample.stateIds.length > 0) {
+              this.handleStateChange(data.sample.stateIds)
+            }
+            if(data.sample.segments.length > 0) {
+              this.handleSegmentChange(data.sample.segments)
+            }
           });
         })
         .catch((error) => {
@@ -323,14 +335,11 @@ class Form extends React.Component<any, any> {
   }
 
 
-  handleStateChange = async (selectedStatesOption) => {
-    this.setState({ stateIds: selectedStatesOption, selectedStatesOption});
-    const regions = selectedStatesOption.map(option => option.value);
-    this.fetchDistrict(regions)
-  };
 
-  handleCityChange = async (selectedCitiesOption) => {
-    this.setState({ cityIds: selectedCitiesOption, selectedCitiesOption});
+  handleRegionChange = async (selectedRegionsOption) => {
+    this.setState({ regionsIds: selectedRegionsOption, selectedRegionsOption});
+    const regions = selectedRegionsOption.map(option => option.value);
+    this.fetchTiers(regions)
   };
 
   handleTierChange = async (selectedTiersOption) => {
@@ -339,17 +348,25 @@ class Form extends React.Component<any, any> {
     this.fetchStates(regions)
   };
 
+  handleStateChange = async (selectedStatesOption) => {
+    this.setState({ stateIds: selectedStatesOption, selectedStatesOption});
+    const regions = selectedStatesOption.map(option => option.value);
+    this.fetchDistrict(regions)
+  };
+
   handleSegmentChange = async (selectedSegmentsOption) => {
     this.setState({ segmentsIds: selectedSegmentsOption, selectedSegmentsOption});
     const regions = selectedSegmentsOption.map(option => option.value);
     this.fetchCities(regions)
   };
 
-  handleRegionChange = async (selectedRegionsOption) => {
-    this.setState({ regionsIds: selectedRegionsOption, selectedRegionsOption});
-    const regions = selectedRegionsOption.map(option => option.value);
-    this.fetchTiers(regions)
+  handleCityChange = async (selectedCitiesOption) => {
+    this.setState({ cityIds: selectedCitiesOption, selectedCitiesOption});
   };
+
+
+
+
 
 
   render() {
@@ -557,7 +574,7 @@ class Form extends React.Component<any, any> {
 
               <div className="row mt-2">
                 <div className="col">
-                  <label htmlFor="text">Segments</label>
+                  <label htmlFor="text">District</label>
                   <Select
                       name='state'
                       id='state'
