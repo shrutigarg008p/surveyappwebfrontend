@@ -60,11 +60,64 @@ export class CountriesAPI {
             return _.get(res, 'data.data', []);
         });
     }
+
+    static getAllTiersBasedOnRegion(
+        regions,
+    ): Promise<any[]> {
+        return api.post(`${countryURL}/getTiersBasedOnSegment`, regions)
+            .then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
+
+    static getStatesByTiers(
+        tiers,
+    ): Promise<any[]> {
+        return api.post(`${countryURL}/getStatesByTiers`, tiers)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
+
+    static getUniqueDistrictByStateIds(
+        stateIds,
+    ): Promise<any[]> {
+        return api.post(`${countryURL}/getUniqueDistrictByStateIds`, stateIds)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
+
+    static getUniqueCitiesByDistrict(
+        districts,
+    ): Promise<any[]> {
+        return api.post(`${countryURL}/getUniqueCitiesByDistrict`, districts)
+            .then((res) => {
+                return _.get(res, 'data.data', []);
+            });
+    }
+
+
+
     static getAllCities(
         limit = 10000,
         offset = 0,
     ): Promise<any[]> {
         return api.get(`${countryURL}/getAllCities/${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', []);
+        });
+    }
+
+
+    static getAllRegions(
+        limit = 10000,
+        offset = 0,
+    ): Promise<any[]> {
+        return api.get(`${countryURL}/getAllRegions`, {
         }).then((res) => {
             return _.get(res, 'data.data', []);
         });

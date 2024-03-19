@@ -108,43 +108,16 @@ class Form extends React.Component<any, any> {
     return Promise.resolve()
         .then(() => this.setState({ status: PageStatus.Loading }))
         .then(() => Promise.all([
-          CountriesAPI.getAllStates(1000),
-          CountriesAPI.getAllCities(20000),
-          CountriesAPI.getAllCities(160000)
+          CountriesAPI.getAllRegions(20000),
             ]
         ))
-        .then(([statesList, citiesList, tiersList]) => {
-          const stateOptions = statesList.map((item) => ({
-            label: item.name,
-            value: item.id,
-          }));
-          const citiesOptions = citiesList.map((item) => ({
-            label: item.name,
-            value: item.id,
-          }));
-          const tierOpt = tiersList.map((item) => ({
-            label: item.tier,
-            value: item.tier,
-          }));
-          const segments = tiersList.map((item) => ({
-            label: item.segment,
-            value: item.segment,
-          }));
+        .then(([tiersList]) => {
           const regions = tiersList.map((item) => ({
             label: item.region,
             value: item.region,
           }));
-          console.log('--->', tierOpt.length)
-          const tierOptions = removeDuplicates(tierOpt, 'label');
-          const segmentOptions = removeDuplicates(segments, 'label');
-          const regionOptions = removeDuplicates(regions, 'label');
-
           this.setState({
-            states: stateOptions,
-            cities: citiesOptions,
-            tiers: tierOptions,
-            segments: segmentOptions,
-            regions: regionOptions,
+            regions: regions,
             status: PageStatus.Loaded
           });
         })
@@ -230,6 +203,101 @@ class Form extends React.Component<any, any> {
         });
   }
 
+
+  fetchTiers(regionsIn): Promise<void> {
+    const regions = { regions: regionsIn }
+    return Promise.resolve()
+        .then(() => this.setState({ status: PageStatus.Loading }))
+        .then(() => CountriesAPI.getAllTiersBasedOnRegion(regions))
+        .then((tiersList) => {
+          const tierOpt = tiersList.map((item) => ({
+            label: item.tier,
+            value: item.tier,
+          }));
+          console.log('--->', tierOpt.length)
+          const tierOptions = removeDuplicates(tierOpt, 'label');
+
+          this.setState({
+            tiers: tierOptions,
+            status: PageStatus.Loaded
+          });
+        })
+        .catch((error) => {
+          this.setState({ error: error.message, status: PageStatus.Error });
+        });
+  }
+
+  fetchStates(tiers): Promise<void> {
+    const regions = { tiers: tiers }
+    return Promise.resolve()
+        .then(() => this.setState({ status: PageStatus.Loading }))
+        .then(() => CountriesAPI.getStatesByTiers(regions))
+        .then((tiersList) => {
+          const tierOpt = tiersList.map((item) => ({
+            label: item.name,
+            value: item.id,
+          }));
+          console.log('--->', tierOpt.length)
+          const tierOptions = removeDuplicates(tierOpt, 'label');
+
+          this.setState({
+            states: tierOptions,
+            status: PageStatus.Loaded
+          });
+        })
+        .catch((error) => {
+          this.setState({ error: error.message, status: PageStatus.Error });
+        });
+  }
+
+  fetchDistrict(statesId): Promise<void> {
+    const regions = { stateIds: statesId }
+    return Promise.resolve()
+        .then(() => this.setState({ status: PageStatus.Loading }))
+        .then(() => CountriesAPI.getUniqueDistrictByStateIds(regions))
+        .then((tiersList) => {
+          const tierOpt = tiersList.map((item) => ({
+            label: item.segment,
+            value: item.segment,
+          }));
+          console.log('--->', tierOpt.length)
+          const tierOptions = removeDuplicates(tierOpt, 'label');
+
+          this.setState({
+            segments: tierOptions,
+            status: PageStatus.Loaded
+          });
+        })
+        .catch((error) => {
+          this.setState({ error: error.message, status: PageStatus.Error });
+        });
+  }
+
+
+  fetchCities(districts): Promise<void> {
+    const regions = { districts: districts }
+    return Promise.resolve()
+        .then(() => this.setState({ status: PageStatus.Loading }))
+        .then(() => CountriesAPI.getUniqueCitiesByDistrict(regions))
+        .then((tiersList) => {
+          const tierOpt = tiersList.map((item) => ({
+            label: item.name,
+            value: item.name,
+          }));
+          console.log('--->', tierOpt.length)
+          const tierOptions = removeDuplicates(tierOpt, 'label');
+
+          this.setState({
+            cities: tierOptions,
+            status: PageStatus.Loaded
+          });
+        })
+        .catch((error) => {
+          this.setState({ error: error.message, status: PageStatus.Error });
+        });
+  }
+
+
   reset() {
     return this.setState({
       name: "",
@@ -257,6 +325,8 @@ class Form extends React.Component<any, any> {
 
   handleStateChange = async (selectedStatesOption) => {
     this.setState({ stateIds: selectedStatesOption, selectedStatesOption});
+    const regions = selectedStatesOption.map(option => option.value);
+    this.fetchDistrict(regions)
   };
 
   handleCityChange = async (selectedCitiesOption) => {
@@ -265,14 +335,20 @@ class Form extends React.Component<any, any> {
 
   handleTierChange = async (selectedTiersOption) => {
     this.setState({ tierIds: selectedTiersOption, selectedTiersOption});
+    const regions = selectedTiersOption.map(option => option.value);
+    this.fetchStates(regions)
   };
 
   handleSegmentChange = async (selectedSegmentsOption) => {
     this.setState({ segmentsIds: selectedSegmentsOption, selectedSegmentsOption});
+    const regions = selectedSegmentsOption.map(option => option.value);
+    this.fetchCities(regions)
   };
 
   handleRegionChange = async (selectedRegionsOption) => {
     this.setState({ regionsIds: selectedRegionsOption, selectedRegionsOption});
+    const regions = selectedRegionsOption.map(option => option.value);
+    this.fetchTiers(regions)
   };
 
 
@@ -438,6 +514,21 @@ class Form extends React.Component<any, any> {
 
               <div className="row mt-2">
                 <div className="col">
+                  <label htmlFor="text">Regions</label>
+                  <Select
+                      name='state'
+                      id='state'
+                      onChange={this.handleRegionChange}
+                      value={this.state.selectedRegionsOption}
+                      isMulti
+
+                      options={this.state.regions}
+                  />
+                </div>
+              </div>
+
+              <div className="row mt-2">
+                <div className="col">
                   <label htmlFor="text">Tiers</label>
                   <Select
                       name='tiers'
@@ -446,21 +537,6 @@ class Form extends React.Component<any, any> {
                       value={this.state.selectedTiersOption}
                       isMulti
                       options={this.state.tiers}
-                  />
-                </div>
-              </div>
-
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="text">Cities</label>
-                  <Select
-                      name='cities'
-                      id='cities'
-                      onChange={this.handleCityChange}
-                      value={this.state.selectedCitiesOption}
-                      isMulti
-
-                      options={this.state.cities}
                   />
                 </div>
               </div>
@@ -478,6 +554,7 @@ class Form extends React.Component<any, any> {
                   />
                 </div>
               </div>
+
               <div className="row mt-2">
                 <div className="col">
                   <label htmlFor="text">Segments</label>
@@ -491,20 +568,23 @@ class Form extends React.Component<any, any> {
                   />
                 </div>
               </div>
+
+
               <div className="row mt-2">
                 <div className="col">
-                  <label htmlFor="text">Regions</label>
+                  <label htmlFor="text">Cities</label>
                   <Select
-                      name='state'
-                      id='state'
-                      onChange={this.handleRegionChange}
-                      value={this.state.selectedRegionsOption}
+                      name='cities'
+                      id='cities'
+                      onChange={this.handleCityChange}
+                      value={this.state.selectedCitiesOption}
                       isMulti
 
-                      options={this.state.regions}
+                      options={this.state.cities}
                   />
                 </div>
               </div>
+
 
               <Alert variant="danger" show={!!this.state.error} className="mt-2">
                 {this.state.error}
