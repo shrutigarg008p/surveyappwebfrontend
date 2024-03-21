@@ -91,11 +91,7 @@ class DashboardDetails extends React.Component<any, any> {
             })
             .then((survey: any) => {
                 if(!!survey) {
-                    const user = survey.user.map(user => ({
-                        ...user,
-                        assignUser: survey.assignUsers.find(assignUser => assignUser.userId === user.userId)
-                    }));
-                    this.setState({ survey: survey.data, samples: survey.samples, users: user, status: PageStatus.Loaded }, () => {
+                    this.setState({ survey: survey.data, samples: survey.samples, users: survey.users, status: PageStatus.Loaded }, () => {
                         this.fetchPartners()
                     });
                 }
@@ -437,38 +433,6 @@ class DashboardDetails extends React.Component<any, any> {
                         <div className="mt-5">
                                 <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export Users</button>
                             <UsersPaginations users={this.state.users} samples={this.state.samples}/>
-                            {/*<Table responsive size="sm" bordered>*/}
-                            {/*    <thead>*/}
-                            {/*    <tr>*/}
-                            {/*        <th>S.No</th>*/}
-                            {/*        <th>User Id</th>*/}
-                            {/*        <th>Name</th>*/}
-                            {/*        <th>Gender</th>*/}
-                            {/*        <th>Status</th>*/}
-                            {/*        <th>CreatedAt</th>*/}
-                            {/*        <th>Link</th>*/}
-                            {/*    </tr>*/}
-                            {/*    </thead>*/}
-
-                            {/*    <tbody>*/}
-                            {/*    {*/}
-                            {/*        this.state.users.map((info, index) => (*/}
-                            {/*            <tr key={info.id}>*/}
-                            {/*                <td>{index + 1}</td>*/}
-                            {/*                <td>{info.userId ? info.userId : '-'}</td>*/}
-                            {/*                <td>{info.firstName} {info.lastName}</td>*/}
-                            {/*                <td>{info.gender}</td>*/}
-                            {/*                <td>{info.assignUser ? info.assignUser.status : '-' }</td>*/}
-                            {/*                <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
-                            {/*                <td>{info.assignUser ? <a href={info.assignUser.temporarySurveyLink} target="_blank" rel="noopener noreferrer">*/}
-                            {/*                    Click here to start survey*/}
-                            {/*                </a> : 'NA' }</td>*/}
-                            {/*            </tr>*/}
-                            {/*        ))*/}
-                            {/*    }*/}
-                            {/*    </tbody>*/}
-
-                            {/*</Table>*/}
                         </div>
                         </Show>
 

@@ -346,7 +346,7 @@ export class DashboardSurvey extends Component<any, any> {
                                               />
                                             </td>
                                             <td>{survey.id}</td>
-                                            <td>{survey.assignedSurveys.length > 0 ? survey.assignedSurveys[0].temporarySurveyLinkId: survey.uniqueid}</td>
+                                            <td>{survey?.uniqueid}</td>
                                             <td>{survey.company}</td>
                                             <td>{survey.isActive === true ? 'Yes' : 'No' }</td>
                                             <td>{survey.ceggPoints}</td>

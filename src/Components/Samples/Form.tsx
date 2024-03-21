@@ -43,6 +43,7 @@ class Form extends React.Component<any, any> {
     super(props);
     this.state = {
       status: PageStatus.None,
+      isLoading: true,
       error: null,
       data: '',
       name: "",
@@ -97,18 +98,18 @@ class Form extends React.Component<any, any> {
             status: PageStatus.Loaded,
           }, () => {
             this.fetchList()
-            if(data.sample.regions.length > 0) {
-              this.handleRegionChange(data.sample.regions)
-            }
-            if(data.sample.tierIds.length > 0) {
-              this.handleTierChange(data.sample.tierIds)
-            }
-            if(data.sample.stateIds.length > 0) {
-              this.handleStateChange(data.sample.stateIds)
-            }
-            if(data.sample.segments.length > 0) {
-              this.handleSegmentChange(data.sample.segments)
-            }
+            // if(data.sample.regions.length > 0) {
+            //   this.handleRegionChange(data.sample.regions)
+            // }
+            // if(data.sample.tierIds.length > 0) {
+            //   this.handleTierChange(data.sample.tierIds)
+            // }
+            // if(data.sample.stateIds.length > 0) {
+            //   this.handleStateChange(data.sample.stateIds)
+            // }
+            // if(data.sample.segments.length > 0) {
+            //   this.handleSegmentChange(data.sample.segments)
+            // }
           });
         })
         .catch((error) => {
@@ -131,6 +132,10 @@ class Form extends React.Component<any, any> {
           this.setState({
             regions: regions,
             status: PageStatus.Loaded
+          }, () => {
+           this.fetchTiers({})
+            this.fetchStates({})
+            this.fetchDistrict({})
           });
         })
         .catch((error) => {
@@ -286,24 +291,31 @@ class Form extends React.Component<any, any> {
   }
 
 
-  fetchCities(districts): Promise<void> {
-    const regions = { districts: districts }
-    return Promise.resolve()
-        .then(() => this.setState({ status: PageStatus.Loading }))
-        .then(() => CountriesAPI.getUniqueCitiesByDistrict(regions))
-        .then((tiersList) => {
-          const tierOpt = tiersList.map((item) => ({
-            label: item.name,
-            value: item.name,
-          }));
-          console.log('--->', tierOpt.length)
-          const tierOptions = removeDuplicates(tierOpt, 'label');
+  handleCityOnChange = async (e) => {
+    const inputValue = e.target.value;
+      if (inputValue.length >= 3) {
+        this.fetchCities(inputValue)
+    }
+  }
 
-          this.setState({
-            cities: tierOptions,
-            status: PageStatus.Loaded
-          });
-        })
+  fetchCities(city): Promise<void> {
+      const regions = {city: city}
+      return Promise.resolve()
+          .then(() => this.setState({isLoading: true}))
+          .then(() => CountriesAPI.getUniqueCitiesByDistrict(regions))
+          .then((tiersList) => {
+            const tierOpt = tiersList.map((item) => ({
+              label: item.name,
+              value: item.name,
+            }));
+            console.log('--->', tierOpt.length)
+            const tierOptions = removeDuplicates(tierOpt, 'label');
+
+            this.setState({
+              cities: tierOptions,
+              isLoading: false
+            });
+          })
         .catch((error) => {
           this.setState({ error: error.message, status: PageStatus.Error });
         });
@@ -338,26 +350,26 @@ class Form extends React.Component<any, any> {
 
   handleRegionChange = async (selectedRegionsOption) => {
     this.setState({ regionsIds: selectedRegionsOption, selectedRegionsOption});
-    const regions = selectedRegionsOption.map(option => option.value);
-    this.fetchTiers(regions)
+    // const regions = selectedRegionsOption.map(option => option.value);
+    // this.fetchTiers(regions)
   };
 
   handleTierChange = async (selectedTiersOption) => {
     this.setState({ tierIds: selectedTiersOption, selectedTiersOption});
-    const regions = selectedTiersOption.map(option => option.value);
-    this.fetchStates(regions)
+    // const regions = selectedTiersOption.map(option => option.value);
+    // this.fetchStates(regions)
   };
 
   handleStateChange = async (selectedStatesOption) => {
     this.setState({ stateIds: selectedStatesOption, selectedStatesOption});
-    const regions = selectedStatesOption.map(option => option.value);
-    this.fetchDistrict(regions)
+    // const regions = selectedStatesOption.map(option => option.value);
+    // this.fetchDistrict(regions)
   };
 
   handleSegmentChange = async (selectedSegmentsOption) => {
     this.setState({ segmentsIds: selectedSegmentsOption, selectedSegmentsOption});
-    const regions = selectedSegmentsOption.map(option => option.value);
-    this.fetchCities(regions)
+    // const regions = selectedSegmentsOption.map(option => option.value);
+    // this.fetchCities(regions)
   };
 
   handleCityChange = async (selectedCitiesOption) => {
@@ -596,8 +608,12 @@ class Form extends React.Component<any, any> {
                       onChange={this.handleCityChange}
                       value={this.state.selectedCitiesOption}
                       isMulti
-
                       options={this.state.cities}
+                      // isSearchable
+                      isLoading={this.state.cities.length === 0}
+                      // onInputChange={(e) => this.handleCityOnChange(e)}
+                      onKeyDown={this.handleCityOnChange}
+
                   />
                 </div>
               </div>
