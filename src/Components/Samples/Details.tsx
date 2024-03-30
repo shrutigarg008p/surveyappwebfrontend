@@ -8,6 +8,7 @@ import { Show } from 'Layout';
 import {SamplesAPI, SurveysAPI} from "../../API";
 import {Confirmation} from "../../Shared/Confirmation";
 import moment from "moment/moment";
+import UsersSample from "./UsersSample";
 
 type State = {
   data: any | null,
@@ -201,36 +202,38 @@ class Details extends React.Component<any, any> {
               </div>
 
               <div className="mt-5">
-              <Table responsive size="sm" bordered>
-                <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>User Id</th>
-                  <th>Name</th>
-                  <th>Gender</th>
-                  {/*<th>Email</th>*/}
-                  <th>CreatedAt</th>
-                  <th>UpdatedAt</th>
-                </tr>
-                </thead>
+                <UsersSample id={this.props.id} />
+              {/*<Table responsive size="sm" bordered>*/}
+              {/*  <thead>*/}
+              {/*  <tr>*/}
+              {/*    <th>S.No</th>*/}
+              {/*    <th>User Id</th>*/}
+              {/*    <th>Name</th>*/}
+              {/*    <th>Gender</th>*/}
+              {/*    /!*<th>Email</th>*!/*/}
+              {/*    <th>CreatedAt</th>*/}
+              {/*    <th>UpdatedAt</th>*/}
+              {/*  </tr>*/}
+              {/*  </thead>*/}
 
-                <tbody>
-                {
-                  this.state.users.map((info, index) => (
-                      <tr key={info.id}>
-                        <td>{index + 1}</td>
-                        <td>{info.userId}</td>
-                        <td>{info.firstName} {info.lastName}</td>
-                        <td>{info.gender}</td>
-                        {/*<td>{info.user ? info.user.email : '-'}</td>*/}
-                        <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                        <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
-                      </tr>
-                  ))
-                }
-                </tbody>
+              {/*  <tbody>*/}
+              {/*  {*/}
+              {/*    this.state.users.map((info, index) => (*/}
+              {/*        <tr key={info.id}>*/}
+              {/*          <td>{index + 1}</td>*/}
+              {/*          <td>{info.userId}</td>*/}
+              {/*          <td>{info.firstName} {info.lastName}</td>*/}
+              {/*          <td>{info.gender}</td>*/}
+              {/*          /!*<td>{info.user ? info.user.email : '-'}</td>*!/*/}
+              {/*          <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
+              {/*          <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
+              {/*        </tr>*/}
+              {/*    ))*/}
+              {/*  }*/}
+              {/*  </tbody>*/}
 
-              </Table>
+              {/*</Table>*/}
+
               </div>
 
             <Alert

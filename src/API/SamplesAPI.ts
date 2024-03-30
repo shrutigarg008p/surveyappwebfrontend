@@ -30,6 +30,18 @@ export class SamplesAPI {
         });
     }
 
+
+    static getOneSampleUsers(
+        id : string,
+        page,
+        limit
+    ): Promise<any[]> {
+        return api.get(`${samplesURL}/getOneSampleUsers/${id}?page=${page}&limit=${limit}`, {
+        }).then((res) => {
+            return _.get(res, 'data.data', {});
+        });
+    }
+
     static update(id: string, values: any): Promise<any> {
         return api.put(`${samplesURL}/update/${id}`, values)
             .then((res) => {
