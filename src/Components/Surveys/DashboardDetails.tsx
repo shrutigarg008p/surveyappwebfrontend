@@ -254,6 +254,25 @@ class DashboardDetails extends React.Component<any, any> {
                                     {this.state.survey?.publishDate}
                                 </div>
                             </div>
+
+                            <div className="row mt-2">
+                                <div className="col">
+                                    <strong>Over Quota Points: </strong>
+                                    {this.state.survey?.overquota}
+                                </div>
+                                <div className="col">
+                                    <strong>Terminate Points: </strong>
+                                    {this.state.survey?.terminate}
+                                </div>
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col">
+                                    <strong>Quality Terminate Points: </strong>
+                                    {this.state.survey?.qualityterminate}
+                                </div>
+                            </div>
+
+
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Expiry Date: </strong>

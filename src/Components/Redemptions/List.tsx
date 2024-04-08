@@ -151,20 +151,24 @@ type State = {
     };
 
 
-    approvedActions(id): Promise<void> {
-        let obj = {
-            id, approvedById: this.props.userId
+    approvedActions(id, mobile): Promise<void> {
+        if(mobile) {
+            let obj = {
+                id, approvedById: this.props.userId
+            }
+            return Promise.resolve()
+                .then(() => this.setState({status: PageStatus.Loading}))
+                .then(() => AuthAPI.approveRedemptionRequest(obj))
+                .then((users) => {
+                    this.fetchList()
+                    this.setState({data: users, status: PageStatus.Loaded});
+                })
+                .catch((error) => {
+                    this.setState({error: error.message, status: PageStatus.Error});
+                });
+        } else {
+            alert('Mobile number not available, Please update mobile number')
         }
-        return Promise.resolve()
-            .then(() => this.setState({ status: PageStatus.Loading }))
-            .then(() => AuthAPI.approveRedemptionRequest(obj))
-            .then((users) => {
-                this.fetchList()
-                this.setState({ data: users,  status: PageStatus.Loaded });
-            })
-            .catch((error) => {
-                this.setState({ error: error.message, status: PageStatus.Error });
-            });
     }
 
     rejectActions(id): Promise<void> {
@@ -490,7 +494,7 @@ type State = {
                                             </td>
                                             <td>
                                                 {redemption.redemptionModeTitle !== 'Amazon e-Gift Card' ?
-                                                <Confirmation onAction={() => this.approvedActions(redemption.id)} body="Are you sure want to approve request ?">
+                                                <Confirmation onAction={() => this.approvedActions(redemption.id, redemption.user ? redemption.user.phoneNumber : null)} body="Are you sure want to approve request ?">
                                                     <Button
                                                         variant="success"
                                                         size="sm"
