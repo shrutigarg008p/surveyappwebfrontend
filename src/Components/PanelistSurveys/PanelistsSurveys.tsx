@@ -264,7 +264,15 @@ class PanelistSurveys extends Component<any, any> {
                                         />
                                     </td>
                                     <td>{info.status}</td>
-                                    <td>{info.survey ? info.survey.ceggPoints : ''}</td>
+                                    <td>{info.status === 'pending'
+                                        ? info.survey ? info.survey.ceggPoints : ''
+                                        : info.status === 'Quality Terminated'
+                                            ? info.survey ? info.survey.terminate : ''
+                                            : info.status === 'Over Quota'
+                                                ? info.survey ? info.survey.overquota : ''
+                                                : info.status === 'Terminated'
+                                                    ? info.survey ? info.survey.terminate : ''
+                                                    : ''}</td>
                                     <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                     <td>
                                         <a href={info?.temporarySurveyLink} target="_blank" rel="noopener noreferrer">
