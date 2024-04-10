@@ -267,7 +267,7 @@ class PanelistSurveys extends Component<any, any> {
                                     <td>{info.status === 'pending'
                                         ? info.survey ? info.survey.ceggPoints : ''
                                         : info.status === 'Quality Terminated'
-                                            ? info.survey ? info.survey.terminate : ''
+                                            ? info.survey ? info.survey.qualityterminate : ''
                                             : info.status === 'Over Quota'
                                                 ? info.survey ? info.survey.overquota : ''
                                                 : info.status === 'Terminated'

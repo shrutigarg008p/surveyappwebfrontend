@@ -121,6 +121,7 @@ export class BasicProfileOnly extends Component<any, State> {
          let obj = this.state.filteredData.map((user) => {
              return {
                  ...user,
+                 ...user.basic_profile,
                  name: `${user.basic_profile.firstName} ${user.basic_profile.lastName}`,
                  'Date Of Birth': user.basic_profile.dateOfBirth
              }

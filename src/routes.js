@@ -567,6 +567,15 @@ const dashboardRoutes = [
     layout: "/pm",
     type: 'pm'
   },
+  {
+    path: "/newsletters",
+    name: "Newsletters",
+    hindi: "समाचार पत्रिकाएँ",
+    icon: Email,
+    component: NewsLetters,
+    layout: "/pm",
+    type: 'pm'
+  },
 
 
   {
@@ -648,6 +657,24 @@ const dashboardRoutes = [
     hindi: "संदेश",
     icon: Message,
     component: Messages,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
+  {
+    path: "/profile-management",
+    name: "Profiles",
+    hindi: "प्रोफ़ाइल्स",
+    icon: AccountBox,
+    component: ProfileManagement,
+    layout: "/sub-admin",
+    type: 'sub-admin'
+  },
+  {
+    path: "/deleteRequests",
+    name: "Delete Requests",
+    hindi: "हटाएँ अनुरोध",
+    icon: DeleteForever,
+    component: DeletedPanelistsOnly,
     layout: "/sub-admin",
     type: 'sub-admin'
   },

@@ -638,10 +638,12 @@ export default function PenalistDetails(props:any) {
                                             : info.status === 'Quality Terminated'
                                                 ? info.survey ? info.survey.terminate : ''
                                                 : info.status === 'Over Quota'
-                                                    ? info.survey ? info.survey.overquota : ''
+                                                    ? info.survey ? info.survey.qualityterminate : ''
                                                     : info.status === 'Terminated'
                                                         ? info.survey ? info.survey.terminate : ''
-                                                        : ''}</td>
+                                                        : info.status === 'Completed'
+                                                             ? info.survey ? info.survey.ceggPoints : ''
+                                                                  : ''}</td>
                                         <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                     </tr>
                                 </Show>
