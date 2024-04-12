@@ -201,4 +201,11 @@ export class SurveysAPI {
             });
     }
 
+    static uploadBulkRewards(data: any): Promise<any> {
+        return api.post(`${surveysURL}/uploadBulkRewards`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
 }

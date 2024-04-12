@@ -29,6 +29,7 @@ class Details extends React.Component<any, any> {
     this.state = {
       data: null,
       users: [],
+      count: 0,
       status: PageStatus.None,
       error: null,
     };
@@ -51,7 +52,7 @@ class Details extends React.Component<any, any> {
       })
       .then((survey: any) => {
         if(!!survey) {
-          this.setState({ data: survey.sample, users: survey.user, status: PageStatus.Loaded });
+          this.setState({ data: survey.sample, users: survey.user, count: survey.totalCount, status: PageStatus.Loaded });
         }
       })
       .catch((error) => {
@@ -202,7 +203,7 @@ class Details extends React.Component<any, any> {
               </div>
 
               <div className="mt-5">
-                <UsersSample id={this.props.id} />
+                <UsersSample id={this.props.id} count={this.state.count} />
               {/*<Table responsive size="sm" bordered>*/}
               {/*  <thead>*/}
               {/*  <tr>*/}

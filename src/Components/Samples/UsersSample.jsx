@@ -46,7 +46,7 @@ class UsersSample extends Component {
     }
 
     fetch() {
-        const { id } = this.props;
+        const { id, count } = this.props;
         const { currentPage } = this.state;
 
         if (!id) {
@@ -106,7 +106,7 @@ class UsersSample extends Component {
                         <tbody>
                         {filteredData.map((info, index) => (
                             <tr key={info.id}>
-                                <td>{index + 1 + ((currentPage - 1) * PAGE_SIZE)}</td>
+                                <td>{this.props.count - (index + (currentPage * PAGE_SIZE))}</td>
                                 <td>{info.userId}</td>
                                 <td>{info.firstName} {info.lastName}</td>
                                 <td>{info.gender}</td>

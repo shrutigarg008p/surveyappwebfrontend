@@ -46,8 +46,10 @@ type State = {
             queryId: null,
             showManual: false,
             id: '',
-            filteredData: [],
             bulkImportData: [],
+            filteredData: [],
+            currentPage: 1,
+            pageSize: 100,
             modes: [],
             filters: {
                 requestDate: '',
@@ -269,14 +271,17 @@ type State = {
      }
 
     render() {
-        const { filteredData, filters } = this.state;
+        const { filters } = this.state;
+        const { filteredData, currentPage, pageSize } = this.state;
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = Math.min(startIndex + pageSize, filteredData.length);
         return (
             <>
                 <GridContainer>
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>Redemption Requests</h4>
+                                <h4>Redemption Requests....</h4>
                             </div>
                         </CardHeader>
                     </Card>
@@ -451,10 +456,9 @@ type State = {
                                 </thead>
 
                                 <tbody>
-                                {
-                                    this.state.filteredData.map((redemption, index) => (
-                                        <tr key={redemption.id}>
-                                            <td>{index + 1}</td>
+                                { filteredData.slice(startIndex, endIndex).map((redemption, index) => (
+                                    <tr key={redemption.id}>
+                                        <td>{filteredData.length - index - (currentPage - 1) * pageSize}</td>
                                             <td>
                                           <span
                                               aria-label="button"
@@ -537,6 +541,18 @@ type State = {
                                 </tbody>
 
                             </Table>
+                            <Button
+                                onClick={() => this.setState(prevState => ({ currentPage: prevState.currentPage - 1 }))}
+                                disabled={currentPage === 1}
+                            >
+                                Previous
+                            </Button>
+                            <Button
+                                onClick={() => this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }))}
+                                disabled={endIndex >= filteredData.length}
+                            >
+                                Next
+                            </Button>
                         </Show>
                     </Show>
                 </div>

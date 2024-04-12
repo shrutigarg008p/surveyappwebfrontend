@@ -40,7 +40,7 @@ type State = {
   },
 };
 
-class NewsLetters extends Component<any, State> {
+class NewsLetters extends Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,6 +51,8 @@ class NewsLetters extends Component<any, State> {
       id: null,
       body: null,
       filteredData: [],
+      currentPage: 1,
+      pageSize: 100,
       filters: {
         name: '',
       },
@@ -121,7 +123,11 @@ class NewsLetters extends Component<any, State> {
   };
 
   render() {
-    const { filteredData, filters } = this.state;
+    const { filters } = this.state;
+    const { filteredData, currentPage, pageSize } = this.state;
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = Math.min(startIndex + pageSize, filteredData.length);
+    console.log('filteredData---->', filteredData)
     return (
         <>
         <GridContainer>
@@ -236,65 +242,72 @@ class NewsLetters extends Component<any, State> {
               />
             </Show>
 
-          <Table responsive size="sm" bordered>
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Name</th>
-                <th>SendDate</th>
-                <th>Body</th>
-                <th>Status</th>
-                <th>CreatedAt</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {
-                this.state.filteredData.map((info, index) => (
-                  <tr key={info.id}>
-                    <td>{index + 1}</td>
-                    <td>
-                      <span
-                        aria-label="button"
-                        role="button"
-                        tabIndex={0}
-                        className="text-primary"
-                        onKeyPress={() => null}
-                        onClick={() => {
-                          this.setState({
-                            formType: MODAL_TYPES.DETAILS,
-                            id: info.id,
-                          });
-                        }}
-                        dangerouslySetInnerHTML={{
-                          __html: info.name || 'Title',
-                        }}
-                      />
-                    </td>
-                    <td>{moment(info.sendDate).format('MM/DD/YYYY HH:mm A')}</td>
-                    <td>
-                      <span
-                          aria-label="button"
-                          role="button"
-                          tabIndex={0}
-                          className="text-primary"
-                          onKeyPress={() => null}
-                          onClick={() => {
-                            this.setState({
-                              formType: MODAL_TYPES.BODY,
-                              body: info.body,
-                            });
-                          }}
-                      >Click to view</span>
-                    </td>
-                    <td>{info.newsletterStatus}</td>
-                    <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                  </tr>
-                ))
-              }
-            </tbody>
-
-          </Table>
+            <div>
+              <Table responsive size="sm" bordered>
+                <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Name</th>
+                  <th>SendDate</th>
+                  <th>Body</th>
+                  <th>Status</th>
+                  <th>CreatedAt</th>
+                </tr>
+                </thead>
+                <tbody>
+                { filteredData.slice(startIndex, endIndex).map((info, index) => (
+                    <tr key={info.id}>
+                      <td>{filteredData.length - index - (currentPage - 1) * pageSize}</td>
+                      <td>
+                  <span
+                      role="button"
+                      tabIndex={0}
+                      className="text-primary"
+                      onClick={() => {
+                        this.setState({
+                          formType: MODAL_TYPES.DETAILS,
+                          id: info.id,
+                        });
+                      }}
+                  >
+                    {info.name || 'Title'}
+                  </span>
+                      </td>
+                      <td>{moment(info.sendDate).format('MM/DD/YYYY HH:mm A')}</td>
+                      <td>
+                  <span
+                      role="button"
+                      tabIndex={0}
+                      className="text-primary"
+                      onClick={() => {
+                        this.setState({
+                          formType: MODAL_TYPES.BODY,
+                          body: info.body,
+                        });
+                      }}
+                  >
+                    Click to view
+                  </span>
+                      </td>
+                      <td>{info.newsletterStatus}</td>
+                      <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                    </tr>
+                ))}
+                </tbody>
+              </Table>
+              <Button
+                  onClick={() => this.setState(prevState => ({ currentPage: prevState.currentPage - 1 }))}
+                  disabled={currentPage === 1}
+              >
+                Previous
+              </Button>
+              <Button
+                  onClick={() => this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }))}
+                  disabled={endIndex >= filteredData.length}
+              >
+                Next
+              </Button>
+            </div>
         </Show>
         </Show>
       </div>

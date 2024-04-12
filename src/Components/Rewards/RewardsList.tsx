@@ -103,9 +103,17 @@ export class RewardsList extends Component<any, any> {
             });
     }
 
+
     handleExport(){
-        exportToExcel(this.state.filteredData, 'output'); // 'output' is the filename without extension
+        let obj = this.state.filteredData.map((user) => {
+            return {
+                ...user,
+                name: `${user.basic_profile.firstName} ${user.basic_profile.lastName}`
+            }
+        })
+        exportToExcel(obj, 'BasicProfileOnly');
     };
+
 
     render() {
         const { filteredData, filters } = this.state;

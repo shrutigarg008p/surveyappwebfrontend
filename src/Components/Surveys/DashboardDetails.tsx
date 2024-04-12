@@ -12,6 +12,7 @@ import {SurveyEmailSchedule} from "./SurveyEmailSchedule";
 import moment from "moment";
 import UsersPaginations from "./UsersPaginations";
 import {exportToExcel} from "../../Utils/ExportToExcel";
+import {ManualSurveyRewards} from "./ManualSurveyRewards";
 
 
 type State = {
@@ -66,6 +67,7 @@ class DashboardDetails extends React.Component<any, any> {
             partnersSelected: null,
             selectedPartnerOption: null,
             checkboxChecked: false,
+            showManual: false
         };
     }
 
@@ -200,6 +202,17 @@ class DashboardDetails extends React.Component<any, any> {
                                     className="mr-2"
                                 />
                                 Update
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => this.setState({ showManual: !this.state.showManual })}
+                                className="btn-sm btn-primary mr-2"
+                            >
+                                <FontAwesomeIcon
+                                    icon={['fas', 'upload']}
+                                    className="mr-2"
+                                />
+                                Upload Manual Rewards
                             </button>
                         </div>
                     </Modal.Header>
@@ -459,6 +472,14 @@ class DashboardDetails extends React.Component<any, any> {
                         <SurveyEmailSchedule id={this.props.id}/>
                     </Modal.Body>
                 </Modal>
+
+                <Show when={this.state.showManual}>
+                    <ManualSurveyRewards
+                        surveyId={this.props.id}
+                        show={this.state.showManual}
+                        onClose={()=> this.setState({ showManual: false, id: '' })}
+                    />
+                </Show>
             </>
         );
     }

@@ -503,6 +503,53 @@ class Form extends React.Component<any, any> {
                   />
                 </div>
               </div>
+
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="overquota">Over Quota Points*</label>
+                  <input
+                      type="number"
+                      className="form-control"
+                      id="overquota"
+                      name="overquota"
+                      onChange={(e) => this.setState({ overquota: e.target.value })}
+                      value={this.state.overquota}
+                      placeholder="Enter here"
+                      required
+                  />
+                </div>
+                <div className="col">
+                  <label htmlFor="ceggPoints">Terminate Points*</label>
+                  <input
+                      type="number"
+                      className="form-control"
+                      id="terminate"
+                      name="terminate"
+                      onChange={(e) => this.setState({ terminate: e.target.value })}
+                      value={this.state.terminate}
+                      placeholder="Enter here"
+                      required
+                  />
+                </div>
+              </div>
+
+              <div className="row mt-2">
+                <div className="col">
+                  <label htmlFor="qualityterminate">Quality Terminate Points*</label>
+                  <input
+                      type="number"
+                      className="form-control"
+                      id="qualityterminate"
+                      name="qualityterminate"
+                      onChange={(e) => this.setState({ qualityterminate: e.target.value })}
+                      value={this.state.qualityterminate}
+                      placeholder="Enter here"
+                      required
+                  />
+                </div>
+              </div>
+
+
               <div className="row mt-2">
                 <div className="col">
                   <label htmlFor="companyLogo">Logo</label>
@@ -734,52 +781,6 @@ class Form extends React.Component<any, any> {
                       onChange={(e) => this.setState({ colorCode: e.target.value })}
                       value={this.state.colorCode}
                       placeholder="Enter here"
-                  />
-                </div>
-              </div>
-
-
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="overquota">Over Quota Points*</label>
-                  <input
-                      type="number"
-                      className="form-control"
-                      id="overquota"
-                      name="overquota"
-                      onChange={(e) => this.setState({ overquota: e.target.value })}
-                      value={this.state.overquota}
-                      placeholder="Enter here"
-                      required
-                  />
-                </div>
-                <div className="col">
-                  <label htmlFor="ceggPoints">Terminate Points*</label>
-                  <input
-                      type="number"
-                      className="form-control"
-                      id="terminate"
-                      name="terminate"
-                      onChange={(e) => this.setState({ terminate: e.target.value })}
-                      value={this.state.terminate}
-                      placeholder="Enter here"
-                      required
-                  />
-                </div>
-              </div>
-
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="qualityterminate">Quality Terminate Points*</label>
-                  <input
-                      type="number"
-                      className="form-control"
-                      id="qualityterminate"
-                      name="qualityterminate"
-                      onChange={(e) => this.setState({ qualityterminate: e.target.value })}
-                      value={this.state.qualityterminate}
-                      placeholder="Enter here"
-                      required
                   />
                 </div>
               </div>
