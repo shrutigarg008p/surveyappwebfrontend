@@ -281,7 +281,7 @@ type State = {
                     <Card>
                         <CardHeader color="primary">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h4>Redemption Requests....</h4>
+                                <h4>Redemption Requests</h4>
                             </div>
                         </CardHeader>
                     </Card>
