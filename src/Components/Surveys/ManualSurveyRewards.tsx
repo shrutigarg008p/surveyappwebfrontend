@@ -106,7 +106,7 @@ class ManualSurveyRewards extends React.Component<any, any> {
                     style={{ zIndex: 1201 }}
                 >
                     <Modal.Header closeButton>
-                        <h5 className="mb-0 mt-1">Manual Rewords</h5>
+                        <h5 className="mb-0 mt-1">Manual Rewards</h5>
                     </Modal.Header>
                     <Modal.Body style={{ maxHeight: '78vh', overflow: 'auto' }}>
 

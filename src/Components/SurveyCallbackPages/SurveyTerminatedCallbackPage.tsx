@@ -107,7 +107,8 @@ export default class SurveyTerminatedCallbackPage extends React.Component<any, a
                                     <th scope="row">1</th>
                                     <td>{this.state.survey.user.firstName} {this.state.survey.user.lastName}</td>
                                     <td>{this.state.survey.surveysDetails.survey.name}</td>
-                                    <td>{this.state.survey.surveysDetails.survey.terminate}</td>
+                                    {/*<td>{this.state.survey.surveysDetails.survey.terminate}</td>*/}
+                                    <td>{`${this.state.survey.surveysDetails.survey.terminate}${this.state.survey.surveysDetails.survey.pointAllocationType !== 'Auto' ? ' (Pending)' : ''}`}</td>
                                     <td>{moment(this.state.survey.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
                                 </tr>
                             </tbody>

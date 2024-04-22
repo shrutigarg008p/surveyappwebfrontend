@@ -153,7 +153,8 @@ type State = {
     };
 
 
-    approvedActions(id, mobile): Promise<void> {
+    // @ts-ignore
+     approvedActions(id, mobile): Promise<void> {
         if(mobile) {
             let obj = {
                 id, approvedById: this.props.userId

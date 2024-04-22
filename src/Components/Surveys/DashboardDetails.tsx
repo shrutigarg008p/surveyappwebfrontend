@@ -203,6 +203,8 @@ class DashboardDetails extends React.Component<any, any> {
                                 />
                                 Update
                             </button>
+
+                            {this.state.survey?.pointAllocationType !== 'Auto' && this.state.survey?.surveyType === 'Close' ?
                             <button
                                 type="button"
                                 onClick={() => this.setState({ showManual: !this.state.showManual })}
@@ -214,6 +216,8 @@ class DashboardDetails extends React.Component<any, any> {
                                 />
                                 Upload Manual Rewards
                             </button>
+                                : ''
+                            }
                         </div>
                     </Modal.Header>
                     <Modal.Body>
