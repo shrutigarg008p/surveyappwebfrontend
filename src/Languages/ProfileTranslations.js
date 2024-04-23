@@ -66,12 +66,11 @@ export const profileDict = {
     },
     hi: {
       "Profile": "प्रोफ़ाइल",
-      "Settings": "समायोजन",
+      "Settings": "सेटिंग",
       "Logout": "लॉग आउट",
       "Edit": "संपादित करें",
       "Change Password": "पासवर्ड बदलें",
       "Notification" : "सूचना"
     }
   };
-  
-  
+

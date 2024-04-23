@@ -108,7 +108,7 @@ class MessageForm extends React.Component<any, any> {
         this.setState({ isMessageSuccess: false })
     }
     render() {
-        const lang = this.props.language ?? 'en'; 
+        const lang = this.props.language ?? 'en';
         return (
             <div>
             <GridContainer>
@@ -120,13 +120,13 @@ class MessageForm extends React.Component<any, any> {
                     </CardHeader>
                 </Card>
             </GridContainer>
-        
+
             <Show when={this.state.status === PageStatus.Loading}>
                 <div className="d-flex justify-content-center w-100 p-5">
                     <Spinner animation="border" variant="primary" />
                 </div>
             </Show>
-        
+
             <form onSubmit={this.props.handleSubmit(() => this.onSubmit())}>
                 <div className="row col-10 mt-3">
                     <div className="col">
@@ -135,6 +135,7 @@ class MessageForm extends React.Component<any, any> {
                             name='queryType'
                             id='queryType'
                             value={this.state.queryType}
+                            title=""
                             required
                             onChange={(e) => this.setState({ queryType: e.target.value })}
                             style={{
@@ -150,14 +151,14 @@ class MessageForm extends React.Component<any, any> {
                                 transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
                             }}
                         >
-                            <option value=''>{contactDict[lang]["Choose"] || "--Choose--"}</option>
+                            <option value='' disabled>{contactDict[lang]["Choose"] || "--Choose--"}</option>
                             <option value='General'>{contactDict[lang]["General"] || "General"}</option>
                             <option value='Rewards Related'>{contactDict[lang]["Rewards Related"] || "Rewards Related"}</option>
                             <option value='Surveys Related'>{contactDict[lang]["Surveys Related"] || "Surveys Related"}</option>
                         </select>
                     </div>
                 </div>
-        
+
                 <div className="row col-10 mt-3">
                     <div className="col">
                         <label htmlFor="titleEng">
@@ -168,11 +169,12 @@ class MessageForm extends React.Component<any, any> {
                             onChange={(e) => this.setState({ subject: e.target.value })}
                             value={this.state.subject}
                             placeholder={contactDict[lang]["Please Enter"] || "Please enter..."}
+                            title={contactDict[lang]["Please Enter"] || "Please enter..."}
                             required
                         />
                     </div>
                 </div>
-        
+
                 <div className="row col-10 mt-3">
                     <div className="col">
                         <label htmlFor="titleEng">
@@ -184,17 +186,18 @@ class MessageForm extends React.Component<any, any> {
                             onChange={(e) => this.setState({ body: e.target.value })}
                             value={this.state.body}
                             placeholder={contactDict[lang]["Please Enter"] || "Please enter"}
+                            title={contactDict[lang]["Please Enter"] || "Please enter"}
                             required
                         />
                     </div>
                 </div>
-                
+
                 <hr />
-        
+
                 <Alert variant="danger" show={!!this.state.error} className="mt-2">
                     {this.state.error}
                 </Alert>
-        
+
                 <Show when={this.state.isMessageSuccess}>
                     <div className="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>{contactDict[lang]["Success!"] || "Success!"}</strong> {contactDict[lang]["Success Message"] || "Your query has been successfully submitted. Our team is working diligently to address it, and we will provide a resolution at the earliest opportunity. Thank you for your patience."}
@@ -203,7 +206,7 @@ class MessageForm extends React.Component<any, any> {
                         </button>
                     </div>
                 </Show>
-        
+
                 <div className="d-flex align-items-center mt-2">
                     <button
                         type="submit"
@@ -212,7 +215,7 @@ class MessageForm extends React.Component<any, any> {
                     >
                         {contactDict[lang]["Submit"] || "Submit"}
                     </button>
-        
+
                     <button
                         type="button"
                         onClick={() => this.reset()}
@@ -220,14 +223,14 @@ class MessageForm extends React.Component<any, any> {
                     >
                         {contactDict[lang]["Reset"] || "Reset"}
                     </button>
-        
+
                     <Show when={this.state.status === PageStatus.Submitting}>
                         <Spinner animation="border" variant="primary" />
                     </Show>
                 </div>
             </form>
         </div>
-        
+
         );
     }
 }

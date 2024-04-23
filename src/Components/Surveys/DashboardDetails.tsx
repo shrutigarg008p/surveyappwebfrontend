@@ -30,6 +30,10 @@ const MODAL_TYPES = {
     BODY: 'BODY'
 };
 
+function getNameById(id, partners) {
+    const survey = partners.find(survey => survey.value === id);
+    return survey ? survey.label : 'NA';
+}
 
 function appendParamsToUrl(baseUrl, partnerId, surveyId) {
     if (baseUrl && partnerId) {
@@ -168,10 +172,21 @@ class DashboardDetails extends React.Component<any, any> {
     };
 
     handleExport(){
+        const partners = this.state.survey?.surveypartners
         const modifiedData = this.state.users.map(user => ({
             ...user,
-            status: user.assignUser ? user.assignUser.status : '-'
+            status: user.assignUser ? user.assignUser.status : '-',
+            surveyId: this.props.id,
+            vendorName: partners.length > 0 ? getNameById(partners[0].partnerId, this.state.partners) : '',
+            vendorId: partners.length > 0 ? partners[0].partnerId : '',
+            startTime: user.assignUser ? user.assignUser.createdAt : '',
+            endTime: user.assignUser ? user.assignUser.updatedAt : '',
+            surveyStatus: this.state.survey?.surveyType,
+            startIp: user.registrationIp,
+            endIp: user.registrationIp
+
         }));
+        console.log('modifiedData--->', modifiedData[0])
         exportToExcel(modifiedData, 'surveysUsers');
     };
 

@@ -67,7 +67,8 @@ export class DashboardSurvey extends Component<any, any> {
                 publishDate: '',
                 expiryDate: '',
                 surveyName: '',
-                surveyType: ''
+                surveyType: '',
+                country: ''
             },
         };
         this.fetchList = this.fetchList.bind(this);
@@ -161,7 +162,8 @@ export class DashboardSurvey extends Component<any, any> {
                 expiryDate: '',
                 surveyName: '',
                 surveyType: '',
-                dateRange: ''
+                dateRange: '',
+                country: ''
             },
         })
         this.fetchList()
@@ -191,6 +193,18 @@ export class DashboardSurvey extends Component<any, any> {
                     <form>
                         <div className="row">
                             <div className="col">
+                                <label>Publish Date</label>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    placeholder="select date"
+                                    name="publishDate"
+                                    value={filters.publishDate}
+                                    onChange={this.handleFilterChange}
+
+                                />
+                            </div>
+                            <div className="col">
                                 <label>Date Range</label>
                                 <select
                                     style={{
@@ -218,6 +232,79 @@ export class DashboardSurvey extends Component<any, any> {
                                     <option value='90 Days'>90 Days</option>
                                     <option value='Last Year'>Last Year</option>
                                 </select>
+                            </div>
+                            <div className="col">
+                                <label>Expiry Date</label>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    placeholder="select date"
+                                    name="expiryDate"
+                                    value={filters.expiryDate}
+                                    onChange={this.handleFilterChange}
+
+                                />
+                            </div>
+                            <div className="col">
+                                <label>Type</label>
+                                <select
+                                    style={{
+                                        width: '100%',
+                                        display: 'block',
+                                        height: '40px',
+                                        lineHeight: '1.5',
+                                        color: '#495057',
+                                        backgroundColor: '#fff',
+                                        backgroundClip: 'padding-box',
+                                        border: '1px solid #ced4da',
+                                        borderRadius: '5px',
+                                        transition:
+                                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
+                                    }}
+                                    name='surveyType'
+                                    id='type'
+                                    required
+                                    value={filters.surveyType}
+                                    onChange={this.handleFilterChange}
+                                >
+                                    <option value='' disabled>--Choose--</option>
+                                    <option value='Open'>Open</option>
+                                    <option value='Close'>Close</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <label>Survey Name</label>
+                                <input type="text"
+                                       className="form-control"
+                                       placeholder="Enter..."
+                                       name="name"
+                                       value={filters.name}
+                                       onChange={this.handleFilterChange}
+                                />
+                            </div>
+                            <div className="col">
+                                <label>Client Name</label>
+                                <input type="text" name="client" className="form-control" placeholder="Enter..." value={filters.client}
+                                       onChange={this.handleFilterChange} />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <label>Country</label>
+                                <input type="text"
+                                       className="form-control"
+                                       placeholder="Enter..."
+                                       name="country"
+                                       value={filters.country}
+                                       onChange={this.handleFilterChange}
+                                />
+                            </div>
+                            <div className="col">
+                                <label>Client Name</label>
+                                <input type="text" name="client" className="form-control" placeholder="Enter..." value={filters.client}
+                                       onChange={this.handleFilterChange} />
                             </div>
                         </div>
                     </form>
