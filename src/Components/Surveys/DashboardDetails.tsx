@@ -38,6 +38,22 @@ const calculateTime = (createdAt, updatedAt) => {
     return timeDifferenceInMilliseconds / (1000 * 60);
 }
 
+function calculateAge(dateOfBirth) {
+    const birthDate = new Date(dateOfBirth);
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+
+    if (
+        currentDate.getMonth() < birthDate.getMonth() ||
+        (currentDate.getMonth() === birthDate.getMonth() &&
+            currentDate.getDate() < birthDate.getDate())
+    ) {
+        return age - 1;
+    }
+
+    return age;
+}
+
 function getNameById(id, partners) {
     const survey = partners.find(survey => survey.value === id);
     return survey ? survey.label : 'NA';
@@ -243,7 +259,7 @@ class DashboardDetails extends React.Component<any, any> {
                 LOI: LOI,
                 sampleName: user.sampleName,
                 Gender: user.gender,
-                Age: user.dateOfBirth,
+                Age: calculateAge(user.dateOfBirth),
                 FirstName: user.firstName,
                 LastName: user.lastName,
                 surveyStatus: this.state.survey?.surveyType,
