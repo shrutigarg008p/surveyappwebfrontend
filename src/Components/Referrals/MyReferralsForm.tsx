@@ -224,6 +224,7 @@ class Form extends React.Component<any, any> {
                                     onChange={(e) => this.setState({ name: e.target.value })}
                                     value={this.state.name}
                                     placeholder={referralModalDict[lang]["Enter here"] || "Enter here"}
+                                    title={referralModalDict[lang]["Enter here"] || "Enter here"}
                                     required
                                 />
                             </div>
@@ -235,6 +236,7 @@ class Form extends React.Component<any, any> {
                                     name="email"
                                     onChange={(e) => this.setState({ email: e.target.value })}
                                     value={this.state.email}
+                                    title={referralModalDict[lang]["Enter here"] || "Enter here"}
                                     placeholder={referralModalDict[lang]["Enter.."] || "Enter.."}
                                 />
                             </div>
@@ -246,6 +248,7 @@ class Form extends React.Component<any, any> {
                                     name="phoneNumber"
                                     onChange={(e) => this.setState({ phoneNumber: e.target.value })}
                                     value={this.state.phoneNumber}
+                                    title={referralModalDict[lang]["Enter here"] || "Enter here"}
                                     placeholder={referralModalDict[lang]["Enter.."] || "Enter.."}
                                 />
                             </div>

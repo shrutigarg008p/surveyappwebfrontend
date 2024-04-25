@@ -30,6 +30,14 @@ const MODAL_TYPES = {
     BODY: 'BODY'
 };
 
+const calculateTime = (createdAt, updatedAt) => {
+    const created = new Date(createdAt);
+    const updated = new Date(updatedAt);
+    // @ts-ignore
+    const timeDifferenceInMilliseconds = updated - created;
+    return timeDifferenceInMilliseconds / (1000 * 60);
+}
+
 function getNameById(id, partners) {
     const survey = partners.find(survey => survey.value === id);
     return survey ? survey.label : 'NA';
@@ -68,6 +76,7 @@ class DashboardDetails extends React.Component<any, any> {
             partners: [],
             users: [],
             samples: [],
+            partnerUsers: [],
             partnersSelected: null,
             selectedPartnerOption: null,
             checkboxChecked: false,
@@ -125,6 +134,9 @@ class DashboardDetails extends React.Component<any, any> {
                 if (this.state.survey && this.state.survey.surveypartners.length > 0) {
                     const partnerIds = this.state.survey.surveypartners.map((partner) => partner.partnerId);
                     const filteredOptions = options.filter((item) => partnerIds.includes(item.value));
+                    partnerIds.forEach((partnerId) => {
+                        this.fetchPartnerUsers(partnerId, this.props.id);
+                    });
                     this.setState({ selectedPartnerOption: filteredOptions, checkboxChecked: this.state.survey.surveypartners[0].includesid ? this.state.survey.surveypartners[0].includesid : false });
                 }
                 this.setState({ partners: options, status: PageStatus.Loaded });
@@ -133,6 +145,45 @@ class DashboardDetails extends React.Component<any, any> {
                 this.setState({ status: PageStatus.Error, error: error.message });
             });
     }
+
+
+   fetchPartnerUsers(partnerId, surveyId) {
+        try {
+            if(partnerId && surveyId) {
+                Promise.resolve()
+                    .then(() => SurveysAPI.partnerSurveyUsers(partnerId, surveyId))
+                    .then((response) => {
+                        if (response.length > 0) {
+                            const transformedData = response.map(item => ({
+                                "Survey ID of the Project": this.props.id,
+                                "Country": item.country,
+                                "India Polls respondent ID": item.id,
+                                "Vendor Respondent ID": item.rid,
+                                "Status": item.status,
+                                "Start IP": item.ip,
+                                "End IP": item.ip,
+                                "Start Time": item.createdAt,
+                                "End Time": item.updatedAt,
+                                "LOI (Minutes)": calculateTime(item.createdAt, item.updatedAt),
+                                "Survey Name": item.surveyName,
+                                "Partner Name": item.partnerName
+                            }));
+                            if (transformedData.length > 0) {
+                                // @ts-ignore
+                                this.state.partnerUsers = this.state.partnerUsers.concat(transformedData);
+                            }
+                        }
+                    })
+                    .catch((error) => {
+                        console.log('ERROR: Error In exporting')
+                    });
+            }
+        } catch (error) {
+            console.log('ERROR: Error In exporting')
+        } finally {
+            console.log('ERROR: Error In exporting')
+        }
+    };
 
 
     addPartners() {
@@ -173,22 +224,43 @@ class DashboardDetails extends React.Component<any, any> {
 
     handleExport(){
         const partners = this.state.survey?.surveypartners
-        const modifiedData = this.state.users.map(user => ({
-            ...user,
-            status: user.assignUser ? user.assignUser.status : '-',
-            surveyId: this.props.id,
-            vendorName: partners.length > 0 ? getNameById(partners[0].partnerId, this.state.partners) : '',
-            vendorId: partners.length > 0 ? partners[0].partnerId : '',
-            startTime: user.assignUser ? user.assignUser.createdAt : '',
-            endTime: user.assignUser ? user.assignUser.updatedAt : '',
-            surveyStatus: this.state.survey?.surveyType,
-            startIp: user.registrationIp,
-            endIp: user.registrationIp
+        const modifiedData = this.state.users.map(user => {
+            const startTime = user.assignUser ? new Date(user.assignUser.createdAt) : null;
+            const endTime = user.assignUser ? new Date(user.assignUser.updatedAt) : null;
+            const LOI = startTime && endTime ? endTime.getTime() - startTime.getTime() : null;
 
-        }));
+            return {
+                surveyId: this.props.id,
+                country: this.state.survey?.country,
+                vendorName: partners.length > 0 ? getNameById(partners[0].partnerId, this.state.partners) : '',
+                userId: user?.userId,
+                status: user.assignUser ? user.assignUser.status : '-',
+                vendorId: partners.length > 0 ? partners[0].partnerId : '',
+                startIp: user.registrationIp,
+                endIp: user.registrationIp,
+                startTime: startTime ? startTime.toISOString() : '', // Convert to ISO string format
+                endTime: endTime ? endTime.toISOString() : '', // Convert to ISO string format
+                LOI: LOI,
+                sampleName: user.sampleName,
+                Gender: user.gender,
+                Age: user.dateOfBirth,
+                FirstName: user.firstName,
+                LastName: user.lastName,
+                surveyStatus: this.state.survey?.surveyType,
+            };
+        });
+
         console.log('modifiedData--->', modifiedData[0])
         exportToExcel(modifiedData, 'surveysUsers');
     };
+
+
+    handlePartnerExport(){
+        if(this.state.partnerUsers.length > 0) {
+            exportToExcel(this.state.partnerUsers, 'surveysPartnerUsers');
+        }
+    };
+
 
     render() {
         console.log('STate--->', this.state)
@@ -233,6 +305,13 @@ class DashboardDetails extends React.Component<any, any> {
                             </button>
                                 : ''
                             }
+
+                            {this.state.survey && this.state.survey.surveypartners.length > 0 ?
+                                <button type="button" className="btn btn-info ml-1" onClick={() => this.handlePartnerExport()}>Export Partner Users</button>
+                            : ''
+                            }
+
+
                         </div>
                     </Modal.Header>
                     <Modal.Body>

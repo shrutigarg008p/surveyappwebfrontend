@@ -46,7 +46,8 @@ type State = {
         publishDate: '',
         expiryDate: '',
         surveyName: '',
-        surveyType: ''
+        surveyType: '',
+        id: ''
     },
 };
 
@@ -163,7 +164,8 @@ export class DashboardSurvey extends Component<any, any> {
                 surveyName: '',
                 surveyType: '',
                 dateRange: '',
-                country: ''
+                country: '',
+                id: ''
             },
         })
         this.fetchList()
@@ -302,8 +304,8 @@ export class DashboardSurvey extends Component<any, any> {
                                 />
                             </div>
                             <div className="col">
-                                <label>Client Name</label>
-                                <input type="text" name="client" className="form-control" placeholder="Enter..." value={filters.client}
+                                <label>ID</label>
+                                <input type="text" name="id" className="form-control" placeholder="Enter..." value={filters.id}
                                        onChange={this.handleFilterChange} />
                             </div>
                         </div>
