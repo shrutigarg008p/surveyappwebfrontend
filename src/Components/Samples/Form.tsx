@@ -48,7 +48,7 @@ class Form extends React.Component<any, any> {
       data: '',
       name: "",
       description: "",
-      "gender": 'Male',
+      "gender": '',
       "isActive": true,
       "profileCount": 0,
       "fromAge": null,
@@ -69,7 +69,13 @@ class Form extends React.Component<any, any> {
       selectedCitiesOption: [],
       selectedTiersOption: [],
       selectedSegmentsOption: [],
-      selectedRegionsOption: []
+      selectedRegionsOption: [],
+      genderOptions: [{ label: "Male", value: 'Male' }, { label: "Female", value: 'Female' }, { label: "Other", value: 'Other' }],
+      dynamicFields: [{
+        gender: '',
+        fromAge: '',
+        toAge: ''
+      }],
     };
   }
 
@@ -147,7 +153,7 @@ class Form extends React.Component<any, any> {
     return {
       name: this.state.name,
       description: this.state.description,
-      "gender": this.state.gender,
+      // "gender": this.state.gender,
       "isActive": this.state.isActive,
       "profileCount": this.state.profileCount,
       "fromAge": this.state.fromAge,
@@ -158,7 +164,8 @@ class Form extends React.Component<any, any> {
       "cityIds": this.state.cityIds,
       "tierIds": this.state.tierIds,
       "segments": this.state.segmentsIds,
-      "regions": this.state.regionsIds
+      "regions": this.state.regionsIds,
+      "genders": this.state.dynamicFields
     };
   }
 
@@ -166,7 +173,7 @@ class Form extends React.Component<any, any> {
     return this.setState({
       name: data.name,
       description: data.description,
-      "gender": data.gender,
+      // "gender": data.gender,
       "isActive": data.isActive,
       "profileCount": data.profileCount,
       "fromAge": data.fromAge,
@@ -183,6 +190,7 @@ class Form extends React.Component<any, any> {
       "regionsIds": data.regions,
       selectedSegmentsOption: data.segments,
       selectedRegionsOption: data.regions,
+      "dynamicFields": data.genders
     });
   }
   onSubmit() {
@@ -378,6 +386,35 @@ class Form extends React.Component<any, any> {
 
 
 
+  handleDynamicFieldChange = (e, index, field) => {
+    console.log('index, field---->', e, index, field)
+    const { dynamicFields } = this.state;
+    const updatedFields = [...dynamicFields];
+    if(field === 'gender') {
+      // const genders = selectedGendersOption.map(option => option.value);
+      updatedFields[index][field] = e;
+      this.setState({ dynamicFields: updatedFields });
+    } else {
+      updatedFields[index][field] = e;
+      this.setState({ dynamicFields: updatedFields });
+    }
+  };
+
+  handleAddMore = () => {
+    const { gender, fromAge, toAge } = this.state.dynamicFields;
+    const newField = { gender, fromAge, toAge };
+    this.setState((prevState) => ({
+      dynamicFields: [...prevState.dynamicFields, newField],
+    }));
+  };
+
+  handleDelete = (index) => {
+    if(this.state.dynamicFields.length > 1) {
+      this.setState((prevState) => ({
+        dynamicFields: prevState.dynamicFields.filter((_, i) => i !== index),
+      }));
+    }
+  };
 
 
 
@@ -455,62 +492,67 @@ class Form extends React.Component<any, any> {
                 </div>
               </div>
 
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor='gender'>Gender</label>
-                  <select
-                      style={{
-                        width: '100%',
-                        display: 'block',
-                        height: '40px',
-                        lineHeight: '1.5',
-                        color: '#495057',
-                        backgroundColor: '#fff',
-                        backgroundClip: 'padding-box',
-                        border: '1px solid #ced4da',
-                        borderRadius: '5px',
-                        transition:
-                            'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-                      }}
-                      name='gender'
-                      id='gender'
-                      value={this.state.gender}
+              {this.state.dynamicFields.map((field, index) => (
+                  <div key={index} className="jumbotron bg-white p-3 border shadow-sm mt-4">
+                    <div className="row">
+                      <div className="col">
+                        <label htmlFor='gender'>Gender</label>
+                        <Select
+                            name='state'
+                            id='state'
+                            onChange={(e) => this.handleDynamicFieldChange(e, index, 'gender')}
+                            value={field.gender}
+                            isMulti
+                            required
+                            options={this.state.genderOptions}
+                        />
+                      </div>
+                      <div className="col">
+                        <label htmlFor="fromAge">Min Age</label>
+                        <input
+                            className="form-control"
+                            id="fromAge"
+                            type="number"
+                            name="fromAge"
+                            value={field.fromAge}
+                            onChange={(e) => this.handleDynamicFieldChange(parseInt(e.target.value, 10), index, 'fromAge')}
+                            placeholder="Enter start Age"
+                        />
+                      </div>
+                      <div className="col">
+                        <label htmlFor="fromAge">Max Age</label>
+                        <input
+                            className="form-control"
+                            id="toAge"
+                            type="number"
+                            name="toAge"
+                            value={field.toAge}
+                            onChange={(e) => this.handleDynamicFieldChange(parseInt(e.target.value, 10), index, 'toAge')}
+                            placeholder="Enter end Age"
+                        />
+                      </div>
+                    </div>
+                    <Show when={index + 1 > 1}>
+                    <div className="col mt-4">
+                      <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={() => this.handleDelete(index)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    </Show>
+                  </div>
+              ))}
 
-                      onChange={(e) =>
-                          this.setState({ gender: e.target.value })
-                      }
-                  >
-                    <option value='' disabled>--Choose--</option>
-                    <option value='Male'>Male</option>
-                    <option value='Female'>Female</option>
-                    <option value='Other'>Other</option>
-                  </select>
-                </div>
-                <div className="col">
-                  <label htmlFor="fromAge">Min Age</label>
-                  <input
-                      className="form-control"
-                      id="fromAge"
-                      type="number"
-                      name="fromAge"
-                      value={this.state.fromAge}
-                      onChange={(e) => this.setState({ fromAge: e.target.value })}
-                      placeholder="Enter start Age"
-                  />
-                </div>
-                <div className="col">
-                  <label htmlFor="fromAge">Max Age</label>
-                  <input
-                      className="form-control"
-                      id="toAge"
-                      type="number"
-                      name="toAge"
-                      value={this.state.toAge}
-                      onChange={(e) => this.setState({ toAge: e.target.value })}
-                      placeholder="Enter end Age"
-                  />
-                </div>
-              </div>
+              <button
+                  type="button"
+                  className="btn-sm btn-primary mt-3"
+                  onClick={() => this.handleAddMore()}
+              >
+                Add More
+              </button>
 
               <div className="row mt-2">
                 <div className="col">

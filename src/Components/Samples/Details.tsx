@@ -137,18 +137,8 @@ class Details extends React.Component<any, any> {
                 {this.state.data?.name}
                 </div>
                 <div className="col">
-                <strong>Gender: </strong>
-                {this.state.data?.gender}
-              </div>
-              </div>
-              <div className="row mt-2">
-                <div className="col">
-                  <strong>Min Age: </strong>
-                  {this.state.data?.fromAge}
-                </div>
-                <div className="col">
-                  <strong>Max Age: </strong>
-                  {this.state.data?.toAge}
+                  <strong>Profile Count: </strong>
+                  {this.state.data?.profileCount}
                 </div>
               </div>
               <div className="row mt-2">
@@ -181,12 +171,6 @@ class Details extends React.Component<any, any> {
                   {this.state.data?.segments ? this.state.data?.segments.map(item => item.label).join(', ') : ''}
                 </div>
               </div>
-              <div className="row mt-2">
-                <div className="col">
-                  <strong>Profile Count: </strong>
-                  {this.state.data?.profileCount}
-                </div>
-              </div>
 
               <div className="row mt-2">
                 <div className="col">
@@ -201,6 +185,26 @@ class Details extends React.Component<any, any> {
                   {this.state.data?.description}
                 </div>
               </div>
+
+              {this.state.data?.genders?.map((item, index) => (
+                  <div key={index} className="row mt-2">
+                    <div className="col">
+                      <strong>Gender: </strong>
+                      {item.gender.map((gender, idx) => (
+                          <span key={idx}>{gender.label}{idx !== item.gender.length - 1 ? ', ' : ''}</span>
+                      ))}
+                    </div>
+                    <div className="col">
+                      <strong>Min Age: </strong>
+                      {item.fromAge}
+                    </div>
+                    <div className="col">
+                      <strong>Max Age: </strong>
+                      {item.toAge}
+                    </div>
+                  </div>
+              ))}
+
 
               <div className="mt-5">
                 <UsersSample id={this.props.id} count={this.state.count} />

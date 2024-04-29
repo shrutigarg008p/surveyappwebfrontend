@@ -272,7 +272,7 @@ export class Samples extends Component<any, any> {
               <tr>
                 <th>S.No</th>
                 <th>Name</th>
-                <th>Gender</th>
+                {/*<th>Gender</th>*/}
                 <th>Active</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
@@ -303,7 +303,7 @@ export class Samples extends Component<any, any> {
                         }}
                       />
                     </td>
-                    <td>{info.gender}</td>
+                    {/*<td>{info.gender}</td>*/}
                     <td>{info.isActive === true ? 'Yes' : 'No' }</td>
                     <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                     <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
