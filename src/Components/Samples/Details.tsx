@@ -190,8 +190,8 @@ class Details extends React.Component<any, any> {
                   <div key={index} className="row mt-2">
                     <div className="col">
                       <strong>Gender: </strong>
-                      {item.gender.map((gender, idx) => (
-                          <span key={idx}>{gender.label}{idx !== item.gender.length - 1 ? ', ' : ''}</span>
+                      {item && item.gender && item.gender.length > 0 && item.gender.map((gender, idx) => (
+                          <span key={idx}>{gender?.label}{idx !== item.gender?.length - 1 ? ', ' : ''}</span>
                       ))}
                     </div>
                     <div className="col">
