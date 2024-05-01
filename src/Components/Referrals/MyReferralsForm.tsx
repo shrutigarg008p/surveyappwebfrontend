@@ -170,10 +170,6 @@ class Form extends React.Component<any, any> {
                     </div>
                 </Show>
 
-                <Alert variant="danger" show={this.state.status === PageStatus.Error}>
-                    {this.state.error}
-                </Alert>
-
                 <div className="jumbotron bg-white p-3 border shadow-sm">
                     <div><b>{referralModalDict[lang]["Refer with link"] || "Refer with link"}</b></div>
                     <hr />
@@ -258,13 +254,17 @@ class Form extends React.Component<any, any> {
                                 onClick={() => this.create()}
                                 variant="primary"
                                 disabled={!this.state.name || !this.state.email}
-                                className="mt-3"
+                                className="mt-3 mb-2"
                                 size="sm"
                             >
                                 {referralModalDict[lang]["Refer"] || "Refer"}
                             </Button>
                         </div>
                     </div>
+                    <Alert variant="danger" show={this.state.status === PageStatus.Error}>
+                        {this.state.error}
+                    </Alert>
+
                 </div>
             </Modal.Body>
         </Modal>

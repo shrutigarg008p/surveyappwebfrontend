@@ -350,7 +350,7 @@ type State = {
                                     <option value=''>--Choose--</option>
                                     <option value='New'>New</option>
                                     <option value='Redeemed'>Redeemed</option>
-                                    <option value='Failed'>Failed</option>
+                                    <option value='Rejected'>Rejected</option>
                                 </select>
                             </div>
                             <div className="col">
@@ -503,7 +503,8 @@ type State = {
                                                     <Button
                                                         variant="success"
                                                         size="sm"
-                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'}
+                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'
+                                                            || redemption.redemptionRequestStatus === 'Rejected'}
                                                         className="mx-1"
                                                     >
                                                         Approve
@@ -513,7 +514,8 @@ type State = {
                                                     <Button
                                                         variant="success"
                                                         size="sm"
-                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'}
+                                                        disabled={redemption.redemptionRequestStatus === 'Redeemed'
+                                                            || redemption.redemptionRequestStatus === 'Rejected'}
                                                         onClick={() => this.setState({ id: redemption.id, showManual: true })}
                                                         className="mx-1"
                                                     >

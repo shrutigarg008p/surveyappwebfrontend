@@ -346,7 +346,12 @@ class AllPanelists extends Component<any, any> {
 
 
     handleExport(){
-        let obj = this.state.filteredData
+        let obj = this.state.filteredData.map((user) => {
+            return {
+                ...user,
+                state: user.basic_profile ? user.basic_profile.state : ''
+            }
+        })
         exportToExcel(obj, 'panelist');
     };
 

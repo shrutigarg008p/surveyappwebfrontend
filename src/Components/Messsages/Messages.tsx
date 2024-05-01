@@ -117,7 +117,14 @@ export class Messages extends Component<any, any> {
     }
 
     handleExport(){
-        exportToExcel(this.state.filteredData, 'Messages');
+        let obj = this.state.filteredData.map((user) => {
+            return {
+                ...user,
+                Mobile: user.user ? user.user.phoneNumber : '',
+                Email: user.user ? user.user.email : ''
+            }
+        })
+        exportToExcel(obj, 'Messages');
     };
 
 
@@ -241,6 +248,8 @@ export class Messages extends Component<any, any> {
                                 <tr>
                                     <th>S.No</th>
                                     <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>UserId</th>
                                     <th>QueryType</th>
                                     <th>CreatedAt</th>
                                     <th>Click to view</th>
@@ -254,6 +263,8 @@ export class Messages extends Component<any, any> {
                                         <tr key={info.id}>
                                             <td>{index + 1}</td>
                                             <td>{info.user ? info.user.email : '-'}</td>
+                                            <td>{info.user ? info.user.phoneNumber : '-'}</td>
+                                            <td>{info.userId}</td>
                                             <td>{info.queryType}</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>
