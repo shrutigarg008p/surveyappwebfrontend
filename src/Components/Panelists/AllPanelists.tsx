@@ -465,7 +465,7 @@ class AllPanelists extends Component<any, any> {
                                     required
                                     onChange={this.handleFilterChange}
                                 >
-                                    <option value='' disabled>--Choose--</option>
+                                    <option value=''>--Choose--</option>
                                     <option value='Male'>Male</option>
                                     <option value='Female'>Female</option>
                                     <option value='Other'>Other</option>

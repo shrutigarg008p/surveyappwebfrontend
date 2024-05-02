@@ -119,6 +119,7 @@ export class BasicProfileOnly extends Component<any, State> {
 
     handleExport(){
          let obj = this.state.filteredData.map((user) => {
+             delete user.phoneNumber
              return {
                  ...user,
                  ...user.basic_profile,

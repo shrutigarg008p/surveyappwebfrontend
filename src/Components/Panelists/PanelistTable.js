@@ -28,6 +28,7 @@ class PanelistTable extends Component {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>State</th>
                         <th>City</th>
                         <th>Date Of Birth</th>
                     </tr>
@@ -54,6 +55,7 @@ class PanelistTable extends Component {
                                 </Link>
                             </td>
                             <td>{info.phoneNumber}</td>
+                            <td>{info.basic_profile ? info.basic_profile.state : '-'}</td>
                             <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
                             <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY') : 'NA'}</td>
                         </tr>
