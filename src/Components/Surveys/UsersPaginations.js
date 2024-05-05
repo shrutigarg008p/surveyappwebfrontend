@@ -1,6 +1,14 @@
 import React from 'react';
 import moment from "moment";
 
+
+function filterUsersBySample(users, selectedSample) {
+    if (selectedSample) {
+        return users.filter(user => user.sampleName === selectedSample);
+    }
+    return users;
+}
+
 class UsersPaginations extends React.Component {
     constructor(props) {
         super(props);
@@ -8,7 +16,8 @@ class UsersPaginations extends React.Component {
             currentPage: 1,
             itemsPerPage: 100,
             selectedSample: null,
-            filterUsers: []
+            filterUsers: [],
+            totalUsers: 0
         };
     }
 
@@ -18,10 +27,14 @@ class UsersPaginations extends React.Component {
 
     render() {
         const { currentPage, itemsPerPage, selectedSample } = this.state;
+        const { users } = this.props;
+
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
         const currentItems = this.filterUsersBySample().slice(indexOfFirstItem, indexOfLastItem);
 
+        const filteredUsers = filterUsersBySample(users, selectedSample);
+        console.log('STATE----->', filteredUsers.length);
 
         return (
             <div className="mt-5">
@@ -56,19 +69,20 @@ class UsersPaginations extends React.Component {
                     <tbody>
                     {currentItems.map((info, index) => (
                         <tr key={info.id}>
-                            <td>{indexOfFirstItem + index + 1}</td>
+                            <td>{filteredUsers.length - index - (currentPage - 1) * this.state.itemsPerPage}</td>
                             <td>{info.userId ? info.userId : '-'}</td>
                             <td>{info.firstName} {info.lastName}</td>
                             <td>{info.gender}</td>
-                            <td>{info.assignUser ? info.assignUser.status : '-' }</td>
+                            <td>{info.assignUser ? info.assignUser.status : '-'}</td>
                             <td>{info.sampleName}</td>
                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                             <td>
                                 {info.assignUser ? (
-                                    <a href={info.assignUser.temporarySurveyLink} target="_blank" rel="noopener noreferrer">
+                                    <a href={info.assignUser.temporarySurveyLink} target="_blank"
+                                       rel="noopener noreferrer">
                                         Click here to start survey
                                     </a>
-                                ) : 'NA' }
+                                ) : 'NA'}
                             </td>
                         </tr>
                     ))}

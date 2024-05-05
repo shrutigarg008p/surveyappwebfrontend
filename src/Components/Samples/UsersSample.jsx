@@ -10,8 +10,11 @@ const PAGE_SIZE = 100;
 // Custom Pagination Component
 class CustomPagination extends Component {
     render() {
-        const { currentPage, onPageChange } = this.props;
+        const { currentPage, totalCount, pageSize, onPageChange } = this.props;
+        const lastPage = Math.ceil(totalCount / pageSize);
+        const isLastPage = currentPage === lastPage;
 
+        console.log('isLastPage--->', currentPage, totalCount, pageSize, onPageChange);
         return (
             <nav aria-label="Page navigation">
                 <ul className="pagination">
@@ -21,8 +24,8 @@ class CustomPagination extends Component {
                     <li className="page-item">
                         <button className="page-link" disabled>{currentPage}</button>
                     </li>
-                    <li className="page-item">
-                        <button className="page-link" onClick={() => onPageChange('next')}>Next</button>
+                    <li className={`page-item ${isLastPage ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => onPageChange('next')} disabled={isLastPage}>Next</button>
                     </li>
                 </ul>
             </nav>
@@ -121,6 +124,9 @@ class UsersSample extends Component {
                     <CustomPagination
                         currentPage={currentPage}
                         onPageChange={this.handlePageChange}
+                        totalCount={this.props.count}
+                        pageSize={PAGE_SIZE}
+
                     />
                 </Show>
             </div>

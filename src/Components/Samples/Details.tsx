@@ -133,8 +133,8 @@ class Details extends React.Component<any, any> {
             <Show when={this.state.status === PageStatus.Loaded && !!this.state.data}>
               <div className="row mt-2">
                 <div className="col">
-                <strong>Name: </strong>
-                {this.state.data?.name}
+                  <strong>Name: </strong>
+                  {this.state.data?.name}
                 </div>
                 <div className="col">
                   <strong>Profile Count: </strong>
@@ -175,7 +175,14 @@ class Details extends React.Component<any, any> {
               <div className="row mt-2">
                 <div className="col">
                   <strong>Active: </strong>
-                  {this.state.data?.isActive === true ? 'Yes': 'No'}
+                  {this.state.data?.isActive === true ? 'Yes' : 'No'}
+                </div>
+              </div>
+
+              <div className="row mt-2">
+                <div className="col">
+                  <strong>Profile Count: </strong>
+                  {this.state.data?.profileCount}
                 </div>
               </div>
 
@@ -207,46 +214,48 @@ class Details extends React.Component<any, any> {
 
 
               <div className="mt-5">
-                <UsersSample id={this.props.id} count={this.state.count} />
-              {/*<Table responsive size="sm" bordered>*/}
-              {/*  <thead>*/}
-              {/*  <tr>*/}
-              {/*    <th>S.No</th>*/}
-              {/*    <th>User Id</th>*/}
-              {/*    <th>Name</th>*/}
-              {/*    <th>Gender</th>*/}
-              {/*    /!*<th>Email</th>*!/*/}
-              {/*    <th>CreatedAt</th>*/}
-              {/*    <th>UpdatedAt</th>*/}
-              {/*  </tr>*/}
-              {/*  </thead>*/}
+                <Show when={this.state.count} >
+                <UsersSample id={this.props.id} count={this.state.count}/>
+                </Show>
+                {/*<Table responsive size="sm" bordered>*/}
+                {/*  <thead>*/}
+                {/*  <tr>*/}
+                {/*    <th>S.No</th>*/}
+                {/*    <th>User Id</th>*/}
+                {/*    <th>Name</th>*/}
+                {/*    <th>Gender</th>*/}
+                {/*    /!*<th>Email</th>*!/*/}
+                {/*    <th>CreatedAt</th>*/}
+                {/*    <th>UpdatedAt</th>*/}
+                {/*  </tr>*/}
+                {/*  </thead>*/}
 
-              {/*  <tbody>*/}
-              {/*  {*/}
-              {/*    this.state.users.map((info, index) => (*/}
-              {/*        <tr key={info.id}>*/}
-              {/*          <td>{index + 1}</td>*/}
-              {/*          <td>{info.userId}</td>*/}
-              {/*          <td>{info.firstName} {info.lastName}</td>*/}
-              {/*          <td>{info.gender}</td>*/}
-              {/*          /!*<td>{info.user ? info.user.email : '-'}</td>*!/*/}
-              {/*          <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
-              {/*          <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
-              {/*        </tr>*/}
-              {/*    ))*/}
-              {/*  }*/}
-              {/*  </tbody>*/}
+                {/*  <tbody>*/}
+                {/*  {*/}
+                {/*    this.state.users.map((info, index) => (*/}
+                {/*        <tr key={info.id}>*/}
+                {/*          <td>{index + 1}</td>*/}
+                {/*          <td>{info.userId}</td>*/}
+                {/*          <td>{info.firstName} {info.lastName}</td>*/}
+                {/*          <td>{info.gender}</td>*/}
+                {/*          /!*<td>{info.user ? info.user.email : '-'}</td>*!/*/}
+                {/*          <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
+                {/*          <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>*/}
+                {/*        </tr>*/}
+                {/*    ))*/}
+                {/*  }*/}
+                {/*  </tbody>*/}
 
-              {/*</Table>*/}
+                {/*</Table>*/}
 
               </div>
 
-            <Alert
-              variant="danger"
-              show={this.state.status === PageStatus.Error}
-            >
-              {this.state.error}
-            </Alert>
+              <Alert
+                  variant="danger"
+                  show={this.state.status === PageStatus.Error}
+              >
+                {this.state.error}
+              </Alert>
             </Show>
           </Modal.Body>
         </Modal>
@@ -257,4 +266,4 @@ class Details extends React.Component<any, any> {
 
 const DetailsWithRouter = withRouter(Details);
 
-export { DetailsWithRouter as Details };
+export {DetailsWithRouter as Details};

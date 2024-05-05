@@ -243,7 +243,8 @@ class DashboardDetails extends React.Component<any, any> {
         const modifiedData = this.state.users.map(user => {
             const startTime = user.assignUser ? new Date(user.assignUser.createdAt) : null;
             const endTime = user.assignUser ? new Date(user.assignUser.updatedAt) : null;
-            const LOI = startTime && endTime ? endTime.getTime() - startTime.getTime() : null;
+            const LOI = startTime && endTime ? (endTime.getTime() - startTime.getTime()) / 1000 : null;
+
 
             return {
                 surveyId: this.props.id,
@@ -254,9 +255,9 @@ class DashboardDetails extends React.Component<any, any> {
                 vendorId: partners.length > 0 ? partners[0].partnerId : '',
                 startIp: user.registrationIp,
                 endIp: user.registrationIp,
-                startTime: startTime ? startTime.toISOString() : '', // Convert to ISO string format
-                endTime: endTime ? endTime.toISOString() : '', // Convert to ISO string format
-                LOI: LOI,
+                startTime: startTime ? moment(startTime).format('DD-MM-YYYY HH:mm:ss') : '',
+                endTime: endTime ? moment(endTime).format('DD-MM-YYYY HH:mm:ss') : '',
+                "LOI (Seconds)": LOI,
                 sampleName: user.sampleName,
                 Gender: user.gender,
                 Age: calculateAge(user.dateOfBirth),

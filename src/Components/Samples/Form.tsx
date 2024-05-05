@@ -446,249 +446,266 @@ class Form extends React.Component<any, any> {
             </Alert>
 
             <Show when={this.state.status === PageStatus.Loaded}>
-            <form onSubmit={this.props.handleSubmit(
-                (event) => this.onSubmit(),
-            )}
-            >
-
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="name">Name*</label>
-                  <input
-                      className="form-control"
-                      name="name"
-                      onChange={(e) => this.setState({ name: e.target.value })}
-                      value={this.state.name}
-                      placeholder="Enter here"
-                      required
-                  />
-                </div>
-
-                <div className="col mt-5 ml-60">
-                  <input
-                      type="checkbox"
-                      id="useUniqueLinks"
-                      name="useUniqueLinks"
-                      className="custom-control-input"
-                      checked={this.state.isActive}
-                      onChange={() => this.setState({ isActive: !this.state.isActive })}
-                  />
-                  <label className="custom-control-label" htmlFor="useUniqueLinks">Active*</label>
-                </div>
-              </div>
-
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="description">Description</label>
-                  <input
-                      className="form-control"
-                      type="textbox"
-                      name="description"
-                      onChange={(e) => this.setState({ description: e.target.value })}
-                      value={this.state.description}
-                      placeholder="Enter here"
-
-                  />
-                </div>
-              </div>
-
-              {this.state.dynamicFields.map((field, index) => (
-                  <div key={index} className="jumbotron bg-white p-3 border shadow-sm mt-4">
-                    <div className="row">
-                      <div className="col">
-                        <label htmlFor='gender'>Gender</label>
-                        <Select
-                            name='state'
-                            id='state'
-                            onChange={(e) => this.handleDynamicFieldChange(e, index, 'gender')}
-                            value={field.gender}
-                            isMulti
-                            required
-                            options={this.state.genderOptions}
-                        />
-                      </div>
-                      <div className="col">
-                        <label htmlFor="fromAge">Min Age</label>
-                        <input
-                            className="form-control"
-                            id="fromAge"
-                            type="number"
-                            name="fromAge"
-                            value={field.fromAge}
-                            onChange={(e) => this.handleDynamicFieldChange(parseInt(e.target.value, 10), index, 'fromAge')}
-                            placeholder="Enter start Age"
-                        />
-                      </div>
-                      <div className="col">
-                        <label htmlFor="fromAge">Max Age</label>
-                        <input
-                            className="form-control"
-                            id="toAge"
-                            type="number"
-                            name="toAge"
-                            value={field.toAge}
-                            onChange={(e) => this.handleDynamicFieldChange(parseInt(e.target.value, 10), index, 'toAge')}
-                            placeholder="Enter end Age"
-                        />
-                      </div>
-                    </div>
-                    <Show when={index + 1 > 1}>
-                    <div className="col mt-4">
-                      <button
-                          type="button"
-                          className="btn btn-danger"
-                          onClick={() => this.handleDelete(index)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    </Show>
-                  </div>
-              ))}
-
-              <button
-                  type="button"
-                  className="btn-sm btn-primary mt-3"
-                  onClick={() => this.handleAddMore()}
+              <form onSubmit={this.props.handleSubmit(
+                  (event) => this.onSubmit(),
+              )}
               >
-                Add More
-              </button>
 
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="fromRegistrationDate">Registration Start Date</label>
-                  <input
-                      type="date"
-                      className="form-control"
-                      id="fromRegistrationDate"
-                      name="fromRegistrationDate"
-                      onChange={(e) => this.setState({ fromRegistrationDate: e.target.value })}
-                      value={this.state.fromRegistrationDate}
-                      placeholder="Enter here"
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="name">Name*</label>
+                    <input
+                        className="form-control"
+                        name="name"
+                        onChange={(e) => this.setState({name: e.target.value})}
+                        value={this.state.name}
+                        placeholder="Enter here"
+                        required
+                    />
+                  </div>
 
-                  />
+                  <div className="col mt-5 ml-60">
+                    <input
+                        type="checkbox"
+                        id="useUniqueLinks"
+                        name="useUniqueLinks"
+                        className="custom-control-input"
+                        checked={this.state.isActive}
+                        onChange={() => this.setState({isActive: !this.state.isActive})}
+                    />
+                    <label className="custom-control-label" htmlFor="useUniqueLinks">Active*</label>
+                  </div>
                 </div>
-                <div className="col">
-                  <label htmlFor="toRegistrationDate">Registration End Date</label>
-                  <input
-                      type="date"
-                      className="form-control"
-                      id="toRegistrationDate"
-                      name="toRegistrationDate"
-                      onChange={(e) => this.setState({ toRegistrationDate: e.target.value })}
-                      value={this.state.toRegistrationDate}
-                      placeholder="Enter here"
 
-                  />
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="name">Profile Count*</label>
+                    <input
+                        className="form-control"
+                        name="profileCount"
+                        type="number"
+                        min={0}
+                        onChange={(e) => this.setState({profileCount: e.target.value})}
+                        value={this.state.profileCount}
+                        placeholder="Enter here"
+                        required
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="text">Regions</label>
-                  <Select
-                      name='state'
-                      id='state'
-                      onChange={this.handleRegionChange}
-                      value={this.state.selectedRegionsOption}
-                      isMulti
 
-                      options={this.state.regions}
-                  />
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="description">Description</label>
+                    <input
+                        className="form-control"
+                        type="textbox"
+                        name="description"
+                        onChange={(e) => this.setState({description: e.target.value})}
+                        value={this.state.description}
+                        placeholder="Enter here"
+
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="text">Tiers</label>
-                  <Select
-                      name='tiers'
-                      id='tiers'
-                      onChange={this.handleTierChange}
-                      value={this.state.selectedTiersOption}
-                      isMulti
-                      options={this.state.tiers}
-                  />
-                </div>
-              </div>
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="text">States</label>
-                  <Select
-                      name='state'
-                      id='state'
-                      onChange={this.handleStateChange}
-                      value={this.state.selectedStatesOption}
-                      isMulti
-
-                      options={this.state.states}
-                  />
-                </div>
-              </div>
-
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="text">District</label>
-                  <Select
-                      name='state'
-                      id='state'
-                      onChange={this.handleSegmentChange}
-                      value={this.state.selectedSegmentsOption}
-                      isMulti
-                      options={this.state.segments}
-                  />
-                </div>
-              </div>
-
-
-              <div className="row mt-2">
-                <div className="col">
-                  <label htmlFor="text">Cities</label>
-                  <Select
-                      name='cities'
-                      id='cities'
-                      onChange={this.handleCityChange}
-                      value={this.state.selectedCitiesOption}
-                      isMulti
-                      options={this.state.cities}
-                      // isSearchable
-                      isLoading={this.state.cities.length === 0}
-                      // onInputChange={(e) => this.handleCityOnChange(e)}
-                      onKeyDown={this.handleCityOnChange}
-
-                  />
-                </div>
-              </div>
-
-
-              <Alert variant="danger" show={!!this.state.error} className="mt-2">
-                {this.state.error}
-              </Alert>
-
-              <div className="d-flex align-items-center mt-2">
-                <button
-                    type="submit"
-                    disabled={!this.state.name}
-                    className="btn btn-primary mr-3"
-                >
-                  Submit
-                </button>
+                {this.state.dynamicFields.map((field, index) => (
+                    <div key={index} className="jumbotron bg-white p-3 border shadow-sm mt-4">
+                      <div className="row">
+                        <div className="col">
+                          <label htmlFor='gender'>Gender</label>
+                          <Select
+                              name='state'
+                              id='state'
+                              onChange={(e) => this.handleDynamicFieldChange(e, index, 'gender')}
+                              value={field.gender}
+                              isMulti
+                              required
+                              options={this.state.genderOptions}
+                          />
+                        </div>
+                        <div className="col">
+                          <label htmlFor="fromAge">Min Age</label>
+                          <input
+                              className="form-control"
+                              id="fromAge"
+                              type="number"
+                              name="fromAge"
+                              value={field.fromAge}
+                              onChange={(e) => this.handleDynamicFieldChange(parseInt(e.target.value, 10), index, 'fromAge')}
+                              placeholder="Enter start Age"
+                          />
+                        </div>
+                        <div className="col">
+                          <label htmlFor="fromAge">Max Age</label>
+                          <input
+                              className="form-control"
+                              id="toAge"
+                              type="number"
+                              name="toAge"
+                              value={field.toAge}
+                              onChange={(e) => this.handleDynamicFieldChange(parseInt(e.target.value, 10), index, 'toAge')}
+                              placeholder="Enter end Age"
+                          />
+                        </div>
+                      </div>
+                      <Show when={index + 1 > 1}>
+                        <div className="col mt-4">
+                          <button
+                              type="button"
+                              className="btn btn-danger"
+                              onClick={() => this.handleDelete(index)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </Show>
+                    </div>
+                ))}
 
                 <button
                     type="button"
-                    disabled={false}
-                    onClick={() => this.reset()}
-                    className="btn btn-light mr-3"
+                    className="btn-sm btn-primary mt-3"
+                    onClick={() => this.handleAddMore()}
                 >
-                  Reset
+                  Add More
                 </button>
 
-                <Show when={this.state.status === PageStatus.Submitting}>
-                  <Spinner animation="border" variant="primary" />
-                </Show>
-              </div>
-            </form>
-              </Show>
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="fromRegistrationDate">Registration Start Date</label>
+                    <input
+                        type="date"
+                        className="form-control"
+                        id="fromRegistrationDate"
+                        name="fromRegistrationDate"
+                        onChange={(e) => this.setState({fromRegistrationDate: e.target.value})}
+                        value={this.state.fromRegistrationDate}
+                        placeholder="Enter here"
+
+                    />
+                  </div>
+                  <div className="col">
+                    <label htmlFor="toRegistrationDate">Registration End Date</label>
+                    <input
+                        type="date"
+                        className="form-control"
+                        id="toRegistrationDate"
+                        name="toRegistrationDate"
+                        onChange={(e) => this.setState({toRegistrationDate: e.target.value})}
+                        value={this.state.toRegistrationDate}
+                        placeholder="Enter here"
+
+                    />
+                  </div>
+                </div>
+
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="text">Regions</label>
+                    <Select
+                        name='state'
+                        id='state'
+                        onChange={this.handleRegionChange}
+                        value={this.state.selectedRegionsOption}
+                        isMulti
+
+                        options={this.state.regions}
+                    />
+                  </div>
+                </div>
+
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="text">Tiers</label>
+                    <Select
+                        name='tiers'
+                        id='tiers'
+                        onChange={this.handleTierChange}
+                        value={this.state.selectedTiersOption}
+                        isMulti
+                        options={this.state.tiers}
+                    />
+                  </div>
+                </div>
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="text">States</label>
+                    <Select
+                        name='state'
+                        id='state'
+                        onChange={this.handleStateChange}
+                        value={this.state.selectedStatesOption}
+                        isMulti
+
+                        options={this.state.states}
+                    />
+                  </div>
+                </div>
+
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="text">District</label>
+                    <Select
+                        name='state'
+                        id='state'
+                        onChange={this.handleSegmentChange}
+                        value={this.state.selectedSegmentsOption}
+                        isMulti
+                        options={this.state.segments}
+                    />
+                  </div>
+                </div>
+
+
+                <div className="row mt-2">
+                  <div className="col">
+                    <label htmlFor="text">Cities</label>
+                    <Select
+                        name='cities'
+                        id='cities'
+                        onChange={this.handleCityChange}
+                        value={this.state.selectedCitiesOption}
+                        isMulti
+                        options={this.state.cities}
+                        // isSearchable
+                        isLoading={this.state.cities.length === 0}
+                        // onInputChange={(e) => this.handleCityOnChange(e)}
+                        onKeyDown={this.handleCityOnChange}
+
+                    />
+                  </div>
+                </div>
+
+
+                <Alert variant="danger" show={!!this.state.error} className="mt-2">
+                  {this.state.error}
+                </Alert>
+
+                <div className="d-flex align-items-center mt-2">
+                  <button
+                      type="submit"
+                      disabled={!this.state.name}
+                      className="btn btn-primary mr-3"
+                  >
+                    Submit
+                  </button>
+
+                  <button
+                      type="button"
+                      disabled={false}
+                      onClick={() => this.reset()}
+                      className="btn btn-light mr-3"
+                  >
+                    Reset
+                  </button>
+
+                  <Show when={this.state.status === PageStatus.Submitting}>
+                    <Spinner animation="border" variant="primary"/>
+                  </Show>
+                </div>
+              </form>
+            </Show>
           </Modal.Body>
         </Modal>
     );
@@ -702,4 +719,4 @@ const dataFormRedux = reduxForm<FormValue, any>({
 
 const dataFormWithRouter = withRouter(dataFormRedux);
 
-export { dataFormWithRouter as Form };
+export {dataFormWithRouter as Form};
