@@ -45,6 +45,8 @@ type State = {
             redemptions: [],
             queryId: null,
             showManual: false,
+            isManual: false,
+            isXoXo: false,
             id: '',
             bulkImportData: [],
             filteredData: [],
@@ -260,6 +262,11 @@ type State = {
      };
 
      modifiedConvertedJson = (obj) => {
+         if(obj.coupon && obj.pin && this.state.isManual === false) {
+             this.setState({ isManual: true })
+         } else if(obj.id && !obj.coupon && !obj.pin && this.state.isXoXo === false) {
+             this.setState({ isXoXo: true })
+         }
          return {
              id: obj.id,
              userId: this.props.userId,
@@ -376,7 +383,7 @@ type State = {
                             <Confirmation onAction={() => this.approvedActionsBulkManual()} body="Are you sure want to approve manual ?">
                                 <Button
                                     variant="primary"
-                                    disabled={this.state.bulkImportData.length === 0}
+                                    disabled={this.state.bulkImportData.length === 0 || this.state.isManual === false}
                                     className="mt-3"
                                     size="sm"
                                 >
@@ -388,7 +395,7 @@ type State = {
                             <Confirmation onAction={() => this.approvedActionsBulkXoxo()} body="Are you sure want to approve by xoxo ?">
                                 <Button
                                     variant="primary"
-                                    disabled={this.state.bulkImportData.length === 0}
+                                    disabled={this.state.bulkImportData.length === 0 || this.state.isXoXo === false}
                                     className="mt-3"
                                     size="sm"
                                 >

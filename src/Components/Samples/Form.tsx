@@ -479,7 +479,7 @@ class Form extends React.Component<any, any> {
 
                 <div className="row mt-2">
                   <div className="col">
-                    <label htmlFor="name">Profile Count*</label>
+                    <label htmlFor="name">No Of Respondent*</label>
                     <input
                         className="form-control"
                         name="profileCount"
