@@ -191,7 +191,7 @@ function FaqHi() {
         <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
             <Toolbar>
-                <Typography variant="h6">FAQ</Typography>
+                <Typography variant="h6">अक्सर पूछे जाने वाले प्रश्न</Typography>
             </Toolbar>
         </AppBar>
         <Container maxWidth="lg" className={classes.content}>
