@@ -84,4 +84,11 @@ export class SamplesAPI {
                 return _.get(res, 'data.data', {});
             });
     }
+
+    static uploadUniqueLinks(values: any, id: string): Promise<any> {
+        return api.post(`${samplesURL}/uploadUniqueLinks?id=${id}`, values)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
 }

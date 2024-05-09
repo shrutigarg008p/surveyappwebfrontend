@@ -63,6 +63,7 @@ class UsersPaginations extends React.Component {
                         <th>Status</th>
                         <th>Sample</th>
                         <th>CreatedAt</th>
+                        <th>CaseId</th>
                         <th>Link</th>
                     </tr>
                     </thead>
@@ -76,6 +77,10 @@ class UsersPaginations extends React.Component {
                             <td>{info.assignUser ? info.assignUser.status : '-'}</td>
                             <td>{info.sampleName}</td>
                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                            <td>
+                                {info.assignUser ? info.assignUser.case_id : 'NA'}
+                            </td>
+
                             <td>
                                 {info.assignUser ? (
                                     <a href={info.assignUser.temporarySurveyLink} target="_blank"
@@ -94,10 +99,10 @@ class UsersPaginations extends React.Component {
     }
 
     filterUsersBySample() {
-        let { selectedSample, filterUsers } = this.state;
-        let { users } = this.props;
+        let {selectedSample, filterUsers} = this.state;
+        let {users} = this.props;
         if (selectedSample) {
-            filterUsers =  users.filter(user => user.sampleName === selectedSample);
+            filterUsers = users.filter(user => user.sampleName === selectedSample);
             return filterUsers
         }
         return users;

@@ -264,6 +264,7 @@ class DashboardDetails extends React.Component<any, any> {
                 FirstName: user.firstName,
                 LastName: user.lastName,
                 surveyStatus: this.state.survey?.surveyType,
+                CaseId: user.assignUser ? user.assignUser.case_id : '-',
             };
         });
 
@@ -466,7 +467,7 @@ class DashboardDetails extends React.Component<any, any> {
                             <div className="row mt-2">
                                 <div className="col">
                                     <strong>Use Unique Links: </strong>
-                                    {this.state.survey?.useUniqueLinks}
+                                    {this.state.survey?.useUniqueLinks === true ? 'YES': 'NO'}
                                 </div>
                                 <div className="col">
                                     <strong>Close Date: </strong>
@@ -584,7 +585,7 @@ class DashboardDetails extends React.Component<any, any> {
                         </Show>
 
                         <DashboardTemplates id={this.props.id}/>
-                        <SurveyEmailSchedule id={this.props.id}/>
+                        <SurveyEmailSchedule id={this.props.id} isUnique={this.state.survey?.useUniqueLinks}/>
                     </Modal.Body>
                 </Modal>
 

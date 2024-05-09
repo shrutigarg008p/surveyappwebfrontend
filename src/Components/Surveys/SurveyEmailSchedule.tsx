@@ -188,6 +188,7 @@ class SurveyEmailSchedule extends Component<any, any> {
                             <Show when={this.isShowDetailModal()}>
                                 <SurveyEmailScheduleDetails
                                     id={this.state.id}
+                                    isUnique={this.props.isUnique}
 
                                     onClose={() => this.setState({
                                         formType: MODAL_TYPES.NONE,
@@ -234,6 +235,9 @@ class SurveyEmailSchedule extends Component<any, any> {
                                     <th>Type</th>
                                     <th>Status</th>
                                     <th>Count</th>
+                                    <th>Unique Links Uploaded</th>
+                                    <th>Users Count</th>
+                                    <th>Sample</th>
                                 </tr>
                                 </thead>
 
@@ -260,6 +264,9 @@ class SurveyEmailSchedule extends Component<any, any> {
                                             <td>{info.scheduleType}</td>
                                             <td>{info.scheduleStatus}</td>
                                             <td>{info.count > 0 ? info.count : 'Send to all'}</td>
+                                            <td>{info.isuniqueuploaded === true ? "Uploaded" : 'Not Uploaded'}</td>
+                                            <td>{info.totalUserCount}</td>
+                                            <td>{info.sampleName}</td>
                                         </tr>
                                     ))
                                 }

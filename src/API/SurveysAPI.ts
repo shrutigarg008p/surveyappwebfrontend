@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 import { api } from '../axiosConfig';
-import {surveysURL, surveyEmailSchedule} from "../Utils/urls";
+import {surveysURL, surveyEmailSchedule, samplesURL} from "../Utils/urls";
 
 export class SurveysAPI {
     static getAll(
@@ -146,6 +146,13 @@ export class SurveysAPI {
 
     static sendInviteNow(id: string): Promise<any> {
         return api.get(`${surveyEmailSchedule}/sendNow/${id}`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
+    static downloadUsers(id: string): Promise<any> {
+        return api.get(`${samplesURL}/getOneSampleAllUsers/${id}`)
             .then((res) => {
                 return _.get(res, 'data.data', {});
             });

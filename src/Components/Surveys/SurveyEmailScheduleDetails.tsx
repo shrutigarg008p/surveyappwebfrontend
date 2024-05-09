@@ -1,13 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Alert, Modal, Spinner } from 'react-bootstrap';
+import {Alert, Button, Modal, Spinner} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { PageStatus } from 'enums';
 import { Show } from 'Layout';
-import { SurveysAPI} from "../../API";
+import {AuthAPI, SamplesAPI, SurveysAPI} from "../../API";
 import {Confirmation} from "../../Shared/Confirmation";
 import moment from "moment";
+import {exportToExcel} from "../../Utils/ExportToExcel";
+import csvtojson from "csvtojson";
 
 
 class SurveyEmailScheduleDetails extends React.Component<any, any> {
@@ -23,7 +25,9 @@ class SurveyEmailScheduleDetails extends React.Component<any, any> {
             data: null,
             status: PageStatus.None,
             error: null,
-            sendNow: false
+            sendNow: false,
+            isManual: false,
+            bulkImportData: []
         };
     }
 
@@ -91,6 +95,106 @@ class SurveyEmailScheduleDetails extends React.Component<any, any> {
             });
     }
 
+    downloadUsers() {
+        Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => {
+                if (!this.state.data?.sampleId) {
+                    return Promise.reject(new Error('Invalid ID'));
+                }
+                return SurveysAPI.downloadUsers(this.state.data?.sampleId);
+            })
+            .then((users) => {
+                console.log('users--->', users.user)
+                let obj = users.user?.map((user) => {
+                    return {
+                        userId: user.userId,
+                        name: `${user.firstName} ${user.lastName}`,
+                        email: user.user ? user.user.email : '',
+                        sampleId: this.state.data?.sampleId,
+                        surveyId: this.state.data?.surveyId,
+                        schedulerId: this.state.data?.id,
+                        link: ''
+                    }
+                })
+                exportToExcel(obj, 'ScheduleSampleUsers');
+                this.setState({ status: PageStatus.Loaded });
+
+            })
+            .catch((error) => {
+                this.setState({ status: PageStatus.Error, error: error.message });
+            });
+    }
+
+
+    handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            try {
+                const jsonData = await this.convertCsvToJson(file);
+                const transformedData = jsonData.map(this.modifiedConvertedJson);
+                this.setState({ bulkImportData:  transformedData  })
+                console.log(transformedData);
+            } catch (error) {
+                console.error('Error converting CSV to JSON:', error);
+            }
+        }
+    };
+
+
+    convertCsvToJson = (file: File): Promise<any[]> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                const csvContent: any = reader.result
+
+                if (!csvContent.trim()) {
+                    reject(new Error('CSV content is empty.'));
+                    return;
+                }
+
+                csvtojson()
+                    .fromString(csvContent)
+                    .then(jsonData => resolve(jsonData))
+            };
+
+            reader.onerror = (error) => {
+                reject(error);
+            };
+
+            reader.readAsText(file);
+        });
+    };
+
+    modifiedConvertedJson = (obj) => {
+        if(obj.userId && obj.sampleId && obj.surveyId && obj.schedulerId && obj.link && this.state.isManual === false) {
+            this.setState({ isManual: true })
+        }
+        return {
+            userId: obj.userId,
+            sampleId: obj.sampleId,
+            surveyId: obj.surveyId,
+            schedulerId: obj.schedulerId,
+            link: obj.link,
+        };
+    }
+
+    uploadUniqueLinks(): Promise<void> {
+        return Promise.resolve()
+            .then(() => this.setState({status: PageStatus.Loading}))
+            .then(() => SamplesAPI.uploadUniqueLinks({bulkImportData: this.state.bulkImportData}, this.state.data?.id))
+            .then((users) => {
+                alert('Unique Links Successfully Uploaded')
+                return this.setState({ status: PageStatus.Loaded});
+            })
+            .catch((error) => {
+                this.setState({error: error.message, status: PageStatus.Error});
+            });
+    }
+
+
+
     render() {
         return (
             <>
@@ -118,6 +222,17 @@ class SurveyEmailScheduleDetails extends React.Component<any, any> {
                                 />
                                 Update
                             </button>
+                            <Show when={this.props.isUnique === true}>
+                            <Confirmation onAction={() => this.downloadUsers()} body="Are you sure want to download users?">
+                                <button
+                                    type="button"
+                                    title="Download Users"
+                                    className="btn btn-green"
+                                >
+                                    Download Users
+                                </button>
+                            </Confirmation>
+                            </Show>
                             <Confirmation onAction={() => this.sendNow()} body="Are you sure want to send invite?">
                                 <button
                                     type="button"
@@ -176,6 +291,28 @@ class SurveyEmailScheduleDetails extends React.Component<any, any> {
                                     {this.state.data?.count > 0 ? this.state.data?.count : 'Send to all'}
                                 </div>
                             </div>
+
+                            <Show when={this.props.isUnique === true}>
+                            <div>
+                                <input className="mt-2" type="file" accept=".csv"
+                                       onChange={(e) => this.handleFileChange(e)}/>
+                            </div>
+                            <div>
+                                <Confirmation onAction={() => this.uploadUniqueLinks()}
+                                              body="Are you sure want to upload unique links ?">
+                                    <Button
+                                        variant="primary"
+                                        disabled={this.state.bulkImportData.length === 0 || this.state.isManual === false}
+                                        className="mt-3"
+                                        size="sm"
+                                    >
+                                        Upload unique links
+                                    </Button>
+                                </Confirmation>
+                            </div>
+                            </Show>
+
+
                             <Alert
                                 variant="danger"
                                 show={this.state.status === PageStatus.Error}
@@ -192,4 +329,4 @@ class SurveyEmailScheduleDetails extends React.Component<any, any> {
 
 const SurveyEmailScheduleDetailsWithRouter = withRouter(SurveyEmailScheduleDetails);
 
-export { SurveyEmailScheduleDetailsWithRouter as SurveyEmailScheduleDetails };
+export {SurveyEmailScheduleDetailsWithRouter as SurveyEmailScheduleDetails};

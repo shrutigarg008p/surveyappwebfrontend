@@ -251,7 +251,7 @@ class Details extends React.Component<any, State> {
               <div className="row mt-2">
                 <div className="col">
                   <strong>Use Unique Links: </strong>
-                  {this.state.survey?.useUniqueLinks}
+                  {this.state.survey?.useUniqueLinks === true ? 'YES': 'NO'}
                 </div>
                 <div className="col">
                   <strong>Close Date: </strong>
