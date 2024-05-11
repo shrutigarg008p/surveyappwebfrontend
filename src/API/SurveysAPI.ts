@@ -215,4 +215,11 @@ export class SurveysAPI {
             });
     }
 
+    static fetchSurveyOverviewStatus(data: any): Promise<any> {
+        return api.post(`${surveysURL}/surveyOverviewStatus`, data)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
 }

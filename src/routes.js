@@ -58,6 +58,7 @@ import MyReferralsList from "./Components/Referrals/MyReferralsList";
 import {MySettings} from "./Components/My Settings/MySettings";
 import DashboardOld from "./views/Dashboard/DashboardOld";
 import AdminDashboard from "./views/Dashboard/AdminDashboard";
+import {SurveyStatus} from "./Components/SurveyRewardsOverview/SurveyStatus";
 
 const dashboardRoutes = [
   {
@@ -573,6 +574,15 @@ const dashboardRoutes = [
     hindi: "समाचार पत्रिकाएँ",
     icon: Email,
     component: NewsLetters,
+    layout: "/pm",
+    type: 'pm'
+  },
+  {
+    path: "/survey-overview",
+    name: "Survey Overview",
+    hindi: "सर्वेक्षण अवलोकन",
+    icon: Dashboard,
+    component: SurveyStatus,
     layout: "/pm",
     type: 'pm'
   },
