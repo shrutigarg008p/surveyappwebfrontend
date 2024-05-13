@@ -32,6 +32,7 @@ class LeisureActivity extends React.Component<any, any> {
             error: null,
             data: null,
             userResponse: {},
+            ma: [],
             pageContent: this.props.language === 'hi' ? Language.profilesHindi : Language.profilesEnglish,
         };
     }
@@ -60,6 +61,23 @@ class LeisureActivity extends React.Component<any, any> {
                 this.initializeValues(data)
                 this.setState({
                     data,
+                    status: PageStatus.Loaded,
+                }, () => {
+                    this.fetchMA()
+                });
+            })
+            .catch((error) => {
+                this.setState({ status: PageStatus.Error, error: error.message });
+            });
+    }
+
+    fetchMA() {
+        Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => ProfileManagementAPI.getAllMAOptions())
+            .then((data) => {
+                this.setState({
+                    ma: data,
                     status: PageStatus.Loaded,
                 });
             })
@@ -173,6 +191,7 @@ class LeisureActivity extends React.Component<any, any> {
                         onHandleQuestionResponse={(data) => this.handleQuestionResponse(data)}
                         userResponse={this.state.userResponse}
                         language={this.props.language}
+                        ma={this.state.ma}
                     />
                 </Show>
             </>

@@ -133,8 +133,9 @@ class SurveyEmailScheduleDetails extends React.Component<any, any> {
             try {
                 const jsonData = await this.convertCsvToJson(file);
                 const transformedData = jsonData.map(this.modifiedConvertedJson);
-                this.setState({ bulkImportData:  transformedData  })
-                console.log(transformedData);
+                const filteredData = transformedData.filter(item => item !== null || item == 'undefined');
+                this.setState({ bulkImportData:  filteredData  })
+                console.log('transformedData=====>', filteredData);
             } catch (error) {
                 console.error('Error converting CSV to JSON:', error);
             }
@@ -171,13 +172,16 @@ class SurveyEmailScheduleDetails extends React.Component<any, any> {
         if(obj.userId && obj.sampleId && obj.surveyId && obj.schedulerId && obj.link && this.state.isManual === false) {
             this.setState({ isManual: true })
         }
-        return {
-            userId: obj.userId,
-            sampleId: obj.sampleId,
-            surveyId: obj.surveyId,
-            schedulerId: obj.schedulerId,
-            link: obj.link,
-        };
+        if(obj.userId && obj.sampleId && obj.surveyId && obj.schedulerId) {
+            return {
+                userId: obj.userId,
+                sampleId: obj.sampleId,
+                surveyId: obj.surveyId,
+                schedulerId: obj.schedulerId,
+                link: obj.link,
+            };
+        }
+        return null;
     }
 
     uploadUniqueLinks(): Promise<void> {

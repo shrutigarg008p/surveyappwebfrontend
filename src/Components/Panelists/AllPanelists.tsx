@@ -180,8 +180,8 @@ class AllPanelists extends Component<any, any> {
                     citiesOptions: citiesOptions,
                     tiersOptions: tierOptions,
                     surveysOptions,
-                    secOptions,
-                    status: PageStatus.Loaded });
+                    secOptions
+                });
             })
             .catch((error) => {
                 this.setState({ error: error.message, status: PageStatus.Error });

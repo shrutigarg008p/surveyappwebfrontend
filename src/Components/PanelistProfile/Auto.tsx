@@ -32,6 +32,7 @@ class Auto extends React.Component<any, any> {
             status: PageStatus.None,
             error: null,
             data: null,
+            ma: [],
             userResponse: {},
             pageContent: this.props.language === 'hi' ? Language.profilesHindi : Language.profilesEnglish,
         };
@@ -59,6 +60,23 @@ class Auto extends React.Component<any, any> {
                 this.initializeValues(data)
                 this.setState({
                     data,
+                    status: PageStatus.Loaded,
+                }, () => {
+                    this.fetchMA()
+                });
+            })
+            .catch((error) => {
+                this.setState({ status: PageStatus.Error, error: error.message });
+            });
+    }
+
+    fetchMA() {
+        Promise.resolve()
+            .then(() => this.setState({ status: PageStatus.Loading }))
+            .then(() => ProfileManagementAPI.getAllMAOptions())
+            .then((data) => {
+                this.setState({
+                    ma: data,
                     status: PageStatus.Loaded,
                 });
             })
@@ -172,6 +190,7 @@ class Auto extends React.Component<any, any> {
                         onHandleQuestionResponse={(data) => this.handleQuestionResponse(data)}
                         userResponse={this.state.userResponse}
                         language={this.props.language}
+                        ma={this.state.ma}
                     />
                 </Show>
             </>

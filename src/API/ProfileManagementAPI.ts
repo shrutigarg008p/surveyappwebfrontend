@@ -130,4 +130,11 @@ export class ProfileManagementAPI {
             });
     }
 
+    static getAllMAOptions(): Promise<any> {
+        return api.get(`${optionsURL}/getMaOptions`)
+            .then((res) => {
+                return _.get(res, 'data.data', {});
+            });
+    }
+
 }

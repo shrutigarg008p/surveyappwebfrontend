@@ -245,6 +245,16 @@ class DashboardDetails extends React.Component<any, any> {
             const endTime = user.assignUser ? new Date(user.assignUser.updatedAt) : null;
             const LOI = startTime && endTime ? (endTime.getTime() - startTime.getTime()) / 1000 : null;
 
+            let gender;
+            if (user.gender === 'पुरुष') {
+                gender = 'Male';
+            } else if (user.gender === 'महिला') {
+                gender = 'Female';
+            } else if (user.gender === 'अन्य') {
+                gender = 'Other';
+            } else {
+                gender = user.gender;
+            }
 
             return {
                 surveyId: this.props.id,
@@ -259,7 +269,7 @@ class DashboardDetails extends React.Component<any, any> {
                 endTime: endTime ? moment(endTime).format('DD-MM-YYYY HH:mm:ss') : '',
                 "LOI (Seconds)": LOI,
                 sampleName: user.sampleName,
-                Gender: user.gender,
+                Gender: gender,
                 Age: calculateAge(user.dateOfBirth),
                 FirstName: user.firstName,
                 LastName: user.lastName,
