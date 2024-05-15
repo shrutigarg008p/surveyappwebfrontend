@@ -68,7 +68,7 @@ class MyRewards extends Component<any, any> {
             <Container>
                 <Card className="mainCard">
                     <CardHeader
-                        title={this.props.language === 'hi' ? 'अर्जित अंक' : "Points Earned"}
+                        title={this.props.language === 'hi' ? 'अर्जित पॉइंट' : "Points Earned"}
                         titleTypographyProps={{ className: 'cardHeader' }}
                     />
                 </Card>
@@ -79,7 +79,7 @@ class MyRewards extends Component<any, any> {
 
                             <Grid item xs={6} sm={4} className="gridItem">
                                 <Typography variant="h4">{this.state.total}</Typography>
-                                <Typography variant="body1">{this.props.language === 'hi' ? 'कुल प्राप्त किए गए अंक' : 'Total Points Earned'}</Typography>
+                                <Typography variant="body1">{this.props.language === 'hi' ? 'कुल प्राप्त किए गए पॉइंट' : 'Total Points Earned'}</Typography>
                             </Grid>
 
 
@@ -131,7 +131,7 @@ class MyRewards extends Component<any, any> {
                                     <th>{this.props.language === 'hi' ? 'क्रमांक' : 'S.No'}</th>
                                     <th>{this.props.language === 'hi' ? 'पुरस्कार तिथि' : 'Reward Date'}</th>
                                     <th>{this.props.language === 'hi' ? 'प्रकार' : 'Type'}</th>
-                                    <th>{this.props.language === 'hi' ? 'अंक' : 'Points'}</th>
+                                    <th>{this.props.language === 'hi' ? 'पॉइंट' : 'Points'}</th>
                                     <th>{this.props.language === 'hi' ? 'उपयोगकर्ता' : 'User'}</th>
                                     <th>{this.props.language === 'hi' ? 'संदर्भित उपयोगकर्ता' : 'Referred User'}</th>
                                     <th>{this.props.language === 'hi' ? 'सर्वेक्षण' : 'Survey'}</th>

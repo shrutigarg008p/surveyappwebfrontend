@@ -164,7 +164,7 @@ class Form extends React.Component<any, any> {
                                 transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out'
                             }}
                         >
-                            <option value=''>--Choose--</option>
+                            <option value=''>{redeemPointsDict[lang]["Choose"] || "Choose"}</option>
                             {this.state.modes.length > 0 ? this.state.modes.map((item) => (
                                 <option value={item.value}>{item.label}</option>
                             )) : ''}

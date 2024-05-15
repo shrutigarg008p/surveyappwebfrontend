@@ -9,7 +9,7 @@ export const registerDict = {
         "password_required" : "Password is Required"
     },
     "hi": {
-        "phoneTitle": "फोन नंबर 10 अंकों का होना चाहिए",
+        "phoneTitle": "फोन नंबर 10 पॉइंटं का होना चाहिए",
         "passwordTitle": "पासवर्ड 8-20 वर्णों का होना चाहिए और कम से कम एक विशेष चरित्र शामिल होना चाहिए",
         "validationMessage": "कृपया अनुरोधित प्रारूप से मेल खाएं",
         "email_required": "कृपया सही ईमेल आईडी दर्ज करें।",

@@ -84,6 +84,8 @@ class UsersSample extends Component {
 
     render() {
         const { currentPage, filteredData, status } = this.state;
+        const startIndex = this.props.sample.profileCount > 0 ? Math.min(this.props.sample.profileCount, this.props.count) : this.props.count;
+
 
         return (
             <div>
@@ -107,16 +109,19 @@ class UsersSample extends Component {
                         </thead>
 
                         <tbody>
-                        {filteredData.map((info, index) => (
-                            <tr key={info.id}>
-                                <td>{this.props.count - ((currentPage - 1) * PAGE_SIZE + index)}</td>
-                                <td>{info.userId}</td>
-                                <td>{info.firstName} {info.lastName}</td>
-                                <td>{info.gender}</td>
-                                <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
-                                <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
-                            </tr>
-                        ))}
+                        {filteredData.map((info, index) => {
+                            const adjustedIndex = startIndex - ((currentPage - 1) * PAGE_SIZE + index);
+                            return (
+                                <tr key={info.id}>
+                                    <td>{adjustedIndex}</td>
+                                    <td>{info.userId}</td>
+                                    <td>{info.firstName} {info.lastName}</td>
+                                    <td>{info.gender}</td>
+                                    <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                    <td>{moment(info.updatedAt).format('MM/DD/YYYY HH:mm A')}</td>
+                                </tr>
+                            );
+                        })}
                         </tbody>
                     </Table>
 

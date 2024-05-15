@@ -410,7 +410,7 @@ class BasicProfile extends React.Component<any, any> {
                                         type="email"
                                         onChange={(e) => this.setState({ email: e.target.value })}
                                         value={this.state.email}
-                                        placeholder={formFieldDict[lang]["Enter.."] || "Enter.."}
+                                        placeholder={formFieldDict[lang]["Email"] || "Email"}
                                         maxLength={200}
                                         onInvalid={(event)=>{
                                         const e = event.target ;

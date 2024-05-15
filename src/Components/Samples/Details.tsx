@@ -215,7 +215,7 @@ class Details extends React.Component<any, any> {
 
               <div className="mt-5">
                 <Show when={this.state.count} >
-                <UsersSample id={this.props.id} count={this.state.count}/>
+                <UsersSample id={this.props.id} count={this.state.count} sample={this.state.data} />
                 </Show>
                 {/*<Table responsive size="sm" bordered>*/}
                 {/*  <thead>*/}

@@ -20,7 +20,7 @@ export const surveyDict = {
       "S.No": "क्र.सं.",
       "Name": "नाम",
       "Status": "स्थिति",
-      "Points": "अंक",
+      "Points": "पॉइंट",
       "Expire Date": "समाप्त होने की तिथि",
       "Starts": "प्रारंभ होगा",
       "Click Here to start survey": "सर्वेक्षण शुरू करने के लिए यहां क्लिक करें",
