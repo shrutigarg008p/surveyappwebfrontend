@@ -300,11 +300,11 @@ export default function PenalistDetails(props:any) {
                 }
                             <button type="button" className="btn btn-blue ml-1" onClick={changePassword}>Change Password</button>
 
-                            {profileData.length !== 0 && profileData?.data.dataValues.deletedAt === null ?
-                                <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('temporary delete')}>Temporary Delete </button>
-                                :
-                                <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('re-active')}>Re-Enable</button>
-                            }
+                            {/*{profileData.length !== 0 && profileData?.data.dataValues.deletedAt === null ?*/}
+                            {/*    <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('temporary delete')}>Temporary Delete </button>*/}
+                            {/*    :*/}
+                            {/*    <button type="button" className="btn btn-yellow ml-1" onClick={() => temporaryDelete('re-active')}>Re-Enable</button>*/}
+                            {/*}*/}
                             <button type="button" className="btn btn-red ml-1" onClick={permanentlyDelete}>Permanently Deleted</button>
                 </span>
                     </div>
