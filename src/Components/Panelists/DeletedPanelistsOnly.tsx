@@ -270,14 +270,14 @@ export class DeletedPanelistsOnly extends Component<any, any> {
                                                       });
                                                   }}
                                                   dangerouslySetInnerHTML={{
-                                                      __html: `${info.basic_profile.firstName} ${info.basic_profile.lastName}` || '-',
+                                                      __html: info.basic_profile ? `${info.basic_profile.firstName} ${info.basic_profile.lastName}` : '-',
                                                   }}
                                               />
                                             </td>
                                             <td>{info.email}</td>
                                             <td>{info.phoneNumber}</td>
-                                            <td>{info.basic_profile.city}</td>
-                                            <td>{moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY')}</td>
+                                            <td>{info.basic_profile ? info.basic_profile.city : '-'}</td>
+                                            <td>{info.basic_profile ? moment(info.basic_profile.dateOfBirth).format('MM/DD/YYYY') : '-'}</td>
                                             <td>{moment(info.createdAt).format('MM/DD/YYYY HH:mm A')}</td>
                                             <td>
                                                 <Confirmation onAction={() => this.deleteAcceptActions(info.id)} body="Are you sure want to approve delete request ?">
