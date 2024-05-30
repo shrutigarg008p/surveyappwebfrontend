@@ -96,7 +96,8 @@ class DashboardDetails extends React.Component<any, any> {
             partnersSelected: null,
             selectedPartnerOption: null,
             checkboxChecked: false,
-            showManual: false
+            showManual: false,
+            selectedSample: ''
         };
     }
 
@@ -240,7 +241,14 @@ class DashboardDetails extends React.Component<any, any> {
 
     handleExport(){
         const partners = this.state.survey?.surveypartners
-        const modifiedData = this.state.users.map(user => {
+        let filterUsers = []
+        if(this.state.selectedSample) {
+            filterUsers = this.state.users.filter(usr => usr.sampleName === this.state.selectedSample)
+        } else {
+            filterUsers = this.state.users
+        }
+
+        const modifiedData = filterUsers.map(user => {
             const startTime = user.assignUser ? new Date(user.assignUser.createdAt) : null;
             const endTime = user.assignUser ? new Date(user.assignUser.updatedAt) : null;
             const LOI = startTime && endTime ? (endTime.getTime() - startTime.getTime()) / 1000 : null;
@@ -278,7 +286,7 @@ class DashboardDetails extends React.Component<any, any> {
             };
         });
 
-        console.log('modifiedData--->', modifiedData[0])
+        console.log('modifiedData--->', modifiedData)
         exportToExcel(modifiedData, 'surveysUsers');
     };
 
@@ -590,7 +598,10 @@ class DashboardDetails extends React.Component<any, any> {
                         <Show when={this.state.users.length !== 0} >
                         <div className="mt-5">
                                 <button type="button" className="btn btn-info ml-1" onClick={() => this.handleExport()}>Export Users</button>
-                            <UsersPaginations users={this.state.users} samples={this.state.samples}/>
+                            <UsersPaginations users={this.state.users} samples={this.state.samples}
+                                              onSampleChange={(sample) => {
+                                      this.setState({ selectedSample: sample })
+                            }}/>
                         </div>
                         </Show>
 

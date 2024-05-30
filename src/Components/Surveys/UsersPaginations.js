@@ -109,7 +109,9 @@ class UsersPaginations extends React.Component {
     }
 
     handleSampleChange = (e) => {
-        this.setState({ selectedSample: e.target.value });
+        this.setState({ selectedSample: e.target.value }, () => {
+            this.props.onSampleChange(e.target.value)
+        });
     };
     renderPagination(Users) {
         const { currentPage, itemsPerPage, filterUsers } = this.state;
